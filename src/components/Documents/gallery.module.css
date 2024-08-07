@@ -1,0 +1,11 @@
+.SwiperSlide{
+border-radius:  18px !important;
+overflow:hidden !important;
+cursor: pointer;
+position: relative;
+
+}
+
+.description{
+backdrop-filter: blur(10px) !important;
+}
