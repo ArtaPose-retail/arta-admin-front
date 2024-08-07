@@ -6,10 +6,7 @@ import { headerItems } from "../../utils/data";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import moment from "jalali-moment";
-
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import { Link, useLocation } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
@@ -17,9 +14,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setFullscrenn } from "../../Redux/Slices/general";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import { Height } from "@mui/icons-material";
-import SearchDialog from '../Search/SearchDialog';
+// import SearchDialog from '../Search/SearchDialog';
 import { separateBy3, toPersian } from "../../utils/setting";
+import ScaleOutlinedIcon from '@mui/icons-material/ScaleOutlined';
 
 function MainHeader() {
     const { isfullScrenn } = useSelector((state) => state.general);
@@ -196,20 +193,8 @@ function MainHeader() {
                         }} />
                     </IconButton>
                 </Link>
-                {/* <IconButton
-                    aria-label="delete"
-                    size="large"
-                    sx={{
-                        border: "1px solid #DEDEDE",
-                        borderRadius: "8px",
-                        p: 2,
-                        "&:hover": { bgcolor: (theme) => theme.palette.text.secondary },
-                        bgcolor: (theme) => theme.background.box,
-                    }}
-                >
-                    <SearchOutlinedIcon fontSize="inherit" />
-                </IconButton> */}
-                <SearchDialog />
+
+                {/* <SearchDialog /> */}
                 <Box
                     sx={{
                         ...center,
@@ -232,30 +217,32 @@ function MainHeader() {
                 </Box>
 
                 <Box
-                    onClick={() => navigatehandler("wallet")}
+
                     sx={{
                         ...center,
-                        bgcolor: (theme) => theme.palette.primary.main,
+                        bgcolor: (theme) => theme.palette.icon.primary,
                         borderRadius: "12px",
-                        gap: "5px",
+                        gap: "8px",
                         px: 1,
                         cursor: "pointer",
                     }}
                 >
-                    <AccountBalanceWalletOutlinedIcon
-                        sx={{ fill: (theme) => theme.palette.text.primary }}
-                    />
 
                     <Typography
                         sx={{
                             fontSize: "16px",
                             fontWeight: "bold",
                             color: (theme) => theme.palette.text.primary,
-                            gap: "8px",
+                            display: "flex",
+
                         }}
                     >
-                        {toPersian(separateBy3("5500"))}تومان
+
+                        {toPersian(separateBy3("4000"))}
+                        Kg
                     </Typography>
+                    <ScaleOutlinedIcon sx={{ fill: theme => theme.palette.text.primary }} />
+
                 </Box>
             </Box>
         </Box>
