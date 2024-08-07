@@ -1,5 +1,6 @@
-import { digitsEnToFa } from "@persian-tools/persian-tools";
+import { addCommas, digitsEnToFa } from "@persian-tools/persian-tools";
 import axios from "axios";
+import moment from "jalali-moment";
 
 
 const instance = axios.create({
@@ -46,12 +47,29 @@ export const separateBy4 = (number) => {
 
 export const separateBy3 = (number) => {
 
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return addCommas(number);
 }
 export const toPersian = (str) => {
 
     return digitsEnToFa(str);
 }
+
+
+export const persianDate = (data) => {
+    return digitsEnToFa(
+        moment(data ?? new Date(), "YYYY-MM-DD")
+            .locale("fa")
+            .format(" dddd ,D MMM  YYYY")
+    );
+};
+export const persianTime = (data) => {
+    return digitsEnToFa(
+        moment(data ?? new Date(), "YYYY-MM-DD")
+            .locale("fa")
+            .format("LT")
+    );
+};
 
 import { toast } from "react-toastify"
 export const toastHandler = (msg, variant) => {
