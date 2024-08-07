@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { styled } from '@mui/material/styles';
-import { toPersian } from "../../utils/setting.js";
+import { toPersian } from "../../utils/setting.jsx";
 
 const columns = [
     { id: "row", label: "ردیف", align: "center" },

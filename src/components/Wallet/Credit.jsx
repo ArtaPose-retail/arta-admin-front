@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import Title from "../UI/Title";
-import { months } from "../../utils/data.js";
-import { toPersian } from "../../utils/setting.js";
+import { months } from "../../utils/data.jsx";
+import { toPersian } from "../../utils/setting.jsx";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import IncreaseCredit from "./Dialog/IncreaseCredit";
 const Credit = () => {

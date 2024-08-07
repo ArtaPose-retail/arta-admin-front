@@ -1,6 +1,6 @@
 import { Avatar, Box, Grid, Hidden, IconButton, Typography } from "@mui/material";
 import moment from "jalali-moment";
-import persianJs from "persianjs";
+
 import React, { useEffect, useState } from "react";
 import logo from "../../Assets/images/logo.png";
 import logoNM from "../../Assets/images/logoname.png";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFullscrenn } from "../../Redux/Slices/general";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import { toPersian } from "../../utils/setting";
 function CustomerPage() {
     const [showCustomer, setShowCustomer] = useState(false);
     const [time, setTime] = useState("00:00");
@@ -21,20 +22,18 @@ function CustomerPage() {
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(
-                persianJs(
+                toPersian(
                     moment(new Date(), "YYYY-MM-DD").locale("fa").format("HH:mm ")
                 )
-                    .englishNumber()
-                    .toString()
+
             );
             setDate(
-                persianJs(
+                toPersian(
                     moment(new Date(), "YYYY-MM-DD")
                         .locale("fa")
                         .format(" dddd-YYYY/MM/D  ")
                 )
-                    .englishNumber()
-                    .toString()
+
             );
         }, 500);
 
@@ -50,20 +49,18 @@ function CustomerPage() {
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(
-                persianJs(
+                toPersian(
                     moment(new Date(), "YYYY-MM-DD").locale("fa").format("HH:mm ")
                 )
-                    .englishNumber()
-                    .toString()
+
             );
             setDate(
-                persianJs(
+                toPersian(
                     moment(new Date(), "YYYY-MM-DD")
                         .locale("fa")
                         .format(" dddd-YYYY/MM/D  ")
                 )
-                    .englishNumber()
-                    .toString()
+
             );
         }, 500);
 

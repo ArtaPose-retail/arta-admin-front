@@ -66,13 +66,12 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {persianJs(
+                    {toPersian(
                         moment(new Date(), "YYYY-MM-DD")
                             .locale("fa")
                             .format("HH:mm - YYYY/MM/D")
                     )
-                        .englishNumber()
-                        .toString()
+
                     }
                 </TableCell>
                 <TableCell

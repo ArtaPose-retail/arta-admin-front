@@ -11,7 +11,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import QrCode2Icon from "@mui/icons-material/QrCode2";
 import PtoductSFilter from "./PtoductSFilter";
 import SingleProduct from "./SingleProduct.jsx";
-import { products, refrigeratingProduct } from "../../utils/data";
+import { products, refrigeratingProduct } from "../../utils/data.jsx";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
 import NewProductParentDialog from "./Dialogs";

@@ -1,12 +1,12 @@
 import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
 import { account } from "../../utils/data";
-import persianJs from "persianjs";
-import { separateBy4 } from "../../utils/setting";
+
+import { separateBy4, toPersian } from "../../utils/setting";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { useNavigate } from 'react-router-dom';
-import reactRouts from '../../utils/reactRouts';
-import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
+import reactRouts from "../../utils/reactRouts";
+import EditIcon from "@mui/icons-material/Edit";
 
 const center = {
     display: "flex",
@@ -15,16 +15,13 @@ const center = {
 };
 
 function Card() {
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
 
     const addAcount = () => {
-        navigate(reactRouts.banking.addcart)
-
-    }
+        navigate(reactRouts.banking.addcart);
+    };
     return (
         <Box sx={{ width: "100wh", display: "flex", overflowX: "scroll" }}>
-
             <Box
                 sx={{
                     display: "flex",
@@ -70,9 +67,7 @@ function Card() {
                                     }}
                                 >
                                     موجودی &nbsp;
-                                    {persianJs(`${item.amount}`)
-                                        .englishNumber()
-                                        .toString()}{" "}
+                                    {toPersian(item.amount)}
                                     &nbsp; ریال
                                 </Typography>
                             </Box>
@@ -99,9 +94,7 @@ function Card() {
                                 {item.accountNumber}
                             </Typography>
 
-                            <Box
-                                sx={{ ...center, flexDirection: "row-reverse", gap: "15%" }}
-                            >
+                            <Box sx={{ ...center, flexDirection: "row-reverse", gap: "15%" }}>
                                 {separateBy4(item.cardNumber).map((num) => (
                                     <Typography
                                         sx={{
@@ -111,14 +104,13 @@ function Card() {
                                             color: (theme) => theme.palette.text.card,
                                         }}
                                     >
-                                        {persianJs(num).englishNumber().toString()}
+                                        {toPersian(num)}
                                     </Typography>
                                 ))}
                             </Box>
 
                             {/* })} */}
                             <Box sx={{ ...center, justifyContent: "space-between" }}>
-
                                 <Typography
                                     sx={{
                                         ...center,
@@ -131,9 +123,16 @@ function Card() {
                                     شماره شبا:&nbsp;
                                     {item.sheba}
                                 </Typography>
-                                <EditIcon fontSize="small" sx={{ bgcolor: theme => theme.palette.darkBlue.main, fill: theme => theme.palette.text.primary, borderRadius: "8px", p: 0.2 }} />
+                                <EditIcon
+                                    fontSize="small"
+                                    sx={{
+                                        bgcolor: (theme) => theme.palette.darkBlue.main,
+                                        fill: (theme) => theme.palette.text.primary,
+                                        borderRadius: "8px",
+                                        p: 0.2,
+                                    }}
+                                />
                             </Box>
-
                         </Box>
                     </Box>
                 ))}
@@ -147,7 +146,7 @@ function Card() {
                         ...center,
                         flexDirection: "column",
                         gap: "10px",
-                        cursor: "pointer"
+                        cursor: "pointer",
                     }}
                     onClick={() => addAcount()}
                 >
@@ -164,7 +163,6 @@ function Card() {
                     </Typography>
                 </Box>
             </Box>
-
         </Box>
     );
 }

@@ -9,7 +9,6 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import moment from "jalali-moment";
-import persianJs from "persianjs";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import { Link, useLocation } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
@@ -20,7 +19,7 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import { Height } from "@mui/icons-material";
 import profile from "../../Assets/images/profileImage.png";
 import SearchDialog from "../Search/SearchDialog";
-import { separateBy3 } from "../../utils/setting";
+import { separateBy3, toPersian } from "../../utils/setting";
 
 function SecondaryHeader() {
     const { isfullScrenn } = useSelector((state) => state.general);
@@ -31,13 +30,12 @@ function SecondaryHeader() {
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(
-                persianJs(
+                toPersian(
                     moment(new Date(), "YYYY-MM-DD")
                         .locale("fa")
                         .format("HH:mm - YYYY/MM/D")
                 )
-                    .englishNumber()
-                    .toString()
+
             );
         }, 1000);
 
@@ -248,7 +246,7 @@ function SecondaryHeader() {
                                 gap: "8px",
                             }}
                         >
-                            {persianJs(separateBy3("5500")).englishNumber().toString()}تومان
+                            {toPersian(separateBy3("5500"))}تومان
                         </Typography>
                     </Box>
                 </Box>

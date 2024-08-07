@@ -1,3 +1,4 @@
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 import axios from "axios";
 
 
@@ -48,7 +49,8 @@ export const separateBy3 = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 export const toPersian = (str) => {
-    return persianJs(str).englishNumber().toString()
+
+    return digitsEnToFa(str);
 }
 
 import { toast } from "react-toastify"

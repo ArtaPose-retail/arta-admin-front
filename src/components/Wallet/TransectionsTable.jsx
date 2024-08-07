@@ -17,7 +17,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { toPersian } from "../../utils/setting.js";
+import { toPersian } from "../../utils/setting.jsx";
 import { styled } from '@mui/material/styles';
 import Input from "../UI/Input.jsx";
 

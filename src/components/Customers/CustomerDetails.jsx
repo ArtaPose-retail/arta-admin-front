@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Avatar, Box, Button, Divider, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Title from "../UI/Title";
-import persianJs from "persianjs";
+
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import moment from "jalali-moment";
@@ -82,13 +82,12 @@ export default function CustomerDetails({ data }) {
                                     }}
                                 >
                                     تاریخ تشکیل:
-                                    {persianJs(
+                                    {
                                         moment(new Date(), "YYYY-MM-DD")
                                             .locale("fa")
                                             .format("YYYY/MM/D")
-                                    )
-                                        .englishNumber()
-                                        .toString()}
+
+                                    }
                                 </Typography>
                             </Box>
 
@@ -115,7 +114,7 @@ export default function CustomerDetails({ data }) {
                                     }}
                                 >
                                     میزان اعتبار:
-                                    {persianJs(separateBy3("5500")).englishNumber().toString()}
+                                    {toPersian(separateBy3("5500"))}
                                     تومان
                                 </Typography>
                             </Box>

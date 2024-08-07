@@ -3,7 +3,7 @@ import React from "react";
 import Title from "../../components/UI/Title";
 import { toPersian, toastHandler } from "../../utils/setting";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import persianJs from "persianjs";
+
 import moment from "jalali-moment";
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -101,13 +101,12 @@ function Notificatins() {
                                     color: (theme) => theme.typography.color,
                                 }}
                             >
-                                {persianJs(
+                                {toPersian(
                                     moment(new Date(), "YYYY-MM-DD")
                                         .locale("fa")
                                         .format("HH:mm - YYYY/MM/D")
                                 )
-                                    .englishNumber()
-                                    .toString()}
+                                }
                             </Typography>
                         </Box>
                     </Box>
