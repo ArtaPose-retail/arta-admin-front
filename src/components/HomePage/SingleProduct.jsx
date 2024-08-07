@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import Title from "../UI/Title";
-import { separateBy3, toPersian } from "../../utils/setting";
+import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import moment from "jalali-moment";
-import ProductDetails from './Dialogs/ProductDetails';
+import ProductDetails from "./Dialogs/ProductDetails";
+import { center } from "../../styles/theme";
 function SingleProduct({ data }) {
     const [open, setOpen] = useState(false);
 
@@ -14,7 +15,6 @@ function SingleProduct({ data }) {
     const handlerCloseDialog = () => {
         setOpen(false);
         console.log("here", open);
-
     };
 
     return (
@@ -29,10 +29,9 @@ function SingleProduct({ data }) {
                     lineHeight: "60px",
                     position: "relative",
                     boxShadow: "0px 0px 17px 1px rgb(0 0 0 / 17%)",
-                    borderRadius: "12px"
-
-                }}>
-
+                    borderRadius: "12px",
+                }}
+            >
                 {/* header */}
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                     {/* right part */}
@@ -77,38 +76,18 @@ function SingleProduct({ data }) {
                         <Title
                             title={data.title}
                             Typoprops={{
-                                fontSize: "14px",
-                                fontWeight: 500,
-                                color: (theme) => !data?.refrigerating ? theme.palette.disable.secondary : '',
+                                fontSize: "16px",
+                                fontWeight: 900,
                                 textAlign: "start",
                             }}
                         />
-                        <Typography
-                            sx={{
-                                fontSize: "12px",
-                                fontWeight: 400,
-                                color: (theme) => !data?.refrigerating ? theme.palette.disable.main : "",
-                                textAlign: "start",
-                            }}
-                        >
-                            {data.transportInfo.vehicle} - {data.transportInfo.driver}
-                        </Typography>
-                        <Typography
-                            sx={{
-                                fontSize: "12px",
-                                fontWeight: 400,
-                                color: (theme) => !data?.refrigerating ? theme.palette.disable.main : "",
-                                textAlign: "start",
-                            }}
-                        >
-                            طرف معامله:{data.transactionParty}
-                        </Typography>
                     </Box>
                     <Box
                         sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "flex-end",
+                            ...center,
+                            flexDirection: "column",
+                            alignItems: "start",
+                            gap: "10px"
                         }}
                     >
                         <Typography
@@ -119,26 +98,28 @@ function SingleProduct({ data }) {
                                 textAlign: "start",
                             }}
                         >
-                            {toPersian(separateBy3(data.amount))}ریال
+                            فی: {toPersian(separateBy3(data.amount))}ریال
                         </Typography>
                         <Typography
                             sx={{
                                 fontSize: "12px",
                                 fontWeight: 700,
-                                color: (theme) => !data?.refrigerating ? theme.palette.disable.main : "",
+                                color: (theme) =>
+                                    !data?.refrigerating ? theme.palette.disable.main : "",
                                 textAlign: "start",
                             }}
                         >
-                            {toPersian(
-                                moment(data?.date, "YYYY-MM-DD")
-                                    .locale("fa")
-                                    .format("YYYY/MM/D")
-                            )}
+                            {persianDate(data?.date)
+                            }
                         </Typography>
                     </Box>
                 </Box>
             </Box>
-            <ProductDetails iteminfo={data} status={open} handlerCloseDialog={handlerCloseDialog} />
+            <ProductDetails
+                iteminfo={data}
+                status={open}
+                handlerCloseDialog={handlerCloseDialog}
+            />
         </>
     );
 }
