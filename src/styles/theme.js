@@ -54,3 +54,9 @@ const theme = createTheme({
 });
 
 export default theme;
+
+export const center = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
