@@ -247,6 +247,7 @@ export const menuData = [
             { title: "رند کردن مبالغ" },
             { title: "ارتباط با مشتری (CRM)" },
             { title: "تنظیمات چاپ" },
+            { title: "کاربران", path: "/user" },
         ],
     },
     {
@@ -2332,6 +2333,59 @@ export const safiAmaniData = [
 ]
 
 
+export const createUserForm = [
+    {
+        name: "first_name",
+        select: false,
+        placeholder: "نام",
+        lable: "نام",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+        require: false,
+    },
+    {
+        name: "last_name",
+        select: false,
+        placeholder: "نام خانوادگی",
+        lable: "نام خانوادگی",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+        require: false,
+    },
+    {
+        name: "username",
+        select: false,
+        placeholder: "نام کاربری",
+        lable: "نام کاربری",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+        require: true,
+    },
+    {
+        name: "username",
+        select: false,
+        placeholder: "نام کاربری",
+        lable: "نام کاربری",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+        require: true,
+    },
+    {
+        name: "password",
+        select: false,
+        placeholder: "رمز عبور",
+        lable: "رمز عبور",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        require: true,
+    },
+]
+
 export const checkTable = [
     {
         title: "خرید سیب قرمز",
@@ -2457,3 +2511,5 @@ export const keyboardnumber = [
     "\u06f7 \u06f8 \u06f9",
     ". 0 /",
 ]
+
+
