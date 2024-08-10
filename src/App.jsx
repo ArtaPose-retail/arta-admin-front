@@ -31,6 +31,7 @@ import AddCheck from "./pages/Checks/AddCheck";
 import AccountManaging from "./pages/AccountManaging";
 import Products from "./pages/Products";
 import Transactions from "./pages/Transactions";
+import { UserParent } from "./pages/User/Index";
 
 function App() {
   return (
@@ -73,6 +74,8 @@ function App() {
             <Route path={reactRouts.reportAcount.main} element={<AccountManaging />} />
             <Route path={reactRouts.products.main} element={<Products />} />
             <Route path={reactRouts.transactions.main} element={<Transactions />} />
+            //? manageing section
+            <Route path={reactRouts.user.main} element={<UserParent />} />
           </Routes>
         </MainLayout>
       </Provider>

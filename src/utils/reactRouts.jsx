@@ -61,6 +61,10 @@ const reactRouts = {
     },
     transactions: {
         main: "/transactions"
+    },
+    //! managing section
+    user: {
+        main: "/user"
     }
 };
 

@@ -12,13 +12,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import logo from "../../Assets/images/logo.png";
 const drawerWidth = 328;
 import { menuData } from "../../utils/data";
-
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
 import { Avatar, Collapse } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import reactRouts from "../../utils/reactRouts";
 import profile from "../../Assets/images/profileImage.png";
@@ -39,14 +36,11 @@ const closedMixin = (theme) => ({
 
     overflowX: "hidden",
     width: `calc(${theme.spacing(8)} + 30px)`,
-    // border: "1px solid red",
+
     display: "flex",
     flexDirection: "column",
 
     alignItems: "center",
-    // [theme.breakpoints.up('sm')]: {
-    //     width: `calc(${theme.spacing(8)} + 1px)`,
-    // },
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -54,7 +48,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     alignItems: "center",
     justifyContent: "flex-start",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
+
     ...theme.mixins.toolbar,
 }));
 
@@ -95,7 +89,6 @@ export default function SideBar() {
 
     const handleSubItemClick = (itemTitle) => {
         setOpenSubItems((prevState) => ({
-            // ...prevState,
             [itemTitle]: !prevState[itemTitle],
         }));
         setOpen(true);
@@ -108,11 +101,9 @@ export default function SideBar() {
             }
         };
 
-
         document.addEventListener("click", handleClickOutside);
 
         return () => {
-
             document.removeEventListener("click", handleClickOutside);
         };
     }, [open]);
@@ -250,7 +241,6 @@ export default function SideBar() {
                         sx={{
                             ...center,
                             borderRadius: (theme) => theme.shape.borderRadius,
-
                         }}
                     >
                         <ListItemIcon sx={{ ...center, flexDirection: "column" }}>
@@ -279,7 +269,7 @@ export default function SideBar() {
                                     color: (theme) => theme.palette.icon.primary,
                                     fontSize: "20px",
                                     fontWeight: "400 ",
-                                    ...center
+                                    ...center,
                                 }}
                             >
                                 پرهام حسن زاده
