@@ -1518,7 +1518,7 @@ export const ProductItemInfoForm = [
         type: "number",
     },
     {
-        name: "pureWeight",
+        name: "fee",
         select: false,
         placeholder: "فی",
         hasIcon: false,

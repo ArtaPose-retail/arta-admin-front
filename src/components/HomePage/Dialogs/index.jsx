@@ -63,7 +63,7 @@ export default function NewProductParentDialog({ type }) {
                     </>
                 </Button>
             ) : (
-                <Box onClick={handleClickOpen} sx={{ ...center }}>
+                <Button variant="outlined" onClick={handleClickOpen} sx={{ ...center }}>
                     <Typography
                         sx={{
                             fontSize: "16px",
@@ -74,7 +74,7 @@ export default function NewProductParentDialog({ type }) {
                         تغییرات در محصول
                     </Typography>
                     <EditIcon />
-                </Box>
+                </Button>
             )}
             <Dialog
                 fullWidth={true}

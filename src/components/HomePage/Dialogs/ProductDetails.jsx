@@ -37,18 +37,18 @@ const ExpandMore = styled((props) => {
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const [expanded, setExpanded] = useState(false);
-    const [Refrigrate, setRefrigrate] = useState(false);
-    const [Weight, setWeight] = useState(false);
+    const [Date, seDate] = useState(false);
+    const [Price, setPrice] = useState(false);
     const { productformInformation } = useSelector(
         (state) => state.Productinformation
     );
-    const handerWeight = () => {
-        setWeight(!Weight);
+    const handerPrice = () => {
+        setPrice(!Price);
     };
     const dispatch = useDispatch();
 
-    const handlerRefrigrate = () => {
-        setRefrigrate(!Refrigrate);
+    const handlerDate = () => {
+        seDate(!Date);
     };
 
     const handleExpandClick = () => {
@@ -104,8 +104,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
             >
                 <DialogContent
                     sx={{
-                        bgcolor: (theme) =>
-                            !Refrigrate ? theme.background.box : theme.palette.primary.second,
+                        bgcolor: (theme) => theme.background.box,
                         order: 1,
                     }}
                 >
@@ -118,7 +117,14 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 color: (theme) => theme.palette.text.card,
                             }}
                         />
-                        <Box sx={{ ...center, gap: "10px", justifyContent: "space-between", width: "50%" }}>
+                        <Box
+                            sx={{
+                                ...center,
+                                gap: "10px",
+                                justifyContent: "space-between",
+                                width: "50%",
+                            }}
+                        >
                             <Box sx={{ ...center, gap: "15px" }}>
                                 <Box
                                     sx={{
@@ -181,8 +187,8 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     disabled={
-                                        (!Weight && item.name === "weight") ||
-                                            (!Refrigrate && item.name === "date")
+                                        (!Price && item.name === "price") ||
+                                            (!Date && item.name === "date")
                                             ? true
                                             : false
                                     }
@@ -252,152 +258,123 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                         </Box>
                     </Box>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <Grid
-                            container
-                            spacing={1}
-                            sx={{
-                                border: "1px solid gray",
-
-                                borderRadius: "12px",
-                                mt: 1,
-                                bgcolor: "white",
-                                overflow: "hidden",
-                            }}
-                        >
-                            <Grid
-                                item
-                                xs={2.5}
+                        <Box sx={{ ...center, justifyContent: "space-between", p: 2, mt: 1 }}>
+                            <NewProductParentDialog type={"edit"} />
+                            <Button
+                                variant="outlined"
                                 sx={{
-                                    cursor: "pointer",
-                                    "&:hover": {
-                                        bgcolor: (theme) => theme.palette.green.main,
-                                    },
+                                    ...center,
+                                    m: 1,
+                                    gap: "5px",
                                 }}
+                                onClick={() => deleteBtn()}
                             >
-                                <Box sx={{ ...center }}>
-                                    <CancelBtn
-                                        BtnTitle={
-                                            <Box sx={{ ...center, gap: "5px" }}>
-                                                <Typography
-                                                    sx={{
-                                                        fontSize: "16px",
-                                                        fontWeight: 500,
-                                                        color: (theme) => theme.typography.color,
-                                                    }}
-                                                >
-                                                    اتمام محصول
-                                                </Typography>
-                                                <UndoIcon />
-                                            </Box>
-                                        }
-                                        width="100%"
-                                        open={openCancelBTn}
-                                        handleClose={handleCloseCancleModal}
-                                        handleOpen={handleOpenCancleModal}
-                                        title={"ثبت درخواست"}
-                                        question={"آیا از اتمام محصول اطمینان دارید؟"}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Divider orientation="vertical" flexItem />
-                            <Grid
-                                item
-                                xs={3}
-                                sx={{
-                                    "&:hover": {
-                                        bgcolor: (theme) => theme.palette.green.main,
-                                    },
-                                    cursor: "pointer",
-                                }}
-                            >
-                                <Box sx={{ ...center, gap: "5px", m: 1 }}>
-                                    <NewProductParentDialog type={"edit"} />
-                                </Box>
-                            </Grid>
-                            <Divider orientation="vertical" flexItem />
-
-                            <Grid
-                                item
-                                xs={2.5}
-                                sx={{
-                                    "&:hover": {
-                                        bgcolor: (theme) => theme.palette.green.main,
-                                    },
-                                    cursor: "pointer",
-                                }}
-                            >
-                                <Box
+                                <Typography
                                     sx={{
-                                        ...center,
-                                        m: 1,
-                                        gap: "5px",
+                                        fontSize: "16px",
+                                        fontWeight: 500,
+                                        // color: (theme) => theme.palette.,
                                     }}
-                                    onClick={() => deleteBtn()}
                                 >
+                                    اتمام محصول
+                                </Typography>
+                                <UndoIcon
+                                    sx={{
+                                        // fill: (theme) => theme.palette.warning.main,
+                                        cursor: "pointer",
+                                    }}
+                                />
+                            </Button>
+                            <Button
+                                sx={{
+                                    ...center,
+                                    m: 1,
+                                    gap: "5px",
+
+
+                                }}
+                                variant="outlined"
+                                onClick={() => deleteBtn()}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontSize: "16px",
+                                        fontWeight: 500,
+                                        // color: (theme) => theme.palette.,
+                                    }}
+                                >
+                                    مرجوعی
+                                </Typography>
+                                <UndoIcon
+                                    sx={{
+                                        // fill: (theme) => theme.palette.warning.main,
+                                        cursor: "pointer",
+                                    }}
+                                />
+                            </Button>
+                            <Button
+                                sx={{
+                                    ...center,
+                                    m: 1,
+                                    gap: "5px",
+                                }}
+                                variant="outlined"
+
+                                onClick={() => deleteBtn()}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontSize: "16px",
+                                        fontWeight: 500,
+                                        color: (theme) => theme.palette.warning.main,
+                                    }}
+                                >
+                                    دور ریز
+                                </Typography>
+                                <DeleteOutlineIcon
+                                    sx={{
+                                        fill: (theme) => theme.palette.warning.main,
+                                        cursor: "pointer",
+                                    }}
+                                />
+                            </Button>
+                            <Box sx={{ ...center, m: 1 }}>
+                                <Box sx={{ ...center }}>
+                                    <Switch
+                                        name="Date"
+                                        onClick={() => handlerDate()}
+                                        checked={Date}
+                                        size="small"
+                                    />
                                     <Typography
                                         sx={{
-                                            fontSize: "16px",
+                                            fontSize: "14px",
                                             fontWeight: 500,
-                                            color: (theme) => theme.palette.warning.main,
+                                            color: (theme) => theme.typography.color,
                                         }}
                                     >
-                                        حذف محصول
+                                        تاریخ
                                     </Typography>
-                                    <DeleteOutlineIcon
-                                        sx={{
-                                            fill: (theme) => theme.palette.warning.main,
-                                            cursor: "pointer",
-                                        }}
+                                </Box>
+                                <Box sx={{ ...center }}>
+                                    <Switch
+                                        name="Price"
+                                        onClick={() => handerPrice()}
+                                        checked={Price}
+                                        size="small"
                                     />
+                                    <Typography
+                                        sx={{
+                                            fontSize: "14px",
+                                            fontWeight: 500,
+                                            color: (theme) => theme.typography.color,
+                                        }}
+                                    >
+                                        قیمت
+                                    </Typography>
                                 </Box>
-                            </Grid>
-                            <Divider orientation="vertical" flexItem />
-
-                            <Grid
-                                item
-                                xs={3.5}
-                                sx={{
-                                    cursor: "pointer",
-                                }}
-                            >
-                                <Box sx={{ ...center, m: 1 }}>
-                                    <Box sx={{ ...center }}>
-                                        <Switch
-                                            name="Refrigrate"
-                                            onClick={() => handlerRefrigrate()}
-                                            checked={Refrigrate}
-                                            size="small"
-                                        />
-                                        <Typography
-                                            sx={{
-                                                fontSize: "14px",
-                                                fontWeight: 500,
-                                                color: (theme) => theme.typography.color,
-                                            }}
-                                        >
-                                            سردخانه
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ ...center }}>
-                                        <Switch
-                                            name="Weight"
-                                            onClick={() => handerWeight()}
-                                            checked={Weight}
-                                            size="small"
-                                        />
-                                        <Typography
-                                            sx={{
-                                                fontSize: "14px",
-                                                fontWeight: 500,
-                                                color: (theme) => theme.typography.color,
-                                            }}
-                                        >
-                                            وزن ناخالص
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                            </Grid>
-                        </Grid>
+                            </Box>
+                        </Box>
                     </Collapse>
                 </DialogContent>
             </Dialog>
