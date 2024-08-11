@@ -1504,7 +1504,7 @@ export const ProductItemInfoForm = [
     {
         name: "weight",
         select: false,
-        placeholder: "وزن ناخالص را وارد کنید",
+        placeholder: "وزن",
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
@@ -1512,7 +1512,7 @@ export const ProductItemInfoForm = [
     {
         name: "number",
         select: false,
-        placeholder: "تعداد را وارد کنید",
+        placeholder: "تعداد",
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
@@ -1520,7 +1520,7 @@ export const ProductItemInfoForm = [
     {
         name: "pureWeight",
         select: false,
-        placeholder: "وزن خالص را وارد کنید",
+        placeholder: "فی",
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
@@ -1529,7 +1529,7 @@ export const ProductItemInfoForm = [
     {
         name: "price",
         select: false,
-        placeholder: "قیمت را وارد کنید",
+        placeholder: "قیمت ",
         hasIcon: false,
         hastext: true,
         color: "#6D6D6D",

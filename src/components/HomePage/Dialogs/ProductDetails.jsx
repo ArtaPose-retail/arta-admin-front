@@ -85,7 +85,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
 
-
     const [openCancelBTn, setOpenCancelBTn] = useState(false);
     const handleOpenCancleModal = () => setOpenCancelBTn(true);
     const handleCloseCancleModal = () => setOpenCancelBTn(false);
@@ -119,103 +118,46 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 color: (theme) => theme.palette.text.card,
                             }}
                         />
-                        <Box sx={{ ...center, gap: "10px" }}>
-                            <Typography
-                                sx={{
-                                    bgcolor: (theme) => theme.palette.green.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                    borderRadius: "12px",
-                                    p: 1,
-                                }}
-                            >
-                                فی محصول:{toPersian(separateBy3(iteminfo && iteminfo?.amount))}
-                            </Typography>
-
-                            <Typography
-                                sx={{
-                                    bgcolor: (theme) => theme.palette.darkBlue.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                    borderRadius: "12px",
-                                    p: 1,
-                                }}
-                            >
-                                تاریخ فاکتور :{" "}
-                                {iteminfo?.date &&
-                                    toPersian(
-                                        moment(iteminfo?.date, "YYYY-MM-DD")
-                                            .locale("fa")
-                                            .format("YYYY/MM/D")
-                                    )}
-                            </Typography>
-
-                            <Typography
-                                sx={{
-                                    bgcolor: (theme) => theme.palette.darkBlue.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                    borderRadius: "12px",
-                                    p: 1,
-                                }}
-                            >
-                                شماره فاکتور/ بارنامه : {toPersian("12345")}
-                            </Typography>
-                        </Box>
-                    </Box>
-                    <Box sx={{ ...center, justifyContent: "space-around", mt: 2 }}>
-                        <Box sx={{ ...center, gap: "15px" }}>
-                            <Box
-                                sx={{
-                                    bgcolor: `${iteminfo?.color}`,
-                                    borderRadius: "12px",
-                                    px: 0.5,
-                                    pt: 0.5,
-                                }}
-                            >
-                                <img
-                                    src={iteminfo?.logo}
-                                    width={35}
-                                    height={35}
-                                    style={{
-                                        padding: "0px",
-                                        margin: "0px",
+                        <Box sx={{ ...center, gap: "10px", justifyContent: "space-between", width: "50%" }}>
+                            <Box sx={{ ...center, gap: "15px" }}>
+                                <Box
+                                    sx={{
+                                        bgcolor: `${iteminfo?.color}`,
+                                        borderRadius: "12px",
+                                        px: 0.5,
+                                        pt: 0.5,
                                     }}
-                                />
+                                >
+                                    <img
+                                        src={iteminfo?.logo}
+                                        width={35}
+                                        height={35}
+                                        style={{
+                                            padding: "0px",
+                                            margin: "0px",
+                                        }}
+                                    />
+                                </Box>
+
+                                <Typography
+                                    sx={{
+                                        fontSize: "20px",
+                                        fontWeight: 500,
+                                        color: (theme) => theme.typography.color,
+                                    }}
+                                >
+                                    نام کالا:{iteminfo?.title}
+                                </Typography>
                             </Box>
-
                             <Typography
                                 sx={{
-                                    fontSize: "20px",
-                                    fontWeight: 500,
-                                    color: (theme) => theme.typography.color,
+                                    bgcolor: (theme) => theme.palette.darkBlue.main,
+                                    color: (theme) => theme.palette.text.primary,
+                                    borderRadius: "12px",
+                                    p: 1,
                                 }}
                             >
-                                نام کالا:{iteminfo?.title}
-                            </Typography>
-                        </Box>
-                        <Divider orientation="vertical" variant="middle" flexItem />
-
-                        <Box sx={{ ...center }}>
-                            <Typography
-                                sx={{
-                                    fontSize: "20px",
-                                    fontWeight: 500,
-                                    color: (theme) => theme.typography.color,
-                                }}
-                            >
-                                نام خودرو:{iteminfo.transportInfo?.vehicle}
-                            </Typography>
-                        </Box>
-                        <Divider orientation="vertical" variant="middle" flexItem />
-
-                        <Box sx={{ ...center }}>
-                            <Typography
-                                sx={{
-                                    fontSize: "20px",
-                                    fontWeight: 500,
-                                    color: (theme) => theme.typography.color,
-                                }}
-                            >
-                                طرف معامله:
-                                {iteminfo?.transportInfo?.driver}
+                                شماره قفسه:{toPersian(13243)}
                             </Typography>
                         </Box>
                     </Box>
@@ -333,7 +275,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 }}
                             >
                                 <Box sx={{ ...center }}>
-
                                     <CancelBtn
                                         BtnTitle={
                                             <Box sx={{ ...center, gap: "5px" }}>
@@ -342,7 +283,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                                         fontSize: "16px",
                                                         fontWeight: 500,
                                                         color: (theme) => theme.typography.color,
-
                                                     }}
                                                 >
                                                     اتمام محصول
@@ -355,7 +295,8 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                         handleClose={handleCloseCancleModal}
                                         handleOpen={handleOpenCancleModal}
                                         title={"ثبت درخواست"}
-                                        question={"آیا از اتمام محصول اطمینان دارید؟"} />
+                                        question={"آیا از اتمام محصول اطمینان دارید؟"}
+                                    />
                                 </Box>
                             </Grid>
                             <Divider orientation="vertical" flexItem />
@@ -370,8 +311,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 }}
                             >
                                 <Box sx={{ ...center, gap: "5px", m: 1 }}>
-
-
                                     <NewProductParentDialog type={"edit"} />
                                 </Box>
                             </Grid>
@@ -405,7 +344,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                         حذف محصول
                                     </Typography>
                                     <DeleteOutlineIcon
-
                                         sx={{
                                             fill: (theme) => theme.palette.warning.main,
                                             cursor: "pointer",
