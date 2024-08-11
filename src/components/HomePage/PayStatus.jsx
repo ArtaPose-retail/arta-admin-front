@@ -2,12 +2,8 @@ import {
     Button,
     Divider,
     Fade,
-    FormControlLabel,
     Grid,
-    InputAdornment,
     Popper,
-    Radio,
-    Switch,
     TextField,
     Typography,
 } from "@mui/material";
@@ -23,7 +19,6 @@ function PayStatus() {
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [PosItem, setPositem] = React.useState(null);
-    const [RadioCheck, setRadioCheck] = React.useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -219,7 +214,7 @@ function PayStatus() {
                 spacing={2}
                 sx={{ alignItems: "center", justifyContent: "center" }}
             >
-                <Grid item xs={6}>
+                <Grid item xs={5}>
                     <Box sx={{ ...center, gap: "5px", justifyContent: "flex-start" }}>
                         <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
                             مبلغ فاکتور:
@@ -235,25 +230,12 @@ function PayStatus() {
                         </Typography>
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={7}>
                     <Box sx={{ ...center, justifyContent: "space-between", gap: "5px" }}>
-                        <FormControlLabel
-                            sx={{ m: 0, p: 0 }}
-                            onClick={() => setRadioCheck(!RadioCheck)}
-                            control={
-                                <Radio
-                                    checked={RadioCheck}
-                                    sx={{
-                                        color: (theme) => theme.palette.primary.main,
-                                        p: 0,
-                                        m: 0,
-                                    }}
-                                />
-                            }
-                        />
+
 
                         <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
-                            کارگری:
+                            کد تخفیف:
                         </Typography>
                         <TextField
                             sx={{
@@ -264,19 +246,7 @@ function PayStatus() {
                             type="text"
                             id="input-with-icon-textfield"
                             InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <Typography
-                                            sx={{
-                                                color: (theme) => theme.palette.divider,
-                                                fontSize: "10px",
-                                                fontWeight: 700,
-                                            }}
-                                        >
-                                            ریال
-                                        </Typography>
-                                    </InputAdornment>
-                                ),
+
                                 style: {
                                     background: "#F2F2F2",
                                     color: "#000",
@@ -295,23 +265,8 @@ function PayStatus() {
                 spacing={2}
                 sx={{ alignItems: "center", justifyContent: "center" }}
             >
-                <Grid item xs={6}>
-                    <Box sx={{ ...center, gap: "5px", justifyContent: "flex-start" }}>
-                        <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
-                            دریافتی:
-                        </Typography>
-                        <Typography
-                            sx={{
-                                fontSize: "12px",
-                                fontWeight: 700,
-                                color: (theme) => theme.palette.darkBlue.main,
-                            }}
-                        >
-                            {toPersian(separateBy3("720000"))} ریال
-                        </Typography>
-                    </Box>
-                </Grid>
-                <Grid item xs={6} sx={{ my: 1 }}>
+
+                <Grid item xs={12} sx={{ my: 1 }}>
                     <Box sx={{ ...center, gap: "5px", justifyContent: "flex-start" }}>
                         <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
                             تخفیف:
@@ -345,11 +300,9 @@ function PayStatus() {
                 flexItem
                 sx={{ my: 1 }}
             />
-            {/* <Box
-                sx={{ mt: 1, overflow: "scroll", height: "200px", width: '100%' }}
-            > */}
+
             <PayStatusTable />
-            {/* </Box> */}
+
         </Box >
     );
 }

@@ -7,7 +7,7 @@ import { toastHandler } from "../../utils/setting";
 import CancelBtn from "../UI/CancelBtn";
 import { Close } from "@mui/icons-material";
 function PurchaseInformation() {
-    const [tabs, setTabs] = useState(1);
+    const [tabs, setTabs] = useState(2);
 
     const [openCancelBTn, setOpenCancelBTn] = useState(false);
     const handleOpenCancleModal = () => setOpenCancelBTn(true);

@@ -14,12 +14,12 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { toPersian, toastHandler } from "../../utils/setting";
+import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import moment from "jalali-moment";
 
-function createData(title, TransactionNum, time, date) {
+function createData(title, TransactionNum, amount, time, date) {
     return {
-        title, TransactionNum, time, date
+        title, TransactionNum, amount, time, date
 
     };
 }
@@ -60,6 +60,13 @@ function Row(props) {
                 >
                     {toPersian(row.TransactionNum)}
                 </TableCell>
+                <TableCell
+                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
+                    align="center"
+                >
+                    {toPersian(separateBy3(row.amount))}
+                </TableCell>
+
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
@@ -105,7 +112,8 @@ function Row(props) {
 }
 
 const rows = [
-    createData("دریافتی", "34235325", "13:13", new Date()),
+    createData("تقدی", "34235325", 400000, "13:13", new Date()),
+    createData("پوز", "34235325", 400000, "13:13", new Date()),
 
 ];
 
@@ -136,6 +144,13 @@ export default function CollapsibleTable() {
                             >
                                 شماره تراکنش
                             </TableCell>
+                            <TableCell
+                                sx={{ color: (theme) => theme.palette.disable.main }}
+                                align="center"
+                            >
+                                مبلغ
+                            </TableCell>
+
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
