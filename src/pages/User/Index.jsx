@@ -3,6 +3,7 @@ import Title from '../../components/UI/Title'
 import { Box, Button } from '@mui/material'
 import { center } from "../../styles/theme"
 import CreateUserModal from '../../components/User/CreateUserModal'
+import UserList from '../../components/User/UserList'
 
 export const UserParent = () => {
   return (
@@ -26,11 +27,12 @@ export const UserParent = () => {
           bgcolor: (theme) => theme.background.box,
           width: "100%",
           borderRadius: "18px",
-          p: 1,
+          p: 2,
           mt: 1,
-          height: "75vh"
+          height: "85dvh"
         }}
       >
+        <UserList />
       </Box>
 
     </Box>
