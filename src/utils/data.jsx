@@ -2384,6 +2384,17 @@ export const createUserForm = [
         type: "number",
         require: true,
     },
+    {
+        name: "phone",
+        select: false,
+        placeholder: "شماره همراه",
+        lable: "شماره همراه",
+
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        require: true,
+    },
 ]
 
 export const checkTable = [

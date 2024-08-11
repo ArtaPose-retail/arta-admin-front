@@ -42,14 +42,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(fullName, userName, password, access) {
-    return { fullName, userName, password, access };
+function createData(fullName, userName, password, access, phoneNumber) {
+    return { fullName, userName, password, access, phoneNumber };
 }
 
 const rows = [
-    createData("Frozen yoghurt", "test1", 1, "ادمین"),
-    createData("Frozen yoghurt", "test1", 1, "ادمین"),
-    createData("Frozen yoghurt", "test1", 1, "ادمین"),
+    createData("Frozen yoghurt", "test1", 1, "ادمین", "09138090933"),
+    createData("Frozen yoghurt", "test1", 1, "ادمین", "09138090933"),
+    createData("Frozen yoghurt", "test1", 1, "ادمین", "09138090933"),
 ];
 
 function Row(props) {
@@ -116,6 +116,15 @@ function Row(props) {
                     }}
                     align="center"
                 >
+                    {toPersian(row?.phoneNumber)}
+                </TableCell>
+                <TableCell
+                    sx={{
+                        color: (theme) => theme.typography.color,
+                        fontWeight: 500,
+                    }}
+                    align="center"
+                >
                     <Box sx={{ ...center, gap: "15px" }}>
                         <EditIcon sx={{}} />
                         <DeleteOutlineIcon
@@ -171,6 +180,12 @@ export default function UserList() {
                                 align="center"
                             >
                                 سطح دسترسی
+                            </StyledTableCell>
+                            <StyledTableCell
+                                sx={{ color: (theme) => theme.palette.disable.main }}
+                                align="center"
+                            >
+                                شماره همراه
                             </StyledTableCell>
 
                             <StyledTableCell
