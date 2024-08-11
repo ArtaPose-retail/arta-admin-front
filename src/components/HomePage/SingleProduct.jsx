@@ -87,19 +87,32 @@ function SingleProduct({ data }) {
                             ...center,
                             flexDirection: "column",
                             alignItems: "start",
-                            gap: "10px"
+                            gap: "15px"
                         }}
                     >
-                        <Typography
-                            sx={{
-                                fontSize: "12px",
-                                fontWeight: 700,
-                                color: (theme) => theme.palette.text.secondary,
-                                textAlign: "start",
-                            }}
-                        >
-                            فی: {toPersian(separateBy3(data.amount))}ریال
-                        </Typography>
+                        <Box sx={{ ...center, justifyContent: "space-between", width: "100%" }}>
+                            <Typography
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 700,
+                                    color: (theme) => theme.palette.text.secondary,
+                                    textAlign: "start",
+                                }}
+                            >
+                                فی: {toPersian(separateBy3(data.amount))}ریال
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 700,
+                                    color: (theme) => theme.palette.text.secondary,
+                                    textAlign: "start",
+                                }}
+                            >
+                                موجودی: {toPersian(separateBy3(4000))}
+                            </Typography>
+                        </Box>
+
                         <Typography
                             sx={{
                                 fontSize: "12px",

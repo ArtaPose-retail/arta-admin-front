@@ -114,6 +114,7 @@ function Row(props) {
 const rows = [
     createData("تقدی", "34235325", 400000, "13:13", new Date()),
     createData("پوز", "34235325", 400000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
 
 ];
 
