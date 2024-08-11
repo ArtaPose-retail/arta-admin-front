@@ -28,7 +28,7 @@ function CheckRegister({ stephandler }) {
                 width: "60%",
                 bgcolor: (theme) => theme.background.box,
                 borderRadius: "18px",
-                height: "650px",
+                height: "1005",
                 p: 1,
                 overflowY: "scroll",
             }}
@@ -365,16 +365,7 @@ function CheckRegister({ stephandler }) {
             </Grid>
             <Box sx={{ ...center, p: 2, justifyContent: "space-between", gap: "15px" }}>
                 <Box sx={{ ...center, gap: "15px" }}>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            bgcolor: (theme) => theme.palette.green.main,
-                            color: (theme) => theme.palette.text.primary,
-                            px: 3,
-                        }}
-                    >
-                        ثبت چک
-                    </Button>
+
                     <Button
                         variant="contained"
                         sx={{
@@ -395,7 +386,7 @@ function CheckRegister({ stephandler }) {
                         px: 3,
                     }}
                 >
-                    انصراف
+                    بازگشت
                 </Button>
             </Box>
 

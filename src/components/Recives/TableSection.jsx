@@ -71,7 +71,7 @@ function TableSection() {
                 borderRadius: "18px",
                 bgcolor: (theme) => theme.background.box,
                 p: 1.5,
-                height: "650px",
+                height: "100%",
             }}
         >
             <Box sx={{ ...center, flexDirection: "column", height: "100%" }}>
@@ -280,7 +280,7 @@ function TableSection() {
                             px: 4,
                         }}
                     >
-                        مبلغ
+                        نقد
                     </Button>
                     <Button
                         variant="contained"
@@ -423,10 +423,11 @@ function TableSection() {
                             <Typography sx={{
                                 bgcolor: (theme) => theme.palette.warning.main,
                                 color: (theme) => theme.palette.text.primary,
-                                width: "30%",
+                                width: "100%",
                                 fontSize: "14px",
                                 fontWeight: 700,
                                 borderRadius: "12px",
+                                p: 2,
                                 "&:hover": {
                                     bgcolor: (theme) => theme.palette.warning.main,
                                     color: (theme) => theme.palette.text.primary,

@@ -36,7 +36,7 @@ function FormSection() {
                         width: "60%",
                         bgcolor: (theme) => theme.background.box,
                         borderRadius: "18px",
-                        height: "650px",
+                        height: "100%",
                         p: 1,
                         overflowY: "scroll",
                     }}
@@ -287,6 +287,26 @@ function FormSection() {
                                         color: (theme) => theme.typography.color,
                                     }}
                                 >
+                                    تاریخ:
+                                </Typography>
+                            </InputLabel>
+
+                            <Input
+                                height={"55px"}
+                                hasText={false}
+                                type={"date"}
+                                placeholder={"مبلغ را وارد کنید"}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <InputLabel>
+                                <Typography
+                                    sx={{
+                                        fontSize: "18px",
+                                        fontWeight: 400,
+                                        color: (theme) => theme.typography.color,
+                                    }}
+                                >
                                     عملیات:
                                 </Typography>
                             </InputLabel>
@@ -376,30 +396,7 @@ function FormSection() {
                     </Box>
                     <Divider flexItem />
 
-                    <Box
-                        sx={{ ...center, p: 2, justifyContent: "flex-start", gap: "15px" }}
-                    >
-                        <Button
-                            variant="contained"
-                            sx={{
-                                bgcolor: (theme) => theme.palette.green.main,
-                                color: (theme) => theme.palette.text.primary,
-                                px: 3,
-                            }}
-                        >
-                            ثبت
-                        </Button>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                bgcolor: (theme) => theme.palette.warning.main,
-                                color: (theme) => theme.palette.text.primary,
-                                px: 3,
-                            }}
-                        >
-                            انصراف
-                        </Button>
-                    </Box>
+
                 </Box>
             ) : (
                 <CheckRegister stephandler={stephandler} />

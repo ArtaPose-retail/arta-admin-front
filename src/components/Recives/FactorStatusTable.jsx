@@ -17,12 +17,13 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import moment from "jalali-moment";
 
-function createData(title, TransactionNum, date, reciveType) {
+function createData(title, TransactionNum, amount, time, date) {
     return {
-        title, TransactionNum, date, reciveType
+        title, TransactionNum, amount, time, date
 
     };
 }
+
 
 function Row(props) {
     const { row } = props;
@@ -61,24 +62,26 @@ function Row(props) {
                 >
                     {toPersian(row.TransactionNum)}
                 </TableCell>
+                <TableCell
+                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
+                    align="center"
+                >
+                    {toPersian(separateBy3(row.amount))}
+                </TableCell>
 
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(
-                        moment(new Date(), "YYYY-MM-DD")
-                            .locale("fa")
-                            .format("HH:mm - YYYY/MM/D")
-                    )
-
-                    }
+                    {toPersian(row.time)}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row.reciveType)}
+                    {toPersian(moment(row.date, "YYYY-MM-DD")
+                        .locale("fa")
+                        .format("YYYY/MM/D"))}
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -118,7 +121,17 @@ function Row(props) {
 }
 
 const rows = [
-    createData("دریافتی", "34235325", new Date(), "پوز۱"),
+    createData("تقدی", "34235325", 400000, "13:13", new Date()),
+    createData("پوز", "34235325", 400000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
+    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
 
 ];
 
@@ -127,7 +140,7 @@ export default function FactorStatusTable() {
         <Box
             sx={{
                 width: "100%",
-                height: "190px",
+                height: "100%",
                 overflowY: "scroll",
                 overflowX: "hidden",
             }}
@@ -149,18 +162,24 @@ export default function FactorStatusTable() {
                             >
                                 شماره تراکنش
                             </TableCell>
+                            <TableCell
+                                sx={{ color: (theme) => theme.palette.disable.main }}
+                                align="center"
+                            >
+                                مبلغ
+                            </TableCell>
 
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                تاریخ
+                                ساعت
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                نوع دریافتی
+                                تاریخ
                             </TableCell>
                         </TableRow>
                     </TableHead>
