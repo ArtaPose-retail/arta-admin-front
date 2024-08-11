@@ -36,8 +36,8 @@ function ProductsSection() {
                         color: (theme) => theme.palette.text.card,
                     }}
                 />
+                <PtoductSFilter />
             </Box>
-            <PtoductSFilter />
             <Grid
                 container
                 spacing={2}

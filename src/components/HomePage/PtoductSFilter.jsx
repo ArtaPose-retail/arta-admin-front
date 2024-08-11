@@ -1,7 +1,16 @@
-import { Box, Divider, Switch, TextField, Typography } from "@mui/material";
+import {
+    Autocomplete,
+    Box,
+    Divider,
+    Switch,
+    TextField,
+    Typography,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { handleShowRefrigerateitems } from "../../Redux/Slices/HomePage/product";
 import Input from "../UI/Input";
+import { center } from "../../styles/theme";
+import { products } from "../../utils/data";
 
 function PtoductSFilter() {
     const { showRefrigrateItems } = useSelector((state) => state.product);
@@ -12,7 +21,7 @@ function PtoductSFilter() {
     };
 
     return (
-        <Box sx={{ display: "flex", alignitems: "center", gap: "10px" }}>
+        <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
             <TextField
                 select
                 sx={{
@@ -27,7 +36,7 @@ function PtoductSFilter() {
                         background: "#F2F2F2",
                         color: "#000",
                         direction: "ltr",
-                        height: "40px",
+                        height: "auto",
                     },
                 }}
                 variant="outlined"
@@ -46,16 +55,77 @@ function PtoductSFilter() {
                         وضیعت محصول
                     </Typography>
                 </option>
+                <option value="fruit">
+                    <Typography
+                        sx={{
+                            fontSize: "12px",
+                            color: (theme) => theme.typography.color,
+                            fontWeight: 400,
+                        }}
+                    >
+                        میوه
+                    </Typography>
+                </option>
+                <option value="vegteable">
+                    <Typography
+                        sx={{
+                            fontSize: "12px",
+                            color: (theme) => theme.typography.color,
+                            fontWeight: 400,
+                        }}
+                    >
+                        سبزیجات
+                    </Typography>
+                </option>
             </TextField>
 
             <Divider orientation="vertical" flexItem />
-
-            <Input
-                width={"30%"}
-                icon={"search"}
-                hasIcon={true}
-                type={"text"}
-                placeholder={"جستوجو مشتری"}
+            <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={products}
+                getOptionLabel={(option) => `${option?.title}`}
+                sx={{ width: 300, color: "#000000" }}
+                renderOption={(props, option) => (
+                    <Box
+                        // component="li"
+                        sx={{ ...center, gap: "5px" }}
+                        {...props}
+                    >
+                        <img
+                            src={option.logo}
+                            alt="goods"
+                            style={{ width: 20, height: 20 }}
+                        />
+                        <Typography
+                            sx={{
+                                fontSize: "14px",
+                                fontWeight: 500,
+                                color: (theme) => theme.palette.text.primary,
+                            }}
+                        >{`${option?.title} `}</Typography>
+                    </Box>
+                )}
+                renderInput={(params) => (
+                    <TextField
+                        sx={{ color: "#000", background: "#F2F2F2", borderRadius: "12px" }}
+                        autoComplete="none"
+                        {...params}
+                        placeholder={"جستوجو محصول"}
+                        inputProps={{
+                            ...params.inputProps,
+                            autoComplete: "none", // disable autocomplete and autofill
+                        }}
+                        InputProps={{
+                            ...params.InputProps,
+                            sx: {
+                                "& .MuiInputBase-input": {
+                                    color: "#000000",
+                                },
+                            },
+                        }}
+                    />
+                )}
             />
         </Box>
     );
