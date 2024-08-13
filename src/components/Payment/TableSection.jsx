@@ -59,7 +59,7 @@ function TableSection() {
                 borderRadius: "18px",
                 bgcolor: (theme) => theme.background.box,
                 p: 1.5,
-                height: "650px",
+                height: "100%",
             }}
         >
             <Box sx={{ ...center, flexDirection: "column", height: "100%" }}>
@@ -367,7 +367,8 @@ function TableSection() {
                             <Typography sx={{
                                 bgcolor: (theme) => theme.palette.warning.main,
                                 color: (theme) => theme.palette.text.primary,
-                                width: "30%",
+                                width: "100%",
+                                p: 2,
                                 fontSize: "14px",
                                 fontWeight: 700,
                                 borderRadius: "12px",
@@ -380,6 +381,7 @@ function TableSection() {
                             </Typography>
                         }
                         width="30%"
+
                         open={openCancelBTn}
                         handleClose={handleCloseCancleModal}
                         handleOpen={handleOpenCancleModal}

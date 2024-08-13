@@ -6,6 +6,7 @@ import PayStatus from "./PayStatus";
 import { toastHandler } from "../../utils/setting";
 import CancelBtn from "../UI/CancelBtn";
 import { Close } from "@mui/icons-material";
+import { center } from "../../styles/theme";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
 
@@ -17,11 +18,7 @@ function PurchaseInformation() {
         setTabs(+id);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     return (
         <Box

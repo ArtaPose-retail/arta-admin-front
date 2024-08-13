@@ -16,17 +16,20 @@ import { separateBy3, toPersian } from "../../utils/setting";
 import ReciveForDl from "./ReciveForDl";
 import CheckRegister from "./CheckRegister";
 import Input from "../UI/Input";
+import { center } from "../../styles/theme";
 
 function FormSection() {
+    const [tabs, setTabs] = useState(2);
+
+    const handleChange = (id) => {
+        setTabs(+id);
+    };
+
     const [checkStep, setStep] = useState(false)
     const stephandler = () => {
         setStep(!checkStep)
     }
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <>
             {!checkStep ? <Box
@@ -34,7 +37,7 @@ function FormSection() {
                     width: "60%",
                     bgcolor: (theme) => theme.background.box,
                     borderRadius: "18px",
-                    height: "650px",
+                    height: "100%",
                     p: 1,
                     overflowY: "scroll",
                 }}
@@ -50,85 +53,56 @@ function FormSection() {
                     />
                     <Box
                         sx={{
-                            bgcolor: (theme) => theme.background.field,
-                            borderRadius: "7px",
                             ...center,
-                            // p: 1.2,
-                            // px: 3,
+                            border: "1px solid #DBDCDE",
+                            borderRadius: "7px",
                             gap: "5px",
+                            px: 1,
+                            p: 0.5,
                         }}
                     >
-                        <Typography
+                        <Button
+                            onClick={(e) => handleChange(e.target.id)}
+                            id="1"
+                            variant="contained"
                             sx={{
-                                p: 1.2,
-                                px: 3,
+                                bgcolor: (theme) =>
+                                    tabs === 1
+                                        ? theme.palette.divider
+                                        : theme.palette.text.primary,
+                                color: (theme) =>
+                                    tabs === 1
+                                        ? theme.palette.text.primary
+                                        : theme.palette.disable.main,
                                 borderRadius: "7px",
-                                "&:hover": {
-                                    bgcolor: (theme) => theme.palette.disable.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                },
-                                fontSize: "14px",
-                                cursor: "pointer",
-                                color: (theme) => theme.typography.color,
-                                fontWeight: 500,
                             }}
                         >
+                            {" "}
                             پرداخت
-                        </Typography>
-
-                        <Divider orientation="vertical" flexItem />
-
-                        <Typography
+                        </Button>
+                        <Button
+                            onClick={(e) => handleChange(e.target.id)}
+                            id="2"
+                            variant="contained"
                             sx={{
-                                p: 1.2,
-                                px: 3,
+                                bgcolor: (theme) =>
+                                    tabs === 2
+                                        ? theme.palette.divider
+                                        : theme.palette.text.primary,
+                                color: (theme) =>
+                                    tabs === 2
+                                        ? theme.palette.text.primary
+                                        : theme.palette.disable.main,
                                 borderRadius: "7px",
-                                "&:hover": {
-                                    bgcolor: (theme) => theme.palette.disable.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                },
-                                fontSize: "14px",
-                                cursor: "pointer",
-                                color: (theme) => theme.typography.color,
-                                fontWeight: 500,
                             }}
                         >
                             هزینه
-                        </Typography>
+                        </Button>
                     </Box>
-                    <MoreVertIcon sx={{ cursor: "pointer" }} />
+
                 </Box>
                 <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
-                    <Grid item xs={6}>
-                        <InputLabel>
-                            <Typography
-                                sx={{
-                                    fontSize: "18px",
-                                    fontWeight: 400,
-                                    color: (theme) => theme.typography.color,
-                                }}
-                            >
-                                طرف معامله
-                            </Typography>
-                        </InputLabel>
 
-                        <Box
-                            sx={{
-                                ...center,
-                                bgcolor: (theme) => theme.background.field,
-                                borderRadius: "12px",
-                            }}
-                        >
-                            <Input
-                                height={"55px"}
-                                hasIcon={false}
-                                type={"text"}
-                                placeholder={"نام طرف معامله "}
-                            />
-                            <TransactionDialog />
-                        </Box>
-
-                    </Grid>
                     <Grid item xs={6}>
                         <InputLabel>
                             <Typography

@@ -28,7 +28,7 @@ function CheckRegister({ stephandler }) {
                 width: "60%",
                 bgcolor: (theme) => theme.background.box,
                 borderRadius: "18px",
-                height: "650px",
+                height: "1005",
                 p: 1,
                 overflowY: "scroll",
             }}
@@ -71,16 +71,10 @@ function CheckRegister({ stephandler }) {
                             borderRadius: "18px",
                         }}
                         InputProps={{
-                            // startAdornment: (
-                            //     <InputAdornment position="start">
-                            //         <TransactionDialog />
-                            //     </InputAdornment>
-                            // ),
                             style: {
                                 background: "#F2F2F2",
                                 color: "#000",
                                 direction: "ltr",
-                                // height: "40px",
                             },
                         }}
                     />
@@ -111,16 +105,10 @@ function CheckRegister({ stephandler }) {
                             borderRadius: "18px",
                         }}
                         InputProps={{
-                            // startAdornment: (
-                            //     <InputAdornment position="start">
-                            //         <TransactionDialog />
-                            //     </InputAdornment>
-                            // ),
                             style: {
                                 background: "#F2F2F2",
                                 color: "#000",
                                 direction: "ltr",
-                                // height: "40px",
                             },
                         }}
                     />
@@ -168,7 +156,6 @@ function CheckRegister({ stephandler }) {
                                 background: "#F2F2F2",
                                 color: "#000",
                                 direction: "ltr",
-                                // height: "40px",
                             },
                         }}
                     />
@@ -367,16 +354,7 @@ function CheckRegister({ stephandler }) {
                 sx={{ ...center, p: 2, justifyContent: "space-between", gap: "15px" }}
             >
                 <Box sx={{ ...center, gap: "15px" }}>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            bgcolor: (theme) => theme.palette.green.main,
-                            color: (theme) => theme.palette.text.primary,
-                            px: 3,
-                        }}
-                    >
-                        ثبت چک
-                    </Button>
+
                     <Button
                         variant="contained"
                         sx={{
@@ -403,7 +381,6 @@ function CheckRegister({ stephandler }) {
 
             <Grid container spacing={2} sx={{ p: 1 }}>
                 {[1, 2, 4, 5].map((item, index) => (
-
                     <Grid item xs={6} key={index}>
                         <CheckCard />
                     </Grid>
