@@ -1,7 +1,6 @@
 import {
     Box,
     Button,
-    Divider,
     Grid,
     InputAdornment,
     InputLabel,
@@ -11,17 +10,11 @@ import {
 import React from "react";
 import Title from "../UI/Title";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import TransactionDialog from "../HomePage/Dialogs/defineFactorSteps/TransactionDialog";
-import { separateBy3, toPersian } from "../../utils/setting";
-import ReciveForDl from "../Payment/ReciveForDl";
 import CheckCard from "../UI/CheckCard";
+import { center } from "../../styles/theme";
 
 function CheckRegister({ stephandler }) {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box
             sx={{

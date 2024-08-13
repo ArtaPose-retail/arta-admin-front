@@ -4,13 +4,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import Title from "../../UI/Title";
 import { BankAccountType } from "../../../utils/data";
 import { toPersian } from "../../../utils/setting";
+import { center } from "../../../styles/theme";
 
 function AccountType({ handleClose }) {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box>
             <Box sx={{ ...center, justifyContent: "space-between" }}>

@@ -9,32 +9,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-import {
-    separateBy3,
-    separateBy4,
-    toPersian,
-    toastHandler,
-} from "../../utils/setting";
-import moment from "jalali-moment";
-import { customerFactortable } from "../../utils/data";
-import {
-    Button,
-    Checkbox,
-    Divider,
-    Fade,
-    Popper,
-    TextField,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import reactRouts from "../../utils/reactRouts";
-
-import { ExpandMore } from "@mui/icons-material";
+import { separateBy3, toPersian } from "../../utils/setting";
 
 function createData(
     user,
@@ -60,7 +38,7 @@ function createData(
         mostare,
         check,
         worker,
-        totall
+        totall,
     };
 }
 
@@ -192,11 +170,9 @@ function Row(props) {
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={openCollaps} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1, ...center, gap: "15px" }}>
-
                             <Box sx={{ ...center, gap: "10px" }}>
                                 <Typography
                                     sx={{
-
                                         fontSize: "18px",
                                         fontWeight: 500,
                                     }}
@@ -349,14 +325,12 @@ export default function AccountManagingTable() {
         alignItems: "center",
     };
     return (
-
-
-        <TableContainer sx={{
-            maxHeight: 400,
-
-
-        }}>
-            <Table aria-label="collapsible table" >
+        <TableContainer
+            sx={{
+                maxHeight: 400,
+            }}
+        >
+            <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
                         <TableCell
@@ -428,8 +402,5 @@ export default function AccountManagingTable() {
                 </TableBody>
             </Table>
         </TableContainer>
-
-
-
     );
 }

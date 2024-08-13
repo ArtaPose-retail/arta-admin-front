@@ -9,32 +9,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-import {
-    separateBy3,
-    separateBy4,
-    toPersian,
-    toastHandler,
-} from "../../utils/setting";
+import { separateBy3, separateBy4, toPersian } from "../../utils/setting";
 import moment from "jalali-moment";
-import { customerFactortable } from "../../utils/data";
-import {
-    Button,
-    Checkbox,
-    Divider,
-    Fade,
-    Popper,
-    TextField,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import reactRouts from "../../utils/reactRouts";
-
-import { ExpandMore } from "@mui/icons-material";
+import { Button, Divider } from "@mui/material";
 
 function createData(
     serial,
@@ -340,7 +320,6 @@ export default function AccountDetailsTable() {
                 height: "80%",
                 overflowY: "scroll",
                 overflowX: "hidden",
-
             }}
         >
             <Box
@@ -434,7 +413,7 @@ export default function AccountDetailsTable() {
                     borderBottom: "2px  solid gray",
                 }}
             >
-                <Box sx={{ ...center, justifyContent: "flex-end", gap: "10px", }}>
+                <Box sx={{ ...center, justifyContent: "flex-end", gap: "10px" }}>
                     <Typography
                         sx={{
                             color: (theme) => theme.palette.divider,
