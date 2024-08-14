@@ -30,10 +30,11 @@ function Accounts() {
                 width: "100%",
                 bgcolor: (theme) => theme.background.box,
                 borderRadius: "18px",
-                height: "650px",
+                height: "90dvh",
                 p: 1,
                 mx: 1,
                 overflowY: "scroll",
+
             }}
         >
             <Box sx={{ ...center, justifyContent: "space-between" }}>
@@ -158,7 +159,7 @@ function Accounts() {
                                 fontWeight: 400,
                             }}
                         >
-                            نام مشتری
+                            کمترین مانده حساب
                         </Typography>
                     </option>
                     <option value="mobile">
@@ -169,7 +170,7 @@ function Accounts() {
                                 fontWeight: 400,
                             }}
                         >
-                            شماره تماس
+                            بیشترین مانده حساب
                         </Typography>
                     </option>
                 </TextField>

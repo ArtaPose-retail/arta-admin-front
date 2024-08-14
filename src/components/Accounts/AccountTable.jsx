@@ -63,13 +63,13 @@ export default function AccountTable() {
                             sx={{ color: (theme) => theme.typography.color }}
                             align="center"
                         >
-                            شناسه مشتری
+                            شناسه طرف معامله
                         </StyledTableCell>
                         <StyledTableCell
                             sx={{ color: (theme) => theme.typography.color }}
                             align="center"
                         >
-                            نام مشتری
+                            نام طرف معامله
                         </StyledTableCell>
                         <StyledTableCell
                             sx={{ color: (theme) => theme.typography.color }}
@@ -165,7 +165,6 @@ export default function AccountTable() {
                                     }}
                                 >
                                     <Button variant="outlined">ارسال پیام</Button>
-                                    <Button variant="outlined">تسویه حساب</Button>
                                     <Button
                                         onClick={() => navigate(reactRouts.accounts.details)}
                                         variant="outlined"

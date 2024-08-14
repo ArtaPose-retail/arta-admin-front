@@ -40,7 +40,7 @@ function AccountDetails() {
                 width: "100%",
                 bgcolor: (theme) => theme.background.box,
                 borderRadius: "18px",
-                height: "650px",
+                height: "90dvh",
                 p: 1,
                 mx: 1,
                 overflowY: "scroll",
@@ -263,7 +263,7 @@ function AccountDetails() {
                         px: 3,
                     }}
                 >
-                    تایید
+                    تسویه
                 </Button>
                 <Button
                     variant="contained"

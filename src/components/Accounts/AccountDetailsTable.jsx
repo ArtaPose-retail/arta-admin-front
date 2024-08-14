@@ -11,14 +11,14 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
+import { center } from "../../styles/theme";
 import { separateBy3, separateBy4, toPersian } from "../../utils/setting";
 import moment from "jalali-moment";
 import { Button, Divider } from "@mui/material";
 
 function createData(
     serial,
-    describe,
+
     title,
     factorDate,
     FactorNumber,
@@ -28,7 +28,7 @@ function createData(
 ) {
     return {
         serial,
-        describe,
+
         title,
         factorDate,
         FactorNumber,
@@ -67,12 +67,6 @@ function Row(props) {
         setOpen(false);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-
     return (
         <Fragment>
             <TableRow
@@ -98,12 +92,6 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.describe}
-                </TableCell>
-                <TableCell
-                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
-                    align="center"
-                >
                     {row?.title}
                 </TableCell>
                 <TableCell
@@ -123,27 +111,27 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row?.FactorNumber))}
+                    {toPersian(row?.FactorNumber)}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.palette.warning.main, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row?.debtor))}
+                    {toPersian(row?.debtor)}
                     ریال
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.palette.green.main, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row?.creditor))}
+                    {toPersian(row?.creditor)}
                     ریال
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row?.remain))}
+                    {toPersian(row?.remain)}
                     ریال
                 </TableCell>
                 <TableCell
@@ -217,7 +205,7 @@ function Row(props) {
 const rows = [
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -227,7 +215,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -237,7 +225,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -247,7 +235,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -257,7 +245,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -267,7 +255,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -277,7 +265,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -287,7 +275,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -297,7 +285,7 @@ const rows = [
     ),
     createData(
         "346344",
-        "سیب قرمز",
+
         "خرید",
         new Date(),
         "34634633",
@@ -346,12 +334,7 @@ export default function AccountDetailsTable() {
                                 >
                                     سریال
                                 </TableCell>
-                                <TableCell
-                                    sx={{ color: (theme) => theme.palette.disable.main }}
-                                    align="center"
-                                >
-                                    شرح
-                                </TableCell>
+
                                 <TableCell
                                     sx={{ color: (theme) => theme.palette.disable.main }}
                                     align="center"
