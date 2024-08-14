@@ -7,12 +7,9 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import EditIcon from "@mui/icons-material/Edit";
+import { center } from "../../styles/theme";
 
-const center = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
+
 
 function Card() {
     const navigate = useNavigate();
@@ -108,6 +105,18 @@ function Card() {
                                     </Typography>
                                 ))}
                             </Box>
+                            <Typography
+                                sx={{
+                                    ...center,
+                                    fontSize: "12px",
+                                    fontWeight: "regular",
+                                    color: (theme) => theme.palette.text.card,
+                                    justifyContent: "flex-start",
+                                }}
+                            >
+                                صاحب حساب:&nbsp;
+                                {item.name}
+                            </Typography>
 
                             {/* })} */}
                             <Box sx={{ ...center, justifyContent: "space-between" }}>

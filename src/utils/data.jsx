@@ -314,6 +314,7 @@ export const account = [
         cardNumber: "6219861906149249",
         color: "#345BFF",
         bg: blueBank,
+        name: "پرهام حسن زاده"
     },
     {
         bankName: "بانک سپه - جاری",
@@ -324,6 +325,8 @@ export const account = [
         cardNumber: "6219861906149249",
         color: "#FF8A00",
         bg: bankRed,
+        name: "پرهام حسن زاده"
+
     },
     {
         bankName: "بانک ملت - جاری",
@@ -334,6 +337,8 @@ export const account = [
         cardNumber: "6219861906149249",
         color: "#FE4A51",
         bg: bankYellow,
+        name: "پرهام حسن زاده"
+
     },
 ];
 

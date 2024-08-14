@@ -5,8 +5,6 @@ import {
     Box,
     Button,
     InputAdornment,
-    MenuItem,
-    Select,
     TextField,
     Typography,
 } from "@mui/material";
@@ -18,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import { FullScreen } from "@chiragrupani/fullscreen-react";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { center } from "../../styles/theme"
 import Input from "../../components/UI/Input";
 import CheckList from "../../components/Banking/CheckList";
 function Banking() {
@@ -50,11 +48,7 @@ function Banking() {
         setTabs(+id);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box sx={{ p: 2, width: "100%" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -146,9 +140,8 @@ function Banking() {
                 <Box
                     sx={{
                         width: "100%",
-                        height: "400px",
+                        height: fullScrenn ? "100dvh" : "400px",
                         my: 1,
-
                         borderRadius: "18px",
                         overflow: "hidden",
                         position: "relative",
