@@ -5,16 +5,11 @@ import { DatePicker } from "@kasraghoreyshi/datepicker";
 import "@kasraghoreyshi/calendar/styles.css";
 import "@kasraghoreyshi/datepicker/styles.css";
 import moment from "jalali-moment";
-import { separateBy3, toPersian } from "../../utils/setting";
+import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import { report } from "../../utils/data";
 import PayDialog from "../../components/Report/PayDialog";
 
-
-
-
-
-//! this page is for AMALIAt page 
-
+//! this page is for AMALIAt page
 
 function Report() {
     const center = {
@@ -42,20 +37,15 @@ function Report() {
                     }}
                 />
 
-
-
-                <DatePicker
-                    className="datePicker2"
-                    persianDigits={true}
-                    // onChange={(e) => props.getDate(e)}
-                    style={{ border: "0px" }}
-                    value={toPersian(moment(new Date(), "YYYY-MM-DD")
-                        .locale("fa")
-                        .format("dddd D MMMM YYYY"))}
-
-                />
-
-
+                <Typography
+                    sx={{
+                        fontSize: "20px",
+                        fontWeight: 500,
+                        color: (theme) => theme.palette.text.card,
+                    }}
+                >
+                    {persianDate()}
+                </Typography>
             </Box>
             <Box sx={{ px: 2, mt: 4 }}>
                 <Grid container spacing={2}>
@@ -173,7 +163,7 @@ function Report() {
                     چاپ گزارش
                 </Button>
             </Box>
-        </Box >
+        </Box>
     );
 }
 

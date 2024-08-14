@@ -1806,9 +1806,9 @@ export const report = {
             value: 20000,
         },
         {
-            title: "جمع کل کارگری",
+            title: "تعداد مشتریان",
             value: 20000,
-            hasIcon: true
+
         },
         {
             title: "موجودی صندوق",
