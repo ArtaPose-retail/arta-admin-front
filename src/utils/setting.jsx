@@ -60,7 +60,7 @@ export const persianDate = (data) => {
     return digitsEnToFa(
         moment(data ?? new Date(), "YYYY-MM-DD")
             .locale("fa")
-            .format(" dddd ,D MMM  YYYY")
+            .format(" D MMM  YYYY")
     );
 };
 export const persianTime = (data) => {

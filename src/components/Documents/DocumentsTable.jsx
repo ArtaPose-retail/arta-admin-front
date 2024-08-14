@@ -9,36 +9,32 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
-    separateBy3,
-    separateBy4,
+    persianDate,
+    persianTime,
     toPersian,
     toastHandler,
 } from "../../utils/setting";
-import moment from "jalali-moment";
-import { customerFactortable } from "../../utils/data";
-import { Button, Checkbox, Divider, Fade, Popper, TextField } from "@mui/material";
+
+import { Button, Checkbox, Divider, Fade, Popper } from "@mui/material";
 import { Link } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
-import Gallery from "./Gallery";
-
+import { center } from "../../styles/theme";
 import { ExpandMore } from "@mui/icons-material";
 
-
-
-
-function createData(DocCode, title, transactionName, date, fee) {
+function createData(DocCode, title, transactionName, phone, date, fee, status) {
     return {
         DocCode,
         title,
         transactionName,
+        phone,
         date,
         fee,
+        status,
         Details: {
             productName: "سیب قرمز البرز",
             checks: "12",
@@ -49,7 +45,7 @@ function createData(DocCode, title, transactionName, date, fee) {
 
 function Row(props) {
     const [openPopper, setOpenPopper] = useState(false);
-    const [PosItem, setPositem] = useState(null);
+    const [PosItem, setPositem] = useState("چاپ حرارتی");
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -65,7 +61,7 @@ function Row(props) {
     const [deleteItem, setDeleteItem] = useState(false);
     const deletehandler = () => {
         setDeleteItem(true);
-        toastHandler("ایتم مورد نظر حذف شد", "warning")
+        toastHandler("ایتم مورد نظر حذف شد", "warning");
     };
 
     const [open, setOpen] = useState(false);
@@ -75,12 +71,6 @@ function Row(props) {
     };
     const handlerCloseDialog = () => {
         setOpen(false);
-    };
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
     };
 
     return (
@@ -107,7 +97,7 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row?.DocCode))}
+                    {toPersian(row?.DocCode)}
                 </TableCell>
 
                 <TableCell
@@ -126,9 +116,13 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(
-                        moment(row?.date, "YYYY-MM-DD").locale("fa").format("YYYY/MM/D")
-                    )}
+                    {toPersian(row?.phone)}
+                </TableCell>
+                <TableCell
+                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
+                    align="center"
+                >
+                    {persianDate()} | {persianTime()}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -137,8 +131,17 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy3(row?.fee))}
+                    {toPersian(row?.fee)}
                     ریال
+                </TableCell>
+                <TableCell
+                    sx={{
+                        color: (theme) => theme.palette.darkBlue.main,
+                        fontWeight: 500,
+                    }}
+                    align="center"
+                >
+                    {row?.status}
                 </TableCell>
                 <TableCell>
                     <Box
@@ -200,7 +203,6 @@ function Row(props) {
                                                 bgcolor: "background.paper",
                                             }}
                                         >
-
                                             <Typography
                                                 sx={{
                                                     borderBottom: "1px solid gray",
@@ -217,11 +219,10 @@ function Row(props) {
                                             <Typography
                                                 sx={{ p: 1, cursor: "pointer" }}
                                                 onClick={() => {
-                                                    setPositem("  چاپ لیبلی");
+                                                    setPositem("  چاپ حرارتی");
                                                     setOpenPopper(false);
                                                 }}
                                             >
-
                                                 چاپ حرارتی
                                             </Typography>
                                         </Box>
@@ -229,18 +230,21 @@ function Row(props) {
                                 )}
                             </Popper>
                         </Box>
-                        <Gallery />
-                        <Link to={reactRouts.home}>
-                            <EditIcon fontSize="medium" onClick={showDialoghandler} />
-                        </Link>
-                        <DeleteOutlineIcon
-                            onClick={() => deletehandler()}
-                            fontSize="medium"
-                            sx={{
-                                fill: (theme) => theme.palette.warning.main,
-                                cursor: "pointer",
-                            }}
-                        />
+
+                        <Box sx={{ ...center, flexDirection: "column" }}>
+                            <Link to={reactRouts.home}>
+                                <EditIcon fontSize="small" onClick={showDialoghandler} />
+                            </Link>
+                            <DeleteOutlineIcon
+                                onClick={() => deletehandler()}
+                                fontSize="medium"
+                                sx={{
+                                    fill: (theme) => theme.palette.warning.main,
+                                    cursor: "pointer",
+                                }}
+                            />
+                        </Box>
+
                         <IconButton
                             aria-label="expand row"
                             size="small"
@@ -290,7 +294,7 @@ function Row(props) {
                                     sx={{
                                         color: (theme) => theme.typography.color,
                                         fontSize: "16px",
-                                        fontWeight: 500,
+                                        fontWeight: 400,
                                     }}
                                 >
                                     {toPersian(row?.Details?.checks)}
@@ -327,10 +331,42 @@ function Row(props) {
 }
 
 const rows = [
-    createData("98326498", "دریافتی", "امیرحسین فهمیده", new Date(), "300000"),
-    createData("98326498", "دریافتی", "امیرحسین فهمیده", new Date(), "300000"),
-    createData("98326498", "دریافتی", "امیرحسین فهمیده", new Date(), "300000"),
-    createData("98326498", "دریافتی", "امیرحسین فهمیده", new Date(), "300000"),
+    createData(
+        "98326498",
+        "فروش",
+        "امیرحسین فهمیده",
+        "09138090933",
+        new Date(),
+        "300000",
+        "بدهکار"
+    ),
+    createData(
+        "98326498",
+        "پرداخت",
+        "امیرحسین فهمیده",
+        "09138090933",
+        new Date(),
+        "300000",
+        "بدهکار"
+    ),
+    createData(
+        "98326498",
+        "خرید",
+        "امیرحسین فهمیده",
+        "09138090933",
+        new Date(),
+        "300000",
+        "تسویه شده"
+    ),
+    createData(
+        "98326498",
+        "خرید",
+        "امیرحسین فهمیده",
+        "09138090933",
+        new Date(),
+        "300000",
+        "بدهکار"
+    ),
 ];
 
 export default function DocumentsTable() {
@@ -351,13 +387,7 @@ export default function DocumentsTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                <Checkbox
-                                    color="primary"
-                                // checked={isItemSelected}
-                                // inputProps={{
-                                //     "aria-labelledby": labelId
-                                // }}
-                                />
+                                <Checkbox color="primary" />
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
@@ -381,7 +411,13 @@ export default function DocumentsTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                طرف معامله
+                                طرف معامله/مشتری
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: (theme) => theme.palette.disable.main }}
+                                align="center"
+                            >
+                                شماره طرف معامله/مشتری
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
@@ -394,6 +430,12 @@ export default function DocumentsTable() {
                                 align="center"
                             >
                                 مبلغ
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: (theme) => theme.palette.disable.main }}
+                                align="center"
+                            >
+                                وضعیت
                             </TableCell>
 
                             <TableCell
