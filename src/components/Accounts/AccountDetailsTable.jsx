@@ -396,7 +396,7 @@ export default function AccountDetailsTable() {
                     borderBottom: "2px  solid gray",
                 }}
             >
-                <Box sx={{ ...center, justifyContent: "flex-end", gap: "10px" }}>
+                {/* <Box sx={{ ...center, border: "1px solid red", width: "100%", gap: "10px" }}>
                     <Typography
                         sx={{
                             color: (theme) => theme.palette.divider,
@@ -436,7 +436,65 @@ export default function AccountDetailsTable() {
                     >
                         {toPersian(separateBy3("3246346"))} ریال
                     </Typography>
+                </Box> */}
+                <Box
+                    sx={{
+                        ...center,
+
+                        width: "80%",
+                        pl: 4,
+                        gap: "20px",
+                        justifyContent: "left"
+
+                    }}
+                >
+
+                    <Typography
+                        sx={{
+                            color: (theme) => theme.palette.warning.main,
+                            fontSize: "16px",
+                            fontWeight: 500,
+                            textAlign: 'center', // optional
+                        }}
+                    >
+                        {toPersian(separateBy3("3246346"))} ریال
+                    </Typography>
+                    <Divider flexItem orientation="vertical" />
+                    <Typography
+                        sx={{
+                            color: (theme) => theme.palette.green.main,
+                            fontSize: "16px",
+                            fontWeight: 500,
+                            textAlign: 'center', // optional
+                        }}
+                    >
+                        {toPersian(separateBy3("3246346"))} ریال
+                    </Typography>
+                    <Divider flexItem orientation="vertical" />
+                    <Typography
+                        sx={{
+                            color: (theme) => theme.typography.color,
+                            fontSize: "16px",
+                            fontWeight: 500,
+                            textAlign: 'center', // optional
+                        }}
+                    >
+                        {toPersian(separateBy3("3246346"))} ریال
+                    </Typography>
+                    <Divider flexItem orientation="vertical" />
+
+                    <Typography
+                        sx={{
+                            color: (theme) => theme.palette.divider,
+                            fontSize: "16px",
+                            fontWeight: 400,
+                            textAlign: 'center', // optional, to center text in the grid item
+                        }}
+                    >
+                        :جمع کل
+                    </Typography>
                 </Box>
+
             </Box>
         </Box>
     );

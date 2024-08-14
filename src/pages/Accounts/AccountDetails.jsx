@@ -14,6 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { separateBy3, toPersian } from "../../utils/setting";
 import AccountDetailsTable from "../../components/Accounts/AccountDetailsTable";
 import { ExpandMore } from "@mui/icons-material";
+import { center } from "../../styles/theme";
 
 function AccountDetails() {
     const [currentItem, setCurrentItem] = useState(0);
@@ -29,11 +30,7 @@ function AccountDetails() {
 
     const canBeOpen = openPopper && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box
             sx={{
