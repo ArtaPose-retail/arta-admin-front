@@ -1,104 +1,77 @@
-import { Box, Button, TextField } from '@mui/material'
-import React from 'react'
-import Title from '../../components/UI/Title'
-import { toastHandler } from '../../utils/setting'
-import ProductsTable from '../../components/Products/ProductsTable';
+import { Box, Button } from "@mui/material";
+import React, { useState } from "react";
+import Title from "../../components/UI/Title";
+import ProductsTable from "../../components/Products/ProductsTable";
+import { center } from "../../styles/theme";
+import Add from "@mui/icons-material/Add";
+import AddNewProduct from "../../components/Products/AddNewProduct";
 
 function Products() {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    const [openDg, setOpenDg] = useState(false);
+    const openProductDg = () => {
+        setOpenDg(true);
+    };
+
+    const closeProductDg = () => {
+        setOpenDg(false);
     };
     return (
-        <Box sx={{
-            bgcolor: theme => theme.background.box,
-            borderRadius: "18px",
-            m: 1, p: 1
-        }}>
+        <Box
+            sx={{
+                bgcolor: (theme) => theme.background.box,
+                borderRadius: "18px",
+                m: 1,
+                p: 1,
+                height: "90dvh",
+            }}
+        >
+            <Title
+                title={"محصولات"}
+                typoprops={{
+                    fontSize: "20px",
+                    fontWeight: 700,
+                    color: (theme) => theme.typoprops.color,
+                }}
+            />
 
-            <Title title={"محصولات"} typoprops={{
-                fontSize: "20px",
-                fontWeight: 500,
-                color: theme => theme.typoprops.color
-            }} />
-
-            <Box sx={{ mt: 2 }}>
+            <Box
+                sx={{
+                    ...center,
+                    justifyContent: "space-between",
+                    gap: "5px",
+                    my: 2,
+                }}
+            >
                 <Title
                     title={"نوع محصول"}
                     Typoprops={{
                         color: (theme) => theme.typography.color,
                         fontSize: "18px",
-                        fontWeight: 400,
+                        fontWeight: 700,
                     }}
                 />
-                <Box
+
+                <Button
+                    onClick={() => openProductDg()}
+                    variant="contained"
                     sx={{
+                        bgcolor: (theme) => theme.palette.text.secondary,
+                        color: (theme) => theme.palette.text.primary,
+                        p: 2,
+                        borderRadius: "18px",
                         ...center,
-                        justifyContent: "flex-start",
                         gap: "5px",
-                        my: 2,
                     }}
                 >
-                    <TextField
-                        sx={{
-                            "& .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "white",
-                            },
-                        }}
-                        type="number"
-                        id="input-with-icon-textfield"
-                        placeholder="نام ژنریک را وارد کنید"
-                        InputProps={{
-                            style: {
-                                borderRadius: "0px 18px 18px 0px",
-                                background: "#F2F2F2",
-                                color: "#000",
-                                direction: "ltr",
-                            },
-                        }}
-                        variant="outlined"
-                    />
-                    <TextField
-                        sx={{
-                            "& .MuiOutlinedInput-notchedOutline": {
-                                borderColor: "white",
-                            },
-                        }}
-                        type="number"
-                        id="input-with-icon-textfield"
-                        placeholder="نام منتسب را وارد کنید"
-                        InputProps={{
-                            style: {
-                                borderRadius: "0px",
-                                background: "#F2F2F2",
-                                color: "#000",
-                                direction: "ltr",
-                            },
-                        }}
-                        variant="outlined"
-                    />
-                    <Button
-                        onClick={() => {
-                            toastHandler("محصول با موفقیت اضافه شد", "success")
-                        }}
-                        variant="contained"
-                        sx={{
-                            bgcolor: (theme) => theme.palette.text.secondary,
-                            color: (theme) => theme.palette.text.primary,
-                            p: 1.75,
-                            px: 2.5,
-                            borderRadius: "18px 0px 0px 18px",
-                        }}
-                    >
-                        افزودن
-                    </Button>
-                </Box>
+                    <Add sx={{ fill: (theme) => theme.palette.text.primary }} />
+                    افزودن
+                </Button>
             </Box>
 
             <ProductsTable />
+            <AddNewProduct status={openDg} handlerCloseDialog={closeProductDg} />
         </Box>
-    )
+    );
 }
 
-export default Products
+export default Products;

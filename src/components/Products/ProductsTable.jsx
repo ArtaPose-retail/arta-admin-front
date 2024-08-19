@@ -39,13 +39,17 @@ export default function ProductsTable() {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
     return (
-        <TableContainer sx={{ maxHeight: 450 }}>
+
+        <TableContainer sx={{ maxHeight: "85%" }} >
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>
                         <StyledTableCell align="center">ردیف</StyledTableCell>
-                        <StyledTableCell align="center"> نام ژنریک محصول</StyledTableCell>
-                        <StyledTableCell align="center">نام منتسب</StyledTableCell>
+                        <StyledTableCell align="center">کد محصول</StyledTableCell>
+                        <StyledTableCell align="center"> نام ژنریک</StyledTableCell>
+                        <StyledTableCell align="center">نام محصول</StyledTableCell>
+                        <StyledTableCell align="center">دسته</StyledTableCell>
+                        <StyledTableCell align="center">واحد</StyledTableCell>
                         <StyledTableCell align="center">عملیات </StyledTableCell>
                     </TableRow>
                 </TableHead>
@@ -56,10 +60,19 @@ export default function ProductsTable() {
                                 {toPersian(index + 1)}
                             </StyledTableCell>
                             <StyledTableCell align="center">
+                                {item?.productCode}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
                                 {item?.genericName}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 {item?.title}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                {item?.type}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                {item?.unit}
                             </StyledTableCell>
 
                             <StyledTableCell align="center">
@@ -83,5 +96,6 @@ export default function ProductsTable() {
                 </TableBody>
             </Table>
         </TableContainer>
+
     );
 }

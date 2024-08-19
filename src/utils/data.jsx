@@ -196,7 +196,7 @@ export const menuData = [
             { title: "طرف های معامله", path: "/Transactions" },
             { title: "حساب معین" },
             { title: "ثبت هزینه" },
-            { title: "کالا ها", path: "/products" },
+            { title: "محصولات", path: "/products" },
             { title: "بانک ها و حساب ها" },
             { title: "مدیریت چک", path: "/checks" },
             { title: "سال مالی و بیلان" },
@@ -788,6 +788,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادی",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
 
     {
@@ -802,6 +805,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادی",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: blue_berry,
@@ -815,6 +821,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادی",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
 
     {
@@ -829,6 +838,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادی",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: fruits,
@@ -842,6 +854,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادی",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: goji_berry,
@@ -852,6 +867,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادی",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: grapes_purpel,
@@ -863,6 +881,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: grapes,
@@ -874,6 +895,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: green_apple,
@@ -885,6 +909,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: kiwi,
@@ -896,6 +923,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: mango,
@@ -907,6 +937,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: melon,
@@ -918,6 +951,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: orange,
@@ -929,6 +965,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: passion_fruit,
@@ -940,6 +979,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: pear,
@@ -951,6 +993,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: pineapple,
@@ -962,6 +1007,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: strawberry,
@@ -972,6 +1020,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
     {
         logo: watermelon,
@@ -983,6 +1034,9 @@ export const products = [
         amount: "720000",
         date: new Date(),
         transactionParty: "محمد مرادي",
+        productCode: "103",
+        type: "سبزیجات",
+        unit: "1"
     },
 ];
 
