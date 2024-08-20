@@ -6,19 +6,15 @@ import MainHeader from "./Layout/MainHeader";
 
 import reactRouts from "../utils/reactRouts";
 import { useLocation } from "react-router-dom";
-import { FullScreen, DocumentFullScreen } from "@chiragrupani/fullscreen-react";
-import { useState } from "react";
+import { DocumentFullScreen } from "@chiragrupani/fullscreen-react";
+
 import { setFullscrenn } from "../Redux/Slices/general";
 import { useDispatch, useSelector } from "react-redux";
 import SecondaryHeader from "./Layout/SecondaryHeader";
-import { onChangevalue } from "../Redux/Slices/Keyboard/keyboard";
-import KeyBoard from "./UI/KeyBoard";
 
 function MainLayout({ children }) {
-    // let [isFullScreen, setFullScreen] = useState(false);
-
     const { isfullScrenn } = useSelector((state) => state.general);
-    const { show } = useSelector((state) => state.keyboard);
+
     const dispatch = useDispatch();
 
     const hideElement = [reactRouts.auth.signIn, reactRouts.customer.main];
@@ -71,7 +67,6 @@ function MainLayout({ children }) {
                             {children}
                         </Box>
                     </Box>
-
                 </ThemeProvider>
             </DocumentFullScreen>
         </>

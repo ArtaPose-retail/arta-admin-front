@@ -22,8 +22,8 @@ const initialState = {
     }
 };
 
-export const Productinformation = createSlice({
-    name: "Productinformation",
+export const productinformation = createSlice({
+    name: "productinformation",
     initialState,
 
     reducers: {
@@ -35,6 +35,6 @@ export const Productinformation = createSlice({
     extraReducers: (builder) => { },
 });
 
-export const { setFormInfo } = Productinformation.actions;
+export const { setFormInfo } = productinformation.actions;
 
-export default Productinformation.reducer;
+export default productinformation.reducer;

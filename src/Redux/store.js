@@ -1,24 +1,30 @@
+
+
 import { configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
 
-import addCardReducer from "../Redux/Slices/Banking/addcard"
-import generalReducer from "./Slices/general"
-import factorReducer from "./Slices/HomePage/factor"
-import productReducer from "./Slices/HomePage/product"
-import ProductinformationReducer from "./Slices/HomePage/Productinformation"
-import WalletReducer from "./Slices/Wallet/wallet"
-import KeyboardReducer from "./Slices/Keyboard/keyboard"
+import logger from "redux-logger";
 
-export const store = configureStore({
-    reducer: {
+import { rootReducers } from "./rootReducers";
 
-        addCard: addCardReducer,
-        general: generalReducer,
-        factor: factorReducer,
-        product: productReducer,
-        Productinformation: ProductinformationReducer,
-        wallet: WalletReducer,
-        keyboard: KeyboardReducer
+const persistConfig = {
+    key: "root",
+    version: 1,
+    storage,
+};
 
-    }
-})
+
+const persistedReducer = persistReducer(persistConfig, rootReducers)
+
+export default function storeGenerator() {
+    const store = configureStore({
+        reducer: persistedReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(logger),
+        devTools: process.env.NODE_ENV !== 'production',
+
+    })
+    const persistor = persistStore(store)
+    return { store, persistor }
+}
 

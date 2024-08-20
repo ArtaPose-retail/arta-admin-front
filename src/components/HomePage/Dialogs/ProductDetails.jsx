@@ -40,7 +40,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const [Date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
     const { productformInformation } = useSelector(
-        (state) => state.Productinformation
+        (state) => state.productinformation
     );
     const handerPrice = () => {
         setPrice(!Price);
