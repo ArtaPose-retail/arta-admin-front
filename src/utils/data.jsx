@@ -58,7 +58,7 @@ import pineapple from "../Assets/images/Fruits/pineapple.svg";
 import strawberry from "../Assets/images/Fruits/strawberry.svg";
 import watermelon from "../Assets/images/Fruits/watermelon.svg";
 //? profile image
-import profile from "../Assets/images/profileImage.png"
+import profile from "../Assets/images/profileImage.png";
 export const menuData = [
     {
         title: "داشبورد",
@@ -200,7 +200,7 @@ export const menuData = [
             { title: "بانک ها و حساب ها" },
             { title: "مدیریت چک", path: "/checks" },
             { title: "سال مالی و بیلان" },
-            { title: "مدیریت صندوق", path: '/account-managing' },
+            { title: "مدیریت صندوق", path: "/account-managing" },
         ],
     },
     {
@@ -314,7 +314,7 @@ export const account = [
         cardNumber: "6219861906149249",
         color: "#345BFF",
         bg: blueBank,
-        name: "پرهام حسن زاده"
+        name: "پرهام حسن زاده",
     },
     {
         bankName: "بانک سپه - جاری",
@@ -325,8 +325,7 @@ export const account = [
         cardNumber: "6219861906149249",
         color: "#FF8A00",
         bg: bankRed,
-        name: "پرهام حسن زاده"
-
+        name: "پرهام حسن زاده",
     },
     {
         bankName: "بانک ملت - جاری",
@@ -337,8 +336,7 @@ export const account = [
         cardNumber: "6219861906149249",
         color: "#FE4A51",
         bg: bankYellow,
-        name: "پرهام حسن زاده"
-
+        name: "پرهام حسن زاده",
     },
 ];
 
@@ -379,7 +377,7 @@ export const addCartForm = [
         lable: "نام بانک",
         hasIcon: true,
         color: "#6D6D6D",
-        type: "text"
+        type: "text",
     },
     {
         name: "displayName",
@@ -388,7 +386,7 @@ export const addCartForm = [
         lable: "نام قابل نمایش",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text"
+        type: "text",
     },
     {
         name: "accountNum",
@@ -397,7 +395,7 @@ export const addCartForm = [
         lable: "شماره حساب",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number"
+        type: "number",
     },
     {
         name: "sheba",
@@ -406,7 +404,7 @@ export const addCartForm = [
         lable: "شماره شبا",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number"
+        type: "number",
     },
     {
         name: "cardNum",
@@ -415,7 +413,7 @@ export const addCartForm = [
         lable: "شماره کارت",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'number'
+        type: "number",
     },
     {
         name: "cvv2",
@@ -424,7 +422,7 @@ export const addCartForm = [
         lable: "cvv2",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'number'
+        type: "number",
     },
     {
         name: "expireDate",
@@ -463,8 +461,7 @@ export const addCartForm = [
         lable: "نام شعبه",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'text'
-
+        type: "text",
     },
     {
         name: "branchCode",
@@ -473,8 +470,7 @@ export const addCartForm = [
         lable: "کد شعبه",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'number'
-
+        type: "number",
     },
     {
         name: " fullname",
@@ -483,8 +479,7 @@ export const addCartForm = [
         lable: "نام صاحب حساب",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'text'
-
+        type: "text",
     },
     {
         name: " mobile",
@@ -493,8 +488,7 @@ export const addCartForm = [
         lable: "شماره موبایل",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'number'
-
+        type: "number",
     },
     {
         name: "API_IP",
@@ -503,8 +497,7 @@ export const addCartForm = [
         lable: "API-IP",
         hasIcon: false,
         color: "#FF8A00",
-        type: 'number'
-
+        type: "number",
     },
     {
         name: "API_TERMENAL",
@@ -513,8 +506,7 @@ export const addCartForm = [
         lable: "API-TERMENAL",
         hasIcon: false,
         color: "#FF8A00",
-        type: 'text'
-
+        type: "text",
     },
     {
         name: "posName",
@@ -523,8 +515,7 @@ export const addCartForm = [
         lable: "نام نمایشی پوز",
         hasIcon: false,
         color: "#FF8A00",
-        type: 'text'
-
+        type: "text",
     },
     {
         name: "bankUrl",
@@ -533,8 +524,7 @@ export const addCartForm = [
         lable: "آدرس URL بانک",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'text'
-
+        type: "text",
     },
     {
         name: "userName",
@@ -543,8 +533,7 @@ export const addCartForm = [
         lable: "نام کاربری",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'text'
-
+        type: "text",
     },
     {
         name: "password",
@@ -553,8 +542,7 @@ export const addCartForm = [
         lable: "رمزعبور",
         hasIcon: false,
         color: "#6D6D6D",
-        type: 'number'
-
+        type: "number",
     },
 ];
 
@@ -566,7 +554,7 @@ export const checklistbanking = [
         description: "توضیحات مربوط به واریزی",
         income: "45000000",
         outcome: "500000000",
-        remain: "600000000"
+        remain: "600000000",
     },
     {
         serial: "324321",
@@ -575,7 +563,7 @@ export const checklistbanking = [
         description: "توضیحات مربوط به واریزی",
         income: "45000000",
         outcome: "500000000",
-        remain: "600000000"
+        remain: "600000000",
     },
     {
         serial: "324321",
@@ -584,33 +572,36 @@ export const checklistbanking = [
         description: "توضیحات مربوط به واریزی",
         income: "45000000",
         outcome: "500000000",
-        remain: "600000000"
-    }, {
-        serial: "324321",
-        title: "واریز",
-        date: new Date(),
-        description: "توضیحات مربوط به واریزی",
-        income: "45000000",
-        outcome: "500000000",
-        remain: "600000000"
-    }, {
-        serial: "324321",
-        title: "واریز",
-        date: new Date(),
-        description: "توضیحات مربوط به واریزی",
-        income: "45000000",
-        outcome: "500000000",
-        remain: "600000000"
-    }, {
-        serial: "324321",
-        title: "واریز",
-        date: new Date(),
-        description: "توضیحات مربوط به واریزی",
-        income: "45000000",
-        outcome: "500000000",
-        remain: "600000000"
+        remain: "600000000",
     },
-]
+    {
+        serial: "324321",
+        title: "واریز",
+        date: new Date(),
+        description: "توضیحات مربوط به واریزی",
+        income: "45000000",
+        outcome: "500000000",
+        remain: "600000000",
+    },
+    {
+        serial: "324321",
+        title: "واریز",
+        date: new Date(),
+        description: "توضیحات مربوط به واریزی",
+        income: "45000000",
+        outcome: "500000000",
+        remain: "600000000",
+    },
+    {
+        serial: "324321",
+        title: "واریز",
+        date: new Date(),
+        description: "توضیحات مربوط به واریزی",
+        income: "45000000",
+        outcome: "500000000",
+        remain: "600000000",
+    },
+];
 
 export const BankAccountType = [
     {
@@ -790,7 +781,7 @@ export const products = [
         transactionParty: "محمد مرادی",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
 
     {
@@ -807,7 +798,7 @@ export const products = [
         transactionParty: "محمد مرادی",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: blue_berry,
@@ -823,7 +814,7 @@ export const products = [
         transactionParty: "محمد مرادی",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
 
     {
@@ -840,7 +831,7 @@ export const products = [
         transactionParty: "محمد مرادی",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: fruits,
@@ -856,7 +847,7 @@ export const products = [
         transactionParty: "محمد مرادی",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: goji_berry,
@@ -869,7 +860,7 @@ export const products = [
         transactionParty: "محمد مرادی",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: grapes_purpel,
@@ -883,7 +874,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: grapes,
@@ -897,7 +888,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: green_apple,
@@ -911,7 +902,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: kiwi,
@@ -925,7 +916,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: mango,
@@ -939,7 +930,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: melon,
@@ -953,7 +944,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: orange,
@@ -967,7 +958,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: passion_fruit,
@@ -981,7 +972,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: pear,
@@ -995,7 +986,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: pineapple,
@@ -1009,7 +1000,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: strawberry,
@@ -1022,7 +1013,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
     {
         logo: watermelon,
@@ -1036,7 +1027,7 @@ export const products = [
         transactionParty: "محمد مرادي",
         productCode: "103",
         type: "سبزیجات",
-        unit: "1"
+        unit: "1",
     },
 ];
 
@@ -1746,6 +1737,186 @@ export const transactionpartyField = [
         ],
     },
 ];
+export const productsFeilds = [
+    {
+        name: "type",
+        select: true,
+        placeholder: "دسته محصولات",
+        lable: "دسته محصولات",
+        hasIcon: true,
+        color: "#6D6D6D",
+        type: "select",
+        options: [
+            {
+                title: "دسته مورد نظر را انتخاب کنید",
+                value: "",
+            },
+            {
+                title: "سبزیجات",
+                value: "vegetables",
+            },
+            {
+                title: "میوه",
+                value: "fruits",
+            },
+        ],
+    },
+    {
+        name: "generic",
+        select: false,
+        placeholder: "نام ژنریک ",
+        lable: "نام ژنریک ",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "productName",
+        select: false,
+        placeholder: "نام محصول",
+        lable: "نام محصول",
+
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+
+    {
+        name: "unit",
+        select: true,
+        placeholder: "واحد",
+        lable: "واحد",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        options: [
+            {
+                title: "واحد مورد نظر را انتخاب کنید",
+                value: "",
+            },
+            {
+                title: "kg",
+                value: "kg",
+            },
+            {
+                title: "gr",
+                value: "gr",
+            },
+        ],
+    },
+    {
+        name: "min",
+        select: false,
+        placeholder: "حداقل موجودی",
+        lable: "حداقل موجودی",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "orderPoint",
+        select: false,
+        placeholder: "نقطه سفارش",
+        lable: "نقطه سفارش",
+
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "max",
+        select: false,
+        placeholder: "حداکثر موجودی",
+        lable: "حداکثر موجودی",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+    },
+    {
+        name: "shelf",
+        select: false,
+        placeholder: "شماره قفسه",
+        lable: "شماره قفسه",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+
+    {
+        name: "code",
+        select: false,
+        placeholder: "بارکد",
+        lable: "بارکد",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+];
+export const digitalLable = [
+    {
+        name: "advantage",
+        select: false,
+        placeholder: "خواص",
+        lable: "خواص",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "sugar",
+        select: false,
+        placeholder: "قند",
+        lable: "قند",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "energy",
+        select: false,
+
+        lable: "انرژی",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+
+    {
+        name: "fat",
+        select: true,
+        placeholder: "چربی",
+        lable: "چربی",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "protein",
+        select: false,
+        lable: "پروتیین",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "vitamin1",
+        select: false,
+        lable: "ویتامین",
+
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "vitamin2",
+        select: false,
+        lable: "ویتامین",
+
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+];
 
 export const accountstable = [
     {
@@ -1762,54 +1933,45 @@ export const RegistrationCostData = [
         amount: "40000000",
         date: new Date(),
         description: "چک میوه",
-
     },
     {
         amount: "40000000",
         date: new Date(),
         description: "چک میوه",
-
     },
     {
         amount: "40000000",
         date: new Date(),
         description: "چک میوه",
-
     },
     {
         amount: "40000000",
         date: new Date(),
         description: "چک میوه",
-
     },
     {
         amount: "40000000",
         date: new Date(),
         description: "چک میوه",
-
     },
     {
         amount: "40000000",
         date: new Date(),
         description: "چک میوه",
-
     },
 ];
 
 export const vehicleType = [
     {
         name: "پیکان",
-
     },
     {
         name: "نیسان",
-
     },
     {
         name: "پراید وانت",
-
     },
-]
+];
 
 export const transactionTypeItem = [
     {
@@ -1867,7 +2029,6 @@ export const report = {
         {
             title: "تعداد مشتریان",
             value: 20000,
-
         },
         {
             title: "موجودی صندوق",
@@ -1890,157 +2051,149 @@ export const report = {
     ],
 };
 
-
 export const keypadletter = [
     {
-        "0": "ض",
-        "1": "ص",
-        "2": "ث",
-        "3": "ق",
-        "4": "ف",
-        "5": "غ",
-        "6": "ع",
-        "7": "ه",
-        "8": "خ",
-        "9": "ح",
-        "10": "ج",
-        "11": "چ",
-        "12": "پ",
+        0: "ض",
+        1: "ص",
+        2: "ث",
+        3: "ق",
+        4: "ف",
+        5: "غ",
+        6: "ع",
+        7: "ه",
+        8: "خ",
+        9: "ح",
+        10: "ج",
+        11: "چ",
+        12: "پ",
     },
     {
-        "0": "ش",
-        "1": "س",
-        "2": "ی",
-        "3": "ب",
-        "4": "ل",
-        "5": "ا",
-        "6": "ت",
-        "7": "ن",
-        "8": "م",
-        "9": "ک",
-        "10": "گ"
+        0: "ش",
+        1: "س",
+        2: "ی",
+        3: "ب",
+        4: "ل",
+        5: "ا",
+        6: "ت",
+        7: "ن",
+        8: "م",
+        9: "ک",
+        10: "گ",
     },
     {
-        "0": "ظ",
-        "1": "ط",
-        "2": "ز",
-        "3": "ر",
-        "4": "ذ",
-        "5": "د",
-        "6": "و"
-    }
-]
+        0: "ظ",
+        1: "ط",
+        2: "ز",
+        3: "ر",
+        4: "ذ",
+        5: "د",
+        6: "و",
+    },
+];
 export const keypadnumber = [
     {
-        "0": "۱",
-        "1": "۲",
-        "2": "۳"
+        0: "۱",
+        1: "۲",
+        2: "۳",
     },
     {
-        "0": "۴",
-        "1": "۵",
-        "2": "۶"
+        0: "۴",
+        1: "۵",
+        2: "۶",
     },
     {
-        "0": "۷",
-        "1": "۸",
-        "2": "۹"
+        0: "۷",
+        1: "۸",
+        2: "۹",
     },
     {
-        "0": "0",
-        "1": "."
-    }
-]
-
+        0: "0",
+        1: ".",
+    },
+];
 
 export const BarChartData = [
     {
         id: 1,
         year: "۱۵-۳۰ اردیبهشت",
         userGain: 40,
-
     },
     {
         id: 2,
         year: "۱-۱۵ اردیبهشت",
         userGain: 20,
-
     },
     {
         id: 3,
         year: "۱۵-۳۰ فروردین",
         userGain: 45,
-
     },
     {
         id: 4,
         year: "۱-۲۵ فروردین",
         userGain: 60,
-
     },
-
 ];
-
 
 export const customersDashbord = [
     {
         name: "پرهام حسن زاده",
         status: "بدهکار",
         mobile: "09138090933",
-        remain: "500000"
+        remain: "500000",
     },
     {
         name: "امیرحسین فهمیده",
         status: "بستانکار",
         mobile: "09138090833",
-        remain: "500000"
+        remain: "500000",
     },
     {
         name: "امیرحسین فهمیده",
         status: "بستانکار",
         mobile: "09138090833",
-        remain: "500000"
+        remain: "500000",
     },
     {
         name: "امیرحسین فهمیده",
         status: "بستانکار",
         mobile: "09138090833",
-        remain: "500000"
+        remain: "500000",
     },
     {
         name: "امیرحسین فهمیده",
         status: "بستانکار",
         mobile: "09138090833",
-        remain: "500000"
+        remain: "500000",
     },
-]
+];
 
 export const factorDTable = [
     {
         name: "امیرحسین فهمیده",
         status: "موفق",
         date: new Date(),
-        price: "300000"
+        price: "300000",
     },
     {
         name: "امیرحسین فهمیده",
         status: "ناموفق",
         date: new Date(),
-        price: "300000"
+        price: "300000",
     },
     {
         name: "امیرحسین فهمیده",
         status: "نامشخصی",
         date: new Date(),
-        price: "300000"
-    }
-]
+        price: "300000",
+    },
+];
 
 export const customersData = [
     {
         image: profile,
         name: "پرهام حسن زاده",
-        mobile: '09138090933',
+        mobile: "09138090933",
         phone1: "۰۵۱۳۶۰۹۸۹۶۵",
         phone2: "۰۵۱۳۶۰۹۸۹۶۵",
         Ncode: "1273005651",
@@ -2055,7 +2208,7 @@ export const customersData = [
                 fee: "50000",
                 pureWeight: "25",
                 weight: "30",
-                finalFee: "3500000"
+                finalFee: "3500000",
             },
             {
                 product_name: "سیب قرمز سبزوار",
@@ -2063,7 +2216,7 @@ export const customersData = [
                 fee: "50000",
                 pureWeight: "25",
                 weight: "30",
-                finalFee: "3500000"
+                finalFee: "3500000",
             },
             {
                 product_name: "سیب قرمز سبزوار",
@@ -2071,13 +2224,11 @@ export const customersData = [
                 fee: "50000",
                 pureWeight: "25",
                 weight: "30",
-                finalFee: "3500000"
-            }
-        ]
-
-
+                finalFee: "3500000",
+            },
+        ],
     },
-]
+];
 
 export const FactorPageTable = [
     {
@@ -2090,7 +2241,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "open"
+        status: "open",
     },
     {
         serialNumber: "45743",
@@ -2102,7 +2253,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2114,7 +2265,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2126,7 +2277,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2138,7 +2289,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2150,7 +2301,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2162,7 +2313,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2174,7 +2325,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2186,7 +2337,7 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
     {
         serialNumber: "45743",
@@ -2198,10 +2349,9 @@ export const FactorPageTable = [
         vehicle: "پیکان وانت",
         plate: "۱۳م۸۴۷-۱۲",
         date: new Date(),
-        status: "close"
+        status: "close",
     },
-]
-
+];
 
 export const safiFrom = [
     {
@@ -2267,7 +2417,8 @@ export const safiFrom = [
         color: "#6D6D6D",
         type: "text",
         require: true,
-    }, {
+    },
+    {
         name: "auto-type",
         select: true,
         placeholder: "نوع خودرو",
@@ -2290,7 +2441,6 @@ export const safiFrom = [
                 value: "mazda",
             },
         ],
-
     },
     {
         name: "auto-driver",
@@ -2336,7 +2486,7 @@ export const safiFrom = [
         type: "number",
         require: true,
     },
-]
+];
 
 export const safiAmaniData = [
     {
@@ -2347,7 +2497,7 @@ export const safiAmaniData = [
         weight: "60",
         paletWeight: "10",
         fee: "500000",
-        price: '600000',
+        price: "600000",
     },
     {
         productName: "سیب قرمز البرز",
@@ -2357,7 +2507,7 @@ export const safiAmaniData = [
         weight: "60",
         paletWeight: "10",
         fee: "500000",
-        price: '600000',
+        price: "600000",
     },
     {
         productName: "سیب قرمز البرز",
@@ -2367,7 +2517,7 @@ export const safiAmaniData = [
         weight: "60",
         paletWeight: "10",
         fee: "500000",
-        price: '600000',
+        price: "600000",
     },
     {
         productName: "سیب قرمز البرز",
@@ -2377,7 +2527,7 @@ export const safiAmaniData = [
         weight: "60",
         paletWeight: "10",
         fee: "500000",
-        price: '600000',
+        price: "600000",
     },
     {
         productName: "سیب قرمز البرز",
@@ -2387,10 +2537,9 @@ export const safiAmaniData = [
         weight: "60",
         paletWeight: "10",
         fee: "500000",
-        price: '600000',
-    }
-]
-
+        price: "600000",
+    },
+];
 
 export const createUserForm = [
     {
@@ -2454,7 +2603,7 @@ export const createUserForm = [
         type: "number",
         require: true,
     },
-]
+];
 
 export const checkTable = [
     {
@@ -2470,14 +2619,13 @@ export const checkTable = [
             {
                 for: "پرهام حسن زاده",
                 nCode: "1246776434",
-                status: "برگشتی"
-            }
-        ]
-    }
-]
+                status: "برگشتی",
+            },
+        ],
+    },
+];
 
 export const addchceckFrom = [
-
     {
         name: "bank",
         select: false,
@@ -2566,20 +2714,19 @@ export const addchceckFrom = [
         type: "text",
         hastext: false,
     },
-]
+];
 
-
-export const keyboardLatter = ["` \u06f1 \u06f2 \u06f3 \u06f4 \u06f5 \u06f6 \u06f7 \u06f8 \u06f9 \u06f0 - = {bksp}",
+export const keyboardLatter = [
+    "` \u06f1 \u06f2 \u06f3 \u06f4 \u06f5 \u06f6 \u06f7 \u06f8 \u06f9 \u06f0 - = {bksp}",
     "{tab} \u0636 \u0635 \u062b \u0642 \u0641 \u063a \u0639 \u0647 \u062e \u062d \u062c \u0686 \\",
     "{lock} \u0634 \u0633 \u06cc \u0628 \u0644 \u0627 \u062a \u0646 \u0645 \u06a9 \u06af {enter}",
     "\u0638 \u0637 \u0632 \u0631 \u0630 \u062f \u067e \u0648 \u002e \u002f",
-    "{space}",]
+    "{space}",
+];
 
 export const keyboardnumber = [
     "\u06f1 \u06f2 \u06f3",
     "\u06f4 \u06f5 \u06f6",
     "\u06f7 \u06f8 \u06f9",
     ". 0 /",
-]
-
-
+];

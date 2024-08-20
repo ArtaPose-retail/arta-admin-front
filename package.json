@@ -16,6 +16,7 @@
     "@kasraghoreyshi/calendar": "^0.0.5",
     "@kasraghoreyshi/datepicker": "^0.1.4",
     "@mui/icons-material": "^5.14.3",
+    "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.14.5",
     "@mui/x-date-pickers": "^6.18.0",
     "@persian-tools/persian-tools": "^3.5.2",
