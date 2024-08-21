@@ -60,7 +60,7 @@ function SignIn() {
                             sx={{
                                 ...center,
                                 flexDirection: "column",
-                                gap: "15px",
+                                gap: "25px",
                                 width: "80%",
                             }}
                         >
@@ -100,7 +100,7 @@ function SignIn() {
                                     },
                                 }}
                             />
-                            <Box sx={{ ...center, mt: 3 }}>
+                            {/* <Box sx={{ ...center, mt: 3 }}>
                                 <Typography
                                     sx={{
                                         color: (theme) => theme.typography.color,
@@ -119,7 +119,7 @@ function SignIn() {
                                 >
                                     کلیک کنید.
                                 </Typography>
-                            </Box>
+                            </Box> */}
                             <Box
                                 onClick={() => loginhandler()}
                                 variant="outline"
@@ -136,26 +136,8 @@ function SignIn() {
                                 ورود به نرم‌افزار آرتـاپـوز
                             </Box>
 
-                            <Divider sx={{ width: "100%" }}>
-                                <Typography sx={{
-                                    color: theme => theme.palette.disable.main
-                                }}>
 
-                                    ورود با کد پیامکی
-                                </Typography>
-                            </Divider>
-                            <Box
-                                sx={{
-                                    width: "100%",
-                                    backgroundColor: (theme) => theme.palette.disable.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                    borderRadius: (theme) => theme.shape.borderRadius,
-                                    p: 2,
-                                    textAlign: "center",
-                                }}
-                            >
-                                کد ورود را به من پیامک کنید
-                            </Box>
+
                         </Box>
                     </Box>
                 </Grid>
