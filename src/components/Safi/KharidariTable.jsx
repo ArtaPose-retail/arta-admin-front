@@ -92,7 +92,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row.factorNumer))}
+                    {toPersian(separateBy3(row.factorNumer))}
                 </TableCell>
                 <TableCell
                     sx={{

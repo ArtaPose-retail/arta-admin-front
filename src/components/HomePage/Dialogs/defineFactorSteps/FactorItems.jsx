@@ -21,14 +21,10 @@ import ProductType from "./ProductType";
 import PackageType from "./PackageType";
 import Input from "../../../UI/Input";
 import SearchBox from "../../../UI/SearchBox";
+import { center } from "../../../../styles/theme";
 
 function FactorItems({ handleClose }) {
     const dispatch = useDispatch();
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
 
     const { defineFactorStep1 } = useSelector(state => state.factor)
 
@@ -46,7 +42,7 @@ function FactorItems({ handleClose }) {
         <Box>
             <Box>
                 <Box sx={{ ...center, justifyContent: "space-between", p: 1 }}>
-                    <Typography
+                    {/* <Typography
                         sx={{
                             fontSize: "16px",
                             fontWeight: 400,
@@ -56,7 +52,7 @@ function FactorItems({ handleClose }) {
                     >
                         شماره سند:
                         {toPersian("886677")}
-                    </Typography>
+                    </Typography> */}
                     <Typography
                         sx={{
                             fontSize: "16px",
@@ -178,7 +174,7 @@ function FactorItems({ handleClose }) {
                                 color: (theme) => theme.typography.color,
                             }}
                         >
-                            وزن ناخالص
+                            الزام وزن
                         </Typography>
                         <Switch
                             name="pureWeight"
@@ -201,6 +197,19 @@ function FactorItems({ handleClose }) {
                         // checked={}
                         />
                     </Box>
+                    <Box>
+                        <Typography
+
+                            sx={{
+                                bgcolor: (theme) => theme.palette.green.main,
+                                color: (theme) => theme.palette.text.primary,
+                                borderRadius: "15px",
+                                px: 3,
+                            }}
+                        >
+                            درصد سود:  %{toPersian(23)}
+                        </Typography>
+                    </Box>
                 </Box>
                 <Box>
                     <Button
@@ -214,6 +223,7 @@ function FactorItems({ handleClose }) {
                         افزودن
                     </Button>
                 </Box>
+
             </Box>
 
             <FactorItemstable height={200} />

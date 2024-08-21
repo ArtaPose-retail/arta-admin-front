@@ -1,32 +1,26 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import FactorItemstable from "./FactorItemstable";
 import { toPersian, toastHandler } from "../../../../utils/setting";
 import { handlefactorStep } from "../../../../Redux/Slices/HomePage/factor";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import reactRouts from "../../../../utils/reactRouts";
+import { center } from "../../../../styles/theme";
 
 function RegisterFactor({ handleClose }) {
     const dispatch = useDispatch();
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     const location = useLocation();
     const navigate = useNavigate();
 
     const registerBn = () => {
         toastHandler("فاکتور با موفقیت ثبت شد", "info");
         handleClose();
-        // if (location.pathname === "/factor") {
-
-        //     navigate(reactRouts.safi.main, {
-        //         state: { key: "خریداری" },
-        //     })
-        // }
     };
+    const [img, setImg] = useState(null)
+    const handlerUploadImg = (e) => {
+        setImg(URL.createObjectURL(e.target.files[0]))
+    }
     return (
         <Box>
             <Box>
@@ -86,6 +80,19 @@ function RegisterFactor({ handleClose }) {
                         }}
                     >
                         ثبت
+                    </Button>
+                    <Button
+                        sx={{ bgcolor: theme => theme.palette.darkBlue.main, color: theme => theme.palette.text.primary }}
+                        variant="contained"
+                        component="label"
+
+                    >
+                        اپلود
+                        <input
+                            type="file"
+                            hidden
+                            onChange={(e) => handlerUploadImg(e)}
+                        />
                     </Button>
                     <Button
                         onClick={() => dispatch(handlefactorStep("decrease"))}

@@ -15,7 +15,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { separateBy3, separateBy4, toPersian } from "../../utils/setting";
-import { FactorPageTable } from "../../utils/data";
+import { FactorPageTable, FactorPageTablemain } from "../../utils/data";
 import moment from "jalali-moment";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -87,8 +87,10 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy4(row.factorNumer))}
+                    {toPersian(row.factorNumer)}
                 </TableCell>
+
+
                 <TableCell
                     sx={{
                         color: (theme) => theme.typography.color,
@@ -96,38 +98,8 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {row?.driver}
-                </TableCell>
-                <TableCell
-                    sx={{
-                        color: (theme) => theme.typography.color,
-                        fontWeight: 500,
-                    }}
-                    align="center"
-                >
-                    {row?.vehicle}
-                </TableCell>
-                <TableCell
-                    sx={{
-                        color: (theme) => theme.typography.color,
-                        fontWeight: 500,
-                    }}
-                    align="center"
-                >
-                    {toPersian(row.plate)}
-                </TableCell>
-                <TableCell
-                    sx={{
-                        color: (theme) => theme.typography.color,
-                        fontWeight: 500,
-                    }}
-                    align="center"
-                >
-                    {toPersian(
-                        moment(row?.date, "YYYY-MM-DD ")
-                            .locale("fa")
-                            .format("YYYY/MM/D - HH:mm")
-                    )}
+                    {toPersian(separateBy3(row.amount))}
+
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -164,7 +136,7 @@ function Row(props) {
                                                 : theme.palette.green.main,
                                     }}
                                 >
-                                    {row.status === "open" ? "باز است" : "بسته شده"}
+                                    {row.status === "open" ? "تسویه نشده" : "تسویه شده"}
                                 </Typography>
                             </Box>
                             <Box
@@ -246,42 +218,27 @@ export default function FactorTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                تاریخ فاکتور/بارنامه
+                                تاریخ فاکتور
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                شماره فاکتور/بارنامه
+                                شماره فاکتور
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                راننده
+                                مبلغ فاکتور
                             </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                خودرو
-                            </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                پلاک
-                            </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                زمان / تاریخ
-                            </TableCell>
+
+
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {FactorPageTable?.map((row, index) => (
+                        {FactorPageTablemain?.map((row, index) => (
                             <Row key={index} row={row} index={index} />
                         ))}
                     </TableBody>

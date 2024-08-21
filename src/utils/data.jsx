@@ -1337,15 +1337,7 @@ export const factorItemForm = [
         color: "#6D6D6D",
         type: "text",
     },
-    {
-        name: "displayName",
-        select: false,
-        placeholder: "نام نمایشی ",
-        lable: "نام نمایشی ",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "text",
-    },
+
     {
         name: "purchaseFee",
         select: false,
@@ -1367,46 +1359,26 @@ export const factorItemForm = [
         hastext: true,
     },
     {
-        name: "palletWeight",
+        name: "amount",
         select: false,
-        placeholder: "وزن ظرف",
-        lable: "وزن ظرف ",
+        placeholder: "تعداد ",
+        lable: "تعداد  ",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: false,
+    },
+    {
+        name: "Weight",
+        select: false,
+        placeholder: "وزن ",
+        lable: "وزن  ",
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
     },
-    {
-        name: "packageType",
-        select: true,
-        placeholder: "نوع بسته بندی",
-        lable: "نوع بسته بندی",
-        hasIcon: true,
-        color: "#6D6D6D",
-        type: "select",
-        options: [
-            {
-                title: "نوع بسته بندی",
-                value: "",
-            },
-            {
-                title: "نوع ۱",
-                value: "type 1",
-            },
-            {
-                title: "نوع ۱",
-                value: "type 2",
-            },
-        ],
-    },
-    {
-        name: "among",
-        select: false,
-        placeholder: "تعداد",
-        lable: "تعداد را وارد کنید",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "number",
-    },
+
+
 ];
 export const defineFactorForm = [
     {
@@ -2227,6 +2199,31 @@ export const customersData = [
                 finalFee: "3500000",
             },
         ],
+    },
+];
+
+export const FactorPageTablemain = [
+    {
+        serialNumber: "45743",
+        transactionName: "امیررضا محمدی",
+        factorType: "خریداری",
+        factorDate: new Date(),
+        factorNumer: "462462",
+
+
+        amount: "3400000",
+        status: "open",
+    },
+    {
+        serialNumber: "45743",
+        transactionName: "امیررضا محمدی",
+        factorType: "خریداری",
+        factorDate: new Date(),
+        factorNumer: "462462",
+
+
+        amount: "3400000",
+        status: "close",
     },
 ];
 

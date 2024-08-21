@@ -51,24 +51,8 @@ function Details({ handleClose }) {
     };
     return (
         <Box>
-            <Box>
-                <Title
-                    title={"شماره سند"}
-                    Typoprops={{
-                        fontSize: "20px",
-                        fontWeight: 500,
-                        color: (theme) => theme.palette.disable.main,
-                        my: 0.5,
-                    }}
-                />
-                <Divider
-                    orientation="horizontal"
-                    variant="middle"
-                    flexItem
-                    sx={{ my: 1 }}
-                />
-            </Box>
-            <Grid container spacing={2} sx={{ p: 1 }}>
+
+            <Grid container spacing={2} sx={{ p: 1, mt: 2 }}>
                 {defineFactorForm?.map((item, index) => (
                     <Grid item xs={4} key={index}>
                         <InputLabel>

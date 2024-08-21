@@ -6,15 +6,12 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
-import moment from "jalali-moment";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/material";
 import {
     FactorSellitemstable,
-    customersFactorList,
 } from "../../../../utils/data";
 import { toPersian, toastHandler } from "../../../../utils/setting";
 
@@ -49,11 +46,11 @@ export default function FactorItemstable({ height }) {
                     <TableRow>
                         <StyledTableCell align="center">ردیف</StyledTableCell>
                         <StyledTableCell align="center">نوع محصول</StyledTableCell>
-                        <StyledTableCell align="center">نام نمایشی</StyledTableCell>
+
                         <StyledTableCell align="center">فی خرید</StyledTableCell>
                         <StyledTableCell align="center">فی فروش</StyledTableCell>
-                        <StyledTableCell align="center">وزن ناخالص</StyledTableCell>
-                        <StyledTableCell align="center">نوع بسته‌بندی</StyledTableCell>
+                        <StyledTableCell align="center">وزن</StyledTableCell>
+
                         <StyledTableCell align="center">تعداد</StyledTableCell>
                         <StyledTableCell align="center">عملیات</StyledTableCell>
                     </TableRow>
@@ -67,9 +64,7 @@ export default function FactorItemstable({ height }) {
                             <StyledTableCell align="center">
                                 {item.productName}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item.displayName}
-                            </StyledTableCell>
+
                             <StyledTableCell align="center">
                                 {toPersian(item.purchaseFee)}ریال
                             </StyledTableCell>
@@ -79,9 +74,7 @@ export default function FactorItemstable({ height }) {
                             <StyledTableCell align="center">
                                 {toPersian(item.pureWeight)}کیلوگرم
                             </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item.packageType}
-                            </StyledTableCell>
+
                             <StyledTableCell align="center">{item.amount}عدد</StyledTableCell>
                             <StyledTableCell align="center">
                                 <Box

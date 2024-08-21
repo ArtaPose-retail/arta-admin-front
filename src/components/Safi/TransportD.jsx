@@ -82,7 +82,7 @@ export default function TransportD({ data }) {
 
                         <Box sx={{ ...center, gap: "5px" }}>
                             <Typography>شماره بارنامه / فاکتور:</Typography>
-                            <Typography>{toPersian(separateBy4("92303270"))}</Typography>
+                            <Typography>{toPersian(separateBy3("92303270"))}</Typography>
                         </Box>
                     </Box>
                     <Box

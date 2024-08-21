@@ -53,7 +53,7 @@ export default function Safi() {
         >
             <Box sx={{ ...center, justifyContent: "flex-start" }}>
                 <Title
-                    title={`صافی (${location?.state?.key})`}
+                    title={`فاکتور (${location?.state?.key})`}
                     Typoprops={{
                         fontSize: "20px",
                         fontWeight: 500,
