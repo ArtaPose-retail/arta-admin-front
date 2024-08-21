@@ -1,30 +1,24 @@
 import {
     Avatar,
-    Backdrop,
     Box,
     Button,
     Dialog,
     DialogContent,
-    Divider,
     Grid,
     InputAdornment,
     InputLabel,
-    List,
-    ListItem,
-    ListItemText,
-    Modal,
-    Switch,
     TextField,
     Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+
 import profile from "../../../../Assets/images/profileImage.png";
 import AddIcon from '@mui/icons-material/Add';
 import { transactionpartyField } from "../../../../utils/data";
 import { toastHandler } from "../../../../utils/setting";
 import Title from '../../../UI/Title';
 import AddTransactionType from "../AddTransactionType";
+import { center } from "../../../../styles/theme";
 
 function TransactionDialog({ title }) {
     const [open, setOpen] = useState(false);
@@ -39,11 +33,7 @@ function TransactionDialog({ title }) {
     const handlerUploadImg = (e) => {
         setImg(URL.createObjectURL(e.target.files[0]))
     }
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     return (
         <div>

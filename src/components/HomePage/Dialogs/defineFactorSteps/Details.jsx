@@ -21,6 +21,7 @@ import {
 import TransactionDialog from "./TransactionDialog";
 import Input from "../../../UI/Input";
 import SearchBox from "../../../UI/SearchBox";
+import CarDg from "./CarDg";
 
 function Details({ handleClose }) {
     const dispatch = useDispatch();
@@ -117,7 +118,7 @@ function Details({ handleClose }) {
                                                             ریال
                                                         </Typography>
                                                     ) : (
-                                                        <TransactionDialog title={item.lable} />
+                                                        item.name == "carType" ? <CarDg /> : <TransactionDialog title={item.lable} />
                                                     )}
                                                 </InputAdornment>
                                             )}

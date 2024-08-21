@@ -1489,14 +1489,32 @@ export const defineFactorForm = [
     },
     {
         name: "carType",
-        select: false,
+        select: true,
         placeholder: "نوع خودرو",
         lable: "نوع خودرو را وارد کنید",
-        hasIcon: false,
+        hasIcon: true,
         color: "#6D6D6D",
-        type: "text",
+        type: "select",
         require: false,
         hastext: false,
+        options: [
+            {
+                title: "نوع خودرو",
+                value: ""
+            },
+            {
+                title: "پراید وانت",
+                value: "perayd vanet"
+            },
+            {
+                title: "زامیاد",
+                value: "zamyad"
+            },
+            {
+                title: "نیسان ابی",
+                value: "deathrider"
+            },
+        ]
     },
     {
         name: "plate",
