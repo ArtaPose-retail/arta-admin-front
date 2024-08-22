@@ -30,6 +30,7 @@ import AccountManaging from "./pages/AccountManaging";
 import Products from "./pages/Products";
 import Transactions from "./pages/Transactions";
 import { UserParent } from "./pages/User/Index";
+import Round from "./pages/Rounf";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
           <Route path={reactRouts.transactions.main} element={<Transactions />} />
             //? manageing section
           <Route path={reactRouts.user.main} element={<UserParent />} />
+          <Route path={reactRouts.round.main} element={<Round />} />
         </Routes>
       </MainLayout>
 

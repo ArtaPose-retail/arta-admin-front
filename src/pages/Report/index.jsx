@@ -8,15 +8,11 @@ import moment from "jalali-moment";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import { report } from "../../utils/data";
 import PayDialog from "../../components/Report/PayDialog";
-
+import { center } from '../../styles/theme'
 //! this page is for AMALIAt page
 
 function Report() {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box
             sx={{

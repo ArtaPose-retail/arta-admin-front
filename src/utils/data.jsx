@@ -59,6 +59,7 @@ import strawberry from "../Assets/images/Fruits/strawberry.svg";
 import watermelon from "../Assets/images/Fruits/watermelon.svg";
 //? profile image
 import profile from "../Assets/images/profileImage.png";
+import reactRouts from "./reactRouts";
 export const menuData = [
     {
         title: "داشبورد",
@@ -244,10 +245,10 @@ export const menuData = [
             { title: "ارتباط تصویری" },
             { title: "ارتباط با ترازو" },
             { title: "نرخ کارگری" },
-            { title: "رند کردن مبالغ" },
+            { title: "رند کردن مبالغ", path: reactRouts.round.main },
             { title: "ارتباط با مشتری (CRM)" },
             { title: "تنظیمات چاپ" },
-            { title: "کاربران", path: "/user" },
+            { title: "کاربران", path: reactRouts.user.main },
         ],
     },
     {
@@ -354,6 +355,58 @@ export const months = [
     { title: "بهمن", value: "bahman" },
     { title: "اسفند", value: "esfand" },
 ];
+
+export const roundPage = [
+
+    {
+        title: "رند کردن به پایین ",
+        box: [
+            {
+                lable: "کمتر از",
+                placeholder: "مثال:۵۰۰ریال",
+                name: "downRound",
+                select: false,
+                hasIcon: false,
+                color: "#6D6D6D",
+                type: "number",
+            },
+            {
+                lable: "تبدیل شود به",
+                placeholder: "مثال:۰ریال",
+                name: "changeTo",
+                select: false,
+                hasIcon: false,
+                color: "#6D6D6D",
+                type: "number",
+            }
+        ]
+
+    },
+    {
+        title: "رند کردن به بالا ",
+        box: [
+            {
+                lable: "بیشتر از",
+                placeholder: "مثال:۵۰۰ریال",
+                name: "downRound",
+                select: false,
+                hasIcon: false,
+                color: "#6D6D6D",
+                type: "number",
+            },
+            {
+                lable: "تبدیل شود به",
+                placeholder: "مثال:۱۰۰۰ریال",
+                name: "changeTo",
+                select: false,
+                hasIcon: false,
+                color: "#6D6D6D",
+                type: "number",
+            }
+        ]
+
+    }
+]
 
 export const addCartForm = [
     {

@@ -65,6 +65,9 @@ const reactRouts = {
     //! managing section
     user: {
         main: "/user"
+    },
+    round: {
+        main: "/round"
     }
 };
 
