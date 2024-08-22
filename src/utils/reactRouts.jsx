@@ -42,6 +42,9 @@ const reactRouts = {
     customers: {
         main: "/customers"
     },
+    LableDiscount: {
+        main: "/lable-discount"
+    },
     //!accounts Section
     factor: {
         main: "/factor"

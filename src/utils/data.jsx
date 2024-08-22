@@ -153,14 +153,15 @@ export const menuData = [
             </svg>
         ),
         subItems: [
-            { title: "فروش", path: "/" },
-            { title: "دریافتی", path: "/recives" },
-            { title: "پرداختی", path: "/payments" },
-            { title: "حساب ها", path: "/accounts" },
-            { title: "اسناد گذشته", path: "/documents" },
-            { title: "گزارش صندوق", path: "/reports" },
-            { title: "مشتریان", path: "/customers   " },
-            { title: "صفحه مشتری", path: "/customer-page" },
+            { title: "فروش", path: reactRouts.home },
+            { title: "دریافتی", path: reactRouts.recives.main },
+            { title: "پرداختی", path: reactRouts.payment.main },
+            { title: "حساب ها", path: reactRouts.accounts.main },
+            { title: "اسناد گذشته", path: reactRouts.documents.main },
+            { title: "گزارش صندوق", path: reactRouts.report.main },
+            { title: "مشتریان", path: reactRouts.customers.main },
+            { title: "صفحه مشتری", path: reactRouts.customer.main },
+            { title: "تولید لیبل کد تخیف", path: reactRouts.LableDiscount.main },
         ],
     },
     {
