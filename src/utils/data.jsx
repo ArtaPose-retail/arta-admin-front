@@ -161,7 +161,7 @@ export const menuData = [
             { title: "گزارش صندوق", path: reactRouts.report.main },
             { title: "مشتریان", path: reactRouts.customers.main },
             { title: "صفحه مشتری", path: reactRouts.customer.main },
-            { title: "تولید لیبل کد تخیف", path: reactRouts.LableDiscount.main },
+            { title: "تولید کد تخیف", path: reactRouts.Discount.main },
         ],
     },
     {
@@ -2799,3 +2799,153 @@ export const keyboardnumber = [
     "\u06f7 \u06f8 \u06f9",
     ". 0 /",
 ];
+
+
+export const lableDiscountForm = [
+    {
+
+        name: "Type",
+        select: true,
+        placeholder: "نوع کد تخفیف:",
+        lable: "نوع کد تخفیف:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+        hastext: false,
+        options: [
+            {
+                value: "",
+                title: "نوع  تخفیف"
+            },
+            {
+                value: "percent",
+                title: "درصدی"
+            },
+            {
+                value: "amount",
+                title: "مبلغی"
+            },
+        ]
+    },
+    {
+
+        name: "amount",
+        select: false,
+        placeholder: "مقدار کد تخفیف:",
+        lable: "مقدار کد تخفیف:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: false,
+    },
+    // {
+    //     name: "limit-price",
+    //     lable: "بازه مبلغ:",
+    //     subItems: [
+    {
+        name: "min-price",
+        select: false,
+        placeholder: "از مبلغ:",
+        lable: "از مبلغ:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: false,
+    },
+    {
+        name: "max-price",
+        select: false,
+        placeholder: "تا مبلغ:",
+        lable: "تا مبلغ:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: false,
+    },
+
+    //     ]
+    // },
+    // {
+    //     name: "limit-time",
+    //     lable: "بازه زمانی:",
+    //     subItems: [
+    {
+        name: "start-time",
+        select: false,
+        placeholder: "از تاریخ:",
+        lable: "از تاریخ:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "date",
+        hastext: false,
+    },
+    {
+        name: "end-time",
+        select: false,
+        placeholder: "تا تاریخ:",
+        lable: "تا تاریخ:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "date",
+        hastext: false,
+    },
+
+    //     ]
+    // },
+    {
+        name: "txtType",
+        select: true,
+        placeholder: "نوع متن  لیبل:",
+        lable: "نوع متن  لیبل:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "select",
+        hastext: false,
+        options: [
+            {
+                value: "",
+                title: "نوع متن  لیبل"
+            },
+            {
+                value: "manual",
+                title: "دستی"
+            },
+            {
+                value: "system",
+                title: 'سیستمی'
+            }
+        ]
+    }
+    , {
+        name: "use-number",
+        select: false,
+        placeholder: "تعداد استفاده:",
+        lable: "تعداد استفاده:",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "select",
+        hastext: false,
+    }
+    , {
+        name: "number",
+        select: false,
+        placeholder: "تعداد :",
+        lable: "تعداد :",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "select",
+        hastext: false,
+    }
+    , {
+        name: "manual-text",
+        select: false,
+        placeholder: "متن دستی :",
+        lable: "متن دستی :",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+        hastext: false,
+    }
+
+
+]

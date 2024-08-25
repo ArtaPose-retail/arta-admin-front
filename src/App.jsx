@@ -1,5 +1,3 @@
-// import "./App.css";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,7 +28,8 @@ import AccountManaging from "./pages/AccountManaging";
 import Products from "./pages/Products";
 import Transactions from "./pages/Transactions";
 import { UserParent } from "./pages/User/Index";
-import Round from "./pages/Rounf";
+import Round from "./pages/Round";
+import Discount from "./pages/Actions/Discount/Index";
 
 function App() {
   return (
@@ -65,7 +64,8 @@ function App() {
           <Route path={reactRouts.report.main} element={<Report />} />
           <Route path={reactRouts.dashbord.main} element={<Dashbord />} />
           <Route path={reactRouts.customers.main} element={<Customers />} />
-            //?account section
+          <Route path={reactRouts.Discount.main} element={<Discount />} />
+            //?accounting section
           <Route path={reactRouts.factor.main} element={<FactorPage />} />
           <Route path={reactRouts.safi.main} element={<Safi />} />
           <Route path={reactRouts.checks.main} element={<Checks />} />
