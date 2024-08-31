@@ -9,7 +9,6 @@ import ProductDetails from "./ProductDetails";
 function AddNewProduct({ status, handlerCloseDialog }) {
     const [value, setValue] = useState("1");
     const handleChange = (event, newValue) => {
-        console.log(event, newValue)
         setValue(newValue);
     };
 

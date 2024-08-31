@@ -17,6 +17,10 @@ import { productsFeilds } from "../../utils/data";
 import { center } from "../../styles/theme";
 import Title from "../UI/Title";
 import { toastHandler } from "../../utils/setting";
+import { AddNewUnits } from './Dialogs/AddNewUnits';
+import { AddNewProductType } from "./Dialogs/AddNewProductType";
+
+
 
 function ProductDetails({ handlerCloseDialog, next }) {
     const [img, setImg] = useState(null);
@@ -114,7 +118,8 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                     <>
                                         {item.hasIcon && (
                                             <InputAdornment position="start">
-                                                {/* <AddTransactionType /> */}
+                                                {item.name == "unit" ? <AddNewUnits />
+                                                    : <AddNewProductType />}
                                             </InputAdornment>
                                         )}
                                     </>

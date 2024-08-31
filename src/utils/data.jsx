@@ -1792,7 +1792,7 @@ export const productsFeilds = [
         type: "select",
         options: [
             {
-                title: "دسته مورد نظر را انتخاب کنید",
+                title: "انتخاب دسته",
                 value: "",
             },
             {
@@ -1830,12 +1830,12 @@ export const productsFeilds = [
         select: true,
         placeholder: "واحد",
         lable: "واحد",
-        hasIcon: false,
+        hasIcon: true,
         color: "#6D6D6D",
         type: "number",
         options: [
             {
-                title: "واحد مورد نظر را انتخاب کنید",
+                title: "انتخاب واحد",
                 value: "",
             },
             {
