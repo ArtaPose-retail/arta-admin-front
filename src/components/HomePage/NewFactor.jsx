@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Fade, Popper, Typography } from "@mui/material";
 import { useState } from "react";
 import LableCard from "./LableCard";
-import theme from "../../styles/theme";
+import theme, { center } from "../../styles/theme";
 import Description from "./Dialogs/Description";
 import PersonIcon from "@mui/icons-material/Person";
 import TransactionpartyDg from "./Dialogs/TransactionpartyDg";
@@ -9,11 +9,7 @@ import { separateBy3, toPersian } from "../../utils/setting";
 import Input from "../UI/Input";
 
 function NewFactor() {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     const [open, setOpen] = useState(false);
     const [openTransaction, setOpenTransaction] = useState(false);
