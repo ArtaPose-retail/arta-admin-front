@@ -80,7 +80,7 @@ export const menuData = [
                     height="7"
                     rx="2"
                     stroke="#41669A"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <rect
                     x="3"
@@ -89,7 +89,7 @@ export const menuData = [
                     height="16"
                     rx="2"
                     stroke="#41669A"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <rect
                     x="18"
@@ -98,7 +98,7 @@ export const menuData = [
                     height="7"
                     rx="2"
                     stroke="#41669A"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <rect
                     x="18"
@@ -107,7 +107,7 @@ export const menuData = [
                     height="16"
                     rx="2"
                     stroke="#41669A"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
             </svg>
         ),

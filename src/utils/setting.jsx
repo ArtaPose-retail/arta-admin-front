@@ -4,7 +4,7 @@ import moment from "jalali-moment";
 
 
 const instance = axios.create({
-    baseURL: "https://pay.arta-tech.ir",
+    baseURL: "https://api.artps.ir/v1/",
     timeout: 60000,
 });
 

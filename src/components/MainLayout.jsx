@@ -5,17 +5,26 @@ import SideBar from "./Layout/SideBar";
 import MainHeader from "./Layout/MainHeader";
 
 import reactRouts from "../utils/reactRouts";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { DocumentFullScreen } from "@chiragrupani/fullscreen-react";
 
 import { setFullscrenn } from "../Redux/Slices/general";
 import { useDispatch, useSelector } from "react-redux";
 import SecondaryHeader from "./Layout/SecondaryHeader";
+import { useEffect } from "react";
 
 function MainLayout({ children }) {
-    const { isfullScrenn } = useSelector((state) => state.general);
-
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const { isfullScrenn } = useSelector((state) => state.general);
+    const { token } = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (token !== null) {
+            navigate(reactRouts.auth.signIn)
+        }
+    }, [])
+
 
     const hideElement = [reactRouts.auth.signIn, reactRouts.customer.main];
     const showSecondaryHeader = [
