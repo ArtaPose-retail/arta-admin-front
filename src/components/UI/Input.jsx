@@ -64,7 +64,7 @@ function Input({
                 <Box
                     ref={boxRef}
                     onFocus={handleFocus}
-                    onClick={handleFocus} // Also trigger on click
+                    onClick={handleFocus}
                     onBlur={handleBlur}
                     sx={{
                         borderRadius: "12px",

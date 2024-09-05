@@ -6,7 +6,6 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 import { styled } from "@mui/material";
@@ -15,6 +14,7 @@ import { center } from "../../styles/theme";
 import { deleteUser, getAllUser } from "../../Redux/Slices/Manangement/user/user";
 import { useDispatch, useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
+import CreateUserModal from "./CreateUserModal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -105,7 +105,7 @@ function Row(props) {
                     align="center"
                 >
                     <Box sx={{ ...center, gap: "15px" }}>
-                        <EditIcon />
+                        <CreateUserModal type="edit" />
                         <DeleteOutlineIcon
                             onClick={() => deleteUserHandler(row?.user_id)}
                             sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}

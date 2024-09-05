@@ -7,14 +7,18 @@ import AddIcon from "@mui/icons-material/Add";
 import Title from "../UI/Title";
 import Close from "@mui/icons-material/Close";
 import { center } from "../../styles/theme";
+import EditIcon from "@mui/icons-material/Edit";
+
 import {
     FormControlLabel,
     Grid,
-    Input,
+
     InputLabel,
 } from "@mui/material";
-import { createUserForm } from "../../utils/data";
+import { createUserCheckbox, createUserForm } from "../../utils/data";
 import Checkbox from "@mui/material/Checkbox";
+import Input from '../UI/Input';
+import { useSelector } from "react-redux";
 
 const style = {
     position: "absolute",
@@ -28,26 +32,35 @@ const style = {
     p: 4,
 };
 
-export default function CreateUserModal() {
+export default function CreateUserModal({ type }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const { UserInfo } = useSelector((state) => state.user)
 
+    const checkHandler = (e) => {
+        console.log(e.target.id)
+    }
     return (
         <div>
-            <Button
-                onClick={handleOpen}
-                variant="contained"
-                sx={{
-                    bgcolor: (theme) => theme.palette.darkBlue.main,
-                    color: (theme) => theme.palette.text.primary,
-                }}
-            >
-                <AddIcon
-                    fontSize="medium"
-                    sx={{ fill: (theme) => theme.palette.text.primary }}
-                />
-            </Button>
+            {type == "add" ?
+                <Button
+                    onClick={handleOpen}
+                    variant="contained"
+                    sx={{
+                        bgcolor: (theme) => theme.palette.darkBlue.main,
+                        color: (theme) => theme.palette.text.primary,
+                    }}
+                >
+                    <AddIcon
+                        fontSize="medium"
+                        sx={{ fill: (theme) => theme.palette.text.primary }}
+                    />
+                </Button>
+                : <EditIcon fontSize="medium"
+                    onClick={handleOpen}
+                    sx={{ cursor: "pointer" }} />}
+
             <Modal
                 open={open}
                 // onClose={handleClose}
@@ -78,6 +91,7 @@ export default function CreateUserModal() {
                                         }}
                                     >
                                         {item?.placeholder}
+
                                     </Typography>
                                 </InputLabel>
 
@@ -86,8 +100,7 @@ export default function CreateUserModal() {
                                     placeholder={item.placeholder}
                                     name={item.name}
                                     id={item.name}
-                                // // width={"55px"}
-                                // height={"55px"}
+                                    value={UserInfo[item?.name]}
                                 />
                             </Grid>
                         ))}
@@ -110,12 +123,11 @@ export default function CreateUserModal() {
                             mt: 1,
                         }}
                     >
-                        <FormControlLabel control={<Checkbox />} label="ادمین" />
-                        <FormControlLabel control={<Checkbox />} label="ادمین عملیات" />
-                        <FormControlLabel control={<Checkbox />} label="عملیات" />
-                        <FormControlLabel control={<Checkbox />} label="تنظیمات" />
-                        <FormControlLabel control={<Checkbox />} label="مدیریت" />
-                        <FormControlLabel control={<Checkbox />} label="حسابداری" />
+                        {createUserCheckbox.map((item, index) =>
+                            < FormControlLabel key={index} control={<Checkbox id={item.id}
+                                onClick={(e) => checkHandler(e)} />} label={item.title} />
+                        )}
+
                     </Box>
                     <Box sx={{ ...center, justifyContent: "space-between", mt: 3 }}>
                         <Button variant="contained" color="success" sx={{ width: "15%" }}>

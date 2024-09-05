@@ -5,6 +5,21 @@ import { toastHandler } from "../../../../utils/setting";
 const initialState = {
     loading: false,
     userList: null,
+    UserInfo: {
+        fname: null,
+        lname: null,
+        username: null,
+        password: null,
+        rules: {
+            admin: false,
+            actions: false,
+            settings: false,
+            accounting: false,
+            management: false,
+            admin_actions: false
+        }
+
+    }
 };
 
 export const getAllUser = createAsyncThunk("uesr/list", UserListThunk);

@@ -2612,7 +2612,7 @@ export const safiAmaniData = [
 
 export const createUserForm = [
     {
-        name: "first_name",
+        name: "fname",
         select: false,
         placeholder: "نام",
         lable: "نام",
@@ -2622,7 +2622,7 @@ export const createUserForm = [
         require: false,
     },
     {
-        name: "last_name",
+        name: "lname",
         select: false,
         placeholder: "نام خانوادگی",
         lable: "نام خانوادگی",
@@ -2641,16 +2641,7 @@ export const createUserForm = [
         type: "text",
         require: true,
     },
-    {
-        name: "username",
-        select: false,
-        placeholder: "نام کاربری",
-        lable: "نام کاربری",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "text",
-        require: true,
-    },
+
     {
         name: "password",
         select: false,
@@ -2666,13 +2657,21 @@ export const createUserForm = [
         select: false,
         placeholder: "شماره همراه",
         lable: "شماره همراه",
-
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
         require: true,
     },
 ];
+export const createUserCheckbox = [
+    { title: "مدیر", id: "admin" },
+    { title: "عملیات", id: "action" },
+    { title: "مدیر عملیات", id: "admin_actions" },
+    { title: "تنظیمات", id: "setting" },
+    { title: "حسابداری", id: "accounting" },
+    { title: "مدیریت", id: "management" },
+
+]
 
 export const checkTable = [
     {

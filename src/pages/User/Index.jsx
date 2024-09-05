@@ -19,7 +19,7 @@ export const UserParent = () => {
             color: (theme) => theme.palette.text.card,
           }}
         />
-        <CreateUserModal />
+        <CreateUserModal type="add" />
       </Box>
 
 
