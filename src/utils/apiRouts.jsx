@@ -7,7 +7,7 @@ const apiRouts = {
         login: "user/login"
     },
     user: {
-        list: "admin/users/"
+        list: "admin/users/",
     }
 };
 

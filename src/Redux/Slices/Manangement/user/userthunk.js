@@ -5,3 +5,9 @@ import AXIOS from "../../../../utils/setting";
 export const UserListThunk = async () => {
     return AXIOS.get(`${apiRouts.user.list}?userType=User`);
 };
+
+
+//?delete specific users
+export const deleteUserThunk = async (id) => {
+    return AXIOS.delete(`${apiRouts.user.list}${id}`);
+};

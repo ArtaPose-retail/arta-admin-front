@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UserListThunk } from "./userthunk";
+import { deleteUserThunk, UserListThunk } from "./userthunk";
 import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
@@ -8,12 +8,14 @@ const initialState = {
 };
 
 export const getAllUser = createAsyncThunk("uesr/list", UserListThunk);
+export const deleteUser = createAsyncThunk("uesr/delete", deleteUserThunk);
 
 export const user = createSlice({
     name: "user",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        //? all user get
         builder.addCase(getAllUser.pending, (state) => {
             state.loading = true;
         });
@@ -24,6 +26,19 @@ export const user = createSlice({
         builder.addCase(getAllUser.rejected, (state) => {
             (state.loading = false),
                 toastHandler("مشکلی پیش امده لطفا مجدد وارد شوید", info);
+        });
+
+        //?delete user
+        builder.addCase(deleteUser.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteUser.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            console.log(payload.data)
+        });
+        builder.addCase(deleteUser.rejected, (state) => {
+            (state.loading = false),
+                toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", info);
         });
     },
 });
