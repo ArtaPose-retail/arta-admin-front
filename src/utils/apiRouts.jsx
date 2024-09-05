@@ -5,6 +5,9 @@ const apiRouts = {
     },
     auth: {
         login: "user/login"
+    },
+    user: {
+        list: "admin/users/"
     }
 };
 

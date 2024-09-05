@@ -8,9 +8,11 @@ import productinformation from "./Slices/HomePage/productinformation"
 import wallet from "./Slices/Wallet/wallet"
 import keyboard from "./Slices/Keyboard/keyboard"
 import auth from "./Slices/Auth/auth";
+import user from "./Slices/Manangement/user/user";
 
 const appReducer = combineReducers({
     auth,
+    user,
     addCard,
     general,
     factor,
