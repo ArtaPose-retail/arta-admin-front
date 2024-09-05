@@ -2,7 +2,6 @@ import { addCommas, digitsEnToFa } from "@persian-tools/persian-tools";
 import axios from "axios";
 import moment from "jalali-moment";
 
-
 const instance = axios.create({
     baseURL: "https://api.artps.ir/v1/",
     timeout: 60000,
@@ -38,23 +37,16 @@ instance.interceptors.response.use(
 );
 export default instance;
 
-
-
 export const separateBy4 = (number) => {
     return number?.match(/.{1,4}/g);
 };
 
-
 export const separateBy3 = (number) => {
-
-    // return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return addCommas(number);
-}
+};
 export const toPersian = (str) => {
-
     return digitsEnToFa(str);
-}
-
+};
 
 export const persianDate = (data) => {
     return digitsEnToFa(
@@ -71,15 +63,33 @@ export const persianTime = (data) => {
     );
 };
 
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 export const toastHandler = (msg, variant) => {
     toast[variant](msg, {
-        position: 'bottom-center',
+        position: "bottom-center",
         autoClose: 4000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-    })
-}
+    });
+};
+
+export const ruleChecker = (rules) => {
+    const translations = {
+        admin: "مدیر",
+        actions: "عملیات",
+        settings: "تنظیمات",
+        accounting: "حسابداری",
+        management: "مدیریت",
+        admin_actions: "مدیر عملیات",
+    };
+    const result = [];
+    for (let key in rules) {
+        if (rules[key]) {
+            result.push(translations[key]);
+        }
+    }
+    return result;
+};

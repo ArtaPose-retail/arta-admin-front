@@ -6,7 +6,7 @@ const initialState = {
     addmission: []
 };
 
-const LoginAction = createAsyncThunk("auth/login", LoginThunk)
+export const LoginAction = createAsyncThunk("auth/login", LoginThunk)
 
 export const auth = createSlice({
     name: "auth",

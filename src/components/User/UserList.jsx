@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -18,14 +18,17 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import moment from "jalali-moment";
 import { Button, styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { separateBy4, toPersian } from "../../utils/setting";
+import { ruleChecker, separateBy4, toPersian } from "../../utils/setting";
 import { FactorPageTable } from "../../utils/data";
+import { center } from "../../styles/theme";
+import { getAllUser } from "../../Redux/Slices/Manangement/user/user";
+import { useDispatch, useSelector } from "react-redux";
+import { NoItem } from "../UI/NoItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
         color: theme.palette.common.white,
-
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -54,16 +57,6 @@ const rows = [
 
 function Row(props) {
     const { row, index } = props;
-    const [openCollaps, setOpenCollaps] = useState(false);
-
-    const navigate = useNavigate();
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-
     return (
         <Fragment>
             <StyledTableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -82,13 +75,13 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.fullName}
+                    {row?.fname}{row?.lname}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.userName}
+                    {row?.username}
                 </TableCell>
 
                 <TableCell
@@ -107,7 +100,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {row?.access}
+                    {ruleChecker(row?.rules).map((item) => item)}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -116,7 +109,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(row?.phoneNumber)}
+                    {toPersian(row?.phone)}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -138,6 +131,11 @@ function Row(props) {
 }
 
 export default function UserList() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getAllUser());
+    }, []);
+    const { userList, loading } = useSelector((state) => state.user);
     return (
         <Box
             sx={{
@@ -147,62 +145,66 @@ export default function UserList() {
                 overflowX: "hidden",
             }}
         >
-            <TableContainer>
-                <Table aria-label="collapsible table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                ردیف
-                            </StyledTableCell>
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                نام و نام خانوادگی
-                            </StyledTableCell>
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                نام کاربری
-                            </StyledTableCell>
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                رومز عبور
-                            </StyledTableCell>
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                سطح دسترسی
-                            </StyledTableCell>
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                شماره همراه
-                            </StyledTableCell>
+            {userList == null ? (
+                <NoItem />
+            ) : (
+                <TableContainer>
+                    <Table aria-label="collapsible table">
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    ردیف
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    نام و نام خانوادگی
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    نام کاربری
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    رومز عبور
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    سطح دسترسی
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    شماره همراه
+                                </StyledTableCell>
 
-                            <StyledTableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                عملیات
-                            </StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows?.map((row, index) => (
-                            <Row key={index} row={row} index={index} />
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                                <StyledTableCell
+                                    sx={{ color: (theme) => theme.palette.disable.main }}
+                                    align="center"
+                                >
+                                    عملیات
+                                </StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {userList?.map((row, index) => (
+                                <Row key={index} row={row} index={index} />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
         </Box>
     );
 }

@@ -5,6 +5,7 @@ import { center } from "../../styles/theme"
 import CreateUserModal from '../../components/User/CreateUserModal'
 import UserList from '../../components/User/UserList'
 
+
 export const UserParent = () => {
   return (
     <Box sx={{ p: 1 }}>
