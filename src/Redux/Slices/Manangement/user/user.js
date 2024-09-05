@@ -28,7 +28,18 @@ export const deleteUser = createAsyncThunk("uesr/delete", deleteUserThunk);
 export const user = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        setUserInfo: (state, { payload }) => {
+            state.UserInfo[payload.key] = payload.value
+        },
+        setUserRule: (state, { payload }) => {
+            console.log(payload)
+            state.UserInfo.rules[payload.key] = payload.value
+        },
+        resSetUserInfo: (state) => {
+            state.UserInfo = initialState.UserInfo
+        }
+    },
     extraReducers: (builder) => {
         //? all user get
         builder.addCase(getAllUser.pending, (state) => {
@@ -58,5 +69,5 @@ export const user = createSlice({
     },
 });
 
-export const { } = user.actions;
+export const { setUserInfo, setUserRule, resSetUserInfo } = user.actions;
 export default user.reducer;

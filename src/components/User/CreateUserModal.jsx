@@ -9,16 +9,15 @@ import Close from "@mui/icons-material/Close";
 import { center } from "../../styles/theme";
 import EditIcon from "@mui/icons-material/Edit";
 
-import {
-    FormControlLabel,
-    Grid,
-
-    InputLabel,
-} from "@mui/material";
+import { FormControlLabel, Grid, InputLabel } from "@mui/material";
 import { createUserCheckbox, createUserForm } from "../../utils/data";
 import Checkbox from "@mui/material/Checkbox";
-import Input from '../UI/Input';
-import { useSelector } from "react-redux";
+import Input from "../UI/Input";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    setUserInfo,
+    setUserRule,
+} from "../../Redux/Slices/Manangement/user/user";
 
 const style = {
     position: "absolute",
@@ -36,14 +35,32 @@ export default function CreateUserModal({ type }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const { UserInfo } = useSelector((state) => state.user)
+    const { UserInfo } = useSelector((state) => state.user);
+
+    const dispatch = useDispatch();
 
     const checkHandler = (e) => {
-        console.log(e.target.id)
-    }
+        console.log(e.target.id);
+        console.log(e.target.checked);
+
+        dispatch(
+            setUserRule({
+                key: e.target.id,
+                value: e.target.checked,
+            })
+        );
+    };
+    const onChangeHandler = (name, value) => {
+        dispatch(
+            setUserInfo({
+                key: name,
+                value: value,
+            })
+        );
+    };
     return (
         <div>
-            {type == "add" ?
+            {type == "add" ? (
                 <Button
                     onClick={handleOpen}
                     variant="contained"
@@ -57,9 +74,13 @@ export default function CreateUserModal({ type }) {
                         sx={{ fill: (theme) => theme.palette.text.primary }}
                     />
                 </Button>
-                : <EditIcon fontSize="medium"
+            ) : (
+                <EditIcon
+                    fontSize="medium"
                     onClick={handleOpen}
-                    sx={{ cursor: "pointer" }} />}
+                    sx={{ cursor: "pointer" }}
+                />
+            )}
 
             <Modal
                 open={open}
@@ -91,7 +112,6 @@ export default function CreateUserModal({ type }) {
                                         }}
                                     >
                                         {item?.placeholder}
-
                                     </Typography>
                                 </InputLabel>
 
@@ -101,6 +121,7 @@ export default function CreateUserModal({ type }) {
                                     name={item.name}
                                     id={item.name}
                                     value={UserInfo[item?.name]}
+                                    onChange={onChangeHandler}
                                 />
                             </Grid>
                         ))}
@@ -123,11 +144,19 @@ export default function CreateUserModal({ type }) {
                             mt: 1,
                         }}
                     >
-                        {createUserCheckbox.map((item, index) =>
-                            < FormControlLabel key={index} control={<Checkbox id={item.id}
-                                onClick={(e) => checkHandler(e)} />} label={item.title} />
-                        )}
-
+                        {createUserCheckbox.map((item, index) => (
+                            <FormControlLabel
+                                key={index}
+                                control={
+                                    <Checkbox
+                                        checked={UserInfo.rules[item.id]}
+                                        id={item.id}
+                                        onClick={(e) => checkHandler(e)}
+                                    />
+                                }
+                                label={item.title}
+                            />
+                        ))}
                     </Box>
                     <Box sx={{ ...center, justifyContent: "space-between", mt: 3 }}>
                         <Button variant="contained" color="success" sx={{ width: "15%" }}>

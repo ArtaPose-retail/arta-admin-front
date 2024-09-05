@@ -121,7 +121,7 @@ export default function UserList() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllUser());
-    }, []);
+    }, [dispatch]);
     const { userList, loading } = useSelector((state) => state.user);
     return (
         <Box

@@ -2649,7 +2649,7 @@ export const createUserForm = [
         lable: "رمز عبور",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "text",
         require: true,
     },
     {
@@ -2659,7 +2659,7 @@ export const createUserForm = [
         lable: "شماره همراه",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "text",
         require: true,
     },
 ];
