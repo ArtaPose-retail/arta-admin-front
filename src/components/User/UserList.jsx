@@ -86,7 +86,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {ruleChecker(row?.rules).map((item) => item)}
+                    {ruleChecker(row?.rules)}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -105,7 +105,7 @@ function Row(props) {
                     align="center"
                 >
                     <Box sx={{ ...center, gap: "15px" }}>
-                        <CreateUserModal type="edit" />
+                        <CreateUserModal type="edit" data={row} />
                         <DeleteOutlineIcon
                             onClick={() => deleteUserHandler(row?.user_id)}
                             sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}

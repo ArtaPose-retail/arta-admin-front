@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteUserThunk, UserListThunk } from "./userthunk";
+import { addUserThunk, deleteUserThunk, editUserThunk, UserListThunk } from "./userthunk";
 import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
     loading: false,
     userList: null,
     UserInfo: {
+        user_type: "User",
         fname: null,
         lname: null,
         username: null,
         password: null,
-        rules: {
+        rule: {
             admin: false,
             actions: false,
             settings: false,
@@ -24,6 +25,8 @@ const initialState = {
 
 export const getAllUser = createAsyncThunk("uesr/list", UserListThunk);
 export const deleteUser = createAsyncThunk("uesr/delete", deleteUserThunk);
+export const addUser = createAsyncThunk("uesr/add", addUserThunk);
+export const editUser = createAsyncThunk("uesr/edit", editUserThunk);
 
 export const user = createSlice({
     name: "user",
@@ -34,7 +37,7 @@ export const user = createSlice({
         },
         setUserRule: (state, { payload }) => {
             console.log(payload)
-            state.UserInfo.rules[payload.key] = payload.value
+            state.UserInfo.rule[payload.key] = payload.value
         },
         resSetUserInfo: (state) => {
             state.UserInfo = initialState.UserInfo
@@ -51,7 +54,7 @@ export const user = createSlice({
         });
         builder.addCase(getAllUser.rejected, (state) => {
             (state.loading = false),
-                toastHandler("مشکلی پیش امده لطفا مجدد وارد شوید", info);
+                toastHandler("مشکلی پیش امده لطفا مجدد وارد شوید", "info");
         });
 
         //?delete user
@@ -64,7 +67,31 @@ export const user = createSlice({
         });
         builder.addCase(deleteUser.rejected, (state) => {
             (state.loading = false),
-                toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", info);
+                toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", "info");
+        });
+
+        //?add user
+        builder.addCase(addUser.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(addUser.fulfilled, (state, { payload }) => {
+            state.loading = false;
+        });
+        builder.addCase(addUser.rejected, (state) => {
+            (state.loading = false),
+                toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", "info");
+        });
+
+        //?edit user
+        builder.addCase(editUser.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(editUser.fulfilled, (state, { payload }) => {
+            state.loading = false;
+        });
+        builder.addCase(editUser.rejected, (state) => {
+            (state.loading = false),
+                toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", "info");
         });
     },
 });

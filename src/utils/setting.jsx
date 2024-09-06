@@ -85,7 +85,7 @@ export const ruleChecker = (rules) => {
         management: "مدیریت",
         admin_actions: "مدیر عملیات",
     };
-    const result = [];
+    const result = []
     for (let key in rules) {
         if (rules[key]) {
             result.push(translations[key]);

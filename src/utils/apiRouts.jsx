@@ -8,6 +8,7 @@ const apiRouts = {
     },
     user: {
         list: "admin/users/",
+        add: "admin/users/new"
     }
 };
 

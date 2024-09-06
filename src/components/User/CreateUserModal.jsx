@@ -15,9 +15,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Input from "../UI/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    addUser,
+    editUser,
+    resSetUserInfo,
     setUserInfo,
     setUserRule,
 } from "../../Redux/Slices/Manangement/user/user";
+import { ruleChecker } from "../../utils/setting";
 
 const style = {
     position: "absolute",
@@ -31,9 +35,13 @@ const style = {
     p: 4,
 };
 
-export default function CreateUserModal({ type }) {
+export default function CreateUserModal({ type, data }) {
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+        setOpen(true)
+        dispatch(resSetUserInfo())
+
+    };
     const handleClose = () => setOpen(false);
     const { UserInfo } = useSelector((state) => state.user);
 
@@ -57,6 +65,14 @@ export default function CreateUserModal({ type }) {
                 value: value,
             })
         );
+    };
+
+    const submitHandler = () => {
+        if (type == "add") {
+            dispatch(addUser());
+        } else {
+            dispatch(editUser(data?.user_id))
+        }
     };
     return (
         <div>
@@ -123,6 +139,9 @@ export default function CreateUserModal({ type }) {
                                     value={UserInfo[item?.name]}
                                     onChange={onChangeHandler}
                                 />
+                                <Typography sx={{ fontSize: "10px", fontWeight: "bold" }}>
+                                    {type == "edit" ? `${item.placeholder} فعلی شما :   ${data[item.name]}` : ""}
+                                </Typography>
                             </Grid>
                         ))}
                     </Grid>
@@ -136,6 +155,9 @@ export default function CreateUserModal({ type }) {
                             my: 2,
                         }}
                     />
+                    <Typography sx={{ fontSize: "10px", fontWeight: "bold" }}>
+                        {type == "edit" ? `سطح دسترسی فعلی شما :   ${ruleChecker(data?.rules)}` : ""}
+                    </Typography>
                     <Box
                         sx={{
                             ...center,
@@ -149,7 +171,7 @@ export default function CreateUserModal({ type }) {
                                 key={index}
                                 control={
                                     <Checkbox
-                                        checked={UserInfo.rules[item.id]}
+                                        checked={UserInfo.rule[item.id]}
                                         id={item.id}
                                         onClick={(e) => checkHandler(e)}
                                     />
@@ -159,7 +181,12 @@ export default function CreateUserModal({ type }) {
                         ))}
                     </Box>
                     <Box sx={{ ...center, justifyContent: "space-between", mt: 3 }}>
-                        <Button variant="contained" color="success" sx={{ width: "15%" }}>
+                        <Button
+                            onClick={submitHandler}
+                            variant="contained"
+                            color="success"
+                            sx={{ width: "15%" }}
+                        >
                             تایید
                         </Button>
                         <Button variant="contained" color="warning" sx={{ width: "15%" }}>
