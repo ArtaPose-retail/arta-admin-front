@@ -65,6 +65,7 @@ export const menuData = [
         title: "داشبورد",
         path: "/dashbord",
         hasSubItem: false,
+        id: "dashbord",
         icon: (
             <svg
                 width="32"
@@ -113,6 +114,7 @@ export const menuData = [
         ),
     },
     {
+        id: "actions",
         title: "عملیات",
         hasSubItem: true,
         icon: (
@@ -165,6 +167,7 @@ export const menuData = [
         ],
     },
     {
+        id: "accounting",
         title: "حسابداری",
         hasSubItem: true,
         icon: (
@@ -206,6 +209,7 @@ export const menuData = [
         ],
     },
     {
+        id: "management",
         title: "مدیریت",
         hasSubItem: true,
         icon: (
@@ -253,6 +257,7 @@ export const menuData = [
         ],
     },
     {
+        id: "settings",
         title: "تنظیمات",
         hasSubItem: false,
         icon: (

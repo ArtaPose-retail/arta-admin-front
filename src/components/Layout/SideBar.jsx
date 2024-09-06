@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -19,6 +19,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import reactRouts from "../../utils/reactRouts";
 import profile from "../../Assets/images/profileImage.png";
+import { center } from "../../styles/theme";
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -72,7 +73,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function SideBar() {
-    const theme = useTheme();
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -108,11 +108,6 @@ export default function SideBar() {
         };
     }, [open]);
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />

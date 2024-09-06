@@ -20,7 +20,7 @@ function MainLayout({ children }) {
     const { token } = useSelector((state) => state.auth);
 
     useEffect(() => {
-        if (token !== null) {
+        if (token == null) {
             navigate(reactRouts.auth.signIn)
         }
     }, [])

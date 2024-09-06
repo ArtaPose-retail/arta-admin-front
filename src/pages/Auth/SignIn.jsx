@@ -11,9 +11,9 @@ import { styled } from "@mui/material/styles";
 import logo from "../../Assets/images/logo.png";
 import name from "../../Assets/images/logoname.png";
 import SigninAD from '../../components/SigninAD';
-import reactRouts from "../../utils/reactRouts";
-import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
+import { LoginAction, setLogininfo } from "../../Redux/Slices/Auth/auth";
+import { center } from "../../styles/theme"
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#3A5DF0",
     ...theme.typography.body2,
@@ -21,16 +21,12 @@ const Item = styled(Paper)(({ theme }) => ({
     width: "90%"
 }));
 
-const center = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
 function SignIn() {
-    const Navigate = useNavigate()
 
+    const dispatch = useDispatch()
     const loginhandler = () => {
-        Navigate(reactRouts.home)
+
+        dispatch(LoginAction())
     }
 
     return (
@@ -75,6 +71,10 @@ function SignIn() {
                             </Typography>
                             <TextField
                                 fullWidth
+                                onChange={(e) => dispatch(setLogininfo({
+                                    key: "emailorphone",
+                                    value: e.target.value
+                                }))}
                                 id="outlined-basic"
                                 variant="outlined"
                                 placeholder="نام‌کاربری / شماره همراه خود را وارد کنید"
@@ -91,6 +91,10 @@ function SignIn() {
                                 id="outlined-basic"
                                 // label="Outlined"
                                 variant="outlined"
+                                onChange={(e) => dispatch(setLogininfo({
+                                    key: "password",
+                                    value: e.target.value
+                                }))}
                                 placeholder="رمز عبور خود را وارد کنید"
                                 InputProps={{
                                     shirink: true,
@@ -100,26 +104,7 @@ function SignIn() {
                                     },
                                 }}
                             />
-                            {/* <Box sx={{ ...center, mt: 3 }}>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.typography.color,
-                                        fontSize: "18px",
-                                        fontWeight: "500",
-                                    }}
-                                >
-                                    آیا رمز عبور خود را فراموش کرده‌اید؟
-                                </Typography>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.palette.text.secondary,
-                                        fontSize: "18px",
-                                        fontWeight: "500",
-                                    }}
-                                >
-                                    کلیک کنید.
-                                </Typography>
-                            </Box> */}
+
                             <Box
                                 onClick={() => loginhandler()}
                                 variant="outline"
@@ -135,8 +120,6 @@ function SignIn() {
                             >
                                 ورود به نرم‌افزار آرتـاپـوز
                             </Box>
-
-
 
                         </Box>
                     </Box>
