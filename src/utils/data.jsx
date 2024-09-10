@@ -2670,7 +2670,7 @@ export const createUserForm = [
 ];
 export const createUserCheckbox = [
     { title: "مدیر", id: "admin" },
-    { title: "عملیات", id: "action" },
+    { title: "عملیات", id: "actions" },
     { title: "مدیر عملیات", id: "admin_actions" },
     { title: "تنظیمات", id: "setting" },
     { title: "حسابداری", id: "accounting" },
