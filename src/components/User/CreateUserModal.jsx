@@ -100,7 +100,7 @@ export default function CreateUserModal({ type, data }) {
 
             <Modal
                 open={open}
-                // onClose={handleClose}
+
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -114,7 +114,6 @@ export default function CreateUserModal({ type, data }) {
                                 color: (theme) => theme.palette.text.card,
                             }}
                         />
-                        <Close onClick={handleClose} sx={{ cursor: "pointer" }} />
                     </Box>
                     <Grid container spacing={3} sx={{ p: 1, mt: 1 }}>
                         {createUserForm?.map((item, index) => (
@@ -189,7 +188,7 @@ export default function CreateUserModal({ type, data }) {
                         >
                             تایید
                         </Button>
-                        <Button variant="contained" color="warning" sx={{ width: "15%" }}>
+                        <Button onClick={handleClose} variant="contained" color="warning" sx={{ width: "15%" }}>
                             انصراف
                         </Button>
                     </Box>

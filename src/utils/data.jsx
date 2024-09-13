@@ -247,8 +247,7 @@ export const menuData = [
             </svg>
         ),
         subItems: [
-            { title: "کیف پول" },
-            { title: "کاربران" },
+            { title: "کیف پول", path: reactRouts.wallet.main },
             { title: "پوز و درگاه پرداخت" },
             { title: "پیامک" },
             { title: "ارتباط تصویری" },

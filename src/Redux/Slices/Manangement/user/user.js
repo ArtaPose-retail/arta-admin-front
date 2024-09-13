@@ -4,6 +4,7 @@ import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
     loading: false,
+    update: false,
     userList: null,
     UserInfo: {
         user_type: "User",
@@ -50,6 +51,7 @@ export const user = createSlice({
         });
         builder.addCase(getAllUser.fulfilled, (state, { payload }) => {
             state.loading = false;
+            state.update = false;
             state.userList = payload.data;
         });
         builder.addCase(getAllUser.rejected, (state) => {
@@ -63,6 +65,8 @@ export const user = createSlice({
         });
         builder.addCase(deleteUser.fulfilled, (state, { payload }) => {
             state.loading = false;
+            state.update = true;
+
             console.log(payload.data)
         });
         builder.addCase(deleteUser.rejected, (state) => {
@@ -89,9 +93,10 @@ export const user = createSlice({
         builder.addCase(editUser.fulfilled, (state, { payload }) => {
             state.loading = false;
         });
-        builder.addCase(editUser.rejected, (state) => {
-            (state.loading = false),
-                toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", "info");
+        builder.addCase(editUser.rejected, (state, { payload }) => {
+            state.loading = false,
+                console.log(payload)
+            toastHandler("مشکلی پیش امده لطفا مجدد تلاش کنید ", "info");
         });
     },
 });

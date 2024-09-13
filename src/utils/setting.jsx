@@ -13,11 +13,12 @@ instance.interceptors.request.use(
         config.headers["Content-Type"] = "application/json; charset=utf-8";
         config.headers["Accept"] = "application/json";
         let token = "";
-        if (typeof window !== "undefined") {
-            token = JSON.parse(localStorage.getItem("TOKEN"));
-        }
+        // if (typeof window !== "undefined") {
+        // token = JSON.parse(localStorage.getItem("TOKEN"));
+        token = localStorage.getItem("TOKEN");
+        // }
         if (token) {
-            config.headers["Authorization"] = `${token}`;
+            config.headers["Authorization"] = `Bearer ${token}`;
         }
         return config;
     },
@@ -31,7 +32,7 @@ instance.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.log("error in response of the request");
+        console.log(error, "error in response of the request");
 
         return Promise.reject(error);
     }

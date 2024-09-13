@@ -119,10 +119,13 @@ function Row(props) {
 
 export default function UserList() {
     const dispatch = useDispatch();
+
+
+    const { userList, update } = useSelector((state) => state.user);
+
     useEffect(() => {
         dispatch(getAllUser());
-    }, [dispatch]);
-    const { userList, loading } = useSelector((state) => state.user);
+    }, [dispatch, update]);
     return (
         <Box
             sx={{
