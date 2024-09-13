@@ -2,6 +2,7 @@ import { Box, Button, Grid, InputAdornment, InputLabel, TextField, Typography } 
 import React from 'react'
 import { lableDiscountForm } from '../../../utils/data'
 import { center } from '../../../styles/theme'
+import Input from '../../UI/Input';
 
 function FormSection() {
     return (
@@ -20,51 +21,13 @@ function FormSection() {
                                 {item.lable}
                             </Typography>
                         </InputLabel>
-                        <TextField
-                            // value={formInformation[item.name]}
+                        <Input
                             name={item.name}
                             id={item.name}
-                            fullWidth
-                            sx={{
-                                "& .MuiNativeSelect-select": {
-                                    color: "black",
-                                },
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "white",
-                                },
-                                borderRadius: "18px",
-                            }}
-                            select={item.select}
-                            inputProps={{
-                                style: {
-                                    background: "#F2F2F2",
-                                    color: "#000",
-                                    direction: "ltr",
-                                    borderRadius: "18px",
-                                },
-                            }}
-                            SelectProps={{
-                                native: true,
-                                style: {
-                                    background: "#F2F2F2",
-                                    color: "#000",
-                                    direction: "ltr",
-                                    borderRadius: "18px",
-                                },
+                            hasIcon={item.hasIcon}
+                            type={item.type}
+                        />
 
-
-
-                            }}
-                        >
-                            {item.select &&
-                                item?.options?.map((option, index) => (
-                                    <option key={index} value={option.value}>
-                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                            {option.title}
-                                        </Typography>
-                                    </option>
-                                ))}
-                        </TextField>
                     </Grid>
                 ))}
 
