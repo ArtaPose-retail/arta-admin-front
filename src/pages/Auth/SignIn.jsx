@@ -1,5 +1,6 @@
 import {
     Box,
+    Button,
     Divider,
     Grid,
     Paper,
@@ -11,7 +12,7 @@ import { styled } from "@mui/material/styles";
 import logo from "../../Assets/images/logo.png";
 import name from "../../Assets/images/logoname.png";
 import SigninAD from '../../components/SigninAD';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginAction, setLogininfo } from "../../Redux/Slices/Auth/auth";
 import { center } from "../../styles/theme"
 const Item = styled(Paper)(({ theme }) => ({
@@ -24,6 +25,8 @@ const Item = styled(Paper)(({ theme }) => ({
 function SignIn() {
 
     const dispatch = useDispatch()
+
+    const { loginInfo } = useSelector((state) => state.auth)
     const loginhandler = () => {
 
         dispatch(LoginAction())
@@ -105,9 +108,10 @@ function SignIn() {
                                 }}
                             />
 
-                            <Box
+                            <Button
                                 onClick={() => loginhandler()}
                                 variant="outline"
+                                disabled={loginInfo.password.length > !0 ? false : true}
                                 sx={{
                                     backgroundColor: (theme) => theme.palette.text.secondary,
                                     color: (theme) => theme.palette.text.primary,
@@ -115,11 +119,15 @@ function SignIn() {
                                     p: 2,
                                     textAlign: "center",
                                     width: "100%",
-                                    cursor: "pointer"
+                                    cursor: "pointer",
+
+                                    ":hover": {
+                                        backgroundColor: (theme) => theme.palette.primary.light,
+                                    }
                                 }}
                             >
                                 ورود به نرم‌افزار آرتـاپـوز
-                            </Box>
+                            </Button>
 
                         </Box>
                     </Box>
