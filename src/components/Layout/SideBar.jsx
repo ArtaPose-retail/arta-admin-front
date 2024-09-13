@@ -20,6 +20,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import reactRouts from "../../utils/reactRouts";
 import profile from "../../Assets/images/profileImage.png";
 import { center } from "../../styles/theme";
+import { checkAccess } from "../../utils/setting";
+import { useDispatch, useSelector } from "react-redux";
+import { resetLoginInfo } from "../../Redux/Slices/Auth/auth";
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -108,6 +111,16 @@ export default function SideBar() {
         };
     }, [open]);
 
+    const { UserInfo } = useSelector((state) => state.user)
+    const dispatch = useDispatch()
+    const LogOutHandler = () => {
+        console.log("gere")
+        localStorage.removeItem("TOKEN")
+        localStorage.removeItem("persist:root")
+        dispatch(resetLoginInfo())
+        navigate(reactRouts.auth.signIn)
+    }
+
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -120,7 +133,8 @@ export default function SideBar() {
                 </DrawerHeader>
 
                 {menuData.map((item, index) => (
-                    <List
+
+                    checkAccess(item.RoleAccess) && <List
                         key={index}
                         dir="rtl"
                         sx={{
@@ -130,6 +144,7 @@ export default function SideBar() {
                             mt: 4,
                             p: 1,
                             alignItems: open ? "flex-start" : "center",
+
                         }}
                         component="nav"
                         aria-labelledby="nested-list-subheader"
@@ -195,7 +210,7 @@ export default function SideBar() {
                                         component="div"
                                         disablePadding
                                     >
-                                        {/* <ListItemButton sx={{ pl: 4 }}> */}
+
                                         <Link to={subitem?.path}>
                                             <Typography
                                                 sx={{
@@ -208,13 +223,14 @@ export default function SideBar() {
                                                 {subitem.title}
                                             </Typography>
                                         </Link>
-                                        {/* </ListItemButton> */}
+
                                     </List>
                                 ))}
                                 <Divider component="li" variant="inset" />
                             </Collapse>
                         )}
                     </List>
+
                 ))}
 
                 <List
@@ -226,6 +242,7 @@ export default function SideBar() {
                         mt: 4,
                         p: 1,
                         alignItems: open ? "flex-start" : "center",
+
                     }}
                     component="nav"
                     aria-labelledby="nested-list-subheader"
@@ -267,7 +284,7 @@ export default function SideBar() {
                                     ...center,
                                 }}
                             >
-                                پرهام حسن زاده
+                                {UserInfo.fname}{UserInfo.lname}
                             </Typography>
                         )}
                     </ListItemButton>
@@ -281,7 +298,7 @@ export default function SideBar() {
                     >
                         <ListItemIcon sx={{ ...center, flexDirection: "column" }}>
                             <LogoutIcon
-                                onClick={() => profilehandler()}
+                                onClick={() => LogOutHandler()}
                                 sx={{
                                     m: 2,
 

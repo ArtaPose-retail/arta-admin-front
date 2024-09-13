@@ -29,7 +29,8 @@ import Products from "./pages/Products";
 import Transactions from "./pages/Transactions";
 import { UserParent } from "./pages/User/Index";
 import Round from "./pages/Round";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./utils/ProtectedRoute.jsx";
+import Discount from "./pages/Actions/Discount/Index";
 
 function App() {
   return (
@@ -47,165 +48,230 @@ function App() {
         <Routes>
           <Route path={reactRouts.home} element={<Home />} />
           <Route path={reactRouts.auth.signIn} element={<SignIn />} />
-          {/* <Route path={reactRouts.banking.main} element={<Banking />} /> */}
-          {/* <Route path={reactRouts.banking.Otp} element={<BankingOtp />} /> */}
-          {/* <Route path={reactRouts.customer.main} element={<CustomerPage />} /> */}
-          {/* <Route path={reactRouts.banking.addcart} element={<AddCard />} /> */}
-          {/* <Route path={reactRouts.wallet.main} element={<Wallet />} /> */}
-          {/* <Route path={reactRouts.wallet.payment.result} element={<PaymenResult />} /> */}
-          {/* <Route path={reactRouts.recives.main} element={<RecivesParent />} /> */}
-          {/* <Route path={reactRouts.payment.main} element={<PaymentParent />} /> */}
-          {/* <Route path={reactRouts.accounts.main} element={<Accounts />} /> */}
-          {/* <Route path={reactRouts.accounts.details} element={<AccountDetails />} /> */}
-          {/* <Route path={reactRouts.documents.main} element={<Documents />} /> */}
-          {/* <Route path={reactRouts.notifications.main} element={<Notificatins />} /> */}
-          {/* <Route path={reactRouts.report.main} element={<Report />} /> */}
-          {/* <Route path={reactRouts.dashbord.main} element={<Dashbord />} /> */}
-          {/* <Route path={reactRouts.customers.main} element={<Customers />} /> */}
-          {/* <Route path={reactRouts.Discount.main} element={<Discount />} /> */}
-          {/* 
-          <Route path={reactRouts.factor.main} element={<FactorPage />} />
-          <Route path={reactRouts.safi.main} element={<Safi />} />
-          <Route path={reactRouts.checks.main} element={<Checks />} />
-          <Route path={reactRouts.checks.add} element={<AddCheck />} />
+          <Route path="/unauthorized" element={<div>not access</div>} />
           <Route
-            path={reactRouts.reportAcount.main}
-            element={<AccountManaging />}
-          />
-          <Route path={reactRouts.products.main} element={<Products />} />
-          <Route
-            path={reactRouts.transactions.main}
-            element={<Transactions />}
-          /> */}
-          <ProtectedRoute
             path={reactRouts.banking.main}
-            element={<Banking />}
-            requiredRoles={["actions", "admin"]}
+            element={
+              <ProtectedRoute
+                element={Banking}
+                requiredRole={["actions", "admin"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.banking.Otp}
-            element={<BankingOtp />}
-            requiredRoles={["actions", "admin"]}
+            element={
+              <ProtectedRoute
+                element={BankingOtp}
+                requiredRole={["actions", "admin"]}
+              />
+            }
           />
-          <ProtectedRoute
-            path={reactRouts.banking.addcart}
-            element={<AddCard />}
-            requiredRoles={["actions", "admin"]}
-          />
-          <ProtectedRoute
-            path={reactRouts.wallet.main}
-            element={<Wallet />}
-            requiredRoles={["actions", "admin"]}
-          />
-          <ProtectedRoute
-            path={reactRouts.wallet.payment.result}
-            element={<PaymenResult />}
-            requiredRoles={["actions", "admin"]}
-          />
-          <ProtectedRoute
+          <Route
             path={reactRouts.customer.main}
-            element={<CustomerPage />}
-            requiredRoles={["actions", "admin"]}
+            element={
+              <ProtectedRoute
+                element={CustomerPage}
+                requiredRole={["actions", "admin"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
+            path={reactRouts.banking.addcart}
+            element={
+              <ProtectedRoute
+                element={AddCard}
+                requiredRole={["admin", "actions"]}
+              />
+            }
+          />
+          <Route
+            path={reactRouts.wallet.main}
+            element={
+              <ProtectedRoute
+                element={Wallet}
+                requiredRole={["admin", "actions"]}
+              />
+            }
+          />
+          <Route
+            path={reactRouts.wallet.payment.result}
+            element={
+              <ProtectedRoute
+                element={PaymenResult}
+                requiredRole={["admin", "actions"]}
+              />
+            }
+          />
+          <Route
             path={reactRouts.recives.main}
-            element={<RecivesParent />}
-            requiredRoles={["actions", "admin"]}
+            element={
+              <ProtectedRoute
+                element={RecivesParent}
+                requiredRole={["admin", "actions"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.payment.main}
-            element={<PaymentParent />}
-            requiredRoles={["admin", "actions"]}
+            element={
+              <ProtectedRoute
+                element={PaymentParent}
+                requiredRole={["admin", "actions"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.accounts.main}
-            element={<Accounts />}
-            requiredRoles={["admin", "management"]}
+            element={
+              <ProtectedRoute
+                element={Accounts}
+                requiredRole={["admin", "management"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.accounts.details}
-            element={<AccountDetails />}
-            requiredRoles={["admin", "management"]}
+            element={
+              <ProtectedRoute
+                element={AccountDetails}
+                requiredRole={["admin", "management"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.documents.main}
-            element={<Documents />}
-            requiredRoles={["admin", "settings"]}
+            element={
+              <ProtectedRoute
+                element={Documents}
+                requiredRole={["admin", "settings"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.notifications.main}
-            element={<Notificatins />}
-            requiredRoles={["admin", "settings", "actions"]}
+            element={
+              <ProtectedRoute
+                element={Notificatins}
+                requiredRole={["admin", "settings", "actions"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.report.main}
-            element={<Report />}
-            requiredRoles={["admin", "management"]}
+            element={
+              <ProtectedRoute
+                element={Report}
+                requiredRole={["admin", "management"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.dashbord.main}
-            element={<Dashbord />}
-            requiredRoles={["admin"]}
+            element={
+              <ProtectedRoute element={Dashbord} requiredRole={["admin"]} />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.customers.main}
-            element={<Customers />}
-            requiredRoles={["admin", "actions"]}
+            element={
+              <ProtectedRoute
+                element={Customers}
+                requiredRole={["admin", "actions"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.Discount.main}
-            element={<Discount />}
-            requiredRoles={["admin", "management"]}
+            element={
+              <ProtectedRoute
+                element={Discount}
+                requiredRole={["admin", "management"]}
+              />
+            }
           />
-          //?accounting section
-          <ProtectedRoute
+          <Route
             path={reactRouts.factor.main}
-            element={<FactorPage />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={FactorPage}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.safi.main}
-            element={<Safi />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={Safi}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.checks.main}
-            element={<Checks />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={Checks}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.checks.add}
-            element={<AddCheck />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={AddCheck}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.reportAcount.main}
-            element={<AccountManaging />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={AccountManaging}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.products.main}
-            element={<Products />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={Products}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.transactions.main}
-            element={<Transactions />}
-            requiredRoles={["admin", "accounting"]}
+            element={
+              <ProtectedRoute
+                element={Transactions}
+                requiredRole={["admin", "accounting"]}
+              />
+            }
           />
-          //? manageing section
-          <Route path={reactRouts.user.main} element={<UserParent />} />
-          <Route path={reactRouts.round.main} element={<Round />} />
 
-          <ProtectedRoute
+          {/* Managing section */}
+          <Route
             path={reactRouts.user.main}
-            element={<UserParent />}
-            requiredRoles={['admin', 'management']}
+            element={
+              <ProtectedRoute
+                element={UserParent}
+                requiredRole={["admin", "management"]}
+              />
+            }
           />
-          <ProtectedRoute
+          <Route
             path={reactRouts.round.main}
-            element={<Round />}
-            requiredRoles={['admin', 'settings']}
+            element={
+              <ProtectedRoute
+                element={Round}
+                requiredRole={["admin", "settings"]}
+              />
+            }
           />
 
         </Routes>

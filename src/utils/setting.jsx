@@ -1,6 +1,7 @@
 import { addCommas, digitsEnToFa } from "@persian-tools/persian-tools";
 import axios from "axios";
 import moment from "jalali-moment";
+import { useSelector } from "react-redux";
 
 const instance = axios.create({
     baseURL: "https://api.artps.ir/v1/",
@@ -93,3 +94,10 @@ export const ruleChecker = (rules) => {
     }
     return result;
 };
+
+export const checkAccess = (requiredRole) => {
+    const admission = useSelector((state) => state.auth.admission);
+    const hasAccess = requiredRole.some((role) => admission[role]);
+
+    return hasAccess
+}

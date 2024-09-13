@@ -21,6 +21,9 @@ export const auth = createSlice({
 
         setLogininfo: (state, { payload }) => {
             state.loginInfo[payload.key] = payload.value
+        },
+        resetLoginInfo: (state) => {
+            state.loginInfo = initialState.loginInfo
         }
     },
     extraReducers: (builder) => {
@@ -30,10 +33,11 @@ export const auth = createSlice({
         });
         builder.addCase(LoginAction.fulfilled, (state, { payload }) => {
             state.loading = false;
-
+            console.log(payload.data)
             state.token = payload.data.token,
                 state.admission = payload.data.perm,
-                window.location.pathname = "/"
+                window.location.pathname = "/",
+                localStorage.setItem("TOKEN", payload.data.token)
         });
         builder.addCase(LoginAction.rejected, (state) => {
             (state.loading = false),
@@ -43,5 +47,5 @@ export const auth = createSlice({
     },
 });
 
-export const { setLogininfo } = auth.actions;
+export const { setLogininfo, resetLoginInfo } = auth.actions;
 export default auth.reducer;

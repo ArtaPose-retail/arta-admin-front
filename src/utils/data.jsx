@@ -65,6 +65,7 @@ export const menuData = [
         title: "داشبورد",
         path: "/dashbord",
         hasSubItem: false,
+        RoleAccess: ['admin'],
         id: "dashbord",
         icon: (
             <svg
@@ -117,6 +118,7 @@ export const menuData = [
         id: "actions",
         title: "عملیات",
         hasSubItem: true,
+        RoleAccess: ['admin', 'actions'],
         icon: (
             <svg
                 width="32"
@@ -169,6 +171,7 @@ export const menuData = [
     {
         id: "accounting",
         title: "حسابداری",
+        RoleAccess: ['admin', 'accounting'],
         hasSubItem: true,
         icon: (
             <svg
@@ -211,6 +214,7 @@ export const menuData = [
     {
         id: "management",
         title: "مدیریت",
+        RoleAccess: ['admin', 'management'],
         hasSubItem: true,
         icon: (
             <svg
@@ -259,6 +263,7 @@ export const menuData = [
     {
         id: "settings",
         title: "تنظیمات",
+        RoleAccess: ['admin', 'settings'],
         hasSubItem: false,
         icon: (
             <svg
