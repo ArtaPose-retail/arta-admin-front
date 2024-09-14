@@ -3,19 +3,19 @@ import React from "react";
 import NewFactor from "../components/HomePage/NewFactor";
 import ProductsSection from "../components/HomePage/ProductsSection";
 import PurchaseInformation from "../components/HomePage/PurchaseInformation";
+import { center } from "../styles/theme";
+import logo from "../Assets/images/logo.png"
+import name from "../Assets/images/logoname.png";
 
 function Home() {
     return (
-        <Box>
-            <NewFactor />
-            <Grid container spacing={2} sx={{ m: 1 }}>
-                <Grid item xs={7.5} sx={{ height: "650px" }}>
-                    <ProductsSection />
-                </Grid>
-                <Grid item xs={4.5} sx={{ height: "650px" }}>
-                    <PurchaseInformation />
-                </Grid>
-            </Grid>
+        <Box sx={{ ...center, height: "100dvh", width: "100dvw" }}>
+
+
+            <Box sx={{ ...center, flexDirection: "column" }}>
+                <img src={logo} width={150} height={110} />
+                <img src={name} width={150} height={40} />
+            </Box>
         </Box>
     );
 }

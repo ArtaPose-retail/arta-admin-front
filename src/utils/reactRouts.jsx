@@ -1,5 +1,6 @@
 const reactRouts = {
     home: "/",
+    sellpage: "/sell",
     auth: {
         signIn: "/sign-in",
     },

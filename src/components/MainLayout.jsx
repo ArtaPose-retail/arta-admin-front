@@ -26,7 +26,7 @@ function MainLayout({ children }) {
     }, [])
 
 
-    const hideElement = [reactRouts.auth.signIn, reactRouts.customer.main];
+    const hideElement = [reactRouts.auth.signIn, reactRouts.home, reactRouts.customer.main];
     const showSecondaryHeader = [
         reactRouts.dashbord.main,
         reactRouts.customers.main,
@@ -44,6 +44,9 @@ function MainLayout({ children }) {
     const router = useLocation();
     if (hideElement.includes(router.pathname)) {
         (showHeader = false), (showSideBar = false);
+        if (router.pathname == reactRouts.home) {
+            (showSideBar = true)
+        }
     }
     if (showSecondaryHeader.includes(router.pathname)) {
         (showHeader = false), (secondaryHeader = true);

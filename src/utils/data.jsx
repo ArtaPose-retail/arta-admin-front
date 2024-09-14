@@ -157,7 +157,7 @@ export const menuData = [
             </svg>
         ),
         subItems: [
-            { title: "فروش", path: reactRouts.home },
+            { title: "فروش", path: reactRouts.sellpage },
             { title: "دریافتی", path: reactRouts.recives.main },
             { title: "پرداختی", path: reactRouts.payment.main },
             { title: "حساب ها", path: reactRouts.accounts.main },

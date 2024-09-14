@@ -31,6 +31,7 @@ import { UserParent } from "./pages/User/Index";
 import Round from "./pages/Round";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 import Discount from "./pages/Actions/Discount/Index";
+import Sellpage from "./pages/Actions/Sellpage.jsx";
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
           <Route path={reactRouts.auth.signIn} element={<SignIn />} />
           <Route path="/unauthorized" element={<div>not access</div>} />
           <Route
+            path={reactRouts.sellpage}
+            element={
+              <ProtectedRoute
+                element={Sellpage}
+                requiredRole={["actions", "admin"]}
+              />
+            }
+          />
+          <Route
             path={reactRouts.banking.main}
             element={
               <ProtectedRoute
@@ -58,6 +68,7 @@ function App() {
               />
             }
           />
+
           <Route
             path={reactRouts.banking.Otp}
             element={

@@ -76,7 +76,7 @@ function Dashbord() {
                     }}
                 />
                 <Button
-                    onClick={() => navigate(reactRouts.home)}
+                    onClick={() => navigate(reactRouts.sellpage)}
                     variant="contained"
                     sx={{
                         color: (theme) => theme.palette.text.primary,

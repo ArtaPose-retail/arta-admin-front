@@ -232,7 +232,7 @@ function Row(props) {
                         </Box>
 
                         <Box sx={{ ...center, flexDirection: "column" }}>
-                            <Link to={reactRouts.home}>
+                            <Link to={reactRouts.sellpage}>
                                 <EditIcon fontSize="small" onClick={showDialoghandler} />
                             </Link>
                             <DeleteOutlineIcon

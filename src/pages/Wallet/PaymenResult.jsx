@@ -104,7 +104,7 @@ function PaymenResult() {
                             کد پیگیری:
                             {toPersian(queryParamsObject?.transaction_id)}
                         </Typography>
-                        <Link to={reactRouts.home}>
+                        <Link to={reactRouts.sellpage}>
 
                             <Typography
                                 sx={{
