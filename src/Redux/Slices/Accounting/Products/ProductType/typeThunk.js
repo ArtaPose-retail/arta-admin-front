@@ -10,7 +10,7 @@ export const TypeDeleteThunk = async (id) => {
 export const TypeAddThunk = async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const { NewType } = state.productType
-    return await AXIOS.delete(apiRouts.product.type.add, {
-        NewType
+    return await AXIOS.post(apiRouts.product.type.add, {
+        title: NewType
     })
 }

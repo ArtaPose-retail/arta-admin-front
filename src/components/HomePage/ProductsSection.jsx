@@ -10,7 +10,6 @@ import { products, refrigeratingProduct } from "../../utils/data.jsx";
 import { useSelector } from "react-redux";
 
 function ProductsSection() {
-    const { showRefrigrateItems } = useSelector((state) => state.product);
 
     const center = {
         display: "flex",
@@ -43,7 +42,7 @@ function ProductsSection() {
                 spacing={2}
                 sx={{ mt: 1, overflowY: "scroll", height: "500px" }}
             >
-                {(showRefrigrateItems ? refrigeratingProduct : products)?.map((item, index) => (
+                {(products)?.map((item, index) => (
                     <Grid key={index} item xs={3} sx={{ mt: 1, p: 0.5 }}>
                         <SingleProduct data={item} />
                     </Grid>

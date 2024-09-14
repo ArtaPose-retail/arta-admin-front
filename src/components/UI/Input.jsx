@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import style from "../../styles/Input.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -27,6 +27,7 @@ function Input({
     value,
     onChange,
     children,
+    options
 }) {
 
 
@@ -142,7 +143,7 @@ function Input({
                         </Typography>
                     )}
                 </Box>
-            ) : (
+            ) : type === "date" ? (
                 <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
                     <DatePicker
                         disabled={disabled}
@@ -191,7 +192,60 @@ function Input({
                             .format(" D MMMM YYYY")}
                     />
                 </LocalizationProvider>
-            )}
+            ) : <TextField
+                // value={formInformation[item.name]}
+                name={name}
+                id={id}
+                fullWidth
+                sx={{
+                    "& .MuiNativeSelect-select": {
+                        color: "black",
+                    },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                    },
+                    borderRadius: "18px",
+                }}
+                select={type}
+                inputProps={{
+                    style: {
+                        background: "#F2F2F2",
+                        color: "#000",
+                        direction: "ltr",
+                        borderRadius: "18px",
+                    },
+                }}
+                SelectProps={{
+                    native: true,
+                    style: {
+                        background: "#F2F2F2",
+                        color: "#000",
+                        direction: "ltr",
+                        borderRadius: "18px",
+                    },
+
+                    // startAdornment: (
+                    //     <>
+                    //         {item.hasIcon && (
+                    //             <InputAdornment position="start">
+                    //                 {item.name == "unit" ? <AddNewUnits />
+                    //                     : <AddNewProductType />}
+                    //             </InputAdornment>
+                    //         )}
+                    //     </>
+                    // ),
+                }}
+            >
+                {
+                    options?.map((option, index) => (
+                        <option key={index} value={option.value}>
+                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                {option.title}
+                            </Typography>
+                        </option>
+                    ))}
+
+            </TextField>}
 
 
         </>

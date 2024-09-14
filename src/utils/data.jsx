@@ -2676,7 +2676,7 @@ export const createUserCheckbox = [
     { title: "مدیر", id: "admin" },
     { title: "عملیات", id: "actions" },
     { title: "مدیر عملیات", id: "admin_actions" },
-    { title: "تنظیمات", id: "setting" },
+    { title: "تنظیمات", id: "settings" },
     { title: "حسابداری", id: "accounting" },
     { title: "مدیریت", id: "management" },
 
@@ -2931,7 +2931,7 @@ export const lableDiscountForm = [
         lable: "تعداد استفاده:",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "select",
+        type: "number",
         hastext: false,
     }
     , {
@@ -2941,7 +2941,7 @@ export const lableDiscountForm = [
         lable: "تعداد :",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "select",
+        type: "number",
         hastext: false,
     }
     , {

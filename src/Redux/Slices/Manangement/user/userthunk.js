@@ -27,7 +27,7 @@ export const addUserThunk = async (_, thunkAPI) => {
     });
 };
 
-export const editUserThunk = async (id) => {
+export const editUserThunk = async (id, thunkAPI) => {
     const state = thunkAPI.getState();
     const { user_type, fname, lname, username, password, rule } =
         state.user.UserInfo;
