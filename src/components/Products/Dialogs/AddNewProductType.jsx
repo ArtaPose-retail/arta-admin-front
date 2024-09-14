@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -13,17 +13,31 @@ import Title from "../../UI/Title";
 import CloseIcon from "@mui/icons-material/Close";
 import { toPersian } from "../../../utils/setting";
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from "react-redux";
+import { addType, deleteType, getallType, setNewType } from "../../../Redux/Slices/Accounting/Products/ProductType/Type";
 export const AddNewProductType = () => {
     const [open, setOpen] = useState(false);
+    const { typeList, update } = useSelector(state => state.productType)
+    const dispatch = useDispatch()
     const handleClickOpen = () => {
-
-        // dispatch(setFullscrenn(false))
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        dispatch(getallType())
+    }, [update])
+
+    const deleteHandler = (id) => {
+        dispatch(deleteType(id))
+    }
+
+    const addnewTypeHandler = () => {
+        dispatch(addType())
+    }
     return (
         <>
             <Box
@@ -97,7 +111,8 @@ export const AddNewProductType = () => {
                                             borderColor: "white",
                                         },
                                     }}
-                                    type="number"
+                                    onChange={(e) => dispatch(setNewType(e.target.value))}
+                                    type="text"
                                     id="input-with-icon-textfield"
                                     placeholder="نام دسته را وارد کنید"
                                     InputProps={{
@@ -113,6 +128,7 @@ export const AddNewProductType = () => {
 
                                 <Button
                                     variant="contained"
+                                    onClick={addnewTypeHandler}
                                     sx={{
                                         bgcolor: (theme) => theme.palette.text.secondary,
                                         color: (theme) => theme.palette.text.primary,
@@ -165,7 +181,7 @@ export const AddNewProductType = () => {
                             </Box>
 
                             <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                                {BankAccountType?.map((item, index) => (
+                                {typeList?.map((item, index) => (
                                     <Box
                                         key={index}
                                         sx={{
@@ -186,7 +202,7 @@ export const AddNewProductType = () => {
                                             >
                                                 ویرایش
                                             </Button>
-                                            <Button variant="outlined" color="warning" sx={{ p: 0 }}>
+                                            <Button onClick={() => deleteHandler(item.id)} variant="outlined" color="warning" sx={{ p: 0 }}>
                                                 حذف{" "}
                                             </Button>
                                         </Box>

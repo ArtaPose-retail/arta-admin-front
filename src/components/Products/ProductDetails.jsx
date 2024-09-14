@@ -19,11 +19,14 @@ import Title from "../UI/Title";
 import { toastHandler } from "../../utils/setting";
 import { AddNewUnits } from './Dialogs/AddNewUnits';
 import { AddNewProductType } from "./Dialogs/AddNewProductType";
+import { useSelector } from "react-redux";
 
 
 
 function ProductDetails({ handlerCloseDialog, next }) {
     const [img, setImg] = useState(null);
+
+    const { typeList } = useSelector(state => state.productType)
     const handlerUploadImg = (e) => {
         setImg(URL.createObjectURL(e.target.files[0]));
     };
@@ -126,14 +129,23 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                 ),
                             }}
                         >
-                            {item.select &&
+                            {/* {item.select &&
                                 item?.options?.map((option, index) => (
                                     <option key={index} value={option.value}>
                                         <Typography sx={{ fontSize: "12px", color: "black" }}>
                                             {option.title}
                                         </Typography>
                                     </option>
-                                ))}
+                                ))} */}
+                            {item.select &&
+
+                                item?.name == "type" ? typeList.map((option, index) => (
+                                    <option key={index} value={option.id}>
+                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                            {option.title}
+                                        </Typography>
+                                    </option>
+                                )) : ""}
                         </TextField>
                     </Grid>
                 ))}

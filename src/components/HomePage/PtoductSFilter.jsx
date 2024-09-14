@@ -2,23 +2,15 @@ import {
     Autocomplete,
     Box,
     Divider,
-    Switch,
     TextField,
     Typography,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { handleShowRefrigerateitems } from "../../Redux/Slices/HomePage/product";
-import Input from "../UI/Input";
+import { useDispatch } from "react-redux";
 import { center } from "../../styles/theme";
 import { products } from "../../utils/data";
 
 function PtoductSFilter() {
-    const { showRefrigrateItems } = useSelector((state) => state.product);
     const dispatch = useDispatch();
-
-    const handleChange = (status) => {
-        dispatch(handleShowRefrigerateitems(status.target.checked));
-    };
 
     return (
         <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
