@@ -291,7 +291,7 @@ export const menuData = [
 export const headerItems = [
     {
         title: "صفحه فروش",
-        path: "/",
+        path: reactRouts.sellpage,
     },
     {
         title: "دریافتی ها",
@@ -2812,13 +2812,13 @@ export const keyboardnumber = [
 export const lableDiscountForm = [
     {
 
-        name: "Type",
+        name: "type",
         select: true,
         placeholder: "نوع کد تخفیف:",
         lable: "نوع کد تخفیف:",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "select",
         hastext: false,
         options: [
             {
@@ -2851,7 +2851,7 @@ export const lableDiscountForm = [
     //     lable: "بازه مبلغ:",
     //     subItems: [
     {
-        name: "min-price",
+        name: "from_amount",
         select: false,
         placeholder: "از مبلغ:",
         lable: "از مبلغ:",
@@ -2861,7 +2861,7 @@ export const lableDiscountForm = [
         hastext: false,
     },
     {
-        name: "max-price",
+        name: "to_amount",
         select: false,
         placeholder: "تا مبلغ:",
         lable: "تا مبلغ:",
@@ -2870,15 +2870,8 @@ export const lableDiscountForm = [
         type: "number",
         hastext: false,
     },
-
-    //     ]
-    // },
-    // {
-    //     name: "limit-time",
-    //     lable: "بازه زمانی:",
-    //     subItems: [
     {
-        name: "start-time",
+        name: "started_time",
         select: false,
         placeholder: "از تاریخ:",
         lable: "از تاریخ:",
@@ -2888,7 +2881,7 @@ export const lableDiscountForm = [
         hastext: false,
     },
     {
-        name: "end-time",
+        name: "end_time",
         select: false,
         placeholder: "تا تاریخ:",
         lable: "تا تاریخ:",
@@ -2897,9 +2890,6 @@ export const lableDiscountForm = [
         type: "date",
         hastext: false,
     },
-
-    //     ]
-    // },
     {
         name: "txtType",
         select: true,
@@ -2925,7 +2915,7 @@ export const lableDiscountForm = [
         ]
     }
     , {
-        name: "use-number",
+        name: "used_count",
         select: false,
         placeholder: "تعداد استفاده:",
         lable: "تعداد استفاده:",
@@ -2935,7 +2925,7 @@ export const lableDiscountForm = [
         hastext: false,
     }
     , {
-        name: "number",
+        name: "orderlimit",
         select: false,
         placeholder: "تعداد :",
         lable: "تعداد :",
@@ -2945,7 +2935,7 @@ export const lableDiscountForm = [
         hastext: false,
     }
     , {
-        name: "manual-text",
+        name: "code",
         select: false,
         placeholder: "متن دستی :",
         lable: "متن دستی :",

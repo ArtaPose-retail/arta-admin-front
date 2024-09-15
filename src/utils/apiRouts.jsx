@@ -17,6 +17,9 @@ const apiRouts = {
             add: 'admin/categories/new'
 
         }
+    },
+    promoCode: {
+        getList: "admin/promocode/"
     }
 };
 

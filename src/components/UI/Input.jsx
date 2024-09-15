@@ -146,6 +146,8 @@ function Input({
             ) : type === "date" ? (
                 <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
                     <DatePicker
+                        onChange={onChange}
+                        onClick={onClickHandler}
                         disabled={disabled}
                         aria-invalid="false"
                         className="datePicker2"
@@ -197,6 +199,8 @@ function Input({
                 name={name}
                 id={id}
                 fullWidth
+                onChange={onChange}
+                onClick={onClickHandler}
                 sx={{
                     "& .MuiNativeSelect-select": {
                         color: "black",

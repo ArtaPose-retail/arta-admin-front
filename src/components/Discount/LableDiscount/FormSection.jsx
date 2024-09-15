@@ -26,6 +26,7 @@ function FormSection() {
                             id={item.name}
                             hasIcon={item.hasIcon}
                             type={item.type}
+                            options={item.options}
                         />
 
                     </Grid>

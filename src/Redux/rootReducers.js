@@ -9,6 +9,7 @@ import keyboard from "./Slices/Keyboard/keyboard"
 import auth from "./Slices/Auth/auth";
 import user from "./Slices/Manangement/user/user";
 import productType from "./Slices/Accounting/Products/ProductType/Type";
+import lable from "./Slices/Actions/PromoCode/Lable/lable";
 
 const appReducer = combineReducers({
     auth,
@@ -19,7 +20,7 @@ const appReducer = combineReducers({
     productinformation,
     wallet,
     keyboard,
-
+    lable,
     productType
 });
 

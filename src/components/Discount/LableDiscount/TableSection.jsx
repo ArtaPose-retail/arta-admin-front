@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -14,10 +14,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { separateBy3, toPersian, toastHandler } from "../../../utils/setting";
+import { persianDate, separateBy3, toPersian, toastHandler } from "../../../utils/setting";
 import moment from "jalali-moment";
 import ProductDetails from "../../HomePage/Dialogs/ProductDetails";
 import { customerFactortable } from "../../../utils/data";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePC, getList } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
+import { center } from "../../../styles/theme";
 
 function createData(title, TransactionNum, time, date) {
     return {
@@ -26,21 +29,18 @@ function createData(title, TransactionNum, time, date) {
     };
 }
 
+
 function Row(props) {
     const { row } = props;
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const dispatch = useDispatch()
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
+    const deleteBtn = (id) => {
+        dispatch(deletePC(id))
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
 
                 <TableCell
@@ -54,33 +54,28 @@ function Row(props) {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                    {row.title}
+                    {row?.type == 1 ? "درصدی" : "مبلغی"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row.TransactionNum)}
+                    {toPersian(row?.code)}
                 </TableCell>
+                <TableCell
+                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
+                    align="center"
+                >
+                    {persianDate(row?.started_time)}
 
 
-                <TableCell
-                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
-                    align="center"
-                >
-                    {toPersian(moment(row.date, "YYYY-MM-DD")
-                        .locale("fa")
-                        .format("YYYY/MM/D"))}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(moment(row.date, "YYYY-MM-DD")
-                        .locale("fa")
-                        .format("YYYY/MM/D"))}
+                    {persianDate(row?.end_time)}
                 </TableCell>
-                {/* <TableCell sx={{ color: theme => theme.typography.color }} align="right">{row.protein}</TableCell> */}
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -95,10 +90,10 @@ function Row(props) {
                                 <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
                                     عملیات:
                                 </Typography>
-                                <EditIcon fontSize="small" />
+                                {/* <EditIcon fontSize="small" /> */}
                                 <DeleteOutlineIcon
                                     fontSize="small"
-                                    onClick={() => deleteBtn()}
+                                    onClick={() => deleteBtn(row?.id)}
                                     sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
                                 />
                             </Box>
@@ -106,7 +101,7 @@ function Row(props) {
                     </Collapse>
                 </TableCell>
             </TableRow>
-        </React.Fragment>
+        </Fragment>
     );
 }
 
@@ -118,6 +113,11 @@ const rows = [
 ];
 
 export default function TableSection() {
+    const { update, promoList } = useSelector((state) => state.lable)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getList())
+    }, [update])
     return (
         <Box
             sx={{
@@ -162,7 +162,7 @@ export default function TableSection() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, index) => (
+                        {promoList.map((row, index) => (
                             <Row key={index} row={row} />
                         ))}
                     </TableBody>

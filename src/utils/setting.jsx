@@ -50,12 +50,12 @@ export const toPersian = (str) => {
     return digitsEnToFa(str);
 };
 
-export const persianDate = (data) => {
-    return digitsEnToFa(
-        moment(data ?? new Date(), "YYYY-MM-DD")
+export const persianDate = (date) => {
+    return date != null ? digitsEnToFa(
+        moment(date, "YYYY-MM-DD")
             .locale("fa")
             .format(" D MMM  YYYY")
-    );
+    ) : "_";
 };
 export const persianTime = (data) => {
     return digitsEnToFa(
