@@ -120,7 +120,7 @@ function Input({
                     <input
 
                         value={value}
-                        onChange={onChange}
+                        onChange={(e) => onChange(name, e.target.value)}
                         onClick={onClickHandler}
                         id={id}
                         name={name}
@@ -146,7 +146,7 @@ function Input({
             ) : type === "date" ? (
                 <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
                     <DatePicker
-                        onChange={onChange}
+                        onChange={(e) => onChange(name, e)}
                         onClick={onClickHandler}
                         disabled={disabled}
                         aria-invalid="false"
@@ -195,11 +195,11 @@ function Input({
                     />
                 </LocalizationProvider>
             ) : <TextField
-                // value={formInformation[item.name]}
+                value={value}
                 name={name}
                 id={id}
                 fullWidth
-                onChange={onChange}
+                onChange={(e) => onChange(name, e.target.value)}
                 onClick={onClickHandler}
                 sx={{
                     "& .MuiNativeSelect-select": {

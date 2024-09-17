@@ -19,7 +19,8 @@ const apiRouts = {
         }
     },
     promoCode: {
-        getList: "admin/promocode/"
+        getList: "admin/promocode/",
+        add: "admin/promocode/new"
     }
 };
 

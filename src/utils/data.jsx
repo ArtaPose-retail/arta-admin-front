@@ -2846,10 +2846,6 @@ export const lableDiscountForm = [
         type: "number",
         hastext: false,
     },
-    // {
-    //     name: "limit-price",
-    //     lable: "بازه مبلغ:",
-    //     subItems: [
     {
         name: "from_amount",
         select: false,
@@ -2915,7 +2911,7 @@ export const lableDiscountForm = [
         ]
     }
     , {
-        name: "used_count",
+        name: "orderlimit",
         select: false,
         placeholder: "تعداد استفاده:",
         lable: "تعداد استفاده:",
@@ -2925,7 +2921,7 @@ export const lableDiscountForm = [
         hastext: false,
     }
     , {
-        name: "orderlimit",
+        name: "how_many",
         select: false,
         placeholder: "تعداد :",
         lable: "تعداد :",

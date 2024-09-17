@@ -8,6 +8,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import ProductDetails from "../../../components/Products/ProductDetails";
 import DigitalLable from "../../../components/Products/DigitalLable";
 import { LableDiscount } from "../../../components/Discount/LableDiscount/Index";
+import { NoItem } from '../../../components/UI/NoItem';
 
 function Discount() {
     const [value, setValue] = useState("1");
@@ -62,7 +63,7 @@ function Discount() {
                     <LableDiscount />
                 </TabPanel>
                 <TabPanel value="2">
-                    محصولی
+                    <NoItem />
                 </TabPanel>
             </TabContext>
 

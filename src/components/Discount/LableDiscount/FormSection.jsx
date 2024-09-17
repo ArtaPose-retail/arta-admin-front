@@ -1,10 +1,35 @@
-import { Box, Button, Grid, InputAdornment, InputLabel, TextField, Typography } from '@mui/material'
-import React from 'react'
-import { lableDiscountForm } from '../../../utils/data'
-import { center } from '../../../styles/theme'
-import Input from '../../UI/Input';
+import {
+    Box,
+    Button,
+    Grid,
+    InputAdornment,
+    InputLabel,
+    TextField,
+    Typography,
+} from "@mui/material";
+import React from "react";
+import { lableDiscountForm } from "../../../utils/data";
+import { center } from "../../../styles/theme";
+import Input from "../../UI/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { addPC, resetForm, setNewLableinfo } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
 
 function FormSection() {
+    const { newPromoInfo } = useSelector(state => state.lable)
+    const dispatch = useDispatch();
+    const onChangeHandler = (name, value) => {
+        dispatch(
+            setNewLableinfo({
+                key: name,
+                value: value,
+            })
+        );
+    };
+
+    const submithandler = () => {
+        dispatch(addPC());
+        dispatch(resetForm());
+    };
     return (
         <Box>
             <Grid container spacing={2} sx={{ p: 1, mt: 1, ...center }}>
@@ -22,28 +47,27 @@ function FormSection() {
                             </Typography>
                         </InputLabel>
                         <Input
+                            value={newPromoInfo[item.name]}
                             name={item.name}
                             id={item.name}
                             hasIcon={item.hasIcon}
                             type={item.type}
                             options={item.options}
+                            onChange={onChangeHandler}
                         />
-
                     </Grid>
                 ))}
-
-
             </Grid>
             <Box sx={{ ...center, justifyContent: "space-around", mt: 2 }}>
-                <Button variant='contained' color='success'>
+                <Button onClick={submithandler} variant="contained" color="success">
                     ثبت
                 </Button>
-                <Button variant='contained' color='warning'>
+                <Button variant="contained" color="warning">
                     انصراف
                 </Button>
             </Box>
         </Box>
-    )
+    );
 }
 
-export default FormSection
+export default FormSection;
