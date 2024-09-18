@@ -1,17 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TypeAddThunk, TypeDeleteThunk, TypeThunk } from "./typeThunk";
+import { getCtgChild, TypeAddThunk, TypeDeleteThunk, TypeThunk } from "./typeThunk";
 import { toastHandler } from "../../../../../utils/setting";
 
 const initialState = {
     typeList: [],
     loading: false,
     update: false,
-    NewType: null
+    NewType: null,
+    childList: []
 };
 
 export const getallType = createAsyncThunk("productType/list", TypeThunk);
 export const deleteType = createAsyncThunk("productType/delete", TypeDeleteThunk);
 export const addType = createAsyncThunk("productType/add", TypeAddThunk);
+export const getChild = createAsyncThunk("productType/child", getCtgChild);
 
 export const productType = createSlice({
     name: "productType",
@@ -54,6 +56,19 @@ export const productType = createSlice({
             toastHandler("با موفقیت اضافه شد", "info")
         });
         builder.addCase(addType.rejected, (state) => {
+            state.loading = false;
+        });
+        //?child
+        builder.addCase(getChild.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getChild.fulfilled, (state, { payload }) => {
+            (state.loading = false),
+                console.log(payload.data)
+            state.childList = payload.data
+
+        });
+        builder.addCase(getChild.rejected, (state) => {
             state.loading = false;
         });
     },

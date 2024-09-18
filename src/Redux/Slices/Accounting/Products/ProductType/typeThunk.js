@@ -14,3 +14,8 @@ export const TypeAddThunk = async (_, thunkAPI) => {
         title: NewType
     })
 }
+
+
+export const getCtgChild = async (id) => {
+    return await AXIOS.get(`${apiRouts.product.type.child}?parent_id=${id}`)
+}

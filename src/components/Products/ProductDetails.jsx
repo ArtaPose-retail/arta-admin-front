@@ -11,25 +11,31 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import profile from "../../Assets/images/Fruits/fruits.svg";
 import { productsFeilds } from "../../utils/data";
 import { center } from "../../styles/theme";
 import Title from "../UI/Title";
 import { toastHandler } from "../../utils/setting";
-import { AddNewUnits } from './Dialogs/AddNewUnits';
+import { AddNewUnits } from "./Dialogs/AddNewUnits";
 import { AddNewProductType } from "./Dialogs/AddNewProductType";
-import { useSelector } from "react-redux";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
+import { getChild } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
 
 function ProductDetails({ handlerCloseDialog, next }) {
     const [img, setImg] = useState(null);
-
-    const { typeList } = useSelector(state => state.productType)
+    const dispatch = useDispatch();
+    const { typeList, childList } = useSelector((state) => state.productType);
+    const { newProduct } = useSelector((state) => state.product);
     const handlerUploadImg = (e) => {
         setImg(URL.createObjectURL(e.target.files[0]));
     };
+
+    useEffect(() => {
+        if (newProduct.category_id != null)
+            dispatch(getChild(newProduct.category_id));
+    }, [newProduct.category_id]);
 
     return (
         <>
@@ -87,6 +93,14 @@ function ProductDetails({ handlerCloseDialog, next }) {
                         </InputLabel>
                         <TextField
                             // value={formInformation[item.name]}
+                            onChange={(e) =>
+                                dispatch(
+                                    setNewProduct({
+                                        key: item.name,
+                                        value: e.target.value,
+                                    })
+                                )
+                            }
                             name={item.name}
                             id={item.name}
                             fullWidth
@@ -121,31 +135,56 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                     <>
                                         {item.hasIcon && (
                                             <InputAdornment position="start">
-                                                {item.name == "unit" ? <AddNewUnits />
-                                                    : <AddNewProductType />}
+                                                {item.name == "unit" ? (
+                                                    <AddNewUnits />
+                                                ) : (
+                                                    <AddNewProductType />
+                                                )}
                                             </InputAdornment>
                                         )}
                                     </>
                                 ),
                             }}
                         >
-                            {/* {item.select &&
-                                item?.options?.map((option, index) => (
-                                    <option key={index} value={option.value}>
+                            {item.select && item?.name == "category_id" ? (
+                                <>
+                                    {" "}
+                                    <option value={""}>
                                         <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                            {option.title}
+                                            انتخاب کنید
                                         </Typography>
                                     </option>
-                                ))} */}
-                            {item.select &&
-
-                                item?.name == "type" ? typeList.map((option, index) => (
-                                    <option key={index} value={option.id}>
+                                    {typeList.map((option, index) => (
+                                        <option key={index} value={option.id}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                {option.title}
+                                            </Typography>
+                                        </option>
+                                    ))}
+                                </>
+                            ) : item?.name == "generic" ? (
+                                <>
+                                    {" "}
+                                    <option value={""}>
                                         <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                            {option.title}
+                                            انتخاب کنید
                                         </Typography>
                                     </option>
-                                )) : ""}
+                                    {childList.map((option, index) => (
+                                        <option key={index} value={option.id}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                {option.title}
+                                            </Typography>
+                                        </option>
+                                    ))}
+                                </>
+                            ) : (
+                                <option value={""}>
+                                    <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                        ایتمی وجود ندارد
+                                    </Typography>
+                                </option>
+                            )}
                         </TextField>
                     </Grid>
                 ))}
@@ -164,10 +203,33 @@ function ProductDetails({ handlerCloseDialog, next }) {
                     </InputLabel>
                     <FormGroup row={true}>
                         <FormControlLabel
-                            control={<Switch />}
+                            control={<Switch name="is_fav"
+                                onClick={(e) =>
+                                    dispatch(
+                                        setNewProduct({
+                                            key: e.target.name,
+                                            value: e.target.checked,
+                                        })
+                                    )
+                                } />}
                             label="نمایش در صفحه محصولات"
                         />
-                        <FormControlLabel control={<Switch />} label="فعال بودن تعداد" />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    name="is_bulk"
+                                    onClick={(e) =>
+                                        dispatch(
+                                            setNewProduct({
+                                                key: e.target.name,
+                                                value: e.target.checked,
+                                            })
+                                        )
+                                    }
+                                />
+                            }
+                            label="فعال بودن تعداد"
+                        />
                     </FormGroup>
                 </Grid>
             </Grid>

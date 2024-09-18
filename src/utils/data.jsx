@@ -1792,7 +1792,7 @@ export const transactionpartyField = [
 ];
 export const productsFeilds = [
     {
-        name: "type",
+        name: "category_id",
         select: true,
         placeholder: "دسته محصولات",
         lable: "دسته محصولات",
@@ -1816,15 +1816,30 @@ export const productsFeilds = [
     },
     {
         name: "generic",
-        select: false,
+        select: true,
         placeholder: "نام ژنریک ",
         lable: "نام ژنریک ",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "select",
+        options: [
+            {
+                title: "انتخاب دسته",
+                value: "",
+            },
+            {
+                title: "سبزیجات",
+                value: "vegetables",
+            },
+            {
+                title: "میوه",
+                value: "fruits",
+            },
+        ],
+
     },
     {
-        name: "productName",
+        name: "title",
         select: false,
         placeholder: "نام محصول",
         lable: "نام محصول",
@@ -1835,7 +1850,7 @@ export const productsFeilds = [
     },
 
     {
-        name: "unit",
+        name: "unit_id",
         select: true,
         placeholder: "واحد",
         lable: "واحد",
@@ -1858,7 +1873,7 @@ export const productsFeilds = [
         ],
     },
     {
-        name: "min",
+        name: "min_stock",
         select: false,
         placeholder: "حداقل موجودی",
         lable: "حداقل موجودی",
@@ -1867,7 +1882,7 @@ export const productsFeilds = [
         type: "text",
     },
     {
-        name: "orderPoint",
+        name: "instock",
         select: false,
         placeholder: "نقطه سفارش",
         lable: "نقطه سفارش",
@@ -1877,7 +1892,7 @@ export const productsFeilds = [
         type: "text",
     },
     {
-        name: "max",
+        name: "max_stock",
         select: false,
         placeholder: "حداکثر موجودی",
         lable: "حداکثر موجودی",
@@ -1896,7 +1911,7 @@ export const productsFeilds = [
     },
 
     {
-        name: "code",
+        name: "barcode",
         select: false,
         placeholder: "بارکد",
         lable: "بارکد",
