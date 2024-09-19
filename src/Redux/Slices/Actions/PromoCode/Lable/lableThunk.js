@@ -7,7 +7,7 @@ export const getPromoList = async () => {
 export const deletePromoList = async (id) => {
     return AXIOS.delete(`${apiRouts.promoCode.getList}${id}`);
 };
-export const addPromoList = async (_, thunkAPI) => {
+export const addPromo = async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const {
         type,

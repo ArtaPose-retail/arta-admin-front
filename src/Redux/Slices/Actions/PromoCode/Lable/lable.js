@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addPromoList, deletePromoList, getPromoList } from "./lableThunk";
+import { addPromo, deletePromoList, getPromoList } from "./lableThunk";
 import { toastHandler } from "../../../../../utils/setting";
 
 const initialState = {
@@ -23,7 +23,7 @@ const initialState = {
 
 export const getList = createAsyncThunk("PC/get list", getPromoList);
 export const deletePC = createAsyncThunk("PC/delete", deletePromoList);
-export const addPC = createAsyncThunk("PC/add", addPromoList);
+export const addPC = createAsyncThunk("PC/add", addPromo);
 
 export const lable = createSlice({
     name: "lable",
