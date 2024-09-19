@@ -15,7 +15,8 @@ const initialState = {
         code: "",
         used_count: "",
         orderlimit: "",
-        how_many: "",
+        how_many: "1",
+        txtType: ""
     },
     promoList: [],
 };

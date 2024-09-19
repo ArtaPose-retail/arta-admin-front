@@ -54,6 +54,7 @@ function FormSection() {
                             type={item.type}
                             options={item.options}
                             onChange={onChangeHandler}
+                            disabled={item.name == "how_many" && newPromoInfo.txtType == "manual" ? true : false}
                         />
                     </Grid>
                 ))}

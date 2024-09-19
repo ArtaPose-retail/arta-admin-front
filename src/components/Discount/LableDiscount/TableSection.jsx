@@ -22,12 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePC, getList } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
 import { center } from "../../../styles/theme";
 
-function createData(title, TransactionNum, time, date) {
-    return {
-        title, TransactionNum, time, date
 
-    };
-}
 
 
 function Row(props) {
@@ -54,7 +49,7 @@ function Row(props) {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                    {row?.type == 1 ? "درصدی" : "مبلغی"}
+                    {row?.type == 0 ? "درصدی" : "مبلغی"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -105,12 +100,6 @@ function Row(props) {
     );
 }
 
-const rows = [
-    createData("درصدی", "34235325", "13:13", new Date()),
-    createData("مبلغی", "34235325", "13:13", new Date()),
-    createData("درصدی", "34235325", "13:13", new Date()),
-
-];
 
 export default function TableSection() {
     const { update, promoList } = useSelector((state) => state.lable)

@@ -8,7 +8,6 @@ import moment from "jalali-moment";
 import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
-
 import { center } from "../../styles/theme";
 
 function Input({
@@ -27,10 +26,8 @@ function Input({
     value,
     onChange,
     children,
-    options
+    options,
 }) {
-
-
     const onChangeInput = (event) => {
         const input = event.target.value;
         console.log(event.target.id);
@@ -39,9 +36,6 @@ function Input({
     const onChangekeyboard = (input) => {
         console.log(input);
     };
-
-
-
 
     const boxRef = useRef(null);
 
@@ -56,8 +50,6 @@ function Input({
             boxRef.current.style.border = "none"; // Reset the border style
         }
     };
-
-
 
     return (
         <>
@@ -86,13 +78,11 @@ function Input({
                         disabled={disabled}
                         style={newstyle}
                         className={style.inputMainStyle}
-
                         type="text"
                         placeholder={placeholder}
                     />
                     {hasIcon &&
                         (icon !== "search" ? (
-
                             children
                         ) : (
                             <SearchIcon
@@ -115,10 +105,10 @@ function Input({
                         p: "5px",
                         height: height,
                         ...center,
+                        border: disabled ? "1px solid red" : "",
                     }}
                 >
                     <input
-
                         value={value}
                         onChange={(e) => onChange(name, e.target.value)}
                         onClick={onClickHandler}
@@ -128,7 +118,7 @@ function Input({
                         style={newstyle}
                         className={style.inputMainStyle}
                         type="number"
-                        placeholder={placeholder}
+                        placeholder={disabled ? "غیر فعال" : placeholder}
                     />
 
                     {hasText && (
@@ -194,64 +184,62 @@ function Input({
                             .format(" D MMMM YYYY")}
                     />
                 </LocalizationProvider>
-            ) : <TextField
-                value={value}
-                name={name}
-                id={id}
-                fullWidth
-                onChange={(e) => onChange(name, e.target.value)}
-                onClick={onClickHandler}
-                sx={{
-                    "& .MuiNativeSelect-select": {
-                        color: "black",
-                    },
-                    "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "white",
-                    },
-                    borderRadius: "18px",
-                }}
-                select={type}
-                inputProps={{
-                    style: {
-                        background: "#F2F2F2",
-                        color: "#000",
-                        direction: "ltr",
+            ) : (
+                <TextField
+                    value={value}
+                    name={name}
+                    id={id}
+                    fullWidth
+                    onChange={(e) => onChange(name, e.target.value)}
+                    onClick={onClickHandler}
+                    sx={{
+                        "& .MuiNativeSelect-select": {
+                            color: "black",
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: "white",
+                        },
                         borderRadius: "18px",
-                    },
-                }}
-                SelectProps={{
-                    native: true,
-                    style: {
-                        background: "#F2F2F2",
-                        color: "#000",
-                        direction: "ltr",
-                        borderRadius: "18px",
-                    },
+                    }}
+                    select={type}
+                    inputProps={{
+                        style: {
+                            background: "#F2F2F2",
+                            color: "#000",
+                            direction: "ltr",
+                            borderRadius: "18px",
+                        },
+                    }}
+                    SelectProps={{
+                        native: true,
+                        style: {
+                            background: "#F2F2F2",
+                            color: "#000",
+                            direction: "ltr",
+                            borderRadius: "18px",
+                        },
 
-                    // startAdornment: (
-                    //     <>
-                    //         {item.hasIcon && (
-                    //             <InputAdornment position="start">
-                    //                 {item.name == "unit" ? <AddNewUnits />
-                    //                     : <AddNewProductType />}
-                    //             </InputAdornment>
-                    //         )}
-                    //     </>
-                    // ),
-                }}
-            >
-                {
-                    options?.map((option, index) => (
+                        // startAdornment: (
+                        //     <>
+                        //         {item.hasIcon && (
+                        //             <InputAdornment position="start">
+                        //                 {item.name == "unit" ? <AddNewUnits />
+                        //                     : <AddNewProductType />}
+                        //             </InputAdornment>
+                        //         )}
+                        //     </>
+                        // ),
+                    }}
+                >
+                    {options?.map((option, index) => (
                         <option key={index} value={option.value}>
                             <Typography sx={{ fontSize: "12px", color: "black" }}>
                                 {option.title}
                             </Typography>
                         </option>
                     ))}
-
-            </TextField>}
-
-
+                </TextField>
+            )}
         </>
     );
 }
