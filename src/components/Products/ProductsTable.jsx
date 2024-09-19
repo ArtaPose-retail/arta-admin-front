@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,6 +13,7 @@ import { Box } from "@mui/material";
 import { toPersian } from "../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProd, getProList } from "../../Redux/Slices/Accounting/Products/product";
+import AddNewProduct from "./AddNewProduct";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,6 +36,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ProductsTable() {
+
+    const [openDg, setOpenDg] = useState(false);
+    const openProductDg = () => {
+        setOpenDg(true);
+    };
+
+    const closeProductDg = () => {
+        setOpenDg(false);
+    };
+
     const dispatch = useDispatch();
     const { productList, update } = useSelector((state) => state.product);
     useEffect(() => {
@@ -46,60 +57,65 @@ export default function ProductsTable() {
         dispatch(deleteProd(id))
     };
     return (
-        <TableContainer sx={{ maxHeight: "85%" }}>
-            <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell align="center">ردیف</StyledTableCell>
-                        <StyledTableCell align="center">کد محصول</StyledTableCell>
-                        <StyledTableCell align="center"> نام ژنریک</StyledTableCell>
-                        <StyledTableCell align="center">نام محصول</StyledTableCell>
-                        <StyledTableCell align="center">دسته</StyledTableCell>
-                        <StyledTableCell align="center">واحد</StyledTableCell>
-                        <StyledTableCell align="center">عملیات </StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {productList.map((item, index) => (
-                        <StyledTableRow key={index}>
-                            <StyledTableCell width={"10%"} align="center">
-                                {toPersian(index + 1)}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item?.prod_public_id}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item?.subcategory_title}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">{item?.title}</StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item?.category_title}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">{item?.unit_id}</StyledTableCell>
 
-                            <StyledTableCell align="center">
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        gap: "10px",
-                                    }}
-                                >
-                                    <EditIcon />
-                                    <DeleteOutlineIcon
-                                        onClick={() => deleteBtn(item?.prod_id)}
+        <>
+            <TableContainer sx={{ maxHeight: "85%" }}>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell align="center">ردیف</StyledTableCell>
+                            <StyledTableCell align="center">کد محصول</StyledTableCell>
+                            <StyledTableCell align="center"> نام ژنریک</StyledTableCell>
+                            <StyledTableCell align="center">نام محصول</StyledTableCell>
+                            <StyledTableCell align="center">دسته</StyledTableCell>
+                            <StyledTableCell align="center">واحد</StyledTableCell>
+                            <StyledTableCell align="center">عملیات </StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {productList.map((item, index) => (
+                            <StyledTableRow key={index}>
+                                <StyledTableCell width={"10%"} align="center">
+                                    {toPersian(index + 1)}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {item?.prod_public_id}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {item?.subcategory_title}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{item?.title}</StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {item?.category_title}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{item?.unit_id}</StyledTableCell>
+
+                                <StyledTableCell align="center">
+                                    <Box
                                         sx={{
-                                            fill: (theme) => theme.palette.warning.main,
-                                            cursor: "pointer",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "10px",
                                         }}
-                                    />
-                                </Box>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                                    >
+                                        <EditIcon sx={{ cursor: "pointer" }} onClick={openProductDg} />
+                                        <DeleteOutlineIcon
+                                            onClick={() => deleteBtn(item?.prod_id)}
+                                            sx={{
+                                                fill: (theme) => theme.palette.warning.main,
+                                                cursor: "pointer",
+                                            }}
+                                        />
+                                    </Box>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <AddNewProduct status={openDg} handlerCloseDialog={closeProductDg} />
+
+        </>
     );
 }
