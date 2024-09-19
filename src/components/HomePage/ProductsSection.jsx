@@ -1,21 +1,22 @@
-
-import {
-    Box,
-    Grid,
-} from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Title from "../UI/Title";
 import PtoductSFilter from "./PtoductSFilter";
 import SingleProduct from "./SingleProduct.jsx";
 import { products, refrigeratingProduct } from "../../utils/data.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { center } from "../../styles/theme.js";
+import { useEffect } from "react";
+import { getProList } from "../../Redux/Slices/Accounting/Products/product.js";
+import { NoItem } from '../UI/NoItem';
 
 function ProductsSection() {
+    const dispatch = useDispatch();
+    const { productList } = useSelector((state) => state.product);
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    useEffect(() => {
+        dispatch(getProList());
+    }, []);
+
     return (
         <Box
             sx={{
@@ -42,11 +43,16 @@ function ProductsSection() {
                 spacing={2}
                 sx={{ mt: 1, overflowY: "scroll", height: "500px" }}
             >
-                {(products)?.map((item, index) => (
-                    <Grid key={index} item xs={3} sx={{ mt: 1, p: 0.5 }}>
-                        <SingleProduct data={item} />
-                    </Grid>
-                ))}
+                {productList?.filter(item => item.is_fav).length > 0 ? (
+                    products.filter(item => item.is_fav).map((item, index) => (
+                        <Grid key={index} item xs={3} sx={{ mt: 1, p: 0.5 }}>
+                            <SingleProduct data={item} />
+                        </Grid>
+                    ))
+                ) : (
+                    <NoItem />
+                )}
+
             </Grid>
         </Box>
     );

@@ -1,8 +1,9 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
-import NewFactor from "../../components/HomePage/NewFactor";
-import ProductsSection from "../../components/HomePage/ProductsSection";
-import PurchaseInformation from "../../components/HomePage/PurchaseInformation";
+import NewFactor from '../../components/HomePage/NewFactor';
+import ProductsSection from '../../components/HomePage/ProductsSection';
+import PurchaseInformation from '../../components/HomePage/PurchaseInformation';
+
 
 
 function Sellpage() {

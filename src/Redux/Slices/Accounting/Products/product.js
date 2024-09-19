@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-
-
+import { AllProductsThunk } from "./productThunk";
+import { toastHandler } from "../../../../utils/setting";
 const initialState = {
-
     loading: false,
     update: false,
     newProduct: {
@@ -32,23 +30,34 @@ const initialState = {
         title: "",
         tsv: "",
         unit_id: null,
-        vender_id: null
-    }
-
+        vender_id: null,
+    },
+    productList: [],
 };
 
-
+export const getProList = createAsyncThunk("product/list", AllProductsThunk);
 
 export const product = createSlice({
     name: "product",
     initialState,
     reducers: {
         setNewProduct: (state, { payload }) => {
-            state.newProduct[payload.key] = payload.value
-        }
+            state.newProduct[payload.key] = payload.value;
+        },
     },
     extraReducers: (builder) => {
-
+        builder.addCase(getProList.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(getProList.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = false;
+            state.productList = payload.data
+        });
+        builder.addCase(getProList.rejected, (state) => {
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
+        });
     },
 });
 

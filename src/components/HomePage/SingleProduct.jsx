@@ -16,7 +16,7 @@ function SingleProduct({ data }) {
         setOpen(false);
         console.log("here", open);
     };
-
+    console.log(data)
     return (
         <>
             <Box
