@@ -20,5 +20,15 @@ export const addPromoList = async (_, thunkAPI) => {
         how_many,
         code,
     } = state.lable.newPromoInfo;
-    return AXIOS.post(apiRouts.promoCode.add);
+    return AXIOS.post(apiRouts.promoCode.add, {
+        type,
+        amount,
+        from_amount,
+        to_amount,
+        started_time,
+        end_time,
+        orderlimit,
+        how_many,
+        code,
+    });
 };

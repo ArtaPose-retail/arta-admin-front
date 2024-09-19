@@ -12,10 +12,14 @@ import { lableDiscountForm } from "../../../utils/data";
 import { center } from "../../../styles/theme";
 import Input from "../../UI/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { addPC, resetForm, setNewLableinfo } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
+import {
+    addPC,
+    resetForm,
+    setNewLableinfo,
+} from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
 
 function FormSection() {
-    const { newPromoInfo } = useSelector(state => state.lable)
+    const { newPromoInfo } = useSelector((state) => state.lable);
     const dispatch = useDispatch();
     const onChangeHandler = (name, value) => {
         dispatch(
@@ -28,6 +32,10 @@ function FormSection() {
 
     const submithandler = () => {
         dispatch(addPC());
+        dispatch(resetForm());
+    };
+    const cancelhandler = () => {
+
         dispatch(resetForm());
     };
     return (
@@ -54,7 +62,12 @@ function FormSection() {
                             type={item.type}
                             options={item.options}
                             onChange={onChangeHandler}
-                            disabled={item.name == "how_many" && newPromoInfo.txtType == "manual" ? true : false}
+                            disabled={
+                                (item.name == "how_many" && newPromoInfo.txtType == "manual") ||
+                                    (item.name == "code" && newPromoInfo.txtType == "system")
+                                    ? true
+                                    : false
+                            }
                         />
                     </Grid>
                 ))}
@@ -63,7 +76,7 @@ function FormSection() {
                 <Button onClick={submithandler} variant="contained" color="success">
                     ثبت
                 </Button>
-                <Button variant="contained" color="warning">
+                <Button onClick={cancelhandler} variant="contained" color="warning">
                     انصراف
                 </Button>
             </Box>

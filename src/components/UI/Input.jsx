@@ -67,6 +67,7 @@ function Input({
                         ...center,
                         justifyContent: "space-between",
                         p: "5px",
+                        border: disabled ? "1px solid red" : "",
                     }}
                 >
                     <input
@@ -79,7 +80,7 @@ function Input({
                         style={newstyle}
                         className={style.inputMainStyle}
                         type="text"
-                        placeholder={placeholder}
+                        placeholder={disabled ? "غیر فعال" : placeholder}
                     />
                     {hasIcon &&
                         (icon !== "search" ? (
