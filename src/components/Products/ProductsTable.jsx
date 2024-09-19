@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -6,13 +6,13 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import moment from "jalali-moment";
+
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/material";
-import { products } from "../../utils/data";
-import { toPersian, toastHandler } from "../../utils/setting";
+import { toPersian } from "../../utils/setting";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProd, getProList } from "../../Redux/Slices/Accounting/Products/product";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,12 +35,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ProductsTable() {
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
+    const dispatch = useDispatch();
+    const { productList, update } = useSelector((state) => state.product);
+    useEffect(() => {
+        dispatch(getProList());
+    }, [update]);
+
+    const deleteBtn = (id) => {
+
+        dispatch(deleteProd(id))
     };
     return (
-
-        <TableContainer sx={{ maxHeight: "85%" }} >
+        <TableContainer sx={{ maxHeight: "85%" }}>
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>
@@ -54,26 +60,22 @@ export default function ProductsTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {products.map((item, index) => (
+                    {productList.map((item, index) => (
                         <StyledTableRow key={index}>
                             <StyledTableCell width={"10%"} align="center">
                                 {toPersian(index + 1)}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {item?.productCode}
+                                {item?.prod_public_id}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {item?.genericName}
+                                {item?.subcategory_title}
                             </StyledTableCell>
+                            <StyledTableCell align="center">{item?.title}</StyledTableCell>
                             <StyledTableCell align="center">
-                                {item?.title}
+                                {item?.category_title}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item?.type}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item?.unit}
-                            </StyledTableCell>
+                            <StyledTableCell align="center">{item?.unit_id}</StyledTableCell>
 
                             <StyledTableCell align="center">
                                 <Box
@@ -86,8 +88,11 @@ export default function ProductsTable() {
                                 >
                                     <EditIcon />
                                     <DeleteOutlineIcon
-                                        onClick={() => deleteBtn()}
-                                        sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
+                                        onClick={() => deleteBtn(item?.prod_id)}
+                                        sx={{
+                                            fill: (theme) => theme.palette.warning.main,
+                                            cursor: "pointer",
+                                        }}
                                     />
                                 </Box>
                             </StyledTableCell>
@@ -96,6 +101,5 @@ export default function ProductsTable() {
                 </TableBody>
             </Table>
         </TableContainer>
-
     );
 }

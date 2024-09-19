@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AllProductsThunk } from "./productThunk";
+import { AllProductsThunk, deleteProdThunk } from "./productThunk";
 import { toastHandler } from "../../../../utils/setting";
 const initialState = {
     loading: false,
@@ -36,6 +36,7 @@ const initialState = {
 };
 
 export const getProList = createAsyncThunk("product/list", AllProductsThunk);
+export const deleteProd = createAsyncThunk("product/delete", deleteProdThunk);
 
 export const product = createSlice({
     name: "product",
@@ -46,6 +47,7 @@ export const product = createSlice({
         },
     },
     extraReducers: (builder) => {
+        //?get product list
         builder.addCase(getProList.pending, (state) => {
             state.loading = true;
         });
@@ -58,6 +60,21 @@ export const product = createSlice({
             state.loading = false;
             toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
         });
+
+        //? delete product
+        builder.addCase(deleteProd.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteProd.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+
+        });
+        builder.addCase(deleteProd.rejected, (state) => {
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
+        });
+
     },
 });
 

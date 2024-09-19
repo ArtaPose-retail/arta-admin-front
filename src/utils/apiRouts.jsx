@@ -18,7 +18,7 @@ const apiRouts = {
             child: "admin/categories/child",
         },
         main: {
-            list: "admin/products/"
+            list: "admin/products/",
         }
     },
     promoCode: {
