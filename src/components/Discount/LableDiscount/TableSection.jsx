@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -21,7 +21,10 @@ import { customerFactortable } from "../../../utils/data";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePC, getList } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
 import { center } from "../../../styles/theme";
+import { Print } from "@mui/icons-material";
 
+import ReactToPrint from 'react-to-print';
+import PromoCodePrint from "../../PrintTemplate/PromoCode";
 
 
 
@@ -29,6 +32,7 @@ function Row(props) {
     const { row } = props;
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
+    const componentRef = useRef();
 
     const deleteBtn = (id) => {
         dispatch(deletePC(id))
@@ -91,11 +95,20 @@ function Row(props) {
                                     onClick={() => deleteBtn(row?.id)}
                                     sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
                                 />
+
+                                <ReactToPrint
+                                    trigger={() => <Print sx={{ fill: (theme) => theme.palette.primary.light, cursor: "pointer" }} />}
+                                    content={() => componentRef.current}
+                                />
                             </Box>
                         </Box>
                     </Collapse>
                 </TableCell>
             </TableRow>
+            <Box sx={{ display: "none" }}>
+
+                <PromoCodePrint ref={componentRef} data={row} />
+            </Box>
         </Fragment>
     );
 }
