@@ -21,11 +21,11 @@ import {
 function FormSection() {
     const { newPromoInfo } = useSelector((state) => state.lable);
     const dispatch = useDispatch();
-    const onChangeHandler = (name, value) => {
+    const onChangeHandler = (name, value, type) => {
         dispatch(
             setNewLableinfo({
                 key: name,
-                value: value,
+                value: name == "type" || type == "number" ? +value : value,
             })
         );
     };

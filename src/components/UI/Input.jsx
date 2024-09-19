@@ -72,7 +72,7 @@ function Input({
                 >
                     <input
                         value={value}
-                        onChange={(e) => onChange(name, e.target.value)}
+                        onChange={(e) => onChange(name, e.target.value, type)}
                         onClick={onClickHandler}
                         id={id}
                         name={name}
@@ -111,7 +111,7 @@ function Input({
                 >
                     <input
                         value={value}
-                        onChange={(e) => onChange(name, e.target.value)}
+                        onChange={(e) => onChange(name, e.target.value, type)}
                         onClick={onClickHandler}
                         id={id}
                         name={name}
@@ -137,7 +137,7 @@ function Input({
             ) : type === "date" ? (
                 <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
                     <DatePicker
-                        onChange={(e) => onChange(name, e)}
+                        onChange={(e) => onChange(name, e, type)}
                         onClick={onClickHandler}
                         disabled={disabled}
                         aria-invalid="false"
@@ -191,7 +191,7 @@ function Input({
                     name={name}
                     id={id}
                     fullWidth
-                    onChange={(e) => onChange(name, e.target.value)}
+                    onChange={(e) => onChange(name, e.target.value, type)}
                     onClick={onClickHandler}
                     sx={{
                         "& .MuiNativeSelect-select": {

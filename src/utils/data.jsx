@@ -2841,11 +2841,11 @@ export const lableDiscountForm = [
                 title: "نوع  تخفیف"
             },
             {
-                value: "0",
+                value: 0,
                 title: "درصدی"
             },
             {
-                value: "1",
+                value: 1,
                 title: "مبلغی"
             },
         ]

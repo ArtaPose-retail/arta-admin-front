@@ -6,7 +6,7 @@ const initialState = {
     loading: false,
     update: false,
     newPromoInfo: {
-        type: "",
+        type: null,
         amount: "",
         from_amount: "",
         to_amount: "",
