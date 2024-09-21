@@ -1,6 +1,6 @@
 const base = "/api";
 const apiRouts = {
-    baseUrl: "https://api.artps.ir/v1",
+    baseUrl: "https://api.artps.ir",
     wallet: {
         transactiomn: base + "/transaction",
     },
