@@ -12,6 +12,7 @@ import productType from "./Slices/Accounting/Products/ProductType/Type";
 import lable from "./Slices/Actions/PromoCode/Lable/lable";
 import product from "./Slices/Accounting/Products/product";
 import transactionsSlice from "./Slices/Accounting/Transactions/transactionsSlice";
+import sellPage from "./Slices/Actions/SellPage/sellPage";
 
 
 const appReducer = combineReducers({
@@ -26,7 +27,8 @@ const appReducer = combineReducers({
     lable,
     productType,
     product,
-    transactionsSlice
+    transactionsSlice,
+    sellPage
 });
 
 export const rootReducers = (state, action) => {

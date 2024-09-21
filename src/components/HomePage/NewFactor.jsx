@@ -1,29 +1,29 @@
-import { Box, Button, Divider, Fade, Popper, Typography } from "@mui/material";
-import { useState } from "react";
+import {
+    Autocomplete,
+    Box,
+    Button,
+    Divider,
+    TextField,
+    Typography,
+} from "@mui/material";
+import { useEffect, useState } from "react";
 import LableCard from "./LableCard";
 import theme, { center } from "../../styles/theme";
 import Description from "./Dialogs/Description";
 import PersonIcon from "@mui/icons-material/Person";
 import TransactionpartyDg from "./Dialogs/TransactionpartyDg";
-import { separateBy3, toPersian } from "../../utils/setting";
+import { toPersian } from "../../utils/setting";
 import Input from "../UI/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactions } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
+import { setTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 
 function NewFactor() {
-
-
+    const dispatch = useDispatch();
+    const { TransActionList } = useSelector((state) => state.transactionsSlice);
+    const { transactionInfo } = useSelector((state) => state.sellPage);
     const [open, setOpen] = useState(false);
     const [openTransaction, setOpenTransaction] = useState(false);
-
-    const [openEl, setOpenEl] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const canBeOpen = openEl && Boolean(anchorEl);
-    const id = canBeOpen ? "transition-popper" : undefined;
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpenEl((previousOpen) => !previousOpen);
-    };
 
     const showDialoghandler = () => {
         setOpen(true);
@@ -38,6 +38,9 @@ function NewFactor() {
     const handlerCloseTransactionDialog = () => {
         setOpenTransaction(false);
     };
+    useEffect(() => {
+        dispatch(getTransactions());
+    }, []);
     return (
         <Box
             sx={{
@@ -51,7 +54,7 @@ function NewFactor() {
             <Box
                 sx={{
                     justifyContent: "flex-start",
-                    m: 1.5,
+                    my: 1.5,
                     ...center,
                     gap: "5px",
                     "& hr": {
@@ -59,132 +62,84 @@ function NewFactor() {
                     },
                 }}
             >
-                <Input
-                    id={id}
-                    onClickHandler={handleClick}
-                    icon={"search"}
-                    hasIcon={true}
-                    type={"text"}
-                    placeholder={"جستوجو مشتری"}
-                />
-                <Popper
-                    placement="bottom-start"
-                    sx={{ width: 450 }}
-                    id={id}
-                    open={openEl}
-                    anchorEl={anchorEl}
-                    transition
-                >
-                    {({ TransitionProps }) => (
-                        <Fade {...TransitionProps} timeout={350}>
-                            <Box
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={TransActionList}
+                    getOptionKey={(e) => dispatch(setTransactionInfo(e))}
+                    getOptionLabel={(option) => `${option?.phone1}`}
+                    sx={{ width: 300, color: "#000000" }}
+                    renderOption={(props, option) => (
+                        <Box
+                            // component="li"
+                            sx={{ ...center, gap: "5px" }}
+                            {...props}
+                        >
+                            <Typography
                                 sx={{
-                                    borderRadius: "12px",
-                                    border: "1px solid lightgray",
-                                    p: 1,
-                                    bgcolor: (theme) => theme.background.box,
+                                    fontSize: "14px",
+                                    fontWeight: 500,
+                                    color: (theme) => theme.palette.text.primary,
                                 }}
-                            >
-                                <Box sx={{ ...center, justifyContent: "space-between", p: 1 }}>
-                                    <Typography
-                                        sx={{
-                                            fontSize: "16px",
-                                            fontWeight: 500,
-                                            color: (theme) => theme.typography.color,
-                                        }}
-                                    >
-                                        محمدرضا رحمتی
-                                    </Typography>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            fontSize: "12px",
-                                            fontWeight: 500,
-                                            color: (theme) => theme.palette.text.primary,
-                                        }}
-                                    >
-                                        C-112233
-                                    </Button>
-                                </Box>
-
-                                <Box sx={{ ...center, gap: "5px", mt: 1 }}>
-                                    <Button
-                                        variant="outlined"
-                                        sx={{
-                                            borderColor: (theme) => theme.palette.darkBlue.main,
-                                            fontSize: "12px",
-                                            fontWeight: 700,
-                                            color: (theme) => theme.palette.darkBlue.main,
-                                        }}
-                                    >
-                                        {toPersian("09138090933")}
-                                    </Button>
-                                    <Button
-                                        variant="outlined"
-                                        sx={{
-                                            borderColor: (theme) => theme.palette.darkBlue.main,
-                                            fontSize: "12px",
-                                            fontWeight: 500,
-                                            color: (theme) => theme.palette.darkBlue.main,
-                                        }}
-                                    >
-                                        مشتری
-                                    </Button>
-                                    <Button
-                                        variant="outlined"
-                                        sx={{
-                                            borderColor: (theme) => theme.palette.darkBlue.main,
-                                            fontSize: "12px",
-                                            fontWeight: 500,
-                                            color: (theme) => theme.palette.darkBlue.main,
-                                        }}
-                                    >
-                                        اعتبار:خوب
-                                    </Button>
-
-                                    <Button
-                                        sx={{
-                                            fontSize: "12px",
-                                            fontWeight: 700,
-                                            color: (theme) => theme.palette.darkBlue.main,
-                                        }}
-                                    >
-                                        {toPersian(separateBy3("5600000"))}ریال
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            bgcolor: (theme) => theme.palette.warning.main,
-                                            fontSize: "12px",
-                                            fontWeight: 500,
-                                            color: (theme) => theme.palette.text.primary,
-                                        }}
-                                    >
-                                        بدهکار
-                                    </Button>
-                                </Box>
-                            </Box>
-                        </Fade>
+                            >{`${option?.fname} ${option?.lname} `}</Typography>
+                            <Typography
+                                sx={{
+                                    fontSize: "14px",
+                                    fontWeight: 500,
+                                    color: (theme) => theme.palette.text.primary,
+                                }}
+                            >{`${toPersian(option?.phone1)} `}</Typography>
+                        </Box>
                     )}
-                </Popper>
+                    renderInput={(params) => (
+                        <TextField
+                            onChange={(e) => {
+                                console.log(e.target)
+                            }}
+                            sx={{
+                                color: "#000",
+                                background: "#F2F2F2",
+                                borderRadius: "12px",
+                            }}
+                            autoComplete="none"
+                            {...params}
+                            placeholder={"جستوجو مشتری"}
+                            inputProps={{
+                                ...params.inputProps,
+                                autoComplete: "none", // disable autocomplete and autofill
+                            }}
+                            InputProps={{
+                                ...params.InputProps,
+                                sx: {
+                                    "& .MuiInputBase-input": {
+                                        color: "#000000",
+                                    },
+                                },
+                            }}
+                        />
+                    )}
+                />
                 <Divider orientation="vertical" flexItem />
                 <Input
                     width={"20%"}
                     hasIcon={false}
                     type={"number"}
                     placeholder={"تلفن همراه"}
+                    value={transactionInfo?.phone1}
                 />
                 <Input
                     width={"15%"}
                     hasIcon={false}
                     type={"text"}
                     placeholder={"نام"}
+                    value={transactionInfo?.fname}
                 />
                 <Input
                     width={"15%"}
                     hasIcon={false}
                     type={"text"}
                     placeholder={" نام خانوادگی"}
+                    value={transactionInfo?.lname}
                 />
                 <Box sx={{ ...center, gap: "10px" }}>
                     <Button
