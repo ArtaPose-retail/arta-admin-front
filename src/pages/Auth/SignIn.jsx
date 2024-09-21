@@ -7,30 +7,34 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import logo from "../../Assets/images/logo.png";
 import name from "../../Assets/images/logoname.png";
-import SigninAD from '../../components/SigninAD';
-import { useDispatch, useSelector } from 'react-redux';
+import SigninAD from "../../components/SigninAD";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginAction, setLogininfo } from "../../Redux/Slices/Auth/auth";
-import { center } from "../../styles/theme"
+import { center } from "../../styles/theme";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#3A5DF0",
     ...theme.typography.body2,
     padding: theme.spacing(1),
-    width: "90%"
+    width: "90%",
 }));
 
 function SignIn() {
-
-    const dispatch = useDispatch()
-
-    const { loginInfo } = useSelector((state) => state.auth)
+    const dispatch = useDispatch();
+    const [showPass, setShowPass] = useState(false);
+    const { loginInfo } = useSelector((state) => state.auth);
     const loginhandler = () => {
+        dispatch(LoginAction());
+    };
 
-        dispatch(LoginAction())
-    }
+    const passWordHandler = () => {
+        setShowPass(!showPass);
+    };
 
     return (
         <Box sx={{ flexGrow: 1, p: 1 }}>
@@ -48,7 +52,7 @@ function SignIn() {
                             height: "100%",
                             justifyContent: "space-evenly",
                             // border: "1px solid red",
-                            width: "100%"
+                            width: "100%",
                         }}
                     >
                         <Box sx={{ ...center, flexDirection: "column" }}>
@@ -74,10 +78,14 @@ function SignIn() {
                             </Typography>
                             <TextField
                                 fullWidth
-                                onChange={(e) => dispatch(setLogininfo({
-                                    key: "emailorphone",
-                                    value: e.target.value
-                                }))}
+                                onChange={(e) =>
+                                    dispatch(
+                                        setLogininfo({
+                                            key: "emailorphone",
+                                            value: e.target.value,
+                                        })
+                                    )
+                                }
                                 id="outlined-basic"
                                 variant="outlined"
                                 placeholder="نام‌کاربری / شماره همراه خود را وارد کنید"
@@ -91,13 +99,16 @@ function SignIn() {
                             />
                             <TextField
                                 fullWidth
-                                id="outlined-basic"
-                                // label="Outlined"
+                                type={showPass ? "text" : "password"}
                                 variant="outlined"
-                                onChange={(e) => dispatch(setLogininfo({
-                                    key: "password",
-                                    value: e.target.value
-                                }))}
+                                onChange={(e) =>
+                                    dispatch(
+                                        setLogininfo({
+                                            key: "password",
+                                            value: e.target.value,
+                                        })
+                                    )
+                                }
                                 placeholder="رمز عبور خود را وارد کنید"
                                 InputProps={{
                                     shirink: true,
@@ -105,6 +116,17 @@ function SignIn() {
                                         backgroundColor: "transparent",
                                         color: "#000000",
                                     },
+                                    endAdornment: showPass ? (
+                                        <RemoveRedEyeIcon
+                                            sx={{ cursor: "pointer", mx: 1 }}
+                                            onClick={passWordHandler}
+                                        />
+                                    ) : (
+                                        <VisibilityOffIcon
+                                            sx={{ cursor: "pointer", mx: 1 }}
+                                            onClick={passWordHandler}
+                                        />
+                                    ),
                                 }}
                             />
 
@@ -123,12 +145,11 @@ function SignIn() {
 
                                     ":hover": {
                                         backgroundColor: (theme) => theme.palette.primary.light,
-                                    }
+                                    },
                                 }}
                             >
                                 ورود به نرم‌افزار آرتـاپـوز
                             </Button>
-
                         </Box>
                     </Box>
                 </Grid>
