@@ -20,6 +20,7 @@ export const TransactionAddThunk = async (_, thunkAPI) => {
         phone3,
         home_address,
         referer,
+        shmeli
     } = state.transactionsSlice.newTransaction;
     return await AXIOS.post(apiRouts.user.add, {
         fname,
@@ -30,5 +31,7 @@ export const TransactionAddThunk = async (_, thunkAPI) => {
         phone3,
         home_address,
         referer,
+        shmeli,
+        username: `${fname}@${phone1}`
     });
 };

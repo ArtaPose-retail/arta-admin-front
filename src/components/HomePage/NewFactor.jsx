@@ -66,7 +66,8 @@ function NewFactor() {
                     disablePortal
                     id="combo-box-demo"
                     options={TransActionList}
-                    getOptionKey={(e) => dispatch(setTransactionInfo(e))}
+
+                    onChange={(_, e) => dispatch(setTransactionInfo(e))}
                     getOptionLabel={(option) => `${option?.phone1}`}
                     sx={{ width: 300, color: "#000000" }}
                     renderOption={(props, option) => (
