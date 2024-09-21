@@ -56,7 +56,7 @@ export default function Transactions() {
                     borderRadius: "18px",
                     p: 1,
                     mt: 1,
-                    height: "75vh"
+                    height: "80vh"
                 }}
             >
                 <Box sx={{ ...center, gap: "10px", justifyContent: "flex-start" }}>

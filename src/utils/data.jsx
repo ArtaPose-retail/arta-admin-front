@@ -1659,7 +1659,7 @@ export const ProductItemInfoForm = [
 
 export const transactionpartyField = [
     {
-        name: "fName",
+        name: "fname",
         select: false,
         placeholder: "نام مشتری/طرف معامله را وارد کنید",
         lable: "نام مشتری/طرف معامله",
@@ -1668,7 +1668,7 @@ export const transactionpartyField = [
         type: "text",
     },
     {
-        name: "LName",
+        name: "lname",
         select: false,
         placeholder: "نام خانوادگی مشتری/طرف معامله را وارد کنید",
         lable: "نام خانوادگی مشتری/طرف معامله",
@@ -1677,7 +1677,7 @@ export const transactionpartyField = [
         type: "text",
     },
     {
-        name: "transactionType",
+        name: "user_type",
         select: true,
         placeholder: "نوع یا عنوان طرف معامله",
         lable: "نوع یا عنوان طرف معامله",
@@ -1691,24 +1691,24 @@ export const transactionpartyField = [
             },
             {
                 title: "مشتری",
-                value: "customer",
+                value: "Customer",
             },
             {
                 title: "تامین کننده",
-                value: "provider",
+                value: "Provider",
             },
             {
                 title: "راننده",
-                value: "driver",
+                value: "Driver",
             },
             {
                 title: "کارگر",
-                value: "servent",
+                value: "Worker",
             },
         ],
     },
     {
-        name: "Ncode",
+        name: "shmeli",
         select: false,
         placeholder: "کد ملی",
         lable: "کد ملی",
@@ -1717,7 +1717,7 @@ export const transactionpartyField = [
         type: "number",
     },
     {
-        name: "Mobile1",
+        name: "phone1",
         select: false,
         placeholder: "شماره تماس ۱",
         lable: "شماره تماس ۱",
@@ -1726,7 +1726,7 @@ export const transactionpartyField = [
         type: "number",
     },
     {
-        name: "Mobile2",
+        name: "phone2",
         select: false,
         placeholder: "شماره تماس ۲",
         lable: "شماره تماس ۲",
@@ -1735,7 +1735,7 @@ export const transactionpartyField = [
         type: "number",
     },
     {
-        name: "Mobile3",
+        name: "phone3",
         select: false,
         placeholder: "شماره تماس۳",
         lable: "شماره تماس ۳",
@@ -1745,7 +1745,7 @@ export const transactionpartyField = [
     },
 
     {
-        name: "Address",
+        name: "home_address",
         select: false,
         placeholder: "آدرس",
         lable: "آدرس",
@@ -1754,7 +1754,7 @@ export const transactionpartyField = [
         type: "text",
     },
     {
-        name: "introducer",
+        name: "referer",
         select: false,
         placeholder: "معرف",
         lable: "معرف",

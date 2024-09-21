@@ -16,9 +16,11 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import { center } from "../../styles/theme";
+import { useDispatch } from "react-redux";
+import { deleteTransactions } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 export default function CustomerDetails({ data, avatarPic }) {
     const [open, setOpen] = useState(false);
-
+    const dispatch = useDispatch()
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -28,8 +30,9 @@ export default function CustomerDetails({ data, avatarPic }) {
     };
 
 
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
+    const deleteBtn = (id) => {
+        dispatch(deleteTransactions(id))
+        setOpen(false)
     };
 
     return (
@@ -42,7 +45,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                     backdropFilter: "blur(10px)",
                 }}
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
@@ -406,7 +409,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                             حذف کاربر
                             <DeleteOutlineIcon
                                 sx={{ fill: (theme) => theme.palette.text.primary, cursor: "pointer" }}
-                                onClick={() => deleteBtn()}
+                                onClick={() => deleteBtn(data?.user_id)}
                             />
                         </Button>
                         <Button

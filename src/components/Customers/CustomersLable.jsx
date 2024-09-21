@@ -63,7 +63,7 @@ function CustomersLable({ data }) {
                                 color: (theme) => theme.palette.disable.main,
                             }}
                         >
-                            {toPersian(data?.phone)}
+                            {toPersian(data?.phone || data?.phone1)}
                         </Typography>
                     </Box>
                     <Box sx={{ ...center }}>

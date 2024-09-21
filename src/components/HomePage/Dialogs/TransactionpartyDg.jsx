@@ -1,51 +1,33 @@
 import {
     Avatar,
-    Backdrop,
     Box,
     Button,
     Dialog,
     DialogContent,
-    Divider,
     Grid,
     InputAdornment,
     InputLabel,
-    List,
-    ListItem,
-    ListItemText,
-    Modal,
-    Switch,
     TextField,
     Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import Title from "../../UI/Title";
-import { separateBy3, toPersian, toastHandler } from "../../../utils/setting";
-import moment from "jalali-moment";
-import { ProductItemInfoForm, transactionpartyField } from "../../../utils/data";
-import UndoIcon from "@mui/icons-material/Undo";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import CloseIcon from "@mui/icons-material/Close";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import IosShareIcon from "@mui/icons-material/IosShare";
-import PrintIcon from "@mui/icons-material/Print";
-import styled from "@emotion/styled";
+import { toastHandler } from "../../../utils/setting";
+import { transactionpartyField } from "../../../utils/data";
 import profile from "../../../Assets/images/profileImage.png";
 import AddTransactionType from "./AddTransactionType";
+import { center } from "../../../styles/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { addTransactions, resetNewTransaction, setNewTransaction } from "../../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 
 function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
-    const [img, setImg] = useState(null)
-    const handlerUploadImg = (e) => {
-        setImg(URL.createObjectURL(e.target.files[0]))
-    }
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    const { newTransaction } = useSelector(state => state.transactionsSlice)
+    const dispatch = useDispatch()
 
+    const submitHandler = () => {
+        dispatch(addTransactions())
+        dispatch(resetNewTransaction())
+        handlerCloseDialog()
+    }
     return (
         <div>
             <Dialog
@@ -73,7 +55,7 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                     <Box sx={{ ...center, flexDirection: "column", gap: "5px" }}>
                         <Avatar
                             alt="ARTA-POSE"
-                            src={img ?? profile}
+                            src={profile}
 
                             sx={{
                                 bgcolor: "#41669A",
@@ -88,7 +70,7 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                                 },
                             }}
                         />
-
+                        {/* 
                         <Button
                             sx={{ bgcolor: theme => theme.palette.darkBlue.main, color: theme => theme.palette.text.primary }}
                             variant="contained"
@@ -101,7 +83,7 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                                 hidden
                                 onChange={(e) => handlerUploadImg(e)}
                             />
-                        </Button>
+                        </Button> */}
                     </Box>
                     <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
                         {transactionpartyField?.map((item, index) => (
@@ -114,11 +96,16 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                                     </Typography>
                                 </InputLabel>
                                 <TextField
-                                    // value={formInformation[item.name]}
+                                    value={newTransaction[item.name]}
                                     name={item.name}
                                     id={item.name}
                                     fullWidth
-
+                                    onChange={(e) => {
+                                        dispatch(setNewTransaction({
+                                            key: item.name,
+                                            value: e.target.value
+                                        }))
+                                    }}
                                     sx={{
                                         "& .MuiNativeSelect-select": {
                                             color: "black",
@@ -176,10 +163,7 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                     >
                         <Box sx={{ ...center, gap: "5px" }}>
                             <Button
-                                onClick={() => {
-                                    toastHandler("توضیحات با موفقیت ثبت شد", "info")
-                                    handlerCloseDialog()
-                                }}
+                                onClick={submitHandler}
                                 variant="contained"
                                 sx={{
                                     bgcolor: (theme) => theme.palette.green.main,
