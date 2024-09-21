@@ -1848,6 +1848,15 @@ export const productsFeilds = [
         color: "#6D6D6D",
         type: "text",
     },
+    {
+        name: "productpic_id",
+        select: true,
+        placeholder: "تصویر محصول",
+        lable: "تصویر محصول",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "select",
+    },
 
     {
         name: "unit_id",

@@ -22,20 +22,23 @@ import { AddNewProductType } from "./Dialogs/AddNewProductType";
 import { useDispatch, useSelector } from "react-redux";
 import { setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
 import { getChild } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
+import { getPicList } from "../../Redux/Slices/Setting/Gallery/gallery";
+import apiRouts from "../../utils/apiRouts";
 
 function ProductDetails({ handlerCloseDialog, next }) {
-    const [img, setImg] = useState(null);
     const dispatch = useDispatch();
     const { typeList, childList } = useSelector((state) => state.productType);
     const { newProduct } = useSelector((state) => state.product);
-    const handlerUploadImg = (e) => {
-        setImg(URL.createObjectURL(e.target.files[0]));
-    };
+    const { picList } = useSelector((state) => state.gallery);
 
     useEffect(() => {
         if (newProduct.category_id != null)
             dispatch(getChild(newProduct.category_id));
     }, [newProduct.category_id]);
+    useEffect(() => {
+
+        dispatch(getPicList());
+    }, []);
 
     return (
         <>
@@ -47,36 +50,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                 }}
             />
 
-            <Box sx={{ ...center, flexDirection: "column", gap: "5px" }}>
-                <Avatar
-                    alt="ARTA-POSE"
-                    src={img ?? profile}
-                    sx={{
-                        bgcolor: "#41669A",
-                        width: 60,
-                        height: 60,
 
-                        ...center,
-                        cursor: "pointer",
-                        "& .MuiAvatar-img": {
-                            width: "60%",
-                            height: "80%",
-                        },
-                    }}
-                />
-
-                <Button
-                    sx={{
-                        bgcolor: (theme) => theme.palette.darkBlue.main,
-                        color: (theme) => theme.palette.text.primary,
-                    }}
-                    variant="contained"
-                    component="label"
-                >
-                    اپلود عکس محصول
-                    <input type="file" hidden onChange={(e) => handlerUploadImg(e)} />
-                </Button>
-            </Box>
             <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
                 {productsFeilds?.map((item, index) => (
                     <Grid item xs={3} key={index}>
@@ -178,13 +152,42 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                         </option>
                                     ))}
                                 </>
-                            ) : (
-                                <option value={""}>
-                                    <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                        ایتمی وجود ندارد
-                                    </Typography>
-                                </option>
-                            )}
+                            ) : item?.name == "productpic_id" ? (
+                                <>
+                                    {" "}
+                                    <option value={""}>
+                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                            انتخاب کنید
+                                        </Typography>
+                                    </option>
+                                    {picList?.map((option, index) => (
+                                        <option key={index} value={option.id}>
+                                            <Box
+                                                // component="li"
+                                                sx={{ ...center, gap: "5px" }}
+
+                                            >
+                                                <img
+                                                    src={`${apiRouts.baseUrl}${option?.url}`}
+                                                    alt="goods"
+                                                    style={{ width: 20, height: 20 }}
+                                                />
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: "14px",
+                                                        fontWeight: 500,
+                                                        color: (theme) => theme.palette.text.primary,
+                                                    }}
+                                                >{option?.id}</Typography>
+                                            </Box>
+                                        </option>
+                                    ))}
+                                </>
+                            ) : <option value={""}>
+                                <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                    ایتمی وجود ندارد
+                                </Typography>
+                            </option>}
                         </TextField>
                     </Grid>
                 ))}

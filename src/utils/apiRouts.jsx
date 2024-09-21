@@ -1,5 +1,6 @@
 const base = "/api";
 const apiRouts = {
+    baseUrl: "https://api.artps.ir/v1",
     wallet: {
         transactiomn: base + "/transaction",
     },
@@ -25,6 +26,12 @@ const apiRouts = {
         getList: "admin/promocode/",
         add: "admin/promocode/new",
     },
+
+    setting: {
+        gallery: {
+            list: "admin/gallery/"
+        }
+    }
 };
 
 export default apiRouts;
