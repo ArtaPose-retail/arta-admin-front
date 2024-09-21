@@ -398,6 +398,7 @@ export default function CustomerDetails({ data, avatarPic }) {
 
                     <Box sx={{ ...center, justifyContent: "flex-start", gap: "15px", mt: 3 }}>
                         <Button
+                            onClick={() => deleteBtn(data?.user_id)}
                             variant="contained"
                             sx={{
                                 bgcolor: (theme) => theme.palette.warning.main,
@@ -409,7 +410,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                             حذف کاربر
                             <DeleteOutlineIcon
                                 sx={{ fill: (theme) => theme.palette.text.primary, cursor: "pointer" }}
-                                onClick={() => deleteBtn(data?.user_id)}
+
                             />
                         </Button>
                         <Button
