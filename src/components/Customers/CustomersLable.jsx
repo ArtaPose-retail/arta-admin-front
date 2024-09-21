@@ -1,15 +1,10 @@
 import { Avatar, Box, Checkbox, Typography } from "@mui/material";
-import React from "react";
 import profile from "../../Assets/images/profileImage.png";
 import { toPersian } from "../../utils/setting";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CustomerDetails from "./CustomerDetails";
+import { center } from "../../styles/theme";
 function CustomersLable({ data }) {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <>
             <Box
@@ -25,8 +20,7 @@ function CustomersLable({ data }) {
             >
                 <Avatar
                     alt="ARTA-POSE"
-                    src={data?.image}
-                    onClick={() => profilehandler()}
+                    src={profile}
                     sx={{
                         bgcolor: "#41669A",
                         width: 40,
@@ -60,7 +54,7 @@ function CustomersLable({ data }) {
                                 color: (theme) => theme.typography.color,
                             }}
                         >
-                            {data?.name}
+                            {`${data?.fname} ${data?.lname}`}
                         </Typography>
                         <Typography
                             sx={{
@@ -69,11 +63,11 @@ function CustomersLable({ data }) {
                                 color: (theme) => theme.palette.disable.main,
                             }}
                         >
-                            {toPersian(data?.mobile)}
+                            {toPersian(data?.phone)}
                         </Typography>
                     </Box>
                     <Box sx={{ ...center }}>
-                        <CustomerDetails data={data} />
+                        <CustomerDetails data={data} avatarPic={profile} />
                         <Checkbox color="primary" />
                     </Box>
                 </Box>

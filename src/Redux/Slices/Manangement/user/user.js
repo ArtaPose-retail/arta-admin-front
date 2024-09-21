@@ -80,6 +80,7 @@ export const user = createSlice({
         });
         builder.addCase(addUser.fulfilled, (state, { payload }) => {
             state.loading = false;
+            state.update = true;
         });
         builder.addCase(addUser.rejected, (state) => {
             (state.loading = false),
@@ -92,6 +93,7 @@ export const user = createSlice({
         });
         builder.addCase(editUser.fulfilled, (state, { payload }) => {
             state.loading = false;
+            state.update = true;
         });
         builder.addCase(editUser.rejected, (state, { payload }) => {
             state.loading = false,

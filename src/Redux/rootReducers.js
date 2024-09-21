@@ -11,6 +11,8 @@ import user from "./Slices/Manangement/user/user";
 import productType from "./Slices/Accounting/Products/ProductType/Type";
 import lable from "./Slices/Actions/PromoCode/Lable/lable";
 import product from "./Slices/Accounting/Products/product";
+import transactionsSlice from "./Slices/Accounting/Transactions/transactionsSlice";
+
 
 const appReducer = combineReducers({
     auth,
@@ -23,7 +25,8 @@ const appReducer = combineReducers({
     keyboard,
     lable,
     productType,
-    product
+    product,
+    transactionsSlice
 });
 
 export const rootReducers = (state, action) => {

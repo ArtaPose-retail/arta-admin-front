@@ -70,8 +70,10 @@ export default function CreateUserModal({ type, data }) {
     const submitHandler = () => {
         if (type == "add") {
             dispatch(addUser());
+            setOpen(false)
         } else {
             dispatch(editUser(data?.user_id))
+            setOpen(false)
         }
     };
     return (

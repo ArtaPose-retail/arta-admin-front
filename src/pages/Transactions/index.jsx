@@ -2,19 +2,24 @@
 
 
 import { Box, Button, Divider, Grid, InputAdornment, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../../components/UI/Title";
 import SearchIcon from '@mui/icons-material/Search';
 import { customersData, months } from "../../utils/data";
 import CustomersLable from "../../components/Customers/CustomersLable";
 import TransactionpartyDg from "../../components/HomePage/Dialogs/TransactionpartyDg";
 import AddIcon from '@mui/icons-material/Add';
-
+import { center } from "../../styles/theme"
+import { useDispatch, useSelector } from "react-redux";
+import { getTransactions } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 
 export default function Transactions() {
+
+    const dispatch = useDispatch()
     const [month, setMonth] = useState("");
     const [selectedMonth, setSelectedMonth] = useState("");
     const [openTransaction, setOpenTransaction] = useState(false);
+    const { update, TransActionList } = useSelector(state => state.transactionsSlice)
     const showTransactionDialoghandler = () => {
         setOpenTransaction(true);
     };
@@ -29,11 +34,10 @@ export default function Transactions() {
         console.log(months.find((item) => item.value === month));
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
+    useEffect(() => {
+        dispatch(getTransactions())
+    }, [update])
     return (
         <Box sx={{ p: 1 }}>
             <Title
@@ -244,9 +248,9 @@ export default function Transactions() {
                     </Box>
                 </Box>
                 <Grid container spacing={2} sx={{ mt: 1, height: "90%", overflowY: "scroll" }}>
-                    {customersData.map((item, index) =>
+                    {TransActionList.map((item, index) =>
                         < Grid item xs={3} key={index}>
-                            <CustomersLable data={item} key={index} />
+                            <CustomersLable data={item} />
 
                         </Grid>
 

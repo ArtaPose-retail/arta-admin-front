@@ -6,7 +6,7 @@ import { Avatar, Box, Button, Divider, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Title from "../UI/Title";
 
-import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
+import { persianDate, separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import moment from "jalali-moment";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -15,7 +15,8 @@ import Customerfactors from "./Customerfactors";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
-export default function CustomerDetails({ data }) {
+import { center } from "../../styles/theme";
+export default function CustomerDetails({ data, avatarPic }) {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -25,11 +26,7 @@ export default function CustomerDetails({ data }) {
     const handleClose = () => {
         setOpen(false);
     };
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     const deleteBtn = () => {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
@@ -83,9 +80,7 @@ export default function CustomerDetails({ data }) {
                                 >
                                     تاریخ تشکیل:
                                     {
-                                        moment(new Date(), "YYYY-MM-DD")
-                                            .locale("fa")
-                                            .format("YYYY/MM/D")
+                                        persianDate(data?.created_at)
 
                                     }
                                 </Typography>
@@ -114,7 +109,7 @@ export default function CustomerDetails({ data }) {
                                     }}
                                 >
                                     میزان اعتبار:
-                                    {toPersian(separateBy3("5500"))}
+                                    {toPersian(0)}
                                     تومان
                                 </Typography>
                             </Box>
@@ -127,7 +122,7 @@ export default function CustomerDetails({ data }) {
                     >
                         <Avatar
                             alt="ARTA-POSE"
-                            src={data?.image}
+                            src={avatarPic}
                             onClick={() => profilehandler()}
                             sx={{
                                 bgcolor: "#41669A",
@@ -149,7 +144,7 @@ export default function CustomerDetails({ data }) {
                                 fontWeight: 500,
                             }}
                         >
-                            {data?.name}
+                            {`${data?.fname} ${data?.lname}`}
                         </Typography>
                     </Box>
                     <Divider sx={{ mt: 2 }} />
@@ -180,7 +175,7 @@ export default function CustomerDetails({ data }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.mobile)}
+                                    {toPersian(data?.phone)}
                                 </Typography>
                                 <Box>
                                     <LocalPhoneIcon />
@@ -297,7 +292,7 @@ export default function CustomerDetails({ data }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.Ncode)}
+                                    {toPersian(data?.shmeli)}
                                 </Typography>
                             </Box>
                             <Box
@@ -326,7 +321,7 @@ export default function CustomerDetails({ data }) {
                                         wordBreak: "break-all",
                                     }}
                                 >
-                                    {toPersian(data?.address)}
+                                    {toPersian(data?.home_adress)}
                                 </Typography>
                             </Box>
                             <Box
@@ -354,7 +349,7 @@ export default function CustomerDetails({ data }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.transactionTitle)}
+                                    {toPersian(data?.title)}
                                 </Typography>
                             </Box>
                             <Box
@@ -382,7 +377,7 @@ export default function CustomerDetails({ data }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.introducer)}
+                                    {toPersian(data?.referer)}
                                 </Typography>
                             </Box>
                         </Box>
@@ -396,7 +391,7 @@ export default function CustomerDetails({ data }) {
                             mt: 2,
                         }}
                     />
-                    <Customerfactors rows={data.Last_factor} />
+                    {/* <Customerfactors rows={data?.Last_factor} /> */}
 
                     <Box sx={{ ...center, justifyContent: "flex-start", gap: "15px", mt: 3 }}>
                         <Button
