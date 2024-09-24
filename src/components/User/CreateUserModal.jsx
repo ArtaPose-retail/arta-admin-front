@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -37,6 +37,18 @@ const style = {
 
 export default function CreateUserModal({ type, data }) {
     const [open, setOpen] = React.useState(false);
+
+    // useEffect(() => {
+    //     if (type == "edit") {
+    //         console.log(data)
+    //         for (const key in data?.rules) {
+    //             setUserRule({
+    //                 key: key,
+    //                 value: data?.rules[key],
+    //             })
+    //         }
+    //     }
+    // }, [])
     const handleOpen = () => {
         setOpen(true)
         dispatch(resSetUserInfo())
@@ -48,9 +60,6 @@ export default function CreateUserModal({ type, data }) {
     const dispatch = useDispatch();
 
     const checkHandler = (e) => {
-        console.log(e.target.id);
-        console.log(e.target.checked);
-
         dispatch(
             setUserRule({
                 key: e.target.id,

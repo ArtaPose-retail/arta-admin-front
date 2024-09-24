@@ -14,7 +14,7 @@ export const deleteUserThunk = async (id) => {
 //?add  users
 export const addUserThunk = async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const { user_type, fname, lname, username, password, rule } =
+    const { user_type, fname, lname, username, password, rule, phone } =
         state.user.UserInfo;
 
     return await AXIOS.post(apiRouts.user.add, {
@@ -24,6 +24,7 @@ export const addUserThunk = async (_, thunkAPI) => {
         username,
         password,
         rule,
+        phone
     });
 };
 
