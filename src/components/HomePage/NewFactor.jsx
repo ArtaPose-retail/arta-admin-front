@@ -39,7 +39,7 @@ function NewFactor() {
         setOpenTransaction(false);
     };
     useEffect(() => {
-        dispatch(getTransactions());
+        dispatch(getTransactions("Customer"));
     }, []);
     return (
         <Box
