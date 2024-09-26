@@ -14,6 +14,7 @@ import product from "./Slices/Accounting/Products/product";
 import transactionsSlice from "./Slices/Accounting/Transactions/transactionsSlice";
 import sellPage from "./Slices/Actions/SellPage/sellPage";
 import gallery from "./Slices/Setting/Gallery/gallery";
+import productUnit from "./Slices/Accounting/Products/ProductUnit/unit";
 
 
 const appReducer = combineReducers({
@@ -30,7 +31,8 @@ const appReducer = combineReducers({
     product,
     transactionsSlice,
     sellPage,
-    gallery
+    gallery,
+    productUnit
 });
 
 export const rootReducers = (state, action) => {

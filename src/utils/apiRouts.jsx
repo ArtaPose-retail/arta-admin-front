@@ -18,6 +18,9 @@ const apiRouts = {
             add: "admin/categories/new",
             child: "admin/categories/child",
         },
+        unit: {
+            getList: "admin/units/",
+        },
         main: {
             list: "admin/products/",
         }

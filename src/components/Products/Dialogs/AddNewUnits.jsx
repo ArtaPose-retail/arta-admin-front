@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -7,23 +7,28 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { BankAccountType } from "../../../utils/data";
 import { center } from "../../../styles/theme";
 import Title from "../../UI/Title";
 import CloseIcon from "@mui/icons-material/Close";
 import { toPersian } from "../../../utils/setting";
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from "react-redux";
+import { getUnitList } from "../../../Redux/Slices/Accounting/Products/ProductUnit/unit";
 export const AddNewUnits = () => {
     const [open, setOpen] = useState(false);
+    const dispatch = useDispatch()
+    const { unitList } = useSelector(state => state.productUnit)
     const handleClickOpen = () => {
-
-        // dispatch(setFullscrenn(false))
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        dispatch(getUnitList())
+    }, [])
     return (
         <>
             <Box
@@ -165,7 +170,7 @@ export const AddNewUnits = () => {
                             </Box>
 
                             <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                                {BankAccountType?.map((item, index) => (
+                                {unitList?.map((item, index) => (
                                     <Box
                                         key={index}
                                         sx={{
@@ -178,7 +183,7 @@ export const AddNewUnits = () => {
                                         }}
                                     >
                                         <Typography>{toPersian(`${index + 1}`)}</Typography>
-                                        <Typography>{item.title}</Typography>
+                                        <Typography>{item?.title}</Typography>
                                         <Box sx={{ ...center, gap: "5px" }}>
                                             <Button
                                                 variant="outlined"

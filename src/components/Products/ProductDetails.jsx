@@ -109,7 +109,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                     <>
                                         {item.hasIcon && (
                                             <InputAdornment position="start">
-                                                {item.name == "unit" ? (
+                                                {item.name == "unit_id" ? (
                                                     <AddNewUnits />
                                                 ) : (
                                                     <AddNewProductType />
