@@ -80,9 +80,7 @@ export default function SideBar() {
 
     const navigate = useNavigate();
 
-    const profilehandler = () => {
-        navigate(reactRouts.auth.signIn);
-    };
+
 
     const handleDrawerOpen = () => {
         setOpen(!open);
@@ -259,7 +257,7 @@ export default function SideBar() {
                             <Avatar
                                 alt="ARTA-POSE"
                                 src={profile}
-                                onClick={() => profilehandler()}
+
                                 sx={{
                                     bgcolor: "#41669A",
                                     width: 50,
