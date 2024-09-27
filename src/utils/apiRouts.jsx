@@ -23,6 +23,7 @@ const apiRouts = {
         },
         main: {
             list: "admin/products/",
+            add: "admin/products/new"
         }
     },
     promoCode: {

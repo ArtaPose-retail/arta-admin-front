@@ -4,13 +4,16 @@ import { Avatar, Box, Button, Grid, InputAdornment, InputLabel, TextField, Typog
 import { center } from "../../styles/theme";
 import profile from "../../Assets/images/Fruits/fruits.svg";
 import { digitalLable } from "../../utils/data";
+import { useDispatch, useSelector } from "react-redux";
+import { addProd, resetPRInfo, setMetaData } from "../../Redux/Slices/Accounting/Products/product";
 
 function DigitalLable({ handlerCloseDialog }) {
   const [img, setImg] = useState(null);
   const handlerUploadImg = (e) => {
     setImg(URL.createObjectURL(e.target.files[0]));
   };
-
+  const dispatch = useDispatch()
+  const { newProduct } = useSelector(state => state.product)
   return (
     <>
       <Title
@@ -65,7 +68,11 @@ function DigitalLable({ handlerCloseDialog }) {
               </Typography>
             </InputLabel>
             <TextField
-
+              value={newProduct.meta[item.name]}
+              onChange={(e) => dispatch(setMetaData({
+                key: item.name,
+                value: e.target.value
+              }))}
               name={item.name}
               id={item.name}
               fullWidth
@@ -85,27 +92,12 @@ function DigitalLable({ handlerCloseDialog }) {
                   color: "#000",
                   direction: "ltr",
                   borderRadius: "18px",
+                  width: "100%"
                 },
               }}
-              SelectProps={{
-                native: true,
-                style: {
-                  background: "#F2F2F2",
-                  color: "#000",
-                  direction: "ltr",
-                  borderRadius: "18px",
-                },
 
-                startAdornment: (
-                  <>
-                    {item.hasIcon && (
-                      <InputAdornment position="start">
-                        {/* <AddTransactionType /> */}
-                      </InputAdornment>
-                    )}
-                  </>
-                ),
-              }}
+
+
             >
               {item.select &&
                 item?.options?.map((option, index) => (
@@ -130,7 +122,7 @@ function DigitalLable({ handlerCloseDialog }) {
         <Box sx={{ ...center, gap: "5px" }}>
           <Button
             onClick={() => {
-              toastHandler("توضیحات با موفقیت ثبت شد", "info");
+              dispatch(addProd())
               handlerCloseDialog();
             }}
             variant="contained"
@@ -146,8 +138,7 @@ function DigitalLable({ handlerCloseDialog }) {
           </Button>
           <Button
             onClick={() => {
-              toastHandler("توضیحات با موفقیت ثبت شد", "info");
-              handlerCloseDialog();
+              dispatch(resetPRInfo())
             }}
             variant="contained"
             sx={{
@@ -164,6 +155,7 @@ function DigitalLable({ handlerCloseDialog }) {
 
         <Button
           onClick={() => {
+            dispatch(resetPRInfo())
             handlerCloseDialog();
           }}
           variant="contained"

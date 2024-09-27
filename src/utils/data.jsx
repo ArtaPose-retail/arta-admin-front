@@ -1815,7 +1815,7 @@ export const productsFeilds = [
         ],
     },
     {
-        name: "generic",
+        name: "subcategory_id",
         select: true,
         placeholder: "نام ژنریک ",
         lable: "نام ژنریک ",
@@ -1930,15 +1930,7 @@ export const productsFeilds = [
     },
 ];
 export const digitalLable = [
-    {
-        name: "advantage",
-        select: false,
-        placeholder: "خواص",
-        lable: "خواص",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "text",
-    },
+
     {
         name: "sugar",
         select: false,
@@ -1960,7 +1952,7 @@ export const digitalLable = [
 
     {
         name: "fat",
-        select: true,
+        select: false,
         placeholder: "چربی",
         lable: "چربی",
         hasIcon: false,
@@ -1989,6 +1981,15 @@ export const digitalLable = [
         select: false,
         lable: "ویتامین",
 
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "advantage",
+        select: false,
+        placeholder: "خواص",
+        lable: "خواص",
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",

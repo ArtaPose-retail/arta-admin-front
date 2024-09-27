@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AllProductsThunk, deleteProdThunk } from "./productThunk";
+import { addNewPodThunk, AllProductsThunk, deleteProdThunk } from "./productThunk";
 import { toastHandler } from "../../../../utils/setting";
 const initialState = {
     loading: false,
@@ -7,36 +7,38 @@ const initialState = {
     newProduct: {
         barcode: "",
         brandname: "",
-        category_id: null,
+        category_id: "",
         category_title: "",
         description: "",
         detail: "",
-        instock: null,
+        instock: "",
         is_bulk: false,
         is_fav: false,
-        max_stock: null,
-        min_stock: null,
-        orderlimit: null,
-        originalprice: null,
-        price: null,
-        prod_id: null,
-        productpic_id: null,
+        max_stock: "",
+        min_stock: "",
+        orderlimit: "",
+        originalprice: "",
+        price: "",
+        prod_id: "",
+        productpic_id: "",
         productpic_path: "",
-        rate: null,
-        ratecount: null,
-        subcategory_id: null,
+        rate: "",
+        ratecount: "",
+        subcategory_id: "",
         subcategory_pic: "",
         subcategory_title: "",
         title: "",
         tsv: "",
-        unit_id: null,
-        vender_id: null,
+        unit_id: "",
+        vender_id: "",
+        meta: {}
     },
     productList: [],
 };
 
 export const getProList = createAsyncThunk("product/list", AllProductsThunk);
 export const deleteProd = createAsyncThunk("product/delete", deleteProdThunk);
+export const addProd = createAsyncThunk("product/add", addNewPodThunk);
 
 export const product = createSlice({
     name: "product",
@@ -45,6 +47,12 @@ export const product = createSlice({
         setNewProduct: (state, { payload }) => {
             state.newProduct[payload.key] = payload.value;
         },
+        setMetaData: (state, { payload }) => {
+            state.newProduct.meta[payload.key] = payload.value
+        },
+        resetPRInfo: (state) => {
+            state.newProduct = initialState.newProduct
+        }
     },
     extraReducers: (builder) => {
         //?get product list
@@ -74,9 +82,22 @@ export const product = createSlice({
             state.loading = false;
             toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
         });
+        //? add product
+        builder.addCase(addProd.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(addProd.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+
+        });
+        builder.addCase(addProd.rejected, (state) => {
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info")
+        });
 
     },
 });
 
-export const { setNewProduct } = product.actions;
+export const { setNewProduct, setMetaData, resetPRInfo } = product.actions;
 export default product.reducer;

@@ -20,7 +20,7 @@ import { toastHandler } from "../../utils/setting";
 import { AddNewUnits } from "./Dialogs/AddNewUnits";
 import { AddNewProductType } from "./Dialogs/AddNewProductType";
 import { useDispatch, useSelector } from "react-redux";
-import { setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
+import { resetPRInfo, setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
 import { getChild } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
 import { getPicList } from "../../Redux/Slices/Setting/Gallery/gallery";
 import apiRouts from "../../utils/apiRouts";
@@ -66,7 +66,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                             </Typography>
                         </InputLabel>
                         <TextField
-                            // value={formInformation[item.name]}
+                            value={newProduct[item.name]}
                             onChange={(e) =>
                                 dispatch(
                                     setNewProduct({
@@ -136,7 +136,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                         </option>
                                     ))}
                                 </>
-                            ) : item?.name == "generic" ? (
+                            ) : item?.name == "subcategory_id" ? (
                                 <>
                                     {" "}
                                     <option value={""}>
@@ -207,6 +207,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                     <FormGroup row={true}>
                         <FormControlLabel
                             control={<Switch name="is_fav"
+                                checked={newProduct.is_fav}
                                 onClick={(e) =>
                                     dispatch(
                                         setNewProduct({
@@ -221,6 +222,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                             control={
                                 <Switch
                                     name="is_bulk"
+                                    checked={newProduct.is_bulk}
                                     onClick={(e) =>
                                         dispatch(
                                             setNewProduct({
@@ -262,8 +264,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                     </Button>
                     <Button
                         onClick={() => {
-                            toastHandler("توضیحات با موفقیت ثبت شد", "info");
-                            handlerCloseDialog();
+                            dispatch(resetPRInfo())
                         }}
                         variant="contained"
                         sx={{
@@ -280,6 +281,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
 
                 <Button
                     onClick={() => {
+                        dispatch(resetPRInfo())
                         handlerCloseDialog();
                     }}
                     variant="contained"
