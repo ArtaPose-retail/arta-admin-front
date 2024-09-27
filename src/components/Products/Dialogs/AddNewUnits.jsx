@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { toPersian } from "../../../utils/setting";
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from "react-redux";
-import { getUnitList } from "../../../Redux/Slices/Accounting/Products/ProductUnit/unit";
+import { getUnitList, setUnitInf } from "../../../Redux/Slices/Accounting/Products/ProductUnit/unit";
 export const AddNewUnits = () => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
@@ -102,8 +102,8 @@ export const AddNewUnits = () => {
                                             borderColor: "white",
                                         },
                                     }}
-                                    type="number"
-                                    id="input-with-icon-textfield"
+                                    type="text"
+                                    id="pu_title"
                                     placeholder="نام واحد را وارد کنید"
                                     InputProps={{
                                         style: {
@@ -114,6 +114,10 @@ export const AddNewUnits = () => {
                                         },
                                     }}
                                     variant="outlined"
+                                    onChange={(e) => dispatch(setUnitInf({
+                                        key: e.target.id,
+                                        value: e.target.value
+                                    }))}
                                 />
 
                                 <Button

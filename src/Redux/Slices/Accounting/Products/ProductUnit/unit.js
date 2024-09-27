@@ -7,7 +7,9 @@ const initialState = {
     unitList: [],
     loading: false,
     update: false,
-    NewType: null,
+    addType: {
+        pu_title: null
+    },
 }
 
 
@@ -17,6 +19,9 @@ export const productUnit = createSlice({
     name: "productUnit",
     initialState,
     reducers: {
+        setUnitInf: (state, { payload }) => {
+            state.addType[payload.key] = payload.value
+        }
 
     },
     extraReducers: (builder) => {
@@ -25,7 +30,6 @@ export const productUnit = createSlice({
             state.loading = true
         })
         builder.addCase(getUnitList.fulfilled, (state, { payload }) => {
-            console.log(payload)
             state.loading = false
             state.unitList = payload.data.data
         })
@@ -35,5 +39,5 @@ export const productUnit = createSlice({
     }
 });
 
-export const { } = productUnit.actions;
+export const { setUnitInf } = productUnit.actions;
 export default productUnit.reducer;
