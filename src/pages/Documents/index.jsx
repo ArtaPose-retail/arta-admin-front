@@ -11,6 +11,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountTable from "../../components/Accounts/AccountTable";
 import DocumentsTable from "../../components/Documents/DocumentsTable";
+import { center } from "../../styles/theme";
 
 function Documents() {
     const [currentItem, setCurrentItem] = useState(0);
@@ -19,11 +20,7 @@ function Documents() {
         setCurrentItem(+curentItem);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box
             sx={{

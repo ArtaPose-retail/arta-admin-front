@@ -32,6 +32,7 @@ import Round from "./pages/Round";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 import Discount from "./pages/Actions/Discount/Index";
 import Sellpage from "./pages/Actions/Sellpage.jsx";
+import DigitalLable from "./pages/DigiTalLable/index.jsx";
 
 function App() {
   return (
@@ -280,6 +281,15 @@ function App() {
             element={
               <ProtectedRoute
                 element={Round}
+                requiredRole={["admin", "management"]}
+              />
+            }
+          />
+          <Route
+            path={reactRouts.digitalLable.main}
+            element={
+              <ProtectedRoute
+                element={DigitalLable}
                 requiredRole={["admin", "settings"]}
               />
             }

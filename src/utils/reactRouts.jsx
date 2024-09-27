@@ -72,6 +72,12 @@ const reactRouts = {
     },
     round: {
         main: "/round"
+    },
+
+    //?
+    //!
+    digitalLable: {
+        main: "Digital_labe"
     }
 };
 

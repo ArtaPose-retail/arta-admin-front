@@ -285,6 +285,10 @@ export const menuData = [
                 </defs>
             </svg>
         ),
+        subItems: [
+            { title: "دیجیتال لیبل", path: "/Digital_labe" },
+
+        ],
     },
 ];
 
