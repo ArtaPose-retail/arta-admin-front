@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getUnitListThunk } from './unitThunk';
+import { addUnitThunk, deleteUnitThunk, getUnitListThunk } from './unitThunk';
 
 
 
@@ -14,6 +14,8 @@ const initialState = {
 
 
 export const getUnitList = createAsyncThunk("productUnit/list", getUnitListThunk)
+export const addUnit = createAsyncThunk("productUnit/add", addUnitThunk)
+export const deleteUnit = createAsyncThunk("productUnit/delete", deleteUnitThunk)
 
 export const productUnit = createSlice({
     name: "productUnit",
@@ -31,9 +33,34 @@ export const productUnit = createSlice({
         })
         builder.addCase(getUnitList.fulfilled, (state, { payload }) => {
             state.loading = false
+            state.update = false
             state.unitList = payload.data.data
         })
         builder.addCase(getUnitList.rejected, (state) => {
+            state.loading = false
+        })
+        //? add
+        builder.addCase(addUnit.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(addUnit.fulfilled, (state, { payload }) => {
+            state.loading = false
+            state.update = true
+
+        })
+        builder.addCase(addUnit.rejected, (state) => {
+            state.loading = false
+        })
+        //? delete
+        builder.addCase(deleteUnit.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(deleteUnit.fulfilled, (state, { payload }) => {
+            state.loading = false
+            state.update = true
+
+        })
+        builder.addCase(deleteUnit.rejected, (state) => {
             state.loading = false
         })
     }

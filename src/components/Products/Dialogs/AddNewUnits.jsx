@@ -13,11 +13,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { toPersian } from "../../../utils/setting";
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from "react-redux";
-import { getUnitList, setUnitInf } from "../../../Redux/Slices/Accounting/Products/ProductUnit/unit";
+import { addUnit, deleteUnit, getUnitList, setUnitInf } from "../../../Redux/Slices/Accounting/Products/ProductUnit/unit";
 export const AddNewUnits = () => {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
-    const { unitList } = useSelector(state => state.productUnit)
+    const { unitList, update } = useSelector(state => state.productUnit)
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -28,7 +28,7 @@ export const AddNewUnits = () => {
 
     useEffect(() => {
         dispatch(getUnitList())
-    }, [])
+    }, [update])
     return (
         <>
             <Box
@@ -121,6 +121,7 @@ export const AddNewUnits = () => {
                                 />
 
                                 <Button
+                                    onClick={() => dispatch(addUnit())}
                                     variant="contained"
                                     sx={{
                                         bgcolor: (theme) => theme.palette.text.secondary,
@@ -188,14 +189,9 @@ export const AddNewUnits = () => {
                                     >
                                         <Typography>{toPersian(`${index + 1}`)}</Typography>
                                         <Typography>{item?.title}</Typography>
+
                                         <Box sx={{ ...center, gap: "5px" }}>
-                                            <Button
-                                                variant="outlined"
-                                                sx={{ p: 0, color: "#6D6D6D", borderColor: "#6D6D6D" }}
-                                            >
-                                                ویرایش
-                                            </Button>
-                                            <Button variant="outlined" color="warning" sx={{ p: 0 }}>
+                                            <Button onClick={() => dispatch(deleteUnit(item?.id))} variant="outlined" color="warning" sx={{ p: 0 }}>
                                                 حذف{" "}
                                             </Button>
                                         </Box>

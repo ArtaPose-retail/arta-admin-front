@@ -1803,20 +1803,7 @@ export const productsFeilds = [
         hasIcon: true,
         color: "#6D6D6D",
         type: "select",
-        options: [
-            {
-                title: "انتخاب دسته",
-                value: "",
-            },
-            {
-                title: "سبزیجات",
-                value: "vegetables",
-            },
-            {
-                title: "میوه",
-                value: "fruits",
-            },
-        ],
+
     },
     {
         name: "subcategory_id",
@@ -1826,20 +1813,7 @@ export const productsFeilds = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "select",
-        options: [
-            {
-                title: "انتخاب دسته",
-                value: "",
-            },
-            {
-                title: "سبزیجات",
-                value: "vegetables",
-            },
-            {
-                title: "میوه",
-                value: "fruits",
-            },
-        ],
+
 
     },
     {
@@ -1870,20 +1844,7 @@ export const productsFeilds = [
         hasIcon: true,
         color: "#6D6D6D",
         type: "number",
-        options: [
-            {
-                title: "انتخاب واحد",
-                value: "",
-            },
-            {
-                title: "kg",
-                value: "kg",
-            },
-            {
-                title: "gr",
-                value: "gr",
-            },
-        ],
+
     },
     {
         name: "min_stock",
@@ -1892,7 +1853,7 @@ export const productsFeilds = [
         lable: "حداقل موجودی",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "number",
     },
     {
         name: "instock",
@@ -1902,7 +1863,7 @@ export const productsFeilds = [
 
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "number",
     },
     {
         name: "max_stock",
