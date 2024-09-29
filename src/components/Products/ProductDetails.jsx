@@ -80,7 +80,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                     dispatch(
                                         setNewProduct({
                                             key: item.name,
-                                            value: e.target.value,
+                                            value: item.type == "select" || item.type == "number" ? +e.target.value : e.target.value,
                                         })
                                     )
                                 }
