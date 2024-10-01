@@ -3,7 +3,6 @@ import { combineReducers } from "@reduxjs/toolkit";
 import addCard from "./Slices/Banking/addcard"
 import general from "./Slices/general"
 import factor from "./Slices/HomePage/factor"
-import productinformation from "./Slices/HomePage/productinformation"
 import wallet from "./Slices/Wallet/wallet"
 import keyboard from "./Slices/Keyboard/keyboard"
 import auth from "./Slices/Auth/auth";
@@ -23,7 +22,6 @@ const appReducer = combineReducers({
     addCard,
     general,
     factor,
-    productinformation,
     wallet,
     keyboard,
     lable,

@@ -5,12 +5,14 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { center } from "../../styles/theme";
-import { products } from "../../utils/data";
+import apiRouts from "../../utils/apiRouts";
 
 function PtoductSFilter() {
-    const dispatch = useDispatch();
+
+    const { productList } = useSelector((state) => state.product);
+
 
     return (
         <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
@@ -75,7 +77,7 @@ function PtoductSFilter() {
             <Autocomplete
                 disablePortal
                 id="combo-box-demo"
-                options={products}
+                options={productList}
                 getOptionLabel={(option) => `${option?.title}`}
                 sx={{ width: 300, color: "#000000" }}
                 renderOption={(props, option) => (
@@ -85,7 +87,7 @@ function PtoductSFilter() {
                         {...props}
                     >
                         <img
-                            src={option.logo}
+                            src={`${apiRouts.baseUrl}${option?.productpic_path}`}
                             alt="goods"
                             style={{ width: 20, height: 20 }}
                         />

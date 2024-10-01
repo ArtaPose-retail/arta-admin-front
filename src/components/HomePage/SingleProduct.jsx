@@ -11,13 +11,11 @@ function SingleProduct({ data }) {
 
     const showDialoghandler = () => {
         setOpen(true);
-        console.log("here", open);
     };
     const handlerCloseDialog = () => {
         setOpen(false);
-        console.log("here", open);
+
     };
-    console.log(data)
     return (
         <>
             <Box

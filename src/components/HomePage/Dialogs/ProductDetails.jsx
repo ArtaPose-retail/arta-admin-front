@@ -4,7 +4,6 @@ import {
     Collapse,
     Dialog,
     DialogContent,
-    Divider,
     Grid,
     IconButton,
     InputLabel,
@@ -14,8 +13,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../../UI/Title";
-import { persianDate, separateBy3, toPersian, toastHandler } from "../../../utils/setting";
-import moment from "jalali-moment";
+import { checkAccess, toPersian, toastHandler } from "../../../utils/setting";
 import { ProductItemInfoForm } from "../../../utils/data";
 import UndoIcon from "@mui/icons-material/Undo";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -23,7 +21,6 @@ import styled from "@emotion/styled";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Input from "../../UI/Input";
 import NewProductParentDialog from ".";
-import CancelBtn from "../../UI/CancelBtn";
 import { center } from "../../../styles/theme";
 import apiRouts from "../../../utils/apiRouts";
 const ExpandMore = styled((props) => {
@@ -41,9 +38,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const [expanded, setExpanded] = useState(false);
     const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
-    const { productformInformation } = useSelector(
-        (state) => state.productinformation
-    );
     const handerPrice = () => {
         setPrice(!Price);
     };
@@ -57,24 +51,18 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         setExpanded(!expanded);
     };
 
-    const [DPClicked, setDpClicked] = useState(false);
-
-    const getDate = (e) => {
-        console.log(e);
-        setDpClicked(false);
-    };
-
     const deleteBtn = () => {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
 
-    const [openCancelBTn, setOpenCancelBTn] = useState(false);
-    const handleOpenCancleModal = () => setOpenCancelBTn(true);
-    const handleCloseCancleModal = () => setOpenCancelBTn(false);
 
     const onChangeHandler = (name, value, type) => {
         console.log(name, value, type)
     };
+
+
+    console.log(checkAccess(["admin", "admin_actions"]))
+
     return (
         <div>
             <Dialog

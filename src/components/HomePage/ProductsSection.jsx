@@ -2,7 +2,6 @@ import { Box, Grid } from "@mui/material";
 import Title from "../UI/Title";
 import PtoductSFilter from "./PtoductSFilter";
 import SingleProduct from "./SingleProduct.jsx";
-import { products, refrigeratingProduct } from "../../utils/data.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { center } from "../../styles/theme.js";
 import { useEffect } from "react";
