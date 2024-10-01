@@ -5,6 +5,7 @@ import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import moment from "jalali-moment";
 import ProductDetails from "./Dialogs/ProductDetails";
 import { center } from "../../styles/theme";
+import apiRouts from "../../utils/apiRouts";
 function SingleProduct({ data }) {
     const [open, setOpen] = useState(false);
 
@@ -44,10 +45,11 @@ function SingleProduct({ data }) {
                                 bgcolor: `${data.color}`,
                                 borderRadius: "8px",
                                 position: "relative",
+                                bgcolor: "#FFDBDF"
                             }}
                         >
                             <img
-                                src={data.logo}
+                                src={`${apiRouts.baseUrl}${data.productpic_path}`}
                                 width={35}
                                 height={35}
                                 style={{
@@ -99,7 +101,7 @@ function SingleProduct({ data }) {
                                     textAlign: "start",
                                 }}
                             >
-                                فی: {toPersian(separateBy3(data.amount))}ریال
+                                فی: {toPersian(separateBy3(data?.price))}ریال
                             </Typography>
                             <Typography
                                 sx={{
@@ -122,7 +124,7 @@ function SingleProduct({ data }) {
                                 textAlign: "start",
                             }}
                         >
-                            {persianDate(data?.date)
+                            {persianDate(data?.updated_at)
                             }
                         </Typography>
                     </Box>

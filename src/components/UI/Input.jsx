@@ -9,6 +9,7 @@ import { AdapterDateFnsJalali } from "@mui/x-date-pickers/AdapterDateFnsJalali";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { center } from "../../styles/theme";
+import { persianDate } from "../../utils/setting";
 
 function Input({
     type,
@@ -137,6 +138,7 @@ function Input({
             ) : type === "date" ? (
                 <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
                     <DatePicker
+                        value={value}
                         onChange={(e) => onChange(name, e, type)}
                         onClick={onClickHandler}
                         disabled={disabled}
@@ -180,9 +182,7 @@ function Input({
                                 },
                             },
                         }}
-                        defaultValue={moment(new Date(), "YYYY-MM-DD")
-                            .locale("fa")
-                            .format(" D MMMM YYYY")}
+
                     />
                 </LocalizationProvider>
             ) : (

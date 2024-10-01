@@ -44,7 +44,7 @@ function ProductsSection() {
                 sx={{ mt: 1, overflowY: "scroll", height: "500px" }}
             >
                 {productList?.filter(item => item.is_fav).length > 0 ? (
-                    products.filter(item => item.is_fav).map((item, index) => (
+                    productList.filter(item => item.is_fav).map((item, index) => (
                         <Grid key={index} item xs={3} sx={{ mt: 1, p: 0.5 }}>
                             <SingleProduct data={item} />
                         </Grid>

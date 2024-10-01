@@ -14,7 +14,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../../UI/Title";
-import { separateBy3, toPersian, toastHandler } from "../../../utils/setting";
+import { persianDate, separateBy3, toPersian, toastHandler } from "../../../utils/setting";
 import moment from "jalali-moment";
 import { ProductItemInfoForm } from "../../../utils/data";
 import UndoIcon from "@mui/icons-material/Undo";
@@ -24,6 +24,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Input from "../../UI/Input";
 import NewProductParentDialog from ".";
 import CancelBtn from "../../UI/CancelBtn";
+import { center } from "../../../styles/theme";
+import apiRouts from "../../../utils/apiRouts";
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -37,7 +39,7 @@ const ExpandMore = styled((props) => {
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const [expanded, setExpanded] = useState(false);
-    const [Date, seDate] = useState(false);
+    const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
     const { productformInformation } = useSelector(
         (state) => state.productinformation
@@ -48,33 +50,14 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const dispatch = useDispatch();
 
     const handlerDate = () => {
-        seDate(!Date);
+        seDate(!date);
     };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
-    // const [open, setOpen] = useState(false);
-
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-
     const [DPClicked, setDpClicked] = useState(false);
-    // const clickhandlerDp = () => {
-    //     setDpClicked(true);
-    // };
 
     const getDate = (e) => {
         console.log(e);
@@ -89,6 +72,9 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const handleOpenCancleModal = () => setOpenCancelBTn(true);
     const handleCloseCancleModal = () => setOpenCancelBTn(false);
 
+    const onChangeHandler = (name, value, type) => {
+        console.log(name, value, type)
+    };
     return (
         <div>
             <Dialog
@@ -117,55 +103,49 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 color: (theme) => theme.palette.text.card,
                             }}
                         />
-                        <Box
-                            sx={{
-                                ...center,
-                                gap: "10px",
-                                justifyContent: "space-between",
-                                width: "50%",
-                            }}
-                        >
-                            <Box sx={{ ...center, gap: "15px" }}>
-                                <Box
-                                    sx={{
-                                        bgcolor: `${iteminfo?.color}`,
-                                        borderRadius: "12px",
-                                        px: 0.5,
-                                        pt: 0.5,
-                                    }}
-                                >
-                                    <img
-                                        src={iteminfo?.logo}
-                                        width={35}
-                                        height={35}
-                                        style={{
-                                            padding: "0px",
-                                            margin: "0px",
-                                        }}
-                                    />
-                                </Box>
 
-                                <Typography
-                                    sx={{
-                                        fontSize: "20px",
-                                        fontWeight: 500,
-                                        color: (theme) => theme.typography.color,
-                                    }}
-                                >
-                                    نام کالا:{iteminfo?.title}
-                                </Typography>
-                            </Box>
+                        <Box sx={{ ...center, gap: "15px" }}>
                             <Typography
                                 sx={{
-                                    bgcolor: (theme) => theme.palette.darkBlue.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                    borderRadius: "12px",
-                                    p: 1,
+                                    fontSize: "20px",
+                                    fontWeight: 500,
+                                    color: (theme) => theme.typography.color,
                                 }}
                             >
-                                شماره قفسه:{toPersian(13243)}
+                                نام کالا: {iteminfo?.title}
                             </Typography>
+                            <Box
+                                sx={{
+                                    bgcolor: `#FFDBDF`,
+                                    borderRadius: "12px",
+                                    px: 0.5,
+                                    pt: 0.5,
+                                }}
+                            >
+                                <img
+                                    src={`${apiRouts.baseUrl}${iteminfo?.productpic_path}`}
+                                    width={35}
+                                    height={35}
+                                    style={{
+                                        padding: "0px",
+                                        margin: "0px",
+                                    }}
+                                />
+                            </Box>
+
+
                         </Box>
+                        <Typography
+                            sx={{
+                                bgcolor: (theme) => theme.palette.darkBlue.main,
+                                color: (theme) => theme.palette.text.primary,
+                                borderRadius: "12px",
+                                p: 1,
+                            }}
+                        >
+                            شماره قفسه:{toPersian(iteminfo?.shelf ?? "")}
+                        </Typography>
+
                     </Box>
 
                     <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
@@ -184,18 +164,14 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 </InputLabel>
 
                                 <Input
+                                    value={item.name == "date" ? new Date() : ""}
                                     type={item.type}
                                     placeholder={item.placeholder}
-                                    disabled={
-                                        (!Price && item.name === "price") ||
-                                            (!Date && item.name === "date")
-                                            ? true
-                                            : false
-                                    }
+                                    onChange={onChangeHandler}
                                     name={item.name}
                                     id={item.name}
-                                    // width={"55px"}
                                     height={"55px"}
+                                    disabled={iteminfo?.is_bulk == true && item.name == "weight" ? true : false}
                                 />
                             </Grid>
                         ))}
@@ -343,7 +319,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     <Switch
                                         name="Date"
                                         onClick={() => handlerDate()}
-                                        checked={Date}
+                                        checked={date}
                                         size="small"
                                     />
                                     <Typography

@@ -30,7 +30,8 @@ const initialState = {
         title: "",
         tsv: "",
         unit_id: null,
-        meta: {}
+        meta: {},
+        shelf: ""
     },
     productList: [],
 };
