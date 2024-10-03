@@ -41,7 +41,6 @@ export default function ProductsTable() {
     const [singleProdId, setSingleProdId] = useState(null);
     const openProductDg = (data) => {
         setOpenDg(true);
-        console.log(data)
         setSingleProdId(data.prod_id)
         for (const key in data) {
             if (Object.prototype.hasOwnProperty.call(data, key)) {

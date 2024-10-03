@@ -12,6 +12,7 @@ function ProductsSection() {
     const dispatch = useDispatch();
     const { productList } = useSelector((state) => state.product);
 
+
     useEffect(() => {
         dispatch(getProList());
     }, []);

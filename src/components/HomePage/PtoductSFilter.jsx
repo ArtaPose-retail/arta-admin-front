@@ -5,14 +5,20 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { center } from "../../styles/theme";
 import apiRouts from "../../utils/apiRouts";
+import { useEffect } from "react";
+import { getallType } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
 
 function PtoductSFilter() {
-
+    const dispatch = useDispatch()
     const { productList } = useSelector((state) => state.product);
+    const { typeList } = useSelector((state) => state.productType);
 
+    useEffect(() => {
+        dispatch(getallType())
+    }, [])
 
     return (
         <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
@@ -49,28 +55,21 @@ function PtoductSFilter() {
                         وضیعت محصول
                     </Typography>
                 </option>
-                <option value="fruit">
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                            color: (theme) => theme.typography.color,
-                            fontWeight: 400,
-                        }}
-                    >
-                        میوه
-                    </Typography>
-                </option>
-                <option value="vegteable">
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                            color: (theme) => theme.typography.color,
-                            fontWeight: 400,
-                        }}
-                    >
-                        سبزیجات
-                    </Typography>
-                </option>
+                {
+                    typeList?.map((item, index) =>
+                        <option value={item.id} key={item.id}>
+                            <Typography
+                                sx={{
+                                    fontSize: "12px",
+                                    color: (theme) => theme.typography.color,
+                                    fontWeight: 400,
+                                }}
+                            >
+                                {item?.title}
+                            </Typography>
+                        </option>
+                    )
+                }
             </TextField>
 
             <Divider orientation="vertical" flexItem />
