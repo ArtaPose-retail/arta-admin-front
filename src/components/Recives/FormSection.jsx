@@ -1,4 +1,5 @@
 import {
+    Autocomplete,
     Box,
     Button,
     Divider,
@@ -16,14 +17,22 @@ import { separateBy3, toPersian } from "../../utils/setting";
 import ReciveForDl from "../Payment/ReciveForDl";
 import CheckRegister from "./CheckRegister";
 import Input from "../UI/Input";
+import TransactionpartyDg from "../HomePage/Dialogs/TransactionpartyDg";
+import { center } from "../../styles/theme";
+import AddIcon from '@mui/icons-material/Add';
+import { useSelector } from "react-redux";
 
 function FormSection() {
     const [checkStep, setStep] = useState(false);
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    const [openTransaction, setOpenTransaction] = useState(false);
+    const { TransActionList } = useSelector(state => state.transactionsSlice)
+    const showTransactionDialoghandler = () => {
+        setOpenTransaction(true);
     };
+    const handlerCloseTransactionDialog = () => {
+        setOpenTransaction(false);
+    };
+
 
     const stephandler = () => {
         setStep(!checkStep);
@@ -72,13 +81,85 @@ function FormSection() {
                                     borderRadius: "12px",
                                 }}
                             >
-                                <Input
-                                    height={"55px"}
-                                    hasIcon={false}
-                                    type={"text"}
-                                    placeholder={"نام طرف معامله "}
+                                <Autocomplete
+                                    disablePortal
+                                    id="combo-box-demo"
+                                    options={TransActionList}
+                                    getOptionLabel={(option) => `${option?.title}`}
+                                    sx={{ width: 300, color: "#000000" }}
+                                    renderOption={(props, option) => (
+                                        <Box
+                                            // component="li"
+                                            sx={{ ...center, gap: "5px" }}
+                                            {...props}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "14px",
+                                                    fontWeight: 500,
+                                                    color: (theme) => theme.palette.text.primary,
+                                                }}
+                                            >{`${option?.fname} ${option?.lname} `}</Typography>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "14px",
+                                                    fontWeight: 500,
+                                                    color: (theme) => theme.palette.text.primary,
+                                                }}
+                                            >{`${toPersian(option?.phone1)} `}</Typography>
+                                        </Box>
+                                    )}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            sx={{
+                                                color: "#000", background: "#F2F2F2", borderRadius: "12px",
+                                                "& .MuiNativeSelect-select": {
+                                                    color: "black",
+                                                },
+                                                "& .MuiOutlinedInput-notchedOutline": {
+                                                    borderColor: "#f2f2f2",
+                                                },
+                                            }}
+                                            autoComplete="none"
+                                            {...params}
+                                            placeholder={"جستوجو طرف معامله"}
+                                            inputProps={{
+                                                ...params.inputProps,
+                                                autoComplete: "none", // disable autocomplete and autofill
+                                            }}
+                                            InputProps={{
+                                                ...params.InputProps,
+                                                sx: {
+                                                    "& .MuiInputBase-input": {
+                                                        color: "#000000",
+                                                    },
+                                                },
+                                            }}
+                                        />
+                                    )}
                                 />
-                                <TransactionDialog />
+
+                                <Box
+                                    onClick={() => showTransactionDialoghandler()}
+                                    sx={{
+                                        bgcolor: (theme) => theme.palette.text.secondary,
+                                        height: "100%",
+                                        p: 1,
+                                        borderRadius: "50px",
+                                        cursor: "pointer",
+                                        ...center,
+                                    }}
+                                >
+
+                                    <AddIcon
+                                        fontSize="medium"
+                                        sx={{ fill: (theme) => theme.palette.text.primary }}
+                                    />
+                                </Box>
+                                <TransactionpartyDg
+                                    status={openTransaction}
+                                    handlerCloseDialog={handlerCloseTransactionDialog}
+                                />
                             </Box>
                         </Grid>
                         <Grid item xs={6}>

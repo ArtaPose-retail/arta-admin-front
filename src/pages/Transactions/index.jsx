@@ -5,7 +5,7 @@ import { Box, Button, Divider, Grid, InputAdornment, TextField, Typography } fro
 import React, { useEffect, useState } from "react";
 import Title from "../../components/UI/Title";
 import SearchIcon from '@mui/icons-material/Search';
-import { customersData, months } from "../../utils/data";
+import { months } from "../../utils/data";
 import CustomersLable from "../../components/Customers/CustomersLable";
 import TransactionpartyDg from "../../components/HomePage/Dialogs/TransactionpartyDg";
 import AddIcon from '@mui/icons-material/Add';

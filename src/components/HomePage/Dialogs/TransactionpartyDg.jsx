@@ -70,20 +70,6 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                                 },
                             }}
                         />
-                        {/* 
-                        <Button
-                            sx={{ bgcolor: theme => theme.palette.darkBlue.main, color: theme => theme.palette.text.primary }}
-                            variant="contained"
-                            component="label"
-
-                        >
-                            اپلود عکس مشتری/طرف معامله
-                            <input
-                                type="file"
-                                hidden
-                                onChange={(e) => handlerUploadImg(e)}
-                            />
-                        </Button> */}
                     </Box>
                     <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
                         {transactionpartyField?.map((item, index) => (
