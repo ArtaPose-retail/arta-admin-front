@@ -5,6 +5,7 @@ import { center } from "../../styles/theme";
 import { persianDate, toPersian } from "../../utils/setting";
 const PromoCodePrint = forwardRef((props, ref) => {
     const { data } = props;
+    console.log(data)
     return (
         <Box
             ref={ref}
@@ -15,7 +16,7 @@ const PromoCodePrint = forwardRef((props, ref) => {
                 {/* QR Code */}
                 <Grid item xs={4}>
                     <Box sx={{ width: "100%", height: "auto", ...center }}>
-                        <QRCodeCanvas value={data?.code} />,
+                        <QRCodeCanvas value={`${data?.code}`} />,
                     </Box>
                 </Grid>
 
