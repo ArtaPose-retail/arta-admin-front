@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addNewPodThunk, AllProductsThunk, deleteProdThunk } from "./productThunk";
+import { addNewPodThunk, AllProductsThunk, deleteProdThunk, editPodThunk } from "./productThunk";
 import { toastHandler } from "../../../../utils/setting";
 const initialState = {
     loading: false,
@@ -39,6 +39,7 @@ const initialState = {
 export const getProList = createAsyncThunk("product/list", AllProductsThunk);
 export const deleteProd = createAsyncThunk("product/delete", deleteProdThunk);
 export const addProd = createAsyncThunk("product/add", addNewPodThunk);
+export const editProd = createAsyncThunk("product/edit", editPodThunk);
 
 export const product = createSlice({
     name: "product",
@@ -86,12 +87,25 @@ export const product = createSlice({
         builder.addCase(addProd.pending, (state) => {
             state.loading = true;
         });
-        builder.addCase(addProd.fulfilled, (state, { payload }) => {
+        builder.addCase(addProd.fulfilled, (state) => {
             state.loading = false;
             state.update = true;
 
         });
         builder.addCase(addProd.rejected, (state) => {
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info")
+        });
+        //? add product
+        builder.addCase(editProd.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(editProd.fulfilled, (state) => {
+            state.loading = false;
+            state.update = true;
+
+        });
+        builder.addCase(editProd.rejected, (state) => {
             state.loading = false;
             toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info")
         });

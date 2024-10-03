@@ -12,7 +12,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/material";
 import { toPersian } from "../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProd, getProList } from "../../Redux/Slices/Accounting/Products/product";
+import { deleteProd, getProList, setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
 import AddNewProduct from "./AddNewProduct";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,8 +38,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function ProductsTable() {
 
     const [openDg, setOpenDg] = useState(false);
-    const openProductDg = () => {
+    const [singleProdId, setSingleProdId] = useState(null);
+    const openProductDg = (data) => {
         setOpenDg(true);
+        console.log(data)
+        setSingleProdId(data.prod_id)
+        for (const key in data) {
+            if (Object.prototype.hasOwnProperty.call(data, key)) {
+                dispatch(setNewProduct({
+                    key: key,
+                    value: data[key]
+                }))
+            }
+        }
     };
 
     const closeProductDg = () => {
@@ -99,7 +110,7 @@ export default function ProductsTable() {
                                             gap: "10px",
                                         }}
                                     >
-                                        <EditIcon sx={{ cursor: "pointer" }} onClick={openProductDg} />
+                                        <EditIcon sx={{ cursor: "pointer" }} onClick={() => openProductDg(item)} />
                                         <DeleteOutlineIcon
                                             onClick={() => deleteBtn(item?.prod_id)}
                                             sx={{
@@ -114,7 +125,7 @@ export default function ProductsTable() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <AddNewProduct status={openDg} handlerCloseDialog={closeProductDg} />
+            <AddNewProduct status={openDg} handlerCloseDialog={closeProductDg} type={"edit"} id={singleProdId} />
 
         </>
     );

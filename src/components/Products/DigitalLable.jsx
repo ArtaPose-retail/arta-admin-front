@@ -1,19 +1,45 @@
 import React, { useState } from "react";
 import Title from "../UI/Title";
-import { Avatar, Box, Button, Grid, InputAdornment, InputLabel, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Grid,
+  InputLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { center } from "../../styles/theme";
 import profile from "../../Assets/images/Fruits/fruits.svg";
 import { digitalLable } from "../../utils/data";
 import { useDispatch, useSelector } from "react-redux";
-import { addProd, resetPRInfo, setMetaData } from "../../Redux/Slices/Accounting/Products/product";
+import {
+  addProd,
+  editProd,
+  resetPRInfo,
+  setMetaData,
+} from "../../Redux/Slices/Accounting/Products/product";
 
-function DigitalLable({ handlerCloseDialog }) {
+function DigitalLable({ handlerCloseDialog, type, id }) {
   const [img, setImg] = useState(null);
   const handlerUploadImg = (e) => {
     setImg(URL.createObjectURL(e.target.files[0]));
   };
-  const dispatch = useDispatch()
-  const { newProduct } = useSelector(state => state.product)
+  const dispatch = useDispatch();
+  const { newProduct } = useSelector((state) => state.product);
+
+  const submitHandler = () => {
+    if (type == "edit") {
+      dispatch(editProd(id))
+      handlerCloseDialog();
+    } else {
+      dispatch(addProd());
+      handlerCloseDialog();
+    }
+    dispatch(resetPRInfo());
+    dispatch(setMetaData());
+
+  };
   return (
     <>
       <Title
@@ -69,10 +95,14 @@ function DigitalLable({ handlerCloseDialog }) {
             </InputLabel>
             <TextField
               value={newProduct.meta[item.name]}
-              onChange={(e) => dispatch(setMetaData({
-                key: item.name,
-                value: e.target.value
-              }))}
+              onChange={(e) =>
+                dispatch(
+                  setMetaData({
+                    key: item.name,
+                    value: e.target.value,
+                  })
+                )
+              }
               name={item.name}
               id={item.name}
               fullWidth
@@ -92,12 +122,9 @@ function DigitalLable({ handlerCloseDialog }) {
                   color: "#000",
                   direction: "ltr",
                   borderRadius: "18px",
-                  width: "100%"
+                  width: "100%",
                 },
               }}
-
-
-
             >
               {item.select &&
                 item?.options?.map((option, index) => (
@@ -121,10 +148,7 @@ function DigitalLable({ handlerCloseDialog }) {
       >
         <Box sx={{ ...center, gap: "5px" }}>
           <Button
-            onClick={() => {
-              dispatch(addProd())
-              handlerCloseDialog();
-            }}
+            onClick={submitHandler}
             variant="contained"
             sx={{
               bgcolor: (theme) => theme.palette.green.main,
@@ -138,7 +162,7 @@ function DigitalLable({ handlerCloseDialog }) {
           </Button>
           <Button
             onClick={() => {
-              dispatch(resetPRInfo())
+              dispatch(resetPRInfo());
             }}
             variant="contained"
             sx={{
@@ -155,7 +179,7 @@ function DigitalLable({ handlerCloseDialog }) {
 
         <Button
           onClick={() => {
-            dispatch(resetPRInfo())
+            dispatch(resetPRInfo());
             handlerCloseDialog();
           }}
           variant="contained"

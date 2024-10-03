@@ -43,3 +43,37 @@ export const addNewPodThunk = async (_, ThunkApi) => {
         unit_id,
     });
 };
+export const editPodThunk = async (id, ThunkApi) => {
+    const state = ThunkApi.getState();
+    const {
+        barcode,
+        category_id,
+        instock,
+        is_bulk,
+        is_fav,
+        max_stock,
+        meta,
+        min_stock,
+        productpic_id,
+        shelf,
+        subcategory_id,
+        title,
+        unit_id,
+    } = state.product.newProduct;
+
+    return await AXIOS.put(`${apiRouts.product.main.list}${id}`, {
+        barcode,
+        category_id,
+        instock,
+        is_bulk,
+        is_fav,
+        max_stock,
+        meta,
+        min_stock,
+        productpic_id,
+        shelf,
+        subcategory_id,
+        title,
+        unit_id,
+    });
+};

@@ -6,7 +6,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import ProductDetails from "./ProductDetails";
-function AddNewProduct({ status, handlerCloseDialog }) {
+function AddNewProduct({ status, handlerCloseDialog, type, id }) {
     const [value, setValue] = useState("1");
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -43,7 +43,7 @@ function AddNewProduct({ status, handlerCloseDialog }) {
                             <ProductDetails handlerCloseDialog={handlerCloseDialog} next={handleButtonClick} />
                         </TabPanel>
                         <TabPanel value="2">
-                            <DigitalLable handlerCloseDialog={handlerCloseDialog} />
+                            <DigitalLable handlerCloseDialog={handlerCloseDialog} type={type} id={id} />
                         </TabPanel>
                     </TabContext>
                 </DialogContent>

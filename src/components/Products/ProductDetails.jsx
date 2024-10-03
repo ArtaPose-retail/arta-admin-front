@@ -1,5 +1,4 @@
 import {
-    Avatar,
     Box,
     Button,
     FormControlLabel,
@@ -14,11 +13,9 @@ import {
     Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import profile from "../../Assets/images/Fruits/fruits.svg";
 import { productsFeilds } from "../../utils/data";
 import { center } from "../../styles/theme";
 import Title from "../UI/Title";
-import { toastHandler } from "../../utils/setting";
 import { AddNewUnits } from "./Dialogs/AddNewUnits";
 import { AddNewProductType } from "./Dialogs/AddNewProductType";
 import { useDispatch, useSelector } from "react-redux";

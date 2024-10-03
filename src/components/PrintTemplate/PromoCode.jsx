@@ -5,7 +5,6 @@ import { center } from "../../styles/theme";
 import { persianDate, toPersian } from "../../utils/setting";
 const PromoCodePrint = forwardRef((props, ref) => {
     const { data } = props;
-    console.log(data)
     return (
         <Box
             ref={ref}
