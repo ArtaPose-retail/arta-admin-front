@@ -124,7 +124,7 @@ export default function UserList() {
     const { userList, update } = useSelector((state) => state.user);
 
     useEffect(() => {
-        dispatch(getAllUser());
+        dispatch(getAllUser("User"));
     }, [dispatch, update]);
     return (
         <Box

@@ -2,8 +2,8 @@ import apiRouts from "../../../../utils/apiRouts";
 import AXIOS from "../../../../utils/setting";
 
 //?get all the users
-export const UserListThunk = async () => {
-    return await AXIOS.get(`${apiRouts.user.list}?userType=User`);
+export const UserListThunk = async (Type) => {
+    return await AXIOS.get(`${apiRouts.user.list}?userType=${Type}`);
 };
 
 //?delete specific users

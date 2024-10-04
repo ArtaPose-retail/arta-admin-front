@@ -112,7 +112,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                     }}
                                 >
                                     میزان اعتبار:
-                                    {toPersian(0)}
+                                    {/* {toPersian(0)} */}
                                     تومان
                                 </Typography>
                             </Box>
@@ -178,7 +178,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.phone)}
+                                    {/* {toPersian(data?.phone)} */}
                                 </Typography>
                                 <Box>
                                     <LocalPhoneIcon />
@@ -209,7 +209,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.phone1)}
+                                    {/* {toPersian(data?.phone1)} */}
                                 </Typography>
                                 <Box>
                                     <LocalPhoneIcon />
@@ -241,7 +241,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.phone2)}
+                                    {/* {toPersian(data?.phone2)} */}
                                 </Typography>
                                 <Box>
                                     <LocalPhoneIcon />
@@ -295,7 +295,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.shmeli)}
+                                    {/* {toPersian(data?.shmeli)} */}
                                 </Typography>
                             </Box>
                             <Box
@@ -324,7 +324,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         wordBreak: "break-all",
                                     }}
                                 >
-                                    {toPersian(data?.home_adress)}
+                                    {/* {toPersian(data?.home_adress)} */}
                                 </Typography>
                             </Box>
                             <Box
@@ -352,7 +352,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.title)}
+                                    {/* {toPersian(data?.title)} */}
                                 </Typography>
                             </Box>
                             <Box
@@ -380,7 +380,7 @@ export default function CustomerDetails({ data, avatarPic }) {
                                         fontWeight: 500,
                                     }}
                                 >
-                                    {toPersian(data?.referer)}
+                                    {/* {toPersian(data?.referer)} */}
                                 </Typography>
                             </Box>
                         </Box>

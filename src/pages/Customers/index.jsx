@@ -1,12 +1,25 @@
-import { Box, Button, Divider, Grid, InputAdornment, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {
+    Box,
+    Button,
+    Divider,
+    Grid,
+    InputAdornment,
+    TextField,
+    Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Title from "../../components/UI/Title";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import { customersData, months } from "../../utils/data";
 import CustomersLable from "../../components/Customers/CustomersLable";
-
+import { center } from "../../styles/theme";
+import { getAllUser } from "../../Redux/Slices/Manangement/user/user";
+import { useDispatch, useSelector } from "react-redux";
+import { NoItem } from "../../components/UI/NoItem";
 
 function Customers() {
+    const dispatch = useDispatch();
+    const { userList } = useSelector((state) => state.user);
     const [month, setMonth] = useState("");
     const [selectedMonth, setSelectedMonth] = useState("");
     const selectMonth = (month) => {
@@ -16,11 +29,9 @@ function Customers() {
         console.log(months.find((item) => item.value === month));
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    useEffect(() => {
+        dispatch(getAllUser("Customer"));
+    }, []);
     return (
         <Box sx={{ p: 1 }}>
             <Title
@@ -39,7 +50,7 @@ function Customers() {
                     borderRadius: "18px",
                     p: 1,
                     mt: 1,
-                    height: "75vh"
+                    height: "75vh",
                 }}
             >
                 <Box sx={{ ...center, gap: "10px", justifyContent: "flex-start" }}>
@@ -129,9 +140,7 @@ function Customers() {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <SearchIcon
-                                        sx={{ fill: (theme) => theme.palette.divider }}
-                                    />
+                                    <SearchIcon sx={{ fill: (theme) => theme.palette.divider }} />
                                 </InputAdornment>
                             ),
                             style: {
@@ -146,8 +155,6 @@ function Customers() {
                     <Box sx={{ ...center, gap: "15px" }}>
                         <Button
                             variant="contained"
-
-
                             sx={{
                                 bgcolor: (theme) => theme.palette.darkBlue.main,
 
@@ -163,7 +170,6 @@ function Customers() {
                             خروجی اکسل
                         </Button>
                         <Button
-
                             sx={{
                                 bgcolor: (theme) => theme.palette.darkBlue.main,
 
@@ -180,7 +186,6 @@ function Customers() {
                         </Button>
 
                         <Button
-
                             sx={{
                                 bgcolor: (theme) => theme.palette.darkBlue.main,
 
@@ -196,7 +201,6 @@ function Customers() {
                             انتخاب همه
                         </Button>
                         <Button
-
                             sx={{
                                 bgcolor: (theme) => theme.palette.warning.main,
 
@@ -213,14 +217,19 @@ function Customers() {
                         </Button>
                     </Box>
                 </Box>
-                <Grid container spacing={2} sx={{ mt: 1, height: "90%", overflowY: "scroll" }}>
-                    {customersData.map((item, index) =>
-                        < Grid item xs={3} key={index}>
-                            <CustomersLable data={item} key={index} />
-
-                        </Grid>
-
-
+                <Grid
+                    container
+                    spacing={2}
+                    sx={{ mt: 1, height: "90%", overflowY: "scroll" }}
+                >
+                    {userList == null ? (
+                        <NoItem />
+                    ) : (
+                        userList?.map((item, index) => (
+                            <Grid item xs={3} key={index}>
+                                <CustomersLable data={item} key={index} />
+                            </Grid>
+                        ))
                     )}
                 </Grid>
             </Box>
