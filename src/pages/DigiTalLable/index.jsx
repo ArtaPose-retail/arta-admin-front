@@ -1,19 +1,16 @@
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { center } from "../../styles/theme";
-import { setFullscrenn } from "../../Redux/Slices/general";
-import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../Assets/images/logo.png";
 import logoNM from "../../Assets/images/logoname.png";
 import { ProdDetails } from "../../components/Setting/DigitalLable/ProdDetails";
 import { getProList } from "../../Redux/Slices/Accounting/Products/product";
-import SingleProduct from "../../components/HomePage/SingleProduct";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import SingleProd from "../../components/Setting/DigitalLable/SingleProd";
-import { FullScreen } from "@chiragrupani/fullscreen-react";
+
 
 function DigitalLable() {
     const { isfullScrenn } = useSelector((state) => state.general);
