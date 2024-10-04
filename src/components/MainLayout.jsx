@@ -15,18 +15,22 @@ import { useEffect } from "react";
 
 function MainLayout({ children }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { isfullScrenn } = useSelector((state) => state.general);
     const { token } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (token == null) {
-            navigate(reactRouts.auth.signIn)
+            navigate(reactRouts.auth.signIn);
         }
-    }, [])
+    }, []);
 
-
-    const hideElement = [reactRouts.auth.signIn, reactRouts.home, reactRouts.customer.main];
+    const hideElement = [
+        reactRouts.auth.signIn,
+        reactRouts.home,
+        reactRouts.customer.main,
+        reactRouts.digitalLable.main
+    ];
     const showSecondaryHeader = [
         reactRouts.dashbord.main,
         reactRouts.customers.main,
@@ -36,6 +40,7 @@ function MainLayout({ children }) {
         reactRouts.factor.main,
         reactRouts.products.main,
         reactRouts.reportAcount.main,
+
     ];
 
     let showHeader = true;
@@ -45,7 +50,7 @@ function MainLayout({ children }) {
     if (hideElement.includes(router.pathname)) {
         (showHeader = false), (showSideBar = false);
         if (router.pathname == reactRouts.home) {
-            (showSideBar = true)
+            showSideBar = true;
         }
     }
     if (showSecondaryHeader.includes(router.pathname)) {
@@ -57,7 +62,7 @@ function MainLayout({ children }) {
         // setInput(input);
         // dispatch(onChangevalue(input));
     };
-
+    console.log(showHeader, showSideBar, router.pathname)
     return (
         <>
             <DocumentFullScreen

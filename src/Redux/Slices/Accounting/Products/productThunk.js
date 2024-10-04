@@ -5,6 +5,10 @@ export const AllProductsThunk = async () => {
     return await AXIOS.get(apiRouts.product.main.list);
 };
 
+export const getSingleProd = async (id) => {
+    return await AXIOS.get(`${apiRouts.product.main.list}${id}`)
+}
+
 export const deleteProdThunk = async (id) => {
     return await AXIOS.delete(`${apiRouts.product.main.list}${id}`);
 };

@@ -12,6 +12,7 @@ import { setFullscrenn } from "../../Redux/Slices/general";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
 import { toPersian } from "../../utils/setting";
+import { center } from "../../styles/theme";
 function CustomerPage() {
     const [showCustomer, setShowCustomer] = useState(false);
     const [time, setTime] = useState("00:00");
@@ -67,11 +68,7 @@ function CustomerPage() {
         return () => clearInterval(interval);
     }, []);
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box
             sx={{

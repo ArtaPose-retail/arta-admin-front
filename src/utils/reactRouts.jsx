@@ -77,7 +77,7 @@ const reactRouts = {
     //?
     //!
     digitalLable: {
-        main: "Digital_labe"
+        main: "/Digital_lable"
     }
 };
 

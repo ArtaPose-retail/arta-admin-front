@@ -286,7 +286,7 @@ export const menuData = [
             </svg>
         ),
         subItems: [
-            { title: "دیجیتال لیبل", path: "/Digital_labe" },
+            { title: "دیجیتال لیبل", path: reactRouts.digitalLable.main },
 
         ],
     },

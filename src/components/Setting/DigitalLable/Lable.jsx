@@ -2,8 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import { center } from "../../styles/theme";
-export default function Lable() {
+import { center } from "../../../styles/theme";
+
+export default function Lable({ title, info }) {
     return (
         <Card
             sx={{
@@ -16,7 +17,7 @@ export default function Lable() {
             }}
         >
             <Typography sx={{ color: "white", fontSize: "20px", fontWeight: "600" }}>
-                ویتامین
+                {title}
             </Typography>
             <Box
                 sx={{
@@ -29,7 +30,7 @@ export default function Lable() {
                 }}
             >
                 <Typography sx={{ fontSize: "20px", fontWeight: "600" }}>
-                    B12
+                    {info ?? "_"}
                 </Typography>
             </Box>
         </Card>
