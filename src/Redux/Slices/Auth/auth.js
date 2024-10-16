@@ -9,6 +9,8 @@ const initialState = {
         emailorphone: "",
         password: "",
         rememberme: true,
+        fname: "",
+        lname: "",
     },
 };
 
@@ -18,13 +20,12 @@ export const auth = createSlice({
     name: "auth",
     initialState,
     reducers: {
-
         setLogininfo: (state, { payload }) => {
-            state.loginInfo[payload.key] = payload.value
+            state.loginInfo[payload.key] = payload.value;
         },
         resetLoginInfo: (state) => {
-            state.loginInfo = initialState.loginInfo
-        }
+            state.loginInfo = initialState.loginInfo;
+        },
     },
     extraReducers: (builder) => {
         //? login
@@ -33,17 +34,17 @@ export const auth = createSlice({
         });
         builder.addCase(LoginAction.fulfilled, (state, { payload }) => {
             state.loading = false;
-            console.log(payload.data)
-            state.token = payload.data.token,
-                state.admission = payload.data.perm,
-                window.location.pathname = "/",
-                localStorage.setItem("TOKEN", payload.data.token)
+            (state.token = payload.data.token),
+                (state.admission = payload.data.perm),
+                (window.location.pathname = "/"),
+                localStorage.setItem("TOKEN", payload.data.token);
+            state.loginInfo.fname = payload.data.User.fname;
+            state.loginInfo.lname = payload.data.User.lname;
         });
         builder.addCase(LoginAction.rejected, (state) => {
             (state.loading = false),
                 toastHandler("مشکلی پیش امده لطفا مجدد وارد شوید", "info");
         });
-
     },
 });
 

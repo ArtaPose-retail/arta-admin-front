@@ -80,8 +80,6 @@ export default function SideBar() {
 
     const navigate = useNavigate();
 
-
-
     const handleDrawerOpen = () => {
         setOpen(!open);
     };
@@ -109,15 +107,14 @@ export default function SideBar() {
         };
     }, [open]);
 
-    const { UserInfo } = useSelector((state) => state.user)
-    const dispatch = useDispatch()
+    const { loginInfo } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     const LogOutHandler = () => {
-        console.log("gere")
-        localStorage.removeItem("TOKEN")
-        localStorage.removeItem("persist:root")
-        dispatch(resetLoginInfo())
-        navigate(reactRouts.auth.signIn)
-    }
+        localStorage.removeItem("TOKEN");
+        localStorage.removeItem("persist:root");
+        dispatch(resetLoginInfo());
+        navigate(reactRouts.auth.signIn);
+    };
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -130,106 +127,104 @@ export default function SideBar() {
                     </IconButton>
                 </DrawerHeader>
 
-                {menuData.map((item, index) => (
-
-                    checkAccess(item.RoleAccess) && <List
-                        key={index}
-                        dir="rtl"
-                        sx={{
-                            ...center,
-                            flexDirection: "column",
-                            width: "100%",
-                            mt: 4,
-                            p: 1,
-                            alignItems: open ? "flex-start" : "center",
-
-                        }}
-                        component="nav"
-                        aria-labelledby="nested-list-subheader"
-                    >
-                        <ListItemButton
-                            id="ListItemButton"
-                            onClick={() => handleSubItemClick(item.title)}
-                            sx={{
-                                ...center,
-                                borderRadius: (theme) => theme.shape.borderRadius,
-                            }}
-                        >
-                            <ListItemIcon sx={{ ...center, flexDirection: "column" }}>
-                                {item.icon}
-                            </ListItemIcon>
-                            {open && (
-                                <Link to={item?.path}>
-                                    <Typography
-                                        id="ListItemText"
-                                        sx={{
-                                            color: (theme) => theme.palette.icon.primary,
-                                            fontSize: "20px",
-                                            fontWeight: "400 ",
-                                        }}
-                                    >
-                                        {item.title}
-                                    </Typography>
-                                </Link>
-                            )}
-                            {open &&
-                                (item.hasSubItem ? (
-                                    openSubItems[item.title] ? (
-                                        <ExpandLess
-                                            sx={{ fill: (theme) => theme.palette.icon.primary }}
-                                        />
-                                    ) : (
-                                        <ExpandMore
-                                            sx={{ fill: (theme) => theme.palette.icon.primary }}
-                                        />
-                                    )
-                                ) : (
-                                    ""
-                                ))}
-                        </ListItemButton>
-                        {open && (
-                            <Collapse
-                                in={openSubItems[item.title]}
-                                timeout="auto"
-                                unmountOnExit
-                                sx={{ width: "100%" }}
+                {menuData.map(
+                    (item, index) =>
+                        checkAccess(item?.RoleAccess) && (
+                            <List
+                                key={index}
+                                dir="rtl"
+                                sx={{
+                                    ...center,
+                                    flexDirection: "column",
+                                    width: "100%",
+                                    mt: 4,
+                                    p: 1,
+                                    alignItems: open ? "flex-start" : "center",
+                                }}
+                                component="nav"
+                                aria-labelledby="nested-list-subheader"
                             >
-                                {item?.subItems?.map((subitem, index) => (
-                                    <List
-                                        key={index}
-                                        sx={{
-                                            ...center,
-                                            justifyContent: "flex-start",
-                                            mr: 3,
-                                            gap: "15px",
-                                            my: 2,
-                                            width: "100%",
-                                        }}
-                                        component="div"
-                                        disablePadding
-                                    >
-
-                                        <Link to={subitem?.path}>
+                                <ListItemButton
+                                    id="ListItemButton"
+                                    onClick={() => handleSubItemClick(item.title)}
+                                    sx={{
+                                        ...center,
+                                        borderRadius: (theme) => theme.shape.borderRadius,
+                                    }}
+                                >
+                                    <ListItemIcon sx={{ ...center, flexDirection: "column" }}>
+                                        {item?.icon}
+                                    </ListItemIcon>
+                                    {open && (
+                                        <Link to={item?.path}>
                                             <Typography
+                                                id="ListItemText"
                                                 sx={{
-                                                    color: (theme) => theme.palette.text.secondary,
-                                                    fontSize: "18px",
-                                                    fontWeight: "normal ",
-                                                    mr: 2,
+                                                    color: (theme) => theme.palette.icon.primary,
+                                                    fontSize: "20px",
+                                                    fontWeight: "400 ",
                                                 }}
                                             >
-                                                {subitem.title}
+                                                {item?.title}
                                             </Typography>
                                         </Link>
-
-                                    </List>
-                                ))}
-                                <Divider component="li" variant="inset" />
-                            </Collapse>
-                        )}
-                    </List>
-
-                ))}
+                                    )}
+                                    {open &&
+                                        (item?.hasSubItem ? (
+                                            openSubItems[item?.title] ? (
+                                                <ExpandLess
+                                                    sx={{ fill: (theme) => theme.palette.icon.primary }}
+                                                />
+                                            ) : (
+                                                <ExpandMore
+                                                    sx={{ fill: (theme) => theme.palette.icon.primary }}
+                                                />
+                                            )
+                                        ) : (
+                                            ""
+                                        ))}
+                                </ListItemButton>
+                                {open && (
+                                    <Collapse
+                                        in={openSubItems[item?.title]}
+                                        timeout="auto"
+                                        unmountOnExit
+                                        sx={{ width: "100%" }}
+                                    >
+                                        {item?.subItems?.map((subitem, index) => (
+                                            <List
+                                                key={index}
+                                                sx={{
+                                                    ...center,
+                                                    justifyContent: "flex-start",
+                                                    mr: 3,
+                                                    gap: "15px",
+                                                    my: 2,
+                                                    width: "100%",
+                                                }}
+                                                component="div"
+                                                disablePadding
+                                            >
+                                                <Link to={subitem?.path}>
+                                                    <Typography
+                                                        sx={{
+                                                            color: (theme) => theme.palette.text.secondary,
+                                                            fontSize: "18px",
+                                                            fontWeight: "normal ",
+                                                            mr: 2,
+                                                        }}
+                                                    >
+                                                        {subitem?.title}
+                                                    </Typography>
+                                                </Link>
+                                            </List>
+                                        ))}
+                                        <Divider component="li" variant="inset" />
+                                    </Collapse>
+                                )}
+                            </List>
+                        )
+                )}
 
                 <List
                     dir="rtl"
@@ -240,7 +235,6 @@ export default function SideBar() {
                         mt: 4,
                         p: 1,
                         alignItems: open ? "flex-start" : "center",
-
                     }}
                     component="nav"
                     aria-labelledby="nested-list-subheader"
@@ -257,7 +251,6 @@ export default function SideBar() {
                             <Avatar
                                 alt="ARTA-POSE"
                                 src={profile}
-
                                 sx={{
                                     bgcolor: "#41669A",
                                     width: 50,
@@ -282,7 +275,7 @@ export default function SideBar() {
                                     ...center,
                                 }}
                             >
-                                {UserInfo.fname}{UserInfo.lname}
+                                {loginInfo?.fname} {loginInfo?.lname}
                             </Typography>
                         )}
                     </ListItemButton>
