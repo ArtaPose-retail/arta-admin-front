@@ -33,6 +33,7 @@ import ProtectedRoute from "./utils/ProtectedRoute.jsx";
 import Discount from "./pages/Actions/Discount/Index";
 import Sellpage from "./pages/Actions/Sellpage.jsx";
 import DigitalLable from "./pages/DigiTalLable/index.jsx";
+import StoreInfo from "./pages/Setting/StoreInfo/index.jsx";
 
 function App() {
   return (
@@ -291,6 +292,15 @@ function App() {
               <ProtectedRoute
                 element={DigitalLable}
                 requiredRole={["admin", "settings"]}
+              />
+            }
+          />
+          <Route
+            path={reactRouts.setting.store.info}
+            element={
+              <ProtectedRoute
+                element={StoreInfo}
+                requiredRole={["admin"]}
               />
             }
           />

@@ -287,6 +287,7 @@ export const menuData = [
         ),
         subItems: [
             { title: "دیجیتال لیبل", path: reactRouts.digitalLable.main },
+            { title: "مشخصات فروشگاه", path: reactRouts.setting.store.info },
 
         ],
     },
@@ -299,23 +300,23 @@ export const headerItems = [
     },
     {
         title: "دریافتی ها",
-        path: "/recives",
+        path: reactRouts.recives.main,
     },
     {
         title: "پرداختی‌ها",
-        path: "/payments",
+        path: reactRouts.payment.main,
     },
     {
         title: "حساب‌ها",
-        path: "/accounts",
+        path: reactRouts.accounts.main,
     },
     {
         title: "اسناد گذشته",
-        path: "/documents",
+        path: reactRouts.documents.main,
     },
     {
         title: "گزارش صندوق",
-        path: "/reports",
+        path: reactRouts.report.main,
     },
 ];
 

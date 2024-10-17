@@ -78,6 +78,12 @@ const reactRouts = {
     //!
     digitalLable: {
         main: "/Digital_lable"
+    },
+
+    setting: {
+        store: {
+            info: "/store_Information"
+        }
     }
 };
 
