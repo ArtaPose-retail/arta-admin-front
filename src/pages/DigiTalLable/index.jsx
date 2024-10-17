@@ -10,6 +10,7 @@ import { getProList } from "../../Redux/Slices/Accounting/Products/product";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import SingleProd from "../../components/Setting/DigitalLable/SingleProd";
+import { Home } from "@mui/icons-material";
 
 function DigitalLable() {
     const { isfullScrenn } = useSelector((state) => state.general);
@@ -66,6 +67,14 @@ function DigitalLable() {
                         boxShadow: "0px 0px 9px 2px rgba(0, 0, 0, 0.25)",
                     }}
                 >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "end",
+                        }}
+                    >
+                        <Home onClick={() => navigate(reactRouts.home)} />
+                    </Box>
                     <Box
                         sx={{
                             ...center,
