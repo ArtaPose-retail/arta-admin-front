@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import SingleProd from "../../components/Setting/DigitalLable/SingleProd";
 
-
 function DigitalLable() {
     const { isfullScrenn } = useSelector((state) => state.general);
     const dispatch = useDispatch();
@@ -22,18 +21,19 @@ function DigitalLable() {
         setFullScrenn(status);
     };
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     useEffect(() => {
         dispatch(getProList());
     }, []);
     return (
-        <Box sx={{
-            ...center,
-            width: "100vw",
-            height: "100vh",
-            overflow: "Hidden",
-        }}>
-
+        <Box
+            sx={{
+                ...center,
+                width: "100vw",
+                height: "100vh",
+                overflow: "Hidden",
+            }}
+        >
             <Grid
                 container
                 spacing={2}
@@ -51,12 +51,9 @@ function DigitalLable() {
                         boxShadow: "0px 0px 9px 2px rgba(0, 0, 0, 0.25)",
                     }}
                 >
-                    <Box sx={{ width: "100%", height: "100%", p: 0 }}>
-
-                        <ProdDetails />
-
-
-                    </Box>
+                    {/* <Box sx={{ width: "100%", height: "100%", p: 0 }}> */}
+                    <ProdDetails />
+                    {/* </Box> */}
                 </Grid>
                 <Grid
                     xs={3}
@@ -69,29 +66,26 @@ function DigitalLable() {
                         boxShadow: "0px 0px 9px 2px rgba(0, 0, 0, 0.25)",
                     }}
                 >
-
                     <Box
                         sx={{
                             ...center,
                             flexDirection: "column",
                             gap: "100px",
+                            height: "40%",
                         }}
                     >
-
                         <Box
                             onClick={() => navigate(reactRouts.home)}
                             sx={{
-                                cursor: 'pointer',
+                                cursor: "pointer",
                                 ...center,
                                 flexDirection: "column",
-                                // bgcolor: (theme) => theme.palette.darkBlue.main,
                                 borderRadius: "12px",
                                 p: 2,
                                 width: 300,
-                                gap: '15px'
+                                gap: "15px",
                             }}
                         >
-
                             <img src={logo} height={120} width={120} />
                             <img src={logoNM} height={50} width={120} />
                             <Typography
@@ -100,18 +94,21 @@ function DigitalLable() {
                                 WWW.ARTA-POS.COM
                             </Typography>
                         </Box>
-
                     </Box>
-                    <Box sx={{ p: 5, display: "flex", flexDirection: "column", gap: "15px" }}>
+                    <Box
+                        sx={{
+                            p: 3,
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "15px",
+                            height: "60%",
+                            overflowY: "scroll",
+                        }}
+                    >
                         {productList?.map((item, index) => (
-
                             <SingleProd data={item} />
-
-                        ))
-                        }
+                        ))}
                     </Box>
-
-
                 </Grid>
             </Grid>
         </Box>

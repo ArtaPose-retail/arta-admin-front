@@ -19,20 +19,21 @@ function SingleProd({ data }) {
                 background: "#fff",
                 textAlign: "center",
                 height: 100,
-                lineHeight: "60px",
-                position: "relative",
+                width: '100%',
                 boxShadow: "0px 0px 17px 1px rgb(0 0 0 / 17%)",
                 borderRadius: "12px",
                 ...center,
-                justifyContent: "space-between",
-                p: 3
+                justifyContent: "start",
+                gap: "5px",
+                px: 1,
+
             }}
         >
             {/* header */}
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Box
                     sx={{
-                        width: "83px",
+                        width: "80px",
                         height: "56px",
                         borderRadius: "8px",
                         ...center,

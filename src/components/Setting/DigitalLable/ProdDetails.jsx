@@ -6,16 +6,15 @@ import logo from "../../../Assets/images/logo.png";
 import DLbg from "../../../Assets/images/DLbg.png";
 import name from "../../../Assets/images/logoname.png";
 import ObliqueLine from "../../UI/ObliqueLine";
-import fruitBasket from "../../../Assets/images/Fruits/fruitBasket.png";
 import Title from "../../UI/Title";
 import { separateBy3, toPersian } from "../../../utils/setting";
 import { useSelector } from "react-redux";
-import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
 import { FullScreen } from "@chiragrupani/fullscreen-react";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+import apiRouts from "../../../utils/apiRouts";
 export const ProdDetails = () => {
-    const { signleProd } = useSelector(state => state.product)
+    const { signleProd } = useSelector((state) => state.product);
     const [fullScrenn, setFullScrenn] = useState(false);
     const screenHandler = (status) => {
         setFullScrenn(status);
@@ -27,8 +26,7 @@ export const ProdDetails = () => {
                 bgcolor: (theme) => theme.background.box,
                 height: "100%",
                 ...center,
-                // border: "1px solid red",
-
+                // border: "1px solid red"
             }}
         >
             <FullScreen
@@ -37,17 +35,46 @@ export const ProdDetails = () => {
                     setFullScrenn(isFull);
                 }}
             >
-
                 <Box
                     sx={{
-                        height: fullScrenn ? "100dvh" : "80dvh",
-                        width: fullScrenn ? "100dvw`" : "60dvw",
+                        height: fullScrenn ? "100dvh" : "90dvh",
+                        width: fullScrenn ? "100dvw`" : "65dvw",
                         backgroundImage: `url(${DLbg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         // border: "1px solid red",
+                        position: "relative"
                     }}
                 >
+                    <Box sx={{ position: 'absolute' }}>
+                        {!fullScrenn ? (
+                            <FullscreenIcon
+                                onClick={() => screenHandler(true)}
+                                fontSize="medium"
+                                sx={{
+                                    fill: (theme) => theme.background.box,
+                                    bgcolor: (theme) => theme.palette.text.secondary,
+                                    borderRadius: "8px",
+                                    m: 1,
+
+                                    cursor: "pointer",
+                                }}
+                            />
+                        ) : (
+                            <FullscreenExitIcon
+                                onClick={() => screenHandler(false)}
+                                fontSize="medium"
+                                sx={{
+                                    fill: (theme) => theme.background.box,
+                                    bgcolor: (theme) => theme.palette.text.secondary,
+                                    borderRadius: "8px",
+                                    m: 1,
+                                    cursor: "pointer",
+                                }}
+                            />
+                        )}
+                    </Box>
+
                     <Box
                         sx={{
                             height: "50%",
@@ -63,7 +90,7 @@ export const ProdDetails = () => {
                             }}
                         >
                             <img
-                                src={fruitBasket}
+                                src={`${apiRouts.baseUrl}${signleProd?.productpic_path}`}
                                 alt="fruitBasket"
                                 style={{ width: "60%", height: "100%" }}
                             />
@@ -72,7 +99,7 @@ export const ProdDetails = () => {
                             <Title
                                 title={signleProd?.title}
                                 Typoprops={{
-                                    fontSize: "70px",
+                                    fontSize: "40px",
                                     fontWeight: 700,
                                     color: (theme) => theme.palette.text.card,
                                     textAlign: "center",
@@ -80,34 +107,37 @@ export const ProdDetails = () => {
                             />
                             <Typography
                                 sx={{
-                                    fontSize: "80px",
+                                    fontSize: "60px",
                                     textAlign: "center",
                                     fontWeight: "900",
                                     color: (theme) => theme.palette.warning.main,
                                     width: "100%",
                                 }}
                             >
-                                {toPersian(separateBy3("380000"))}
+                                {toPersian(separateBy3(signleProd?.price ?? 0))}
                                 تومان
                             </Typography>
                             <Box sx={{ ...center, justifyContent: "start", gap: "10px" }}>
-                                <ObliqueLine title={separateBy3("400000")} />
                                 <Typography
                                     sx={{
+                                        p: 1,
                                         fontSize: "24px",
                                         textAlign: "center",
                                         fontWeight: "500",
-                                        color: (theme) => theme.palette.primary.main,
+                                        color: (theme) => theme.palette.text.primary,
+                                        bgcolor: "#72BF01",
+                                        borderRadius: "12px",
                                     }}
                                 >
                                     هرکیوگرم
                                 </Typography>
+                                <ObliqueLine title={separateBy3(signleProd?.originalprice ?? 0)} />
                             </Box>
                         </Box>
                     </Box>
                     <Box
                         sx={{
-                            height: "50%",
+                            height: "48%",
                             width: "100%",
                             ...center,
                             flexDirection: "column",
@@ -122,12 +152,36 @@ export const ProdDetails = () => {
                                 gap: "10px",
                             }}
                         >
-                            <Lable title={"انرژی"} info={singleProd?.meta?.energy} />
-                            <Lable title={"قند"} info={singleProd?.meta?.sugar} />
-                            <Lable title={"چربی"} info={singleProd?.meta?.fat} />
-                            <Lable title={"پرویتين"} info={singleProd?.meta?.protein} />
-                            <Lable title={"ویتامین"} info={singleProd?.meta?.vitamin1} />
-                            <Lable title={"ویتامین"} info={singleProd?.meta?.vitamin2} />
+                            <Lable
+                                bg={"#72BF01"}
+                                title={"انرژی"}
+                                info={signleProd?.meta?.energy}
+                            />
+                            <Lable
+                                bg={"#72BF01"}
+                                title={"قند"}
+                                info={signleProd?.meta?.sugar}
+                            />
+                            <Lable
+                                bg={"#3A7817"}
+                                title={"چربی"}
+                                info={signleProd?.meta?.fat}
+                            />
+                            <Lable
+                                bg={"#3A7817"}
+                                title={"پرویتين"}
+                                info={signleProd?.meta?.protein}
+                            />
+                            <Lable
+                                bg={"#BFF102"}
+                                title={"ویتامین"}
+                                info={signleProd?.meta?.vitamin1}
+                            />
+                            <Lable
+                                bg={"#BFF102"}
+                                title={"ویتامین"}
+                                info={signleProd?.meta?.vitamin2}
+                            />
                         </Box>
                         <Typography
                             sx={{
@@ -137,41 +191,14 @@ export const ProdDetails = () => {
                                 fontWeight: "700",
                             }}
                         >
-                            {singleProd?.meta?.advantage ?? "مفید برای سلامتی"}
+                            {signleProd?.meta?.advantage ?? "مفید برای سلامتی"}
                         </Typography>
                         <Box sx={{ ...center, flexDirection: "column" }}>
                             <img src={logo} width={50} height={50} />
                             <img src={name} width={80} height={40} />
                         </Box>
                     </Box>
-                    {!fullScrenn ? (
-                        <FullscreenIcon
-                            onClick={() => screenHandler(true)}
-                            fontSize="large"
-                            sx={{
-                                fill: (theme) => theme.background.box,
-                                bgcolor: (theme) => theme.palette.text.secondary,
-                                borderRadius: "8px",
-                                m: 1,
-
-                                cursor: "pointer",
-                            }}
-                        />
-                    ) : (
-                        <FullscreenExitIcon
-                            onClick={() => screenHandler(false)}
-                            fontSize="large"
-                            sx={{
-                                fill: (theme) => theme.background.box,
-                                bgcolor: (theme) => theme.palette.text.secondary,
-                                borderRadius: "8px",
-                                m: 1,
-                                cursor: "pointer",
-                            }}
-                        />
-                    )}
                 </Box>
-
             </FullScreen>
         </Box>
     );

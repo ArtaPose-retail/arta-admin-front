@@ -19,6 +19,7 @@ function ObliqueLine({ title }) {
                 }}
             >
                 {toPersian(title)}
+                تومان
             </Typography>
             <Box
                 sx={{

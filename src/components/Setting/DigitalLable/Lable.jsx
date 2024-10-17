@@ -3,12 +3,13 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { center } from "../../../styles/theme";
+import { toPersian } from "../../../utils/setting";
 
-export default function Lable({ title, info }) {
+export default function Lable({ title, info, bg }) {
     return (
         <Card
             sx={{
-                background: "#3A7817",
+                background: bg,
                 width: "120px",
                 height: "100%",
                 ...center,
@@ -16,7 +17,7 @@ export default function Lable({ title, info }) {
                 justifyContent: "space-between",
             }}
         >
-            <Typography sx={{ color: "white", fontSize: "20px", fontWeight: "600" }}>
+            <Typography sx={{ color: "black", fontSize: "20px", fontWeight: "600" }}>
                 {title}
             </Typography>
             <Box
@@ -30,7 +31,7 @@ export default function Lable({ title, info }) {
                 }}
             >
                 <Typography sx={{ fontSize: "20px", fontWeight: "600" }}>
-                    {info ?? "_"}
+                    {toPersian(info ?? "_")}
                 </Typography>
             </Box>
         </Card>
