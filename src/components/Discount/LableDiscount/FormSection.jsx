@@ -7,7 +7,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import { lableDiscountForm } from "../../../utils/data";
 import { center } from "../../../styles/theme";
 import Input from "../../UI/Input";
@@ -17,9 +17,14 @@ import {
     resetForm,
     setNewLableinfo,
 } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
+import ReactToPrint from "react-to-print";
+import { Print } from "@mui/icons-material";
+import PromoCodePrint from "../../PrintTemplate/PromoCode";
 
 function FormSection() {
-    const { newPromoInfo } = useSelector((state) => state.lable);
+    const { newPromoInfo, AllowPrint, newPomoList } = useSelector(
+        (state) => state.lable
+    );
     const dispatch = useDispatch();
     const onChangeHandler = (name, value, type) => {
         dispatch(
@@ -35,11 +40,19 @@ function FormSection() {
         dispatch(resetForm());
     };
     const cancelhandler = () => {
-
         dispatch(resetForm());
     };
+    const formRef = useRef();
     return (
-        <Box>
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-evenly",
+                height: "100%",
+                p: 1,
+            }}
+        >
             <Grid container spacing={2} sx={{ p: 1, mt: 1, ...center }}>
                 {lableDiscountForm?.map((item, index) => (
                     <Grid item xs={5} key={index}>
@@ -76,9 +89,27 @@ function FormSection() {
                 <Button onClick={submithandler} variant="contained" color="success">
                     ثبت
                 </Button>
+                <Button disabled={!AllowPrint} sx={{ cursor: "auto" }} variant="outlined">
+                    <ReactToPrint
+                        onAfterPrint={() => console.log("after")}
+                        trigger={() => (
+                            <Print
+                                sx={{
+                                    fill: (theme) => theme.palette.primary.light,
+                                    cursor: "pointer",
+                                }}
+                            />
+                        )}
+                        content={() => formRef.current}
+                    />
+                </Button>
+
                 <Button onClick={cancelhandler} variant="contained" color="warning">
                     انصراف
                 </Button>
+                <Box sx={{ display: "none" }}>
+                    <PromoCodePrint ref={formRef} data={newPomoList} />
+                </Box>
             </Box>
         </Box>
     );

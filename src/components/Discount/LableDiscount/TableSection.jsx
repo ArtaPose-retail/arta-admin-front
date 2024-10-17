@@ -9,42 +9,41 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { persianDate, separateBy3, toPersian, toastHandler } from "../../../utils/setting";
-import moment from "jalali-moment";
-import ProductDetails from "../../HomePage/Dialogs/ProductDetails";
-import { customerFactortable } from "../../../utils/data";
+import { persianDate, separateBy3, toPersian } from "../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePC, getList } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
+import {
+    deletePC,
+    getList,
+} from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
 import { center } from "../../../styles/theme";
 import { Print } from "@mui/icons-material";
-
-import ReactToPrint from 'react-to-print';
+import ReactToPrint from "react-to-print";
 import PromoCodePrint from "../../PrintTemplate/PromoCode";
-
-
 
 function Row(props) {
     const { row } = props;
     const [open, setOpen] = useState(false);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const componentRef = useRef();
 
     const deleteBtn = (id) => {
-        dispatch(deletePC(id))
+        dispatch(deletePC(id));
     };
 
     return (
         <Fragment>
             <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-
                 <TableCell
                     align="center"
-                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500, ...center }}
+                    sx={{
+                        color: (theme) => theme.typography.color,
+                        fontWeight: 500,
+                        ...center,
+                        gap: "5px",
+                    }}
                 >
                     <IconButton
                         aria-label="expand row"
@@ -53,7 +52,9 @@ function Row(props) {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
+
                     {row?.type == 0 ? "درصدی" : "مبلغی"}
+                    {`(${toPersian(row?.amount ?? 0)})`}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -66,8 +67,6 @@ function Row(props) {
                     align="center"
                 >
                     {persianDate(row?.started_time)}
-
-
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -81,8 +80,12 @@ function Row(props) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
                             <Box
-                                sx={{ color: (theme) => theme.palette.disable.main, ...center, justifyContent: "flex-start", gap: "15px" }}
-
+                                sx={{
+                                    color: (theme) => theme.palette.disable.main,
+                                    ...center,
+                                    justifyContent: "flex-start",
+                                    gap: "15px",
+                                }}
                                 gutterBottom
                                 component="div"
                             >
@@ -93,11 +96,21 @@ function Row(props) {
                                 <DeleteOutlineIcon
                                     fontSize="small"
                                     onClick={() => deleteBtn(row?.id)}
-                                    sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
+                                    sx={{
+                                        fill: (theme) => theme.palette.warning.main,
+                                        cursor: "pointer",
+                                    }}
                                 />
 
                                 <ReactToPrint
-                                    trigger={() => <Print sx={{ fill: (theme) => theme.palette.primary.light, cursor: "pointer" }} />}
+                                    trigger={() => (
+                                        <Print
+                                            sx={{
+                                                fill: (theme) => theme.palette.primary.light,
+                                                cursor: "pointer",
+                                            }}
+                                        />
+                                    )}
                                     content={() => componentRef.current}
                                 />
                             </Box>
@@ -106,20 +119,18 @@ function Row(props) {
                 </TableCell>
             </TableRow>
             <Box sx={{ display: "none" }}>
-
                 <PromoCodePrint ref={componentRef} data={row} />
             </Box>
         </Fragment>
     );
 }
 
-
 export default function TableSection() {
-    const { update, promoList } = useSelector((state) => state.lable)
-    const dispatch = useDispatch()
+    const { update, promoList } = useSelector((state) => state.lable);
+    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getList())
-    }, [update])
+        dispatch(getList());
+    }, [update]);
     return (
         <Box
             sx={{
@@ -133,7 +144,6 @@ export default function TableSection() {
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
-
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
@@ -146,7 +156,6 @@ export default function TableSection() {
                             >
                                 کد تخفیف
                             </TableCell>
-
 
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}

@@ -5,6 +5,7 @@ import { toastHandler } from "../../../../../utils/setting";
 const initialState = {
     loading: false,
     update: false,
+    AllowPrint: false,
     newPromoInfo: {
         type: null,
         amount: "",
@@ -19,6 +20,7 @@ const initialState = {
         txtType: ""
     },
     promoList: [],
+    newPomoList: []
 };
 
 export const getList = createAsyncThunk("PC/get list", getPromoList);
@@ -36,6 +38,7 @@ export const lable = createSlice({
 
         resetForm: (state) => {
             state.newPromoInfo = initialState.newPromoInfo;
+            state.AllowPrint = initialState.AllowPrint
         },
     },
 
@@ -69,9 +72,12 @@ export const lable = createSlice({
         builder.addCase(addPC.pending, (state) => {
             state.loading = true;
         });
-        builder.addCase(addPC.fulfilled, (state) => {
+        builder.addCase(addPC.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = true;
+            console.log(payload);
+            state.newPomoList = payload.data.data
+            state.AllowPrint = true
             toastHandler("با موفقیت ثبت شد", "info");
         });
         builder.addCase(addPC.rejected, (state) => {
