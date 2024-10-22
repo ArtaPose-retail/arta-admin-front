@@ -1,16 +1,10 @@
 import { Badge, Box, Typography } from "@mui/material";
-import { separateBy3, toPersian } from "../../utils/setting";
-import { OldFactor } from "../../utils/data";
-import moment from "jalali-moment";
+import { persianDate, separateBy3, toPersian } from "../../utils/setting";
+
+import { center } from "../../styles/theme";
 
 function SingleLable({ item, index, selectedIndex, onCardSelect }) {
 
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
     const isSelected = index === selectedIndex;
 
     const handleCardSelect = () => {
@@ -20,7 +14,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
     return (
         <Box>
             <Badge
-                badgeContent={OldFactor.length - index}
+                badgeContent={index + 1}
                 sx={{
                     "& .MuiBadge-badge": {
                         fontSize: "14px",
@@ -82,7 +76,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                         isSelected ? theme.palette.text.primary : theme.palette.divider,
                                 }}
                             >
-                                شماره فاکتور: {toPersian(item?.factorNumber)}
+                                شماره فاکتور: {toPersian(item?.factorNumber ?? 0)}
                             </Typography>
                         </Box>
                         <Box
@@ -123,7 +117,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                                 : theme.palette.divider,
                                     }}
                                 >
-                                    {toPersian(separateBy3(item?.amount))}
+                                    {toPersian(separateBy3(item?.amount ?? 0))}
                                 </Typography>
                             </Box>
                             <Typography
@@ -135,11 +129,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                         isSelected ? theme.palette.text.primary : theme.palette.divider,
                                 }}
                             >
-                                {toPersian(
-                                    moment(item.date, "YYYY-MM-DD")
-                                        .locale("fa")
-                                        .format("YYYY/MM/D")
-                                )}
+                                {persianDate()}
                             </Typography>
                         </Box>
                     </Box>

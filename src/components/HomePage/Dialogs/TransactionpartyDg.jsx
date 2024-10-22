@@ -17,17 +17,21 @@ import profile from "../../../Assets/images/profileImage.png";
 import AddTransactionType from "./AddTransactionType";
 import { center } from "../../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { addTransactions, resetNewTransaction, setNewTransaction } from "../../../Redux/Slices/Accounting/Transactions/transactionsSlice";
+import {
+    addTransactions,
+    resetNewTransaction,
+    setNewTransaction,
+} from "../../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 
 function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
-    const { newTransaction } = useSelector(state => state.transactionsSlice)
-    const dispatch = useDispatch()
+    const { newTransaction } = useSelector((state) => state.transactionsSlice);
+    const dispatch = useDispatch();
 
     const submitHandler = () => {
-        dispatch(addTransactions())
-        dispatch(resetNewTransaction())
-        handlerCloseDialog()
-    }
+        dispatch(addTransactions());
+        dispatch(resetNewTransaction());
+        handlerCloseDialog();
+    };
     return (
         <div>
             <Dialog
@@ -46,17 +50,18 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                         bgcolor: "white",
                     }}
                 >
-                    <Title title={"افزودن طرف معامله"} Typoprops={{
-                        fontSize: "24px",
-                        fontWeight: "700",
-
-                    }} />
+                    <Title
+                        title={"افزودن طرف معامله"}
+                        Typoprops={{
+                            fontSize: "24px",
+                            fontWeight: "700",
+                        }}
+                    />
 
                     <Box sx={{ ...center, flexDirection: "column", gap: "5px" }}>
                         <Avatar
                             alt="ARTA-POSE"
                             src={profile}
-
                             sx={{
                                 bgcolor: "#41669A",
                                 width: 60,
@@ -76,7 +81,11 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                             <Grid item xs={4} key={index}>
                                 <InputLabel>
                                     <Typography
-                                        sx={{ fontSize: "18px", fontWeight: 400, color: item.color }}
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 400,
+                                            color: item.color,
+                                        }}
                                     >
                                         {item.lable}
                                     </Typography>
@@ -87,10 +96,12 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                                     id={item.name}
                                     fullWidth
                                     onChange={(e) => {
-                                        dispatch(setNewTransaction({
-                                            key: item.name,
-                                            value: e.target.value
-                                        }))
+                                        dispatch(
+                                            setNewTransaction({
+                                                key: item.name,
+                                                value: e.target.value,
+                                            })
+                                        );
                                     }}
                                     sx={{
                                         "& .MuiNativeSelect-select": {
@@ -143,9 +154,13 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                         ))}
                     </Grid>
 
-
                     <Box
-                        sx={{ ...center, mt: 1, gap: "15px", justifyContent: "space-between" }}
+                        sx={{
+                            ...center,
+                            mt: 1,
+                            gap: "15px",
+                            justifyContent: "space-between",
+                        }}
                     >
                         <Box sx={{ ...center, gap: "5px" }}>
                             <Button
@@ -163,12 +178,12 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                             </Button>
                             <Button
                                 onClick={() => {
-                                    toastHandler("توضیحات با موفقیت ثبت شد", "info")
-                                    handlerCloseDialog()
+                                    dispatch(resetNewTransaction());
                                 }}
                                 variant="contained"
                                 sx={{
-                                    bgcolor: "#F90", color: (theme) => theme.palette.text.primary,
+                                    bgcolor: "#F90",
+                                    color: (theme) => theme.palette.text.primary,
                                     px: 4,
                                     fontSize: "16px",
                                     fontWeight: 500,
@@ -176,15 +191,11 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                             >
                                 پاکسازی فرم
                             </Button>
-
-
                         </Box>
-
 
                         <Button
                             onClick={() => {
-
-                                handlerCloseDialog()
+                                handlerCloseDialog();
                             }}
                             variant="contained"
                             sx={{

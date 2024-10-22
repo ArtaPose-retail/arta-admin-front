@@ -15,8 +15,13 @@ import TransactionpartyDg from "./Dialogs/TransactionpartyDg";
 import { toPersian } from "../../utils/setting";
 import Input from "../UI/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { getTransactions } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
+import {
+    getTransactions,
+    setNewTransaction,
+} from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 import { setTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
+import { Add } from "@mui/icons-material";
+import { addOrder } from "../../Redux/Slices/Actions/Order/Order";
 
 function NewFactor() {
     const dispatch = useDispatch();
@@ -32,12 +37,23 @@ function NewFactor() {
         setOpen(false);
     };
     const showTransactionDialoghandler = () => {
+        dispatch(
+            setNewTransaction({
+                key: "user_type",
+                value: "Customer",
+            })
+        );
         setOpenTransaction(true);
     };
 
     const handlerCloseTransactionDialog = () => {
         setOpenTransaction(false);
     };
+
+    const onSearchHandler = (e) => {
+        dispatch(setTransactionInfo(e))
+        dispatch(addOrder())
+    }
     useEffect(() => {
         dispatch(getTransactions("Customer"));
     }, []);
@@ -66,8 +82,7 @@ function NewFactor() {
                     disablePortal
                     id="combo-box-demo"
                     options={TransActionList}
-
-                    onChange={(_, e) => dispatch(setTransactionInfo(e))}
+                    onChange={(_, e) => onSearchHandler(e)}
                     getOptionLabel={(option) => `${option?.phone1}`}
                     sx={{ width: 300, color: "#000000" }}
                     renderOption={(props, option) => (
@@ -94,9 +109,6 @@ function NewFactor() {
                     )}
                     renderInput={(params) => (
                         <TextField
-                            onChange={(e) => {
-                                console.log(e.target)
-                            }}
                             sx={{
                                 color: "#000",
                                 background: "#F2F2F2",
@@ -124,26 +136,53 @@ function NewFactor() {
                 <Input
                     width={"20%"}
                     hasIcon={false}
-                    type={"number"}
+                    type={"text"}
                     placeholder={"تلفن همراه"}
                     value={transactionInfo?.phone1}
+                    name={"phone1"}
+                    onChange={(name, value) => {
+                        dispatch(
+                            setNewTransaction({
+                                key: name,
+                                value: value,
+                            })
+                        );
+                    }}
                 />
                 <Input
                     width={"15%"}
                     hasIcon={false}
                     type={"text"}
                     placeholder={"نام"}
+                    name={"fname"}
                     value={transactionInfo?.fname}
+                    onChange={(name, value) => {
+                        dispatch(
+                            setNewTransaction({
+                                key: name,
+                                value: value,
+                            })
+                        );
+                    }}
                 />
                 <Input
                     width={"15%"}
                     hasIcon={false}
                     type={"text"}
+                    name={"lname"}
                     placeholder={" نام خانوادگی"}
                     value={transactionInfo?.lname}
+                    onChange={(name, value) => {
+                        dispatch(
+                            setNewTransaction({
+                                key: name,
+                                value: value,
+                            })
+                        );
+                    }}
                 />
                 <Box sx={{ ...center, gap: "10px" }}>
-                    <Button
+                    {/* <Button
                         onClick={() => showDialoghandler()}
                         variant="contained"
                         sx={{
@@ -156,7 +195,7 @@ function NewFactor() {
                         }}
                     >
                         توضیحات
-                    </Button>
+                    </Button> */}
                     <Button
                         onClick={() => showTransactionDialoghandler()}
                         variant="contained"
@@ -165,6 +204,10 @@ function NewFactor() {
                             color: (theme) => theme.palette.text.primary,
                         }}
                     >
+                        <Add
+                            fontSize="medium"
+                            sx={{ fill: (theme) => theme.palette.text.primary }}
+                        />
                         <PersonIcon
                             fontSize="medium"
                             sx={{ fill: (theme) => theme.palette.text.primary }}

@@ -1,39 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import reactRouts from "../../utils/reactRouts";
+import { useEffect, useState } from "react";
 import { OldFactor } from "../../utils/data";
 import AddIcon from "@mui/icons-material/Add";
 import SingleLable from "./SingleLable";
 import { Box, Typography } from "@mui/material";
+import { center } from "../../styles/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { OrderList } from "../../Redux/Slices/Actions/Order/Order";
 
 function LableCard() {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-    const navigate = useNavigate();
-
-    const addAcount = () => {
-        navigate(reactRouts.banking.addcart);
-    };
-
-    const [open, setOpen] = useState(false);
-
-    const showDialoghandler = () => {
-        setOpen(true);
-        console.log("here", open);
-    };
-    const handlerCloseDialog = () => {
-        setOpen(false);
-        console.log("here", open);
-    };
-
+    const dispatch = useDispatch();
     const [selectedIndex, setSelectedIndex] = useState(-1);
-
+    const { orderList, update } = useSelector(state => state.Order)
     const handleCardSelect = (index) => {
         setSelectedIndex(index);
     };
+
+    useEffect(() => {
+        dispatch(OrderList());
+    }, [update]);
 
     return (
         <Box sx={{ width: "100wh", display: "flex", overflowX: "scroll" }}>
@@ -68,7 +52,7 @@ function LableCard() {
                         فاکتور جدید
                     </Typography>
                 </Box>
-                {OldFactor.map((item, index) => (
+                {orderList.map((item, index) => (
                     <SingleLable
                         item={item}
                         index={index}

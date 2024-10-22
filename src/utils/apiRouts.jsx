@@ -35,6 +35,10 @@ const apiRouts = {
         gallery: {
             list: "admin/gallery/"
         }
+    },
+    order: {
+        list: "admin/order/",
+        add: "admin/order/new"
     }
 };
 
