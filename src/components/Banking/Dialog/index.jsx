@@ -5,10 +5,9 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/material";
 import AccountType from "./AccountType";
 import BankName from "./BankName";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { center } from "../../../styles/theme";
 import { BankNameList } from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
-import { BTlist } from "../../../Redux/Slices/Accounting/Bank/BankType/bankType";
 export default function BnDialog({ name }) {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch();

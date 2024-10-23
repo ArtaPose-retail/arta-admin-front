@@ -1,18 +1,14 @@
 import {
     Box,
     Button,
-    FormControlLabel,
     Grid,
     InputAdornment,
     InputLabel,
     TextField,
     Typography,
 } from "@mui/material";
-import React, { useState } from "react";
 import Title from "../../components/UI/Title";
 import { addCartForm } from "../../utils/data";
-import AddIcon from "@mui/icons-material/Add";
-import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import {
     setFormInfo,
@@ -25,6 +21,7 @@ import reactRouts from "../../utils/reactRouts";
 import BnDialog from "../../components/Banking/Dialog";
 import { toastHandler } from "../../utils/setting";
 import Input from "../../components/UI/Input";
+import { center } from "../../styles/theme";
 function AddCard() {
     const { formInformation, checkBox } = useSelector((state) => state.addCard);
     const { isfullScrenn } = useSelector((state) => state.general);
@@ -33,11 +30,7 @@ function AddCard() {
     const cancelBTN = () => {
         navigate(reactRouts.banking.main);
     };
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     const poseItems = ["API_IP", "API_TERMENAL", "posName"];
     const internetbankItems = ["userName", "password", "bankUrl"];
