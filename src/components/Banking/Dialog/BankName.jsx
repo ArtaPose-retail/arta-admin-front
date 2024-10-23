@@ -6,12 +6,12 @@ import { BankAccountType, bankList } from "../../../utils/data";
 import { toPersian } from "../../../utils/setting";
 import BankList from "./‌BankList";
 import { center } from "../../../styles/theme";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addBankNameInfo } from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
 
 function BankName({ handleClose }) {
     const dispatch = useDispatch();
-
+    const { bankNamekList } = useSelector(state => state.bankName)
     const onChangehandler = (e) => {
         dispatch(
             addBankNameInfo({
@@ -175,7 +175,7 @@ function BankName({ handleClose }) {
                 </Box>
 
                 <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                    {BankAccountType?.map((item, index) => (
+                    {bankNamekList?.map((item, index) => (
                         <Box
                             key={index}
                             sx={{

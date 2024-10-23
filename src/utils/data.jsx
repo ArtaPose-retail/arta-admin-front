@@ -427,20 +427,6 @@ export const addCartForm = [
     {
         name: "bankName",
         select: true,
-        options: [
-            {
-                title: "بانک خود راانتخاب کنید",
-                value: "",
-            },
-            {
-                title: "ملی",
-                value: "meli",
-            },
-            {
-                title: "تجارت",
-                value: "tejarat",
-            },
-        ],
         placeholder: "بانک خود راانتخاب کنید",
         lable: "نام بانک",
         hasIcon: true,
@@ -503,20 +489,6 @@ export const addCartForm = [
     {
         name: "accountType",
         select: true,
-        options: [
-            {
-                title: "نوع حساب خود را انتخاب کنید",
-                value: "",
-            },
-            {
-                title: "جاری",
-                value: "jari",
-            },
-            {
-                title: "پس انداز",
-                value: "pasandaz",
-            },
-        ],
         placeholder: "نوع حساب خود را انتخاب کنید",
         lable: "نوع حساب",
         hasIcon: true,

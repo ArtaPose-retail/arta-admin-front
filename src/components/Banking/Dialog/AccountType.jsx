@@ -14,7 +14,7 @@ import {
 
 function AccountType({ handleClose }) {
     const dispatch = useDispatch();
-    const { updateType } = useSelector((state) => state.bankType);
+    const { updateType, bankTypeList } = useSelector((state) => state.bankType);
 
     const addTypeHandler = (e) => {
         dispatch(
@@ -139,7 +139,7 @@ function AccountType({ handleClose }) {
                 </Box>
 
                 <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                    {BankAccountType?.map((item, index) => (
+                    {bankTypeList?.map((item, index) => (
                         <Box
                             key={index}
                             sx={{
@@ -152,7 +152,7 @@ function AccountType({ handleClose }) {
                             }}
                         >
                             <Typography>{toPersian(`${index + 1}`)}</Typography>
-                            <Typography>{item.title}</Typography>
+                            <Typography>{item?.title}</Typography>
                             <Box sx={{ ...center, gap: "5px" }}>
                                 <Button
                                     variant="outlined"

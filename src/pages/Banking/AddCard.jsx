@@ -22,6 +22,9 @@ import BnDialog from "../../components/Banking/Dialog";
 import { toastHandler } from "../../utils/setting";
 import Input from "../../components/UI/Input";
 import { center } from "../../styles/theme";
+import { useEffect } from "react";
+import { BTlist } from "../../Redux/Slices/Accounting/Bank/BankType/bankType";
+import { BankNameList } from "../../Redux/Slices/Accounting/Bank/BankName/bankName";
 function AddCard() {
     const { formInformation, checkBox } = useSelector((state) => state.addCard);
     const { isfullScrenn } = useSelector((state) => state.general);
@@ -35,7 +38,13 @@ function AddCard() {
     const poseItems = ["API_IP", "API_TERMENAL", "posName"];
     const internetbankItems = ["userName", "password", "bankUrl"];
 
-    // console.log(dispatch(findDisableProperty()));
+    const { bankNamekList } = useSelector((state) => state.bankName)
+    const { bankTypeList } = useSelector((state) => state.bankType)
+
+    useEffect(() => {
+        dispatch(BTlist())
+        dispatch(BankNameList())
+    }, [])
 
     return (
         <Box
@@ -128,14 +137,50 @@ function AddCard() {
                                     ),
                                 }}
                             >
-                                {item.select &&
-                                    item?.options?.map((option, index) => (
-                                        <option key={index} value={option.value}>
+
+                                {item.select && item?.name == "accountType" ? (
+                                    <>
+                                        {" "}
+                                        <option value={""}>
                                             <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                {option.title}
+                                                انتخاب کنید
                                             </Typography>
                                         </option>
-                                    ))}
+                                        {bankTypeList.map((option, index) => (
+                                            <option key={index} value={option?.id}>
+                                                <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                    {option?.title}
+                                                </Typography>
+                                            </option>
+                                        ))}
+                                    </>
+                                ) : item?.name == "bankName" ? (
+                                    <>
+                                        {" "}
+                                        <option value={""}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                انتخاب کنید
+                                            </Typography>
+                                        </option>
+                                        {bankNamekList != null ? bankNamekList.map((option, index) => (
+                                            <option key={index} value={option?.id}>
+                                                <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                    {option?.title}
+                                                </Typography>
+                                            </option>
+                                        )) : <option value={""}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                ایتمی وجود ندارد
+                                            </Typography>
+                                        </option>}
+                                    </>
+                                ) : (
+                                    <option value={""}>
+                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                            ایتمی وجود ندارد
+                                        </Typography>
+                                    </option>
+                                )}
                             </TextField>
                         ) : (
                             <Input

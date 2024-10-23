@@ -25,26 +25,26 @@ export const bankType = createSlice({
         },
     },
     extraReducers: (builder) => {
-        //?get
+        //!get
         builder.addCase(BTlist.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(BTlist.fulfilled, (state, { payload }) => {
             state.loading = false;
-            state.update = false
+            state.updateType = false
             state.bankTypeList = payload.data.data;
         });
         builder.addCase(BTlist.rejected, (state) => {
             state.loading = false;
             toastHandler("خطا در نوع حساب", "info");
         });
-        //?add
+        //!add
         builder.addCase(addBtype.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(addBtype.fulfilled, (state, { payload }) => {
             state.loading = false;
-            state.update = true
+            state.updateType = true
         });
         builder.addCase(addBtype.rejected, (state) => {
             state.loading = false;
