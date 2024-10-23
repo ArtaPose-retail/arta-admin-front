@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { toastHandler } from "../../../../../utils/setting";
-import { AddBankType, BankTypeList } from "./bankTypeThunk";
+import { AddBankType, BankTypeList, deleteBankType } from "./bankTypeThunk";
 
 const initialState = {
     loading: false,
@@ -15,6 +15,8 @@ const initialState = {
 export const BTlist = createAsyncThunk("bankType/list", BankTypeList);
 
 export const addBtype = createAsyncThunk("bankType/add", AddBankType)
+
+export const deleteType = createAsyncThunk("bankType/delete", deleteBankType)
 
 export const bankType = createSlice({
     name: "bankType",
@@ -47,6 +49,18 @@ export const bankType = createSlice({
             state.updateType = true
         });
         builder.addCase(addBtype.rejected, (state) => {
+            state.loading = false;
+            toastHandler("خطا در نوع حساب", "info");
+        });
+        //!delete
+        builder.addCase(deleteType.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(deleteType.fulfilled, (state) => {
+            state.loading = false;
+            state.updateType = true
+        });
+        builder.addCase(deleteType.rejected, (state) => {
             state.loading = false;
             toastHandler("خطا در نوع حساب", "info");
         });

@@ -34,17 +34,16 @@ function AddCard() {
         navigate(reactRouts.banking.main);
     };
 
-
     const poseItems = ["API_IP", "API_TERMENAL", "posName"];
     const internetbankItems = ["userName", "password", "bankUrl"];
 
-    const { bankNamekList } = useSelector((state) => state.bankName)
-    const { bankTypeList } = useSelector((state) => state.bankType)
+    const { bankNamekList } = useSelector((state) => state.bankName);
+    const { bankTypeList } = useSelector((state) => state.bankType);
 
     useEffect(() => {
-        dispatch(BTlist())
-        dispatch(BankNameList())
-    }, [])
+        dispatch(BTlist());
+        dispatch(BankNameList());
+    }, []);
 
     return (
         <Box
@@ -137,7 +136,6 @@ function AddCard() {
                                     ),
                                 }}
                             >
-
                                 {item.select && item?.name == "accountType" ? (
                                     <>
                                         {" "}
@@ -146,13 +144,21 @@ function AddCard() {
                                                 انتخاب کنید
                                             </Typography>
                                         </option>
-                                        {bankTypeList.map((option, index) => (
-                                            <option key={index} value={option?.id}>
+                                        {bankTypeList != null ? (
+                                            bankTypeList.map((option, index) => (
+                                                <option key={index} value={option?.id}>
+                                                    <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                        {option?.title}
+                                                    </Typography>
+                                                </option>
+                                            ))
+                                        ) : (
+                                            <option value={""}>
                                                 <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                    {option?.title}
+                                                    ایتمی وجود ندارد
                                                 </Typography>
                                             </option>
-                                        ))}
+                                        )}
                                     </>
                                 ) : item?.name == "bankName" ? (
                                     <>
@@ -162,17 +168,21 @@ function AddCard() {
                                                 انتخاب کنید
                                             </Typography>
                                         </option>
-                                        {bankNamekList != null ? bankNamekList.map((option, index) => (
-                                            <option key={index} value={option?.id}>
+                                        {bankNamekList != null ? (
+                                            bankNamekList.map((option, index) => (
+                                                <option key={index} value={option?.id}>
+                                                    <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                        {option?.title}
+                                                    </Typography>
+                                                </option>
+                                            ))
+                                        ) : (
+                                            <option value={""}>
                                                 <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                    {option?.title}
+                                                    ایتمی وجود ندارد
                                                 </Typography>
                                             </option>
-                                        )) : <option value={""}>
-                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                ایتمی وجود ندارد
-                                            </Typography>
-                                        </option>}
+                                        )}
                                     </>
                                 ) : (
                                     <option value={""}>
@@ -188,10 +198,8 @@ function AddCard() {
                                 newstyle={{
                                     width: "100%",
                                     height: "50px",
-
                                 }}
                                 value={formInformation[item.name]}
-
                                 onChange={(newValue) => {
                                     dispatch(
                                         setFormInfo({

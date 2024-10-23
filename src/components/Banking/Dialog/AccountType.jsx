@@ -10,6 +10,7 @@ import {
     addBankTypeInfo,
     addBtype,
     BTlist,
+    deleteType,
 } from "../../../Redux/Slices/Accounting/Bank/BankType/bankType";
 
 function AccountType({ handleClose }) {
@@ -28,6 +29,10 @@ function AccountType({ handleClose }) {
     const TypeSubmit = () => {
         dispatch(addBtype());
     };
+
+    const deleteHandler = (id) => {
+        dispatch(deleteType(id))
+    }
 
     useEffect(() => {
         dispatch(BTlist());
@@ -139,7 +144,7 @@ function AccountType({ handleClose }) {
                 </Box>
 
                 <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                    {bankTypeList?.map((item, index) => (
+                    {bankTypeList == null ? bankTypeList?.map((item, index) => (
                         <Box
                             key={index}
                             sx={{
@@ -154,18 +159,18 @@ function AccountType({ handleClose }) {
                             <Typography>{toPersian(`${index + 1}`)}</Typography>
                             <Typography>{item?.title}</Typography>
                             <Box sx={{ ...center, gap: "5px" }}>
-                                <Button
+                                {/* <Button
                                     variant="outlined"
                                     sx={{ p: 0, color: "#6D6D6D", borderColor: "#6D6D6D" }}
                                 >
                                     ویرایش
-                                </Button>
-                                <Button variant="outlined" color="warning" sx={{ p: 0 }}>
+                                </Button> */}
+                                <Button onClick={() => deleteHandler(item?.id)} variant="outlined" color="warning" sx={{ p: 0 }}>
                                     حذف{" "}
                                 </Button>
                             </Box>
                         </Box>
-                    ))}
+                    )) : ""}
                 </Box>
             </Box>
         </Box>

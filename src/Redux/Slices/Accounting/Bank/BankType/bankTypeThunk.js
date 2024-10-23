@@ -13,3 +13,8 @@ export const AddBankType = async (_, ThunkApi) => {
         title,
     });
 };
+
+
+export const deleteBankType = async (id) => {
+    return await AXIOS.delete(`${apiRouts.bank.type.list}${id}`)
+}
