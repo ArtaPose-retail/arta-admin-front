@@ -4,7 +4,7 @@ import AXIOS from "../../../../utils/setting";
 
 
 export const GetOrderList = async () => {
-    return await AXIOS.get(apiRouts.order.list)
+    return await AXIOS.get(`${apiRouts.order.list}?cartfinilize=true`)
 }
 
 
