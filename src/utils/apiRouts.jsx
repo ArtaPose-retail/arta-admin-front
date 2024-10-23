@@ -39,6 +39,12 @@ const apiRouts = {
     order: {
         list: "admin/order/",
         add: "admin/order/new"
+    },
+
+    bank: {
+        name: {
+            list: "admin/bankaccount/names"
+        }
     }
 };
 

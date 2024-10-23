@@ -15,6 +15,8 @@ import sellPage from "./Slices/Actions/SellPage/sellPage";
 import gallery from "./Slices/Setting/Gallery/gallery";
 import productUnit from "./Slices/Accounting/Products/ProductUnit/unit";
 import Order from "./Slices/Actions/Order/Order";
+import bank from "./Slices/Accounting/Bank/Bank";
+import bankName from "./Slices/Accounting/Bank/BankName/bankName";
 
 
 const appReducer = combineReducers({
@@ -32,7 +34,9 @@ const appReducer = combineReducers({
     sellPage,
     gallery,
     productUnit,
-    Order
+    Order,
+    bank,
+    bankName
 
 });
 

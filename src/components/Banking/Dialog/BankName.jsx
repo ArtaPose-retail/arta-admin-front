@@ -1,16 +1,24 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import Title from "../../UI/Title";
-import { BankAccountType } from "../../../utils/data";
+import { BankAccountType, bankList } from "../../../utils/data";
 import { toPersian } from "../../../utils/setting";
 import BankList from "./‌BankList";
+import { center } from "../../../styles/theme";
+import { useDispatch } from "react-redux";
+import { addBankNameInfo } from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
 
 function BankName({ handleClose }) {
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    const dispatch = useDispatch();
+
+    const onChangehandler = (e) => {
+        dispatch(
+            addBankNameInfo({
+                key: "title",
+                value: e.target.value,
+            })
+        );
     };
     return (
         <Box>
@@ -50,7 +58,10 @@ function BankName({ handleClose }) {
                                 borderColor: "white",
                             },
                         }}
-                        type="number"
+                        onChange={(e) => {
+                            onChangehandler(e);
+                        }}
+                        type="text"
                         id="input-with-icon-textfield"
                         placeholder="نام بانک را وارد کنید"
                         InputProps={{
@@ -63,19 +74,53 @@ function BankName({ handleClose }) {
                         }}
                         variant="outlined"
                     />
-                    {/* <Button
-            variant="contained"
-            sx={{
-              bgcolor: (theme) => theme.palette.disable.main,
-              color: (theme) => theme.palette.text.primary,
-              p: 1.75,
-              px: 2.5,
-              borderRadius: "0px",
-            }}
-          >
-            لیست بانک ها{" "}
-          </Button> */}
-                    <BankList />
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={bankList}
+                        getOptionLabel={(option) => `${option?.title}`}
+                        sx={{ width: 300, color: "#000000" }}
+                        renderOption={(props, option) => (
+                            <Box
+                                // component="li"
+                                sx={{ ...center, gap: "5px" }}
+                                {...props}
+                            >
+                                <img
+                                    src={option.logo}
+                                    alt="goods"
+                                    style={{ width: 20, height: 20 }}
+                                />
+                                <Typography
+                                    sx={{
+                                        fontSize: "14px",
+                                        fontWeight: 500,
+                                        color: (theme) => theme.palette.text.primary,
+                                    }}
+                                >{`${option?.title} `}</Typography>
+                            </Box>
+                        )}
+                        renderInput={(params) => (
+                            <TextField
+                                sx={{ color: "#000", background: "#F2F2F2", borderRadius: "12px" }}
+                                autoComplete="none"
+                                {...params}
+                                placeholder={"جستوجو عکس بانک"}
+                                inputProps={{
+                                    ...params.inputProps,
+                                    autoComplete: "none", // disable autocomplete and autofill
+                                }}
+                                InputProps={{
+                                    ...params.InputProps,
+                                    sx: {
+                                        "& .MuiInputBase-input": {
+                                            color: "#000000",
+                                        },
+                                    },
+                                }}
+                            />
+                        )}
+                    />
                     <Button
                         variant="contained"
                         sx={{

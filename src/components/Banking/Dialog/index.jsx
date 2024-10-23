@@ -1,23 +1,20 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Typography } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import { Box } from "@mui/material";
 import AccountType from "./AccountType";
 import BankName from "./BankName";
-import { setFullscrenn } from "../../../Redux/Slices/general";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { center } from "../../../styles/theme";
+import { BankNameList } from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
 export default function BnDialog({ name }) {
-    // const { isfullScrenn } = useSelector(state => state.general)
+
     const [open, setOpen] = useState(false);
-    // const [prePositionFull, setPrePositionFull] = useState(isfullScrenn)
+
     const dispatch = useDispatch()
     const handleClickOpen = () => {
-
-        // dispatch(setFullscrenn(false))
         setOpen(true);
     };
 
@@ -25,11 +22,11 @@ export default function BnDialog({ name }) {
         setOpen(false);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    useEffect(() => {
+        dispatch(BankNameList())
+    }, [])
+
+
 
     return (
         <div>
@@ -54,6 +51,8 @@ export default function BnDialog({ name }) {
 
             <Dialog
                 fullWidth={true}
+                maxWidth={"md"}
+
                 sx={{
                     backdropFilter: "blur(10px)",
 
