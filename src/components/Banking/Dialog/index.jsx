@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-
 import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/material";
 import AccountType from "./AccountType";
 import BankName from "./BankName";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { center } from "../../../styles/theme";
 import { BankNameList } from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
+import { BTlist } from "../../../Redux/Slices/Accounting/Bank/BankType/bankType";
 export default function BnDialog({ name }) {
-
     const [open, setOpen] = useState(false);
-
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -23,8 +21,8 @@ export default function BnDialog({ name }) {
     };
 
     useEffect(() => {
-        dispatch(BankNameList())
-    }, [])
+        dispatch(BankNameList());
+    }, []);
 
 
 
@@ -48,28 +46,24 @@ export default function BnDialog({ name }) {
                 />
             </Box>
 
-
             <Dialog
                 fullWidth={true}
                 maxWidth={"md"}
-
                 sx={{
                     backdropFilter: "blur(10px)",
-
                 }}
-
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-
                 <DialogContent sx={{ bgcolor: "white" }}>
-
-                    {name === "bankName" ? <BankName handleClose={handleClose} /> :
-                        <AccountType handleClose={handleClose} />}
+                    {name === "bankName" ? (
+                        <BankName handleClose={handleClose} />
+                    ) : (
+                        <AccountType handleClose={handleClose} />
+                    )}
                 </DialogContent>
-
             </Dialog>
         </div>
     );

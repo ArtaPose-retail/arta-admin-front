@@ -1,10 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import addCard from "./Slices/Banking/addcard"
-import general from "./Slices/general"
-import factor from "./Slices/HomePage/factor"
-import wallet from "./Slices/Wallet/wallet"
-import keyboard from "./Slices/Keyboard/keyboard"
+import addCard from "./Slices/Banking/addcard";
+import general from "./Slices/general";
+import factor from "./Slices/HomePage/factor";
+import wallet from "./Slices/Wallet/wallet";
+import keyboard from "./Slices/Keyboard/keyboard";
 import auth from "./Slices/Auth/auth";
 import user from "./Slices/Manangement/user/user";
 import productType from "./Slices/Accounting/Products/ProductType/Type";
@@ -17,7 +17,7 @@ import productUnit from "./Slices/Accounting/Products/ProductUnit/unit";
 import Order from "./Slices/Actions/Order/Order";
 import bank from "./Slices/Accounting/Bank/Bank";
 import bankName from "./Slices/Accounting/Bank/BankName/bankName";
-
+import bankType from "./Slices/Accounting/Bank/BankType/bankType";
 
 const appReducer = combineReducers({
     auth,
@@ -36,8 +36,8 @@ const appReducer = combineReducers({
     productUnit,
     Order,
     bank,
-    bankName
-
+    bankName,
+    bankType,
 });
 
 export const rootReducers = (state, action) => {
