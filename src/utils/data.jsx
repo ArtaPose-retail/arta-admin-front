@@ -443,7 +443,7 @@ export const addCartForm = [
         type: "text",
     },
     {
-        name: "accountNum",
+        name: "account_num",
         select: false,
         placeholder: "شماره حساب",
         lable: "شماره حساب",
@@ -461,7 +461,7 @@ export const addCartForm = [
         type: "number",
     },
     {
-        name: "cardNum",
+        name: "card_num",
         select: false,
         placeholder: "شماره کارت",
         lable: "شماره کارت",
@@ -479,7 +479,7 @@ export const addCartForm = [
         type: "number",
     },
     {
-        name: "expireDate",
+        name: "expier_date",
         select: false,
         placeholder: "تاریخ انقضا",
         lable: "تاریخ انقضا",
@@ -487,7 +487,7 @@ export const addCartForm = [
         color: "#6D6D6D",
     },
     {
-        name: "accountType",
+        name: "account_type_id",
         select: true,
         placeholder: "نوع حساب خود را انتخاب کنید",
         lable: "نوع حساب",
@@ -495,7 +495,7 @@ export const addCartForm = [
         color: "#6D6D6D",
     },
     {
-        name: "branchName",
+        name: "branch_name",
         select: false,
         placeholder: "نام شعبه",
         lable: "نام شعبه",
@@ -504,7 +504,7 @@ export const addCartForm = [
         type: "text",
     },
     {
-        name: "branchCode",
+        name: "branch_code",
         select: false,
         placeholder: "کد شعبه",
         lable: "کد شعبه",
@@ -513,7 +513,7 @@ export const addCartForm = [
         type: "number",
     },
     {
-        name: " fullname",
+        name: "representer_name",
         select: false,
         placeholder: "نام صاحب حساب",
         lable: "نام صاحب حساب",
@@ -522,7 +522,7 @@ export const addCartForm = [
         type: "text",
     },
     {
-        name: " mobile",
+        name: "owner_phone",
         select: false,
         placeholder: "شماره موبایل",
         lable: "شماره موبایل",
@@ -531,7 +531,7 @@ export const addCartForm = [
         type: "number",
     },
     {
-        name: "API_IP",
+        name: "api_ip",
         select: false,
         placeholder: "API-IP",
         lable: "API-IP",
@@ -540,7 +540,7 @@ export const addCartForm = [
         type: "number",
     },
     {
-        name: "API_TERMENAL",
+        name: "api_terminal",
         select: false,
         placeholder: "API-TERMENAL",
         lable: "API-TERMENAL",
@@ -549,7 +549,7 @@ export const addCartForm = [
         type: "text",
     },
     {
-        name: "posName",
+        name: "representer_pos_name",
         select: false,
         placeholder: "نام نمایشی پوز",
         lable: "نام نمایشی پوز",
@@ -1377,27 +1377,6 @@ export const factorItemForm = [
         color: "#6D6D6D",
         type: "text",
     },
-
-    {
-        name: "purchaseFee",
-        select: false,
-        placeholder: "فی خرید ",
-        lable: "فی خرید ",
-        hasIcon: true,
-        color: "#6D6D6D",
-        type: "number",
-        hastext: true,
-    },
-    {
-        name: "sellFee",
-        select: false,
-        placeholder: "فی فروش ",
-        lable: "فی فروش ",
-        hasIcon: true,
-        color: "#6D6D6D",
-        type: "number",
-        hastext: true,
-    },
     {
         name: "amount",
         select: false,
@@ -1415,8 +1394,58 @@ export const factorItemForm = [
         lable: "وزن  ",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "text",
     },
+
+    {
+        name: "purchaseFee",
+        select: false,
+        placeholder: "فی خرید ",
+        lable: "فی خرید ",
+        hasIcon: true,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: true,
+    },
+    {
+        name: "tax",
+        select: false,
+        placeholder: "مالیات ",
+        lable: "مالیات  ",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "discount",
+        select: false,
+        placeholder: "تخفیف ",
+        lable: "تخفیف  ",
+        hasIcon: false,
+        color: "#6D6D6D",
+        type: "text",
+    },
+    {
+        name: "sellFee",
+        select: false,
+        placeholder: "فی فروش ",
+        lable: "فی فروش ",
+        hasIcon: true,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: true,
+    },
+    {
+        name: "StoreSellFee",
+        select: false,
+        placeholder: " فی فروش فروشگاه",
+        lable: "فی فروش فروشگاه",
+        hasIcon: true,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: true,
+    },
+
 
 
 ];

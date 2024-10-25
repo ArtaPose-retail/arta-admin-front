@@ -42,17 +42,7 @@ function FactorItems({ handleClose }) {
         <Box>
             <Box>
                 <Box sx={{ ...center, justifyContent: "space-between", p: 1 }}>
-                    {/* <Typography
-                        sx={{
-                            fontSize: "16px",
-                            fontWeight: 400,
-                            color: (theme) => theme.palette.disable.main,
-                            my: 0.5,
-                        }}
-                    >
-                        شماره سند:
-                        {toPersian("886677")}
-                    </Typography> */}
+
                     <Typography
                         sx={{
                             fontSize: "16px",
@@ -84,7 +74,7 @@ function FactorItems({ handleClose }) {
             </Box>
             <Grid container spacing={2} sx={{ p: 1 }}>
                 {factorItemForm?.map((item, index) => (
-                    <Grid item xs={4} key={index}>
+                    <Grid item xs={3} key={index}>
                         <InputLabel>
                             <Typography
                                 sx={{ fontSize: "16px", fontWeight: 500, color: item.color }}
@@ -164,6 +154,74 @@ function FactorItems({ handleClose }) {
                     </Grid>
                 ))}
             </Grid>
+            <Box sx={{ ...center, width: "100%", gap: "5px", my: 2 }}>
+                <Typography
+
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    جمع کل خرید: {toPersian(23000)}
+                </Typography>
+                <Typography
+
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    فی نهایی خرید: {toPersian(23000)}
+                </Typography>
+                <Typography
+
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    جمع کل فروش: {toPersian(23000000)}
+                </Typography>
+                <Typography
+
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    مبلغ تخفیف فروش: {toPersian(23)}
+                </Typography>
+                <Typography
+
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    درصد تخفیف فروش: %{toPersian(23)}
+                </Typography>
+                <Typography
+
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    درصد سود:  %{toPersian(23)}
+                </Typography>
+            </Box>
             <Box sx={{ ...center, justifyContent: "space-between" }}>
                 <Box sx={{ ...center, mt: 1 }}>
                     <Box sx={{ ...center }}>
@@ -197,20 +255,9 @@ function FactorItems({ handleClose }) {
                         // checked={}
                         />
                     </Box>
-                    <Box>
-                        <Typography
 
-                            sx={{
-                                bgcolor: (theme) => theme.palette.green.main,
-                                color: (theme) => theme.palette.text.primary,
-                                borderRadius: "15px",
-                                px: 3,
-                            }}
-                        >
-                            درصد سود:  %{toPersian(23)}
-                        </Typography>
-                    </Box>
                 </Box>
+
                 <Box>
                     <Button
                         variant="contained"
@@ -247,8 +294,6 @@ function FactorItems({ handleClose }) {
                         sx={{
                             color: (theme) => theme.palette.text.primary,
                             bgcolor: (theme) => theme.palette.warning.main,
-                            // fontSize: "16px",
-                            // fontWeight: 700,
                             px: 3,
                         }}
                     >
