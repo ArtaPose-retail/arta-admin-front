@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import LableCard from "./LableCard";
-import theme, { center } from "../../styles/theme";
+import { center } from "../../styles/theme";
 import Description from "./Dialogs/Description";
 import PersonIcon from "@mui/icons-material/Person";
 import TransactionpartyDg from "./Dialogs/TransactionpartyDg";
@@ -30,9 +30,6 @@ function NewFactor() {
     const [open, setOpen] = useState(false);
     const [openTransaction, setOpenTransaction] = useState(false);
 
-    const showDialoghandler = () => {
-        setOpen(true);
-    };
     const handlerCloseDialog = () => {
         setOpen(false);
     };
@@ -51,6 +48,7 @@ function NewFactor() {
     };
 
     const onSearchHandler = (e) => {
+        console.log(e)
         dispatch(setTransactionInfo(e))
         dispatch(addOrder())
     }
@@ -69,9 +67,9 @@ function NewFactor() {
             <LableCard />
             <Box
                 sx={{
-                    justifyContent: "flex-start",
                     my: 1.5,
                     ...center,
+                    justifyContent: "flex-start",
                     gap: "5px",
                     "& hr": {
                         mx: 0.5,
@@ -109,6 +107,12 @@ function NewFactor() {
                     )}
                     renderInput={(params) => (
                         <TextField
+                            onChange={(e) => dispatch(
+                                setNewTransaction({
+                                    key: "phone1",
+                                    value: e.target.value,
+                                })
+                            )}
                             sx={{
                                 color: "#000",
                                 background: "#F2F2F2",
@@ -133,7 +137,7 @@ function NewFactor() {
                     )}
                 />
                 <Divider orientation="vertical" flexItem />
-                <Input
+                {/* <Input
                     width={"20%"}
                     hasIcon={false}
                     type={"text"}
@@ -148,7 +152,7 @@ function NewFactor() {
                             })
                         );
                     }}
-                />
+                /> */}
                 <Input
                     width={"15%"}
                     hasIcon={false}

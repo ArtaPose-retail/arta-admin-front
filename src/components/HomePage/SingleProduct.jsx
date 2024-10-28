@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import Title from "../UI/Title";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
-import moment from "jalali-moment";
 import ProductDetails from "./Dialogs/ProductDetails";
 import { center } from "../../styles/theme";
 import apiRouts from "../../utils/apiRouts";

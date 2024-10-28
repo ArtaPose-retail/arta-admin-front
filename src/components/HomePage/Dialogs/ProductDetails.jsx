@@ -60,9 +60,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         console.log(name, value, type)
     };
 
-
-    console.log(checkAccess(["admin", "admin_actions"]))
-
     return (
         <div>
             <Dialog
@@ -169,7 +166,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                             sx={{
                                 ...center,
                                 justifyContent: "flex-start",
-                                gap: "10px",
+                                gap: "20px",
                                 my: 1,
                             }}
                         >
@@ -184,7 +181,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     color: (theme) => theme.palette.text.primary,
                                     fontSize: "16px",
                                     fontWeight: 500,
-                                    px: 4,
+                                    px: 8,
                                 }}
                             >
                                 ثبت محصولات
