@@ -26,7 +26,8 @@ export const ProdDetails = () => {
                 bgcolor: (theme) => theme.background.box,
                 height: "100%",
                 ...center,
-                // border: "1px solid red"
+                // border: "1px solid red",
+                pt: 5
             }}
         >
             <FullScreen
@@ -42,8 +43,8 @@ export const ProdDetails = () => {
                         backgroundImage: `url(${DLbg})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
-                        // border: "1px solid red",
-                        position: "relative"
+                        position: "relative",
+                        pt: 5
                     }}
                 >
                     <Box sx={{ position: 'absolute' }}>
@@ -80,6 +81,7 @@ export const ProdDetails = () => {
                             height: "50%",
                             width: "100%",
                             ...center,
+
                         }}
                     >
                         <Box
@@ -92,31 +94,45 @@ export const ProdDetails = () => {
                             <img
                                 src={`${apiRouts.baseUrl}${signleProd?.productpic_path}`}
                                 alt="fruitBasket"
-                                style={{ width: "60%", height: "100%" }}
+                                style={{ width: "80%", height: "100%" }}
                             />
                         </Box>
                         <Box sx={{ height: "100%", width: "60%" }}>
                             <Title
                                 title={signleProd?.title}
                                 Typoprops={{
-                                    fontSize: "40px",
+                                    fontSize: "65px",
                                     fontWeight: 700,
                                     color: (theme) => theme.palette.text.card,
-                                    textAlign: "center",
+                                    textAlign: "start",
                                 }}
                             />
-                            <Typography
-                                sx={{
-                                    fontSize: "60px",
-                                    textAlign: "center",
-                                    fontWeight: "900",
-                                    color: (theme) => theme.palette.warning.main,
-                                    width: "100%",
-                                }}
-                            >
-                                {toPersian(separateBy3(signleProd?.price ?? 0))}
-                                تومان
-                            </Typography>
+                            <Box sx={{ ...center, justifyContent: "start" }}>
+
+                                <Typography
+                                    sx={{
+                                        fontSize: "70px",
+                                        textAlign: "start",
+                                        fontWeight: "800",
+                                        color: (theme) => theme.palette.warning.main,
+                                        // width: "100%",
+                                    }}
+                                >
+                                    {toPersian(separateBy3(signleProd?.price ?? 0))}
+
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        fontSize: "50px",
+                                        textAlign: "start",
+                                        fontWeight: "500",
+                                        color: (theme) => theme.palette.warning.main,
+                                        // width: "100%",
+                                    }}
+                                >
+                                    تومان
+                                </Typography>
+                            </Box>
                             <Box sx={{ ...center, justifyContent: "start", gap: "10px" }}>
                                 <Typography
                                     sx={{
@@ -163,12 +179,12 @@ export const ProdDetails = () => {
                                 info={signleProd?.meta?.sugar}
                             />
                             <Lable
-                                bg={"#3A7817"}
+                                bg={"#72BF01"}
                                 title={"چربی"}
                                 info={signleProd?.meta?.fat}
                             />
                             <Lable
-                                bg={"#3A7817"}
+                                bg={"#72BF01"}
                                 title={"پرویتين"}
                                 info={signleProd?.meta?.protein}
                             />
