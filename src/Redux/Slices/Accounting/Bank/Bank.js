@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addNewAccount } from "./BankThunk";
+import { addNewAccount, BankList } from "./BankThunk";
 import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
@@ -37,6 +37,7 @@ const initialState = {
 };
 
 export const AddAccount = createAsyncThunk("bank/add", addNewAccount);
+export const AccountList = createAsyncThunk("bank/list", BankList);
 
 export const bank = createSlice({
     name: "bank",
@@ -58,15 +59,26 @@ export const bank = createSlice({
         },
     },
     extraReducers: (builder) => {
+        //?create
         builder.addCase(AddAccount.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(AddAccount.fulfilled, (state) => {
             state.loading = false;
-            toastHandler("حساب با موفقیت اضافه شد", "info")
-            resetForm()
+            toastHandler("حساب با موفقیت اضافه شد", "info");
         });
         builder.addCase(AddAccount.rejected, (state) => {
+            state.loading = false;
+        });
+        //?list
+        builder.addCase(AccountList.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(AccountList.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.bankList = payload.data.data;
+        });
+        builder.addCase(AccountList.rejected, (state) => {
             state.loading = false;
         });
     },

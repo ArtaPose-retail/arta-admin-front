@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { account } from "../../utils/data";
 
 import { separateBy4, toPersian } from "../../utils/setting";
@@ -8,15 +8,21 @@ import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import EditIcon from "@mui/icons-material/Edit";
 import { center } from "../../styles/theme";
+import { useDispatch } from "react-redux";
+import { AccountList } from "../../Redux/Slices/Accounting/Bank/Bank";
 
 
 
 function Card() {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch()
     const addAcount = () => {
         navigate(reactRouts.banking.addcart);
     };
+
+    useEffect(() => {
+        dispatch(AccountList())
+    }, [])
     return (
         <Box sx={{ width: "100wh", display: "flex", overflowX: "scroll" }}>
             <Box

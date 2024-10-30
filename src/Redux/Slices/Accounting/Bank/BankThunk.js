@@ -27,3 +27,7 @@ export const addNewAccount = async (_, ThunkApi) => {
         has_otp: checkBox.has_otp,
     });
 };
+
+export const BankList = async () => {
+    return await AXIOS.get(apiRouts.bank.account.list);
+};

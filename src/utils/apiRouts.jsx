@@ -51,7 +51,8 @@ const apiRouts = {
             add: "admin/bankaccount/types/new"
         },
         account: {
-            add: "/admin/bankaccount/new"
+            add: "/admin/bankaccount/new",
+            list: "/admin/bankaccount/"
         }
     }
 };
