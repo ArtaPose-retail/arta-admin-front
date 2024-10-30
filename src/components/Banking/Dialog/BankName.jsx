@@ -1,17 +1,29 @@
-import { Autocomplete, Box, Button, TextField, Typography } from "@mui/material";
-import React from "react";
+import {
+    Autocomplete,
+    Box,
+    Button,
+    TextField,
+    Typography,
+} from "@mui/material";
+import React, { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import Title from "../../UI/Title";
-import { BankAccountType, bankList } from "../../../utils/data";
+import { bankList } from "../../../utils/data";
 import { toPersian } from "../../../utils/setting";
-import BankList from "./‌BankList";
+
 import { center } from "../../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { addBankNameInfo } from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
+import {
+    addBankName,
+    addBankNameInfo,
+    BankNameList,
+    deleteBankName,
+} from "../../../Redux/Slices/Accounting/Bank/BankName/bankName";
+import { NoItem } from "../../UI/NoItem";
 
 function BankName({ handleClose }) {
     const dispatch = useDispatch();
-    const { bankNamekList } = useSelector(state => state.bankName)
+    const { bankNamekList, BNupdate } = useSelector((state) => state.bankName);
     const onChangehandler = (e) => {
         dispatch(
             addBankNameInfo({
@@ -20,6 +32,9 @@ function BankName({ handleClose }) {
             })
         );
     };
+    useEffect(() => {
+        dispatch(BankNameList());
+    }, [BNupdate]);
     return (
         <Box>
             <Box sx={{ ...center, justifyContent: "space-between" }}>
@@ -78,6 +93,14 @@ function BankName({ handleClose }) {
                         disablePortal
                         id="combo-box-demo"
                         options={bankList}
+                        onChange={(_, e) =>
+                            dispatch(
+                                addBankNameInfo({
+                                    key: "image_name",
+                                    value: e.logo,
+                                })
+                            )
+                        }
                         getOptionLabel={(option) => `${option?.title}`}
                         sx={{ width: 300, color: "#000000" }}
                         renderOption={(props, option) => (
@@ -87,8 +110,8 @@ function BankName({ handleClose }) {
                                 {...props}
                             >
                                 <img
-                                    src={option.logo}
-                                    alt="goods"
+                                    src={option?.logo}
+                                    alt="bank logo"
                                     style={{ width: 20, height: 20 }}
                                 />
                                 <Typography
@@ -102,7 +125,11 @@ function BankName({ handleClose }) {
                         )}
                         renderInput={(params) => (
                             <TextField
-                                sx={{ color: "#000", background: "#F2F2F2", borderRadius: "12px" }}
+                                sx={{
+                                    color: "#000",
+                                    background: "#F2F2F2",
+                                    borderRadius: "12px",
+                                }}
                                 autoComplete="none"
                                 {...params}
                                 placeholder={"جستوجو عکس بانک"}
@@ -122,6 +149,7 @@ function BankName({ handleClose }) {
                         )}
                     />
                     <Button
+                        onClick={() => dispatch(addBankName())}
                         variant="contained"
                         sx={{
                             bgcolor: (theme) => theme.palette.text.secondary,
@@ -175,33 +203,45 @@ function BankName({ handleClose }) {
                 </Box>
 
                 <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                    {bankNamekList?.map((item, index) => (
-                        <Box
-                            key={index}
-                            sx={{
-                                borderRadius: "12px",
-                                bgcolor: "#F5F6F8",
-                                ...center,
-                                justifyContent: "space-between",
-                                p: 2,
-                                m: 1,
-                            }}
-                        >
-                            <Typography>{toPersian(`${index + 1}`)}</Typography>
-                            <Typography>{item.title}</Typography>
-                            <Box sx={{ ...center, gap: "5px" }}>
-                                <Button
-                                    variant="outlined"
-                                    sx={{ p: 0, color: "#6D6D6D", borderColor: "#6D6D6D" }}
-                                >
-                                    ویرایش
-                                </Button>
-                                <Button variant="outlined" color="warning" sx={{ p: 0 }}>
-                                    حذف{" "}
-                                </Button>
+                    {bankNamekList != null ? (
+                        bankNamekList?.map((item, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    borderRadius: "12px",
+                                    bgcolor: "#F5F6F8",
+                                    ...center,
+                                    justifyContent: "space-between",
+                                    p: 2,
+                                    m: 1,
+                                }}
+                            >
+                                <Typography>{toPersian(`${index + 1}`)}</Typography>
+                                <Box sx={{ ...center, gap: '5px' }}>
+                                    <img
+                                        src={item?.image_name}
+                                        alt="bank logo"
+                                        style={{ width: 20, height: 20 }}
+                                    />
+                                    <Typography>{item.title}</Typography>
+
+                                </Box>
+
+                                <Box sx={{ ...center, gap: "5px" }}>
+                                    <Button
+                                        onClick={() => dispatch(deleteBankName(item.id))}
+                                        variant="outlined"
+                                        color="warning"
+                                        sx={{ p: 0 }}
+                                    >
+                                        حذف{" "}
+                                    </Button>
+                                </Box>
                             </Box>
-                        </Box>
-                    ))}
+                        ))
+                    ) : (
+                        <NoItem />
+                    )}
                 </Box>
             </Box>
         </Box>

@@ -50,13 +50,14 @@ export default function BnDialog({ name }) {
                 maxWidth={"md"}
                 sx={{
                     backdropFilter: "blur(10px)",
+
                 }}
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogContent sx={{ bgcolor: "white" }}>
+                <DialogContent sx={{ bgcolor: "white", height: "55dvh" }}>
                     {name === "bankName" ? (
                         <BankName handleClose={handleClose} />
                     ) : (

@@ -43,7 +43,8 @@ const apiRouts = {
 
     bank: {
         name: {
-            list: "admin/bankaccount/names/"
+            list: "admin/bankaccount/names/",
+            add: "/admin/bankaccount/names/new"
         },
         type: {
             list: "admin/bankaccount/types/",

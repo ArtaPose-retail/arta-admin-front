@@ -4,35 +4,36 @@ import bankRed from "../Assets/images/Bank/bankRed.png";
 import bankYellow from "../Assets/images/Bank/bankYellow.png";
 import samanIcon from "../Assets/images/Bank/saman.png";
 //? bankList logo
-import Ansar from "../Assets/images/bankList/Ansar.png";
-import Ayande from "../Assets/images/bankList/Ayande.png";
-import EghtesadNovin from "../Assets/images/bankList/EghtesadNovin.png";
-import Hekmat_eIraniyan from "../Assets/images/bankList/Hekmat_eIraniyan.png";
-import IranZamin from "../Assets/images/bankList/IranZamin.png";
-import Karafarin from "../Assets/images/bankList/Karafarin.png";
-import Keshavarzi from "../Assets/images/bankList/Keshavarzi.png";
-import Meli from "../Assets/images/bankList/Meli.png";
-import mellat from "../Assets/images/bankList/mellat.png";
-import Saman from "../Assets/images/bankList/Saman.png";
-import saderat from "../Assets/images/bankList/saderat.png";
-import Shahr from "../Assets/images/bankList/Shahr.png";
-import Tejarat from "../Assets/images/bankList/Tejarat.png";
-import ToseeSaderat from "../Assets/images/bankList/ToseeSaderat.png";
-import ToseeTaavon from "../Assets/images/bankList/ToseeTaavon.png";
-import maskan from "../Assets/images/bankList/maskan.png";
-import blue from "../Assets/images/bankList/blue.png";
-import sepah from "../Assets/images/bankList/sepah.png";
-import sarmaye from "../Assets/images/bankList/sarmaye.png";
-import gardeshgari from "../Assets/images/bankList/gardeshgari.png";
-import refah from "../Assets/images/bankList/refah.png";
-import sina from "../Assets/images/bankList/sina.png";
-import parsian from "../Assets/images/bankList/parsian.png";
-import postBank from "../Assets/images/bankList/postBank.png";
-import mehrIranian from "../Assets/images/bankList/mehrIranian.png";
-import mehrEqtesad from "../Assets/images/bankList/mehrEqtesad.png";
-import day from "../Assets/images/bankList/day.png";
-import pasargad from "../Assets/images/bankList/pasargad.png";
-import resalat from "../Assets/images/bankList/resalat.png";
+import Ansar from "../../public/images/bankList/Ansar.png";
+import Ayande from "../../public/images/bankList/Ayande.png";
+import EghtesadNovin from "../../public/images/bankList/EghtesadNovin.png";
+import Hekmat_eIraniyan from "../../public/images/bankList/Hekmat_eIraniyan.png";
+import IranZamin from "../../public/images/bankList/IranZamin.png";
+import Karafarin from "../../public/images/bankList/Karafarin.png";
+import Keshavarzi from "../../public/images/bankList/Keshavarzi.png";
+import Meli from "../../public/images/bankList/Meli.png";
+import mellat from "../../public/images/bankList/mellat.png";
+import Saman from "../../public/images/bankList/Saman.png";
+import saderat from "../../public/images/bankList/saderat.png";
+import Shahr from "../../public/images/bankList/Shahr.png";
+import Tejarat from "../../public/images/bankList/Tejarat.png";
+import ToseeSaderat from "../../public/images/bankList/ToseeSaderat.png";
+import ToseeTaavon from "../../public/images/bankList/ToseeTaavon.png";
+import maskan from "../../public/images/bankList/maskan.png";
+import blue from "../../public/images/bankList/blue.png";
+import sepah from "../../public/images/bankList/sepah.png";
+import sarmaye from "../../public/images/bankList/sarmaye.png";
+import gardeshgari from "../../public/images/bankList/gardeshgari.png";
+import refah from "../../public/images/bankList/refah.png";
+import sina from "../../public/images/bankList/sina.png";
+import parsian from "../../public/images/bankList/parsian.png";
+import postBank from "../../public/images/bankList/postBank.png";
+import mehrIranian from "../../public/images/bankList/mehrIranian.png";
+import mehrEqtesad from "../../public/images/bankList/mehrEqtesad.png";
+import day from "../../public/images/bankList/day.png";
+import pasargad from "../../public/images/bankList/pasargad.png";
+import resalat from "../../public/images/bankList/resalat.png";
+import otherbank from "../../public/images/bankList/other.png";
 
 //?frouts logo
 
@@ -705,6 +706,7 @@ export const bankList = [
     { title: "بانک پاسارگاد", value: "Pasargad", logo: pasargad },
     { title: "بانک رسالت", value: "Resalat", logo: resalat },
     { title: "بانک صنعت و معدن", value: "San'atVaMadan", logo: Meli },
+    { title: "سایر", value: "other", logo: otherbank },
 ];
 
 export const OldFactor = [
@@ -1223,49 +1225,7 @@ export const customerFactortable = [
         },
     },
 ];
-export const refrigeratingProduct = [
-    {
-        logo: apple,
-        color: "#FFDBDF",
-        title: "سیب قرمز سبزوار",
-        transportInfo: {
-            driver: "احمد رحمتی",
-            vehicle: "نیسان آبی",
-        },
-        amount: "720000",
-        date: new Date(),
-        transactionParty: "محمد مرادی",
-        refrigerating: true,
-    },
 
-    {
-        logo: avocado,
-        color: "#FFDBDF",
-        title: "اواکادو",
-        transportInfo: {
-            driver: "احمد رحمتی",
-            vehicle: "نیسان آبی",
-        },
-        amount: "720000",
-        date: new Date(),
-        transactionParty: "محمد مرادی",
-        refrigerating: true,
-    },
-
-    {
-        logo: cherry,
-        color: "#FFDBDF",
-        title: "گیلاس",
-        transportInfo: {
-            driver: "احمد رحمتی",
-            vehicle: "نیسان آبی",
-        },
-        amount: "720000",
-        date: new Date(),
-        transactionParty: "محمد مرادی",
-        refrigerating: true,
-    },
-];
 
 export const FactorSellitemstable = [
     {
