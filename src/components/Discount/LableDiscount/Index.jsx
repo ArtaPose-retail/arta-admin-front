@@ -28,7 +28,7 @@ export const LableDiscount = () => {
 
                     }}
                 >
-                    {/* <TableSection /> */}
+                    <TableSection />
                 </Grid>
             </Grid>
         </Box>

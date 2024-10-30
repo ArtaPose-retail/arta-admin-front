@@ -19,9 +19,10 @@ import {
     getList,
 } from "../../../Redux/Slices/Actions/PromoCode/Lable/lable";
 import { center } from "../../../styles/theme";
-import { Print } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, Print } from "@mui/icons-material";
 import ReactToPrint from "react-to-print";
 import PromoCodePrint from "../../PrintTemplate/PromoCode";
+import { Button } from "@mui/material";
 
 function Row(props) {
     const { row } = props;
@@ -128,9 +129,14 @@ function Row(props) {
 export default function TableSection() {
     const { update, promoList } = useSelector((state) => state.lable);
     const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
     useEffect(() => {
-        dispatch(getList());
-    }, [update]);
+        dispatch(getList(page ?? 1));
+    }, [update, page]);
+
+    const PageHandler = (pageNumber) => {
+        setPage(pageNumber);
+    };
     return (
         <Box
             sx={{
@@ -169,7 +175,6 @@ export default function TableSection() {
                             >
                                 تاریخ پایان
                             </TableCell>
-                            {/* <TableCell sx={{ color: theme => theme.palette.disable.main }} align="center">Protein&nbsp;(g)</TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -179,6 +184,27 @@ export default function TableSection() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Box sx={{ p: 2, ...center, gap: "25px" }}>
+                <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={() => PageHandler(page + 1)}
+                >
+                    <ArrowForward />
+                    بعدی
+                </Button>
+                <Typography>
+                    {toPersian(page)}
+                </Typography>
+                <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={() => PageHandler(page - 1)}
+                >
+                    قبلی
+                    <ArrowBack />
+                </Button>
+            </Box>
         </Box>
     );
 }
