@@ -10,11 +10,7 @@ import {
 import Title from "../../components/UI/Title";
 import { addCartForm } from "../../utils/data";
 import Switch from "@mui/material/Switch";
-import {
-    setFormInfo,
-    chelkBoxhandler,
-    resetForm,
-} from "../../Redux/Slices/Banking/addcard";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
@@ -25,13 +21,20 @@ import { center } from "../../styles/theme";
 import { useEffect } from "react";
 import { BTlist } from "../../Redux/Slices/Accounting/Bank/BankType/bankType";
 import { BankNameList } from "../../Redux/Slices/Accounting/Bank/BankName/bankName";
+import {
+    AddAccount,
+    checkBoxhandler,
+    resetForm,
+    setFormInfo,
+} from "../../Redux/Slices/Accounting/Bank/Bank";
 function AddCard() {
-    const { formInformation, checkBox } = useSelector((state) => state.addCard);
+    const { newBackAccount, checkBox } = useSelector((state) => state.bank);
     const { isfullScrenn } = useSelector((state) => state.general);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cancelBTN = () => {
         navigate(reactRouts.banking.main);
+        dispatch(resetForm());
     };
 
     const poseItems = ["API_IP", "API_TERMENAL", "posName"];
@@ -78,7 +81,7 @@ function AddCard() {
                         </InputLabel>
                         {item?.select ? (
                             <TextField
-                                value={formInformation[item.name]}
+                                value={newBackAccount[item.name]}
                                 name={item.name}
                                 id={item.name}
                                 fullWidth
@@ -90,11 +93,14 @@ function AddCard() {
                                             ? true
                                             : false
                                 }
-                                onChange={(newValue) => {
+                                onChange={(e) => {
                                     dispatch(
                                         setFormInfo({
                                             key: item.name,
-                                            value: newValue.target.value,
+                                            value:
+                                                item.type == "number"
+                                                    ? +e.target.value
+                                                    : e.target.value,
                                         })
                                     );
                                 }}
@@ -136,7 +142,7 @@ function AddCard() {
                                     ),
                                 }}
                             >
-                                {item.select && item?.name == "accountType" ? (
+                                {item.select && item?.name == "type_id" ? (
                                     <>
                                         {" "}
                                         <option value={""}>
@@ -160,7 +166,7 @@ function AddCard() {
                                             </option>
                                         )}
                                     </>
-                                ) : item?.name == "bankName" ? (
+                                ) : item?.name == "bank_id" ? (
                                     <>
                                         {" "}
                                         <option value={""}>
@@ -199,17 +205,21 @@ function AddCard() {
                                     width: "100%",
                                     height: "50px",
                                 }}
-                                value={formInformation[item.name]}
-                                onChange={(newValue) => {
+                                value={
+                                    item.meta == true
+                                        ? newBackAccount.meta[item.name]
+                                        : newBackAccount[item.name]
+                                }
+                                onChange={(name, value, type) => {
                                     dispatch(
                                         setFormInfo({
-                                            key: item.name,
-                                            value: newValue.target.value,
+                                            key: name,
+                                            value: value,
                                         })
                                     );
                                 }}
                                 disable={
-                                    checkBox.poseGroup === false && poseItems.includes(item.name)
+                                    checkBox.has_pos === false && poseItems.includes(item.name)
                                         ? true
                                         : checkBox.internet === false &&
                                             internetbankItems.includes(item.name)
@@ -228,12 +238,12 @@ function AddCard() {
                 <Box sx={{ ...center }}>
                     <Typography>متصل به پز</Typography>
                     <Switch
-                        name="poseGroup"
+                        name="has_pos"
                         color="warning"
-                        checked={checkBox.poseGroup}
+                        checked={checkBox.has_pos}
                         onClick={(e) =>
                             dispatch(
-                                chelkBoxhandler({
+                                checkBoxhandler({
                                     key: e.target.name,
                                     value: e.target.checked,
                                 })
@@ -244,11 +254,11 @@ function AddCard() {
                 <Box sx={{ ...center }}>
                     <Typography>فعال</Typography>
                     <Switch
-                        name="active"
-                        checked={checkBox.active}
+                        name="enabled"
+                        checked={checkBox.enabled}
                         onClick={(e) =>
                             dispatch(
-                                chelkBoxhandler({
+                                checkBoxhandler({
                                     key: e.target.name,
                                     value: e.target.checked,
                                 })
@@ -259,11 +269,11 @@ function AddCard() {
                 <Box sx={{ ...center }}>
                     <Typography>دسته چک</Typography>
                     <Switch
-                        name="checkBook"
-                        checked={checkBox.checkBook}
+                        name="has_check"
+                        checked={checkBox.has_check}
                         onClick={(e) =>
                             dispatch(
-                                chelkBoxhandler({
+                                checkBoxhandler({
                                     key: e.target.name,
                                     value: e.target.checked,
                                 })
@@ -274,11 +284,11 @@ function AddCard() {
                 <Box sx={{ ...center }}>
                     <Typography>اینترنت بانک</Typography>
                     <Switch
-                        name="internet"
-                        checked={checkBox.internet}
+                        name="has_internet_bank"
+                        checked={checkBox.has_internet_bank}
                         onClick={(e) =>
                             dispatch(
-                                chelkBoxhandler({
+                                checkBoxhandler({
                                     key: e.target.name,
                                     value: e.target.checked,
                                 })
@@ -289,11 +299,11 @@ function AddCard() {
                 <Box sx={{ ...center }}>
                     <Typography>OTP</Typography>
                     <Switch
-                        checked={checkBox.otp}
-                        name="otp"
+                        checked={checkBox.has_otp}
+                        name="has_otp"
                         onClick={(e) =>
                             dispatch(
-                                chelkBoxhandler({
+                                checkBoxhandler({
                                     key: e.target.name,
                                     value: e.target.checked,
                                 })
@@ -306,7 +316,7 @@ function AddCard() {
             <Box sx={{ ...center, justifyContent: "space-between" }}>
                 <Box sx={{ display: "flex", gap: "15px" }}>
                     <Button
-                        onClick={() => toastHandler("حساب با موفقیت اضافه شد", "info")}
+                        onClick={() => dispatch(AddAccount())}
                         variant="contained"
                         sx={{
                             bgcolor: (theme) => theme.palette.green.main,

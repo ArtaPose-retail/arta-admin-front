@@ -4,7 +4,6 @@ import { toastHandler } from "../../../utils/setting";
 const initialState = {
     formInformation: {
         bankName: "",
-        displayName: "",
         accountNum: "",
         sheba: "",
         cardNum: "",

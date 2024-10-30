@@ -426,22 +426,14 @@ export const roundPage = [
 
 export const addCartForm = [
     {
-        name: "bankName",
+        name: "bank_id",
         select: true,
         placeholder: "بانک خود راانتخاب کنید",
         lable: "نام بانک",
         hasIcon: true,
         color: "#6D6D6D",
-        type: "text",
-    },
-    {
-        name: "displayName",
-        select: false,
-        placeholder: "نام قابل نمایش",
-        lable: "نام قابل نمایش",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "text",
+        type: "number",
+        meta: false
     },
     {
         name: "account_num",
@@ -451,15 +443,17 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
+        meta: false
     },
     {
-        name: "sheba",
+        name: "iban",
         select: false,
         placeholder: "شماره شبا",
         lable: "شماره شبا",
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
+        meta: false
     },
     {
         name: "card_num",
@@ -468,7 +462,7 @@ export const addCartForm = [
         lable: "شماره کارت",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "number", meta: false
     },
     {
         name: "cvv2",
@@ -478,6 +472,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
+        meta: false
     },
     {
         name: "expier_date",
@@ -486,14 +481,18 @@ export const addCartForm = [
         lable: "تاریخ انقضا",
         hasIcon: false,
         color: "#6D6D6D",
+        meta: false,
+        type: "date"
     },
     {
-        name: "account_type_id",
+        name: "type_id",
         select: true,
         placeholder: "نوع حساب خود را انتخاب کنید",
         lable: "نوع حساب",
         hasIcon: true,
         color: "#6D6D6D",
+        meta: false,
+        type: "number"
     },
     {
         name: "branch_name",
@@ -503,6 +502,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
+        meta: false
     },
     {
         name: "branch_code",
@@ -512,15 +512,17 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
+        meta: false
     },
     {
-        name: "representer_name",
+        name: "owner_name",
         select: false,
         placeholder: "نام صاحب حساب",
         lable: "نام صاحب حساب",
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
+        meta: false
     },
     {
         name: "owner_phone",
@@ -539,6 +541,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#FF8A00",
         type: "number",
+        meta: false
     },
     {
         name: "api_terminal",
@@ -548,6 +551,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#FF8A00",
         type: "text",
+        meta: false
     },
     {
         name: "representer_pos_name",
@@ -557,6 +561,8 @@ export const addCartForm = [
         hasIcon: false,
         color: "#FF8A00",
         type: "text",
+        meta: false
+
     },
     {
         name: "bankUrl",
@@ -566,6 +572,8 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
+        meta: true
+
     },
     {
         name: "userName",
@@ -575,6 +583,8 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
+        meta: true
+
     },
     {
         name: "password",
@@ -583,7 +593,8 @@ export const addCartForm = [
         lable: "رمزعبور",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "text",
+        meta: true
     },
 ];
 

@@ -29,14 +29,7 @@ function Input({
     children,
     options,
 }) {
-    const onChangeInput = (event) => {
-        const input = event.target.value;
-        console.log(event.target.id);
-    };
 
-    const onChangekeyboard = (input) => {
-        console.log(input);
-    };
 
     const boxRef = useRef(null);
 
@@ -138,7 +131,7 @@ function Input({
             ) : type === "date" ? (
                 <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
                     <DatePicker
-                        value={value}
+                        value={new Date(value)}
                         onChange={(e) => onChange(name, e, type)}
                         onClick={onClickHandler}
                         disabled={disabled}

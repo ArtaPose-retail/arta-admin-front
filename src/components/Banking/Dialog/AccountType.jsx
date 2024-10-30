@@ -144,7 +144,7 @@ function AccountType({ handleClose }) {
                 </Box>
 
                 <Box sx={{ my: 2, maxHeight: "300px", overflow: "scroll" }}>
-                    {bankTypeList == null ? bankTypeList?.map((item, index) => (
+                    {bankTypeList != null ? bankTypeList?.map((item, index) => (
                         <Box
                             key={index}
                             sx={{
@@ -170,7 +170,7 @@ function AccountType({ handleClose }) {
                                 </Button>
                             </Box>
                         </Box>
-                    )) : ""}
+                    )) : <NoItem />}
                 </Box>
             </Box>
         </Box>
