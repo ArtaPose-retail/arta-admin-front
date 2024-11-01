@@ -18,6 +18,7 @@ const initialState = {
         weight: null,
         delivery_company_title: ""
     },
+    addDetailRes: null
 };
 
 export const AddFactorDetails = createAsyncThunk("factorDetails/add", AddDetails)
@@ -39,9 +40,10 @@ export const factorDetails = createSlice({
         builder.addCase(AddFactorDetails.pending, (state) => {
             state.loading = true
         })
-        builder.addCase(AddFactorDetails.fulfilled, (state) => {
+        builder.addCase(AddFactorDetails.fulfilled, (state, { payload }) => {
             state.loading = false,
                 toastHandler("با موفقیت ثبت شد", "info")
+            state.addDetailRes = payload.data.data
         })
         builder.addCase(AddFactorDetails.rejected, (state) => {
             state.loading = false

@@ -59,6 +59,10 @@ const apiRouts = {
         checkin: {
             details: {
                 add: "/admin/order/checkin/new"
+            },
+            items: {
+                add: (orderId) => `/admin/order/checkin/${orderId}/product`
+
             }
         }
     }

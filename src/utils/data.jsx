@@ -1340,16 +1340,16 @@ export const customersFactorList = [
 
 export const factorItemForm = [
     {
-        name: "productType",
-        select: false,
+        name: "product_id",
+        select: true,
         placeholder: "نوع محصول ",
         lable: "نوع محصول ",
-        hasIcon: true,
+        hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "select",
     },
     {
-        name: "amount",
+        name: "quantity",
         select: false,
         placeholder: "تعداد ",
         lable: "تعداد  ",
@@ -1359,7 +1359,7 @@ export const factorItemForm = [
         hastext: false,
     },
     {
-        name: "Weight",
+        name: "quantity",
         select: false,
         placeholder: "وزن ",
         lable: "وزن  ",
@@ -1369,7 +1369,7 @@ export const factorItemForm = [
     },
 
     {
-        name: "purchaseFee",
+        name: "buy_price_fee",
         select: false,
         placeholder: "فی خرید ",
         lable: "فی خرید ",
@@ -1385,19 +1385,11 @@ export const factorItemForm = [
         lable: "مالیات  ",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "number",
     },
+
     {
-        name: "discount",
-        select: false,
-        placeholder: "تخفیف ",
-        lable: "تخفیف  ",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "text",
-    },
-    {
-        name: "sellFee",
+        name: "original_price_fee",
         select: false,
         placeholder: "فی فروش ",
         lable: "فی فروش ",
@@ -1407,7 +1399,7 @@ export const factorItemForm = [
         hastext: true,
     },
     {
-        name: "StoreSellFee",
+        name: "sell_price_fee",
         select: false,
         placeholder: " فی فروش فروشگاه",
         lable: "فی فروش فروشگاه",
@@ -1438,11 +1430,11 @@ export const defineFactorForm = [
 
             {
                 title: "امانی",
-                value: 0,
+                value: 1,
             },
             {
                 title: "خریداری",
-                value: 1,
+                value: 2,
             },
         ],
         placeholder: "نوع فاکتور ",
@@ -1529,7 +1521,7 @@ export const defineFactorForm = [
         select: true,
         placeholder: "نوع خودرو",
         lable: "نوع خودرو را وارد کنید",
-        hasIcon: true,
+        hasIcon: false,
         color: "#6D6D6D",
         type: "select",
         require: false,
@@ -1537,15 +1529,15 @@ export const defineFactorForm = [
         options: [
             {
                 title: "پراید وانت",
-                value: 0
-            },
-            {
-                title: "زامیاد",
                 value: 1
             },
             {
-                title: "نیسان ابی",
+                title: "زامیاد",
                 value: 2
+            },
+            {
+                title: "نیسان ابی",
+                value: 3
             },
         ]
     },

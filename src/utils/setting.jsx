@@ -51,11 +51,11 @@ export const toPersian = (str) => {
 };
 
 export const persianDate = (date) => {
-    return date != null ? digitsEnToFa(
-        moment(date, "YYYY-MM-DD")
-            .locale("fa")
-            .format(" D MMM  YYYY")
-    ) : "_";
+    return date != null
+        ? digitsEnToFa(
+            moment(date, "YYYY-MM-DD").locale("fa").format(" D MMM  YYYY")
+        )
+        : "_";
 };
 export const persianTime = (data) => {
     return digitsEnToFa(
@@ -87,7 +87,7 @@ export const ruleChecker = (rules) => {
         management: "مدیریت",
         admin_actions: "مدیر عملیات",
     };
-    const result = []
+    const result = [];
     for (let key in rules) {
         if (rules[key]) {
             result.push(translations[key]);
@@ -100,5 +100,49 @@ export const checkAccess = (requiredRole) => {
     const admission = useSelector((state) => state.auth.admission);
     const hasAccess = requiredRole.some((role) => admission[role]);
 
-    return hasAccess
+    return hasAccess;
+};
+
+//!factor
+
+export const sumSell = (fee_sell, quantity) => {
+    if (fee_sell != null && quantity != null) {
+        return fee_sell * quantity;
+    } else {
+        return 0;
+    }
+};
+export const Discount = (original_fee_sell, fee_sell) => {
+    if (original_fee_sell != null && fee_sell != null) {
+        return original_fee_sell - fee_sell;
+    } else {
+        return 0;
+    }
+};
+
+export const TotalBuy = (buy_price_fee, quantity, tax) => {
+    if (buy_price_fee != null && quantity != null && tax != null) {
+        return buy_price_fee * quantity + tax;
+    } else {
+        return 0;
+    }
+};
+
+
+export const FinalBuyFee = (total_buy, discount, quantity) => {
+    return (total_buy - discount) / quantity
+}
+
+export const profitPercentage = (FinalBuyFee, sell_price_fee) => {
+
+    return ((sell_price_fee - FinalBuyFee) / FinalBuyFee) * 100
+
+}
+
+export const DiscountPercentage = (discount, original_price_fee) => {
+    if (original_price_fee != null) {
+        return (discount * 100) / original_price_fee
+    } else {
+        return 0
+    }
 }

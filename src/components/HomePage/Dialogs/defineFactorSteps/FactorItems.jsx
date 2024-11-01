@@ -5,39 +5,65 @@ import {
     Grid,
     InputAdornment,
     InputLabel,
-    Switch,
     TextField,
     Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import Title from "../../../UI/Title";
-import { toPersian } from "../../../../utils/setting";
-import AddIcon from "@mui/icons-material/Add";
+import React, { useEffect, useState } from "react";
+import {
+    Discount,
+    DiscountPercentage,
+    FinalBuyFee,
+    profitPercentage,
+    separateBy3,
+    sumSell,
+    toPersian,
+    TotalBuy,
+} from "../../../../utils/setting";
 import { factorItemForm } from "../../../../utils/data";
 import FactorItemstable from "./FactorItemstable";
 import { handlefactorStep } from "../../../../Redux/Slices/HomePage/factor";
 import { useDispatch, useSelector } from "react-redux";
-import ProductType from "./ProductType";
 import PackageType from "./PackageType";
 import Input from "../../../UI/Input";
-import SearchBox from "../../../UI/SearchBox";
 import { center } from "../../../../styles/theme";
+import { getProList } from "../../../../Redux/Slices/Accounting/Products/product";
+import { FactorItemsAdd, setFactorItems } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 
 function FactorItems({ handleClose }) {
     const dispatch = useDispatch();
 
-    const { defineFactorStep1 } = useSelector(state => state.factor)
+    const { addDetailRes } = useSelector(
+        (state) => state.factorDetails
+    );
+    const { newFacrtorItems } = useSelector((state) => state.factorItems);
+    const { productList } = useSelector((state) => state.product);
+    const [singleProd, setSingleProd] = useState();
 
-    const [openEl, setOpenEl] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const canBeOpen = openEl && Boolean(anchorEl);
-    const id = canBeOpen ? "transition-popper" : undefined;
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpenEl((previousOpen) => !previousOpen);
+    const onChangeHandler = (name, value, type) => {
+        dispatch(
+            setFactorItems({
+                key: name,
+                value: type == "number" || type == "select" ? +value : value,
+            })
+        );
     };
+
+    useEffect(() => {
+        dispatch(getProList());
+    }, []);
+
+    useEffect(() => {
+        if (newFacrtorItems.product_id != null) {
+            setSingleProd(
+                productList.find((item) => item.prod_id == newFacrtorItems.product_id)
+            );
+        }
+    }, [newFacrtorItems.product_id]);
+
+    const AddItemHandler = () => {
+        dispatch(FactorItemsAdd(addDetailRes?.id))
+    }
+
     return (
         <Box>
             <Box>
@@ -51,8 +77,10 @@ function FactorItems({ handleClose }) {
                             my: 0.5,
                         }}
                     >
-                        طرف معامله: محمدامین رحمتی
+                        طرف معامله:{addDetailRes?.customer?.fname} {addDetailRes?.customer?.lname}
                     </Typography>
+
+
                     <Typography
                         sx={{
                             fontSize: "16px",
@@ -62,7 +90,7 @@ function FactorItems({ handleClose }) {
                         }}
                     >
                         شماره بارنامه / فاکتور:
-                        {toPersian("3842")}
+                        {toPersian(addDetailRes?.orderpublicid ?? 0)}
                     </Typography>
                 </Box>
                 <Divider
@@ -85,24 +113,31 @@ function FactorItems({ handleClose }) {
                         {item.type !== "select" ? (
                             <>
                                 <Input
-                                    id={id}
-                                    onClickHandler={handleClick}
+                                    value={newFacrtorItems[item.name]}
+                                    onChange={onChangeHandler}
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     name={item.name}
                                     height={"55px"}
                                     hasText={item.hastext}
                                     hasIcon={item.hasIcon}
-                                    disabled={item.name == "purchaseFee" && defineFactorStep1.factorType === "kharidari" ? true : false}
-                                >
-                                    <ProductType />
-                                    <SearchBox openEl={openEl} anchorEl={anchorEl} id={id} />
-                                </Input>
+                                    disabled={
+                                        singleProd?.is_bulk && item.lable.trim() === "وزن"
+                                            ? true
+                                            : !singleProd?.is_bulk && item.lable.trim() === "تعداد"
+                                                ? false
+                                                : false
+                                    }
+                                />
                             </>
                         ) : (
                             <TextField
+                                value={newFacrtorItems[item.name]}
                                 name={item.name}
                                 id={item.name}
+                                onChange={(e) =>
+                                    onChangeHandler(item.name, e.target.value, item.type)
+                                }
                                 fullWidth
                                 sx={{
                                     "& .MuiNativeSelect-select": {
@@ -141,14 +176,24 @@ function FactorItems({ handleClose }) {
                                     },
                                 }}
                             >
-                                {item?.select &&
-                                    item?.options?.map((option, index) => (
-                                        <option key={index} value={option?.value}>
+                                {item?.select && item.name == "product_id" ? (
+                                    <>
+                                        <option value={""}>
                                             <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                {option?.title}
+                                                انتخاب کنید
                                             </Typography>
                                         </option>
-                                    ))}
+                                        {productList.map((option, index) => (
+                                            <option key={index} value={option?.prod_id}>
+                                                <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                    {option?.title}
+                                                </Typography>
+                                            </option>
+                                        ))}{" "}
+                                    </>
+                                ) : (
+                                    ""
+                                )}
                             </TextField>
                         )}
                     </Grid>
@@ -156,7 +201,6 @@ function FactorItems({ handleClose }) {
             </Grid>
             <Box sx={{ ...center, width: "100%", gap: "5px", my: 2 }}>
                 <Typography
-
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
                         color: (theme) => theme.palette.text.primary,
@@ -164,10 +208,22 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    جمع کل خرید: {toPersian(23000)}
+                    جمع کل خرید:{" "}
+                    {toPersian(
+                        separateBy3(
+                            TotalBuy(
+                                newFacrtorItems.buy_price_fee,
+                                newFacrtorItems.quantity,
+                                newFacrtorItems.tax
+                            ) -
+                            Discount(
+                                newFacrtorItems.original_price_fee,
+                                newFacrtorItems.sell_price_fee
+                            )
+                        )
+                    )}
                 </Typography>
                 <Typography
-
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
                         color: (theme) => theme.palette.text.primary,
@@ -175,10 +231,28 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    فی نهایی خرید: {toPersian(23000)}
+                    فی نهایی خرید:{" "}
+                    {toPersian(
+                        separateBy3(
+                            Math.ceil(
+                                FinalBuyFee(
+                                    TotalBuy(
+                                        newFacrtorItems.buy_price_fee,
+                                        newFacrtorItems.quantity,
+                                        newFacrtorItems.tax
+                                    ),
+                                    Discount(
+                                        newFacrtorItems.original_price_fee,
+                                        newFacrtorItems.sell_price_fee
+                                    ),
+                                    newFacrtorItems.quantity
+                                )
+                            )
+                        )
+                    )}
+
                 </Typography>
                 <Typography
-
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
                         color: (theme) => theme.palette.text.primary,
@@ -186,10 +260,17 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    جمع کل فروش: {toPersian(23000000)}
+                    جمع کل فروش:{" "}
+                    {toPersian(
+                        separateBy3(
+                            sumSell(
+                                newFacrtorItems.original_price_fee,
+                                newFacrtorItems.quantity
+                            )
+                        )
+                    )}
                 </Typography>
                 <Typography
-
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
                         color: (theme) => theme.palette.text.primary,
@@ -197,10 +278,17 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    مبلغ تخفیف فروش: {toPersian(23)}
+                    مبلغ تخفیف فروش:{" "}
+                    {toPersian(
+                        separateBy3(
+                            Discount(
+                                newFacrtorItems.original_price_fee,
+                                newFacrtorItems.sell_price_fee
+                            )
+                        )
+                    )}
                 </Typography>
                 <Typography
-
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
                         color: (theme) => theme.palette.text.primary,
@@ -208,10 +296,12 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    درصد تخفیف فروش: %{toPersian(23)}
+                    درصد تخفیف فروش: %{toPersian(DiscountPercentage(Discount(
+                        newFacrtorItems.original_price_fee,
+                        newFacrtorItems.sell_price_fee
+                    ), newFacrtorItems.original_price_fee))}
                 </Typography>
                 <Typography
-
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
                         color: (theme) => theme.palette.text.primary,
@@ -219,50 +309,35 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    درصد سود:  %{toPersian(23)}
+                    درصد سود: %
+                    {toPersian(
+                        Math.floor(
+                            profitPercentage(
+                                FinalBuyFee(
+                                    TotalBuy(
+                                        newFacrtorItems.buy_price_fee,
+                                        newFacrtorItems.quantity,
+                                        newFacrtorItems.tax
+                                    ),
+                                    Discount(
+                                        newFacrtorItems.original_price_fee,
+                                        newFacrtorItems.sell_price_fee
+                                    ),
+                                    newFacrtorItems.quantity
+                                ),
+                                newFacrtorItems.sell_price_fee
+                            )
+                        )
+                    )}
                 </Typography>
             </Box>
             <Box sx={{ ...center, justifyContent: "space-between" }}>
-                <Box sx={{ ...center, mt: 1 }}>
-                    <Box sx={{ ...center }}>
-                        <Typography
-                            sx={{
-                                fontSize: "16px",
-                                fontWeight: 500,
-                                color: (theme) => theme.typography.color,
-                            }}
-                        >
-                            الزام وزن
-                        </Typography>
-                        <Switch
-                            name="pureWeight"
-
-                        // checked={}
-                        />
-                    </Box>
-                    <Box sx={{ ...center }}>
-                        <Typography
-                            sx={{
-                                fontSize: "16px",
-                                fontWeight: 500,
-                                color: (theme) => theme.typography.color,
-                            }}
-                        >
-                            الزام تعداد
-                        </Typography>
-                        <Switch
-                            name="Number"
-                        // checked={}
-                        />
-                    </Box>
-
-                </Box>
-
                 <Box>
                     <Button
+                        onClick={() => AddItemHandler()}
                         variant="contained"
                         sx={{
-                            bgcolor: (theme) => theme.palette.green.main,
+                            bgcolor: (theme) => theme.palette.primary.main,
                             color: (theme) => theme.palette.text.primary,
                             px: 3,
                         }}
@@ -270,7 +345,6 @@ function FactorItems({ handleClose }) {
                         افزودن
                     </Button>
                 </Box>
-
             </Box>
 
             <FactorItemstable height={200} />

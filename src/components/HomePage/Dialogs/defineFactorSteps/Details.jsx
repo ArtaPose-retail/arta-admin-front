@@ -20,6 +20,8 @@ import CarDg from "./CarDg";
 import { center } from "../../../../styles/theme";
 import { getTransactions } from "../../../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 import { AddFactorDetails, resetfactorDetailForm, setFactorDetailsInfo } from "../../../../Redux/Slices/Accounting/Factor/FactorDetails/details";
+import TransactionpartyDg from "../TransactionpartyDg";
+import { Add } from "@mui/icons-material";
 
 function Details({ handleClose }) {
     const dispatch = useDispatch();
@@ -53,7 +55,14 @@ function Details({ handleClose }) {
         dispatch(handlefactorStep("increase"))
         dispatch(AddFactorDetails())
     }
+    const [openTransaction, setOpenTransaction] = useState(false);
+    const showTransactionDialoghandler = () => {
 
+        setOpenTransaction(true);
+    };
+    const handlerCloseTransactionDialog = () => {
+        setOpenTransaction(false);
+    };
     const { TransActionList } = useSelector((state) => state.transactionsSlice);
     return (
         <Box>
@@ -120,10 +129,25 @@ function Details({ handleClose }) {
                                                         >
                                                             ریال
                                                         </Typography>
-                                                    ) : item.name == "carType" ? (
-                                                        <CarDg />
                                                     ) : (
-                                                        <TransactionDialog title={item.lable} />
+                                                        <Box
+                                                            onClick={() => showTransactionDialoghandler()}
+                                                            sx={{
+                                                                bgcolor: (theme) => theme.palette.text.secondary,
+                                                                height: "100%",
+                                                                p: 2,
+                                                                borderRadius: "50px",
+                                                                cursor: "pointer",
+                                                                ...center,
+                                                            }}
+                                                        >
+                                                            <Add
+                                                                sx={{
+                                                                    fill: (theme) => theme.palette.text.primary,
+                                                                }}
+                                                            />
+                                                        </Box>
+
                                                     )}
                                                 </InputAdornment>
                                             )}
@@ -218,7 +242,10 @@ function Details({ handleClose }) {
                     </Grid>
                 ))}
             </Grid>
-
+            <TransactionpartyDg
+                status={openTransaction}
+                handlerCloseDialog={handlerCloseTransactionDialog}
+            />
             <Box sx={{ ...center, justifyContent: "space-between", mt: 2 }}>
                 <Box sx={{ ...center, gap: "10px" }}>
                     <Button
