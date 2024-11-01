@@ -54,6 +54,13 @@ const apiRouts = {
             add: "/admin/bankaccount/new",
             list: "/admin/bankaccount/"
         }
+    },
+    factor: {
+        checkin: {
+            details: {
+                add: "/admin/order/checkin/new"
+            }
+        }
     }
 };
 

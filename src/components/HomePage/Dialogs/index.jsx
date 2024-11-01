@@ -3,15 +3,14 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, Typography } from "@mui/material";
-import CustomerFactorTable from "../CustomerFactorTable";
-import CustomerFactorListTable from "./CustomerFactorListTable";
+import { Button, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { handleShowNewFactorDialog } from "../../../Redux/Slices/HomePage/factor";
 import FactorListDG from "./FactorListDG";
 import DefineFactor from "./DefineFactor";
 
 import EditIcon from "@mui/icons-material/Edit";
+import { center } from "../../../styles/theme";
 
 export default function NewProductParentDialog({ type }) {
     const [open, setOpen] = useState(false);
@@ -27,11 +26,7 @@ export default function NewProductParentDialog({ type }) {
         dispatch(handleShowNewFactorDialog(false));
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     useEffect(() => {
         if (type !== "add") {

@@ -1422,30 +1422,27 @@ export const factorItemForm = [
 ];
 export const defineFactorForm = [
     {
-        name: "transactionParty",
-        select: false,
+        name: "cust_id",
+        select: true,
         placeholder: "نام طرف معامله",
         lable: "طرف معامله",
         hasIcon: true,
         color: "#6D6D6D",
-        type: "text",
+        type: "select",
         require: true,
     },
     {
-        name: "factorType",
+        name: "order_type_id",
         select: true,
         options: [
-            {
-                title: "نوع فاکتور را انتخاب کنید",
-                value: "",
-            },
+
             {
                 title: "امانی",
-                value: "amaani",
+                value: 0,
             },
             {
                 title: "خریداری",
-                value: "kharidari",
+                value: 1,
             },
         ],
         placeholder: "نوع فاکتور ",
@@ -1456,17 +1453,17 @@ export const defineFactorForm = [
         require: false,
     },
     {
-        name: "factorNumber",
+        name: "orderpublicid",
         select: false,
         placeholder: "شماره فاکتور / شماره بارنامه",
         lable: "شماره فاکتور / شماره بارنامه",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "text",
         require: false,
     },
     {
-        name: "date",
+        name: "order_public_date",
         select: false,
         placeholder: "تاریخ فاکتور /  بارنامه",
         lable: "تاریخ فاکتور /  بارنامه",
@@ -1476,7 +1473,7 @@ export const defineFactorForm = [
         require: false,
     },
     {
-        name: "bane",
+        name: "bonebagh",
         select: false,
         placeholder: "بنه / باغ *",
         lable: "بنه / باغ را وارد کنید",
@@ -1486,17 +1483,17 @@ export const defineFactorForm = [
         require: false,
     },
     {
-        name: "driverInformation",
-        select: false,
+        name: "delivery_agent_profile_id",
+        select: true,
         placeholder: "نام راننده را وارد کنید",
         lable: "نام راننده ",
         hasIcon: true,
         color: "#6D6D6D",
-        type: "text",
+        type: "select",
         require: true,
     },
     {
-        name: "tax",
+        name: "fee",
         select: false,
         placeholder: "کرایه",
         lable: "کرایه",
@@ -1507,7 +1504,7 @@ export const defineFactorForm = [
         hastext: true,
     },
     {
-        name: "transport",
+        name: "delivery_company_title",
         select: false,
         placeholder: "باربری",
         lable: "باربری",
@@ -1517,7 +1514,7 @@ export const defineFactorForm = [
         require: false,
     },
     {
-        name: "others",
+        name: "extra_expenses",
         select: false,
         placeholder: "هزینه / سایر",
         lable: "هزینه / سایر",
@@ -1528,7 +1525,7 @@ export const defineFactorForm = [
         hastext: true,
     },
     {
-        name: "carType",
+        name: "vehicle_type_id",
         select: true,
         placeholder: "نوع خودرو",
         lable: "نوع خودرو را وارد کنید",
@@ -1539,25 +1536,21 @@ export const defineFactorForm = [
         hastext: false,
         options: [
             {
-                title: "نوع خودرو",
-                value: ""
-            },
-            {
                 title: "پراید وانت",
-                value: "perayd vanet"
+                value: 0
             },
             {
                 title: "زامیاد",
-                value: "zamyad"
+                value: 1
             },
             {
                 title: "نیسان ابی",
-                value: "deathrider"
+                value: 2
             },
         ]
     },
     {
-        name: "plate",
+        name: "license_plate",
         select: false,
         placeholder: "شماره پلاک",
         lable: " پلاک را وارد کنید",
@@ -1568,7 +1561,7 @@ export const defineFactorForm = [
         hastext: false,
     },
     {
-        name: "baskol",
+        name: "weight",
         select: false,
         lable: "وزن باسکول را وارد کنید",
         placeholder: "وزن باسکول",

@@ -11,6 +11,7 @@ const initialState = {
         rememberme: true,
         fname: "",
         lname: "",
+        user_id: ""
     },
 };
 
@@ -40,6 +41,7 @@ export const auth = createSlice({
                 localStorage.setItem("TOKEN", payload.data.token);
             state.loginInfo.fname = payload.data.User.fname;
             state.loginInfo.lname = payload.data.User.lname;
+            state.loginInfo.user_id = +payload.data.User.user_id;
         });
         builder.addCase(LoginAction.rejected, (state) => {
             (state.loading = false),

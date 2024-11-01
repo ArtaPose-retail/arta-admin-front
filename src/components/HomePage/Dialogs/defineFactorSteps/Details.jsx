@@ -1,36 +1,29 @@
 import {
     Box,
     Button,
-    Divider,
-    Fade,
     Grid,
     InputAdornment,
     InputLabel,
-    Popper,
     TextField,
     Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { defineFactorForm } from "../../../../utils/data";
-import Title from "../../../UI/Title";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     handlefactorStep,
     setdeFactorInfoStep1,
 } from "../../../../Redux/Slices/HomePage/factor";
 import TransactionDialog from "./TransactionDialog";
 import Input from "../../../UI/Input";
-import SearchBox from "../../../UI/SearchBox";
 import CarDg from "./CarDg";
+import { center } from "../../../../styles/theme";
+import { getTransactions } from "../../../../Redux/Slices/Accounting/Transactions/transactionsSlice";
+import { AddFactorDetails, resetfactorDetailForm, setFactorDetailsInfo } from "../../../../Redux/Slices/Accounting/Factor/FactorDetails/details";
 
 function Details({ handleClose }) {
     const dispatch = useDispatch();
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-
+    const { newDetail } = useSelector(state => state.factorDetails)
     const [openEl, setOpenEl] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -42,17 +35,28 @@ function Details({ handleClose }) {
         setOpenEl((previousOpen) => !previousOpen);
     };
 
-    const onChangeHandler = (name, value) => {
+    const onChangeHandler = (name, value, type) => {
         dispatch(
-            setdeFactorInfoStep1({
+            setFactorDetailsInfo({
                 key: name,
-                value: value,
+                value: type == "number" || type == "select" ? +value : value,
+
             })
         );
     };
+
+    useEffect(() => {
+        dispatch(getTransactions());
+    }, []);
+
+    const ContinueHandler = () => {
+        dispatch(handlefactorStep("increase"))
+        dispatch(AddFactorDetails())
+    }
+
+    const { TransActionList } = useSelector((state) => state.transactionsSlice);
     return (
         <Box>
-
             <Grid container spacing={2} sx={{ p: 1, mt: 2 }}>
                 {defineFactorForm?.map((item, index) => (
                     <Grid item xs={4} key={index}>
@@ -66,26 +70,25 @@ function Details({ handleClose }) {
                         {item.type !== "select" ? (
                             <>
                                 <Input
+                                    value={newDetail[item.name]}
                                     id={id}
                                     onClickHandler={handleClick}
                                     onChange={onChangeHandler}
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     name={item.name}
-                                    height={"55px"}
                                     hasText={item.hastext}
                                     hasIcon={item.hasIcon}
-                                >
-                                    <TransactionDialog title={item.lable} />
-                                    <SearchBox openEl={openEl} anchorEl={anchorEl} id={id} />
-                                </Input>
+                                />
                             </>
                         ) : (
                             <TextField
+                                type={item.type}
+                                value={newDetail[item.name]}
                                 name={item.name}
                                 id={item.name}
                                 fullWidth
-                                onChange={(e) => onChangeHandler(item.name, e.target.value)}
+                                onChange={(e) => onChangeHandler(item.name, e.target.value, item.type)}
                                 sx={{
                                     "& .MuiNativeSelect-select": {
                                         color: "black",
@@ -117,8 +120,10 @@ function Details({ handleClose }) {
                                                         >
                                                             ریال
                                                         </Typography>
+                                                    ) : item.name == "carType" ? (
+                                                        <CarDg />
                                                     ) : (
-                                                        item.name == "carType" ? <CarDg /> : <TransactionDialog title={item.lable} />
+                                                        <TransactionDialog title={item.lable} />
                                                     )}
                                                 </InputAdornment>
                                             )}
@@ -135,14 +140,79 @@ function Details({ handleClose }) {
                                     },
                                 }}
                             >
-                                {item?.select &&
-                                    item?.options?.map((option, index) => (
-                                        <option key={index} value={option?.value}>
+                                {item.select && item?.name == "cust_id" ? (
+                                    <>
+                                        {" "}
+                                        <option value={""}>
                                             <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                {option?.title}
+                                                انتخاب کنید
+                                            </Typography>
+                                        </option>
+                                        {/* option.usertype_id!=5 */}
+                                        {TransActionList.filter(
+                                            (option) => option.usertype_id != 5
+                                        ).map((option, index) => (
+                                            <option key={index} value={option.user_id}>
+                                                <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                    {option?.fname} {option?.lname}
+                                                </Typography>
+                                            </option>
+                                        ))}
+                                    </>
+                                ) : item?.name == "order_type_id" ? (
+                                    <>
+                                        {" "}
+                                        <option value={""}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                انتخاب کنید
+                                            </Typography>
+                                        </option>
+                                        {item.options.map((option, index) => (
+                                            <option key={index} value={option.value}>
+                                                <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                    {option.title}
+                                                </Typography>
+                                            </option>
+                                        ))}
+                                    </>
+                                ) : item.name == "delivery_agent_profile_id" ? <>
+                                    {" "}
+                                    <option value={""}>
+                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                            انتخاب کنید
+                                        </Typography>
+                                    </option>
+
+                                    {TransActionList.filter(
+                                        (option) => option.usertype_id == 5
+                                    ).map((option, index) => (
+                                        <option key={index} value={option.user_id}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                {option?.fname} {option?.lname}
                                             </Typography>
                                         </option>
                                     ))}
+                                </> : item.name == "vehicle_type_id" ? <>
+                                    {" "}
+                                    <option value={""}>
+                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                            انتخاب کنید
+                                        </Typography>
+                                    </option>
+                                    {item.options.map((option, index) => (
+                                        <option key={index} value={option.value}>
+                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                                {option.title}
+                                            </Typography>
+                                        </option>
+                                    ))}
+                                </> : (
+                                    <option value={""}>
+                                        <Typography sx={{ fontSize: "12px", color: "black" }}>
+                                            ایتمی وجود ندارد
+                                        </Typography>
+                                    </option>
+                                )}
                             </TextField>
                         )}
                     </Grid>
@@ -152,7 +222,7 @@ function Details({ handleClose }) {
             <Box sx={{ ...center, justifyContent: "space-between", mt: 2 }}>
                 <Box sx={{ ...center, gap: "10px" }}>
                     <Button
-                        onClick={() => dispatch(handlefactorStep("increase"))}
+                        onClick={() => ContinueHandler()}
                         variant="contained"
                         sx={{
                             color: (theme) => theme.palette.text.primary,
@@ -166,6 +236,7 @@ function Details({ handleClose }) {
                 <Button
                     onClick={() => {
                         dispatch(handlefactorStep(1));
+                        dispatch(resetfactorDetailForm());
                         handleClose();
                     }}
                     variant="contained"

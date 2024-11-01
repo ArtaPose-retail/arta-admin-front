@@ -97,7 +97,7 @@ function FactorPage() {
                         hasIcon={true}
                         placeholder={"جستجو براساس نام محصول"}
                     />
-                    <NewProductParentDialog />
+                    <NewProductParentDialog type={"add"} />
 
                 </Box>
             </Box>

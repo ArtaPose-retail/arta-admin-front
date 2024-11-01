@@ -18,6 +18,7 @@ import Order from "./Slices/Actions/Order/Order";
 import bank from "./Slices/Accounting/Bank/Bank";
 import bankName from "./Slices/Accounting/Bank/BankName/bankName";
 import bankType from "./Slices/Accounting/Bank/BankType/bankType";
+import factorDetails from "./Slices/Accounting/Factor/FactorDetails/details";
 
 const appReducer = combineReducers({
     auth,
@@ -38,6 +39,7 @@ const appReducer = combineReducers({
     bank,
     bankName,
     bankType,
+    factorDetails
 });
 
 export const rootReducers = (state, action) => {
