@@ -61,7 +61,8 @@ const apiRouts = {
                 add: "/admin/order/checkin/new"
             },
             items: {
-                add: (orderId) => `/admin/order/checkin/${orderId}/product`
+                add: (orderId) => `/admin/order/checkin/${orderId}/product`,
+                list: (order_id) => `/admin/order/${order_id}/product`
 
             },
             finilize: {

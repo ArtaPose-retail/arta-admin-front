@@ -145,7 +145,7 @@ function Row(props) {
                                     واحد عملیات:
                                 </Typography>
                                 <Button
-                                    disabled={true}
+                                    disabled={false}
                                     onClick={() =>
                                         navigate(reactRouts.safi.main, {
                                             state: { key: row?.factorType },

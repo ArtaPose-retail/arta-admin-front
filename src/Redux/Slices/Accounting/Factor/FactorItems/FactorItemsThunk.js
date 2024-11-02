@@ -23,5 +23,5 @@ export const addFactorItems = async (OrderID, ThunkAPI) => {
 };
 
 export const OrderItemList = async (order_id) => {
-    return await AXIOS.get(`${apiRouts.order.list}${order_id}`);
+    return await AXIOS.get(apiRouts.factor.checkin.items.list(order_id));
 };

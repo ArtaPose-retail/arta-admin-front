@@ -10,10 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/material";
-import {
-    FactorSellitemstable,
-} from "../../../../utils/data";
-import { toPersian, toastHandler } from "../../../../utils/setting";
+
+import { separateBy3, toPersian, toastHandler } from "../../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { FactorItemslist } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 
@@ -39,12 +37,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function FactorItemstable({ height }) {
     const dispach = useDispatch()
+
     const { addDetailRes } = useSelector(
         (state) => state.factorDetails
     );
+    const { singleOrderList } = useSelector(
+        (state) => state.factorItems
+    );
+
     useEffect(() => {
         dispach(FactorItemslist(addDetailRes?.id))
     }, [addDetailRes?.id])
+
+
     const deleteBtn = () => {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
@@ -58,33 +63,33 @@ export default function FactorItemstable({ height }) {
 
                         <StyledTableCell align="center">فی خرید</StyledTableCell>
                         <StyledTableCell align="center">فی فروش</StyledTableCell>
-                        <StyledTableCell align="center">وزن</StyledTableCell>
+                        <StyledTableCell align="center">فی فروش فروشگاه</StyledTableCell>
 
                         <StyledTableCell align="center">تعداد</StyledTableCell>
                         <StyledTableCell align="center">عملیات</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {FactorSellitemstable.map((item, index) => (
+                    {singleOrderList?.map((item, index) => (
                         <StyledTableRow key={index}>
                             <StyledTableCell width={"10%"} align="center">
                                 {toPersian(index + 1)}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {item.productName}
+                                {item?.product_id}
                             </StyledTableCell>
 
                             <StyledTableCell align="center">
-                                {toPersian(item.purchaseFee)}ریال
+                                {toPersian(separateBy3(item?.initial_buy_price ?? 0))}ریال
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {toPersian(item.sellFee)}ریال
+                                {toPersian(separateBy3(item?.original_price ?? 0))}ریال
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {toPersian(item.pureWeight)}کیلوگرم
+                                {toPersian(separateBy3(item?.unitprice ?? 0))}ریال
                             </StyledTableCell>
 
-                            <StyledTableCell align="center">{item.amount}عدد</StyledTableCell>
+                            <StyledTableCell align="center">{item?.quantity}عدد</StyledTableCell>
                             <StyledTableCell align="center">
                                 <Box
                                     sx={{

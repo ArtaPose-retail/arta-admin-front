@@ -78,7 +78,7 @@ export default function NewProductParentDialog({ type }) {
                     backdropFilter: "blur(10px)",
                 }}
                 open={open}
-                onClose={handleClose}
+                // onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >

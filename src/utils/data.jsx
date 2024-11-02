@@ -1140,44 +1140,7 @@ export const customerFactortable = [
 ];
 
 
-export const FactorSellitemstable = [
-    {
-        productName: "سیب قرمز",
-        displayName: "سیب قرمز",
-        purchaseFee: "450000",
-        sellFee: "500000",
-        pureWeight: "35",
-        packageType: "بسته چوبی",
-        amount: "50",
-    },
-    {
-        productName: "سیب قرمز",
-        displayName: "سیب قرمز",
-        purchaseFee: "450000",
-        sellFee: "500000",
-        pureWeight: "35",
-        packageType: "بسته چوبی",
-        amount: "50",
-    },
-    {
-        productName: "سیب قرمز",
-        displayName: "سیب قرمز",
-        purchaseFee: "450000",
-        sellFee: "500000",
-        pureWeight: "35",
-        packageType: "بسته چوبی",
-        amount: "50",
-    },
-    {
-        productName: "سیب قرمز",
-        displayName: "سیب قرمز",
-        purchaseFee: "450000",
-        sellFee: "500000",
-        pureWeight: "35",
-        packageType: "بسته چوبی",
-        amount: "50",
-    },
-];
+
 export const customersFactorList = [
     {
         name: "امیرحسین  فرد",
