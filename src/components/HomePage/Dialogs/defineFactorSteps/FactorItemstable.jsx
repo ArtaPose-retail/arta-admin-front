@@ -7,11 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/material";
 
-import { separateBy3, toPersian, toastHandler } from "../../../../utils/setting";
+import { separateBy3, toPersian } from "../../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOrderItem, FactorItemslist } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 
@@ -51,8 +50,7 @@ export default function FactorItemstable({ height }) {
 
 
     const deleteBtn = (prod_id) => {
-        console.log(prod_id)
-        dispach(DeleteOrderItem(addDetailRes?.id, prod_id))
+        dispach(DeleteOrderItem({ order_id: addDetailRes?.id, op_id: prod_id }))
     };
     return (
         <TableContainer sx={{ maxHeight: height }}>
