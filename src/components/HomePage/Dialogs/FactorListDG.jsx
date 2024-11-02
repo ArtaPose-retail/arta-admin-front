@@ -6,20 +6,14 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box, Button, Typography } from "@mui/material";
 import CustomerFactorTable from "../CustomerFactorTable";
 import CustomerFactorListTable from "./CustomerFactorListTable";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { handleShowNewFactorDialog } from "../../../Redux/Slices/HomePage/factor";
+import { center } from "../../../styles/theme";
 export default function FactorListDG({ handleClose }) {
 
     const dispatch = useDispatch()
 
 
-
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
 
     return (
         <div>

@@ -11,8 +11,6 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
-import { FactorPageTablemain } from "../../utils/data";
-import moment from "jalali-moment";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";

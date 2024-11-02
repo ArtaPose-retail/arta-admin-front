@@ -59,13 +59,13 @@ function Row(props) {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                    {row?.title}
+                    {row?.Title}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row?.quantity ?? 0)}
+                    {toPersian(row?.quantity ?? 0)}{row?.IsBulk == false ? "عدد" : "کیلوگرم"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}

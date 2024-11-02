@@ -75,7 +75,7 @@ export default function FactorItemstable({ height }) {
                                 {toPersian(index + 1)}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {item?.product_id}
+                                {item?.Title}
                             </StyledTableCell>
 
                             <StyledTableCell align="center">
@@ -88,7 +88,7 @@ export default function FactorItemstable({ height }) {
                                 {toPersian(separateBy3(item?.unitprice ?? 0))}ریال
                             </StyledTableCell>
 
-                            <StyledTableCell align="center">{item?.quantity}عدد</StyledTableCell>
+                            <StyledTableCell align="center">{item?.quantity}{item?.IsBulk == false ? "عدد" : "کیلوگرم"}</StyledTableCell>
                             <StyledTableCell align="center">
                                 <Box
                                     sx={{

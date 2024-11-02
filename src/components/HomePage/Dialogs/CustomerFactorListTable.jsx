@@ -6,13 +6,10 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { toPersian, toastHandler } from "../../../utils/setting";
-import moment from "jalali-moment";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Box } from "@mui/material";
-import { customersFactorList } from "../../../utils/data";
+
+import { useSelector } from "react-redux";
+import { NoItem } from "../../UI/NoItem";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,10 +32,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomerFactorListTable() {
+    const { factorList } = useSelector(state => state.factorPage)
 
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
-    };
     return (
         <TableContainer sx={{ maxHeight: 350 }}>
             <Table stickyHeader aria-label="sticky table">
@@ -49,47 +44,32 @@ export default function CustomerFactorListTable() {
                         <StyledTableCell align="center">نوع فاکتور</StyledTableCell>
                         <StyledTableCell align="center">شماره فاکتور</StyledTableCell>
                         <StyledTableCell align="center">تاریخ</StyledTableCell>
-                        <StyledTableCell align="center">عملیات</StyledTableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {customersFactorList.map((item, index) => (
+                    {factorList.length > 0 ? factorList.map((item, index) => (
                         <StyledTableRow key={index}>
                             <StyledTableCell width={"10%"} align="center">
                                 {toPersian(index + 1)}
                             </StyledTableCell>
-                            <StyledTableCell align="center">{item.name}</StyledTableCell>
+                            <StyledTableCell align="center">{item?.cust_fullname}</StyledTableCell>
                             <StyledTableCell align="center">
-                                {item.factorType}
+                                {item?.order_type_id
+                                    ? item?.order_type_id == 1
+                                        ? "خریداری"
+                                        : "امانی"
+                                    : "-"}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {toPersian(item.factorNumber)}
+                                {item?.order_public_date ? persianDate(item?.order_public_date) : "-"}
                             </StyledTableCell>
                             <StyledTableCell align="center">
-                                {toPersian(
-                                    moment(new Date(), "YYYY-MM-DD")
-                                        .locale("fa")
-                                        .format("YYYY/MM/D")
-                                )}
+                                {toPersian(item?.orderpublicid ?? 0)}
                             </StyledTableCell>
-                            <StyledTableCell align="center">
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        gap: "10px",
-                                    }}
-                                >
-                                    <EditIcon />
-                                    <DeleteOutlineIcon
-                                        onClick={() => deleteBtn()}
-                                        sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
-                                    />
-                                </Box>
-                            </StyledTableCell>
+
                         </StyledTableRow>
-                    ))}
+                    )) : <NoItem />}
                 </TableBody>
             </Table>
         </TableContainer>
