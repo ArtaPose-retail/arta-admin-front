@@ -3,19 +3,21 @@ import React, { useState } from "react";
 import FactorItemstable from "./FactorItemstable";
 import { toPersian, toastHandler } from "../../../../utils/setting";
 import { handlefactorStep } from "../../../../Redux/Slices/HomePage/factor";
-import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { center } from "../../../../styles/theme";
+import { finalizeFactorAction } from "../../../../Redux/Slices/Accounting/Factor/FactorRegister/factorRegister";
 
 function RegisterFactor({ handleClose }) {
     const dispatch = useDispatch();
+    const { addDetailRes } = useSelector(
+        (state) => state.factorDetails
+    );
 
-    const location = useLocation();
-    const navigate = useNavigate();
 
     const registerBn = () => {
-        toastHandler("فاکتور با موفقیت ثبت شد", "info");
-        handleClose();
+        // toastHandler("فاکتور با موفقیت ثبت شد", "info");
+        // handleClose();
+        dispatch(finalizeFactorAction(addDetailRes?.id))
     };
     const [img, setImg] = useState(null)
     const handlerUploadImg = (e) => {

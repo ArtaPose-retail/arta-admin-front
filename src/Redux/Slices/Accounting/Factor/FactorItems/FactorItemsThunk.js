@@ -19,5 +19,9 @@ export const addFactorItems = async (OrderID, ThunkAPI) => {
         tax,
         original_price_fee,
         sell_price_fee,
-    })
+    });
+};
+
+export const OrderItemList = async (order_id) => {
+    return await AXIOS.get(`${apiRouts.order.list}${order_id}`);
 };

@@ -63,6 +63,9 @@ const apiRouts = {
             items: {
                 add: (orderId) => `/admin/order/checkin/${orderId}/product`
 
+            },
+            finilize: {
+                main: "/admin/order/checkin/"
             }
         }
     }

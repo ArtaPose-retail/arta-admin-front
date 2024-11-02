@@ -14,17 +14,14 @@ import FactorTable from "../../components/FactorPage/FactorTable";
 import Input from "../../components/UI/Input";
 import AddIcon from "@mui/icons-material/Add";
 import NewProductParentDialog from "../../components/HomePage/Dialogs";
+import { center } from "../../styles/theme";
 
 function FactorPage() {
     const [month, setMonth] = useState("");
     const selectMonth = (month) => {
         setMonth(month);
     };
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
     return (
         <Box
             sx={{

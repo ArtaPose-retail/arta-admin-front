@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -9,29 +9,23 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { separateBy3, separateBy4, toPersian } from "../../utils/setting";
-import { FactorPageTable, FactorPageTablemain } from "../../utils/data";
+import { persianDate, separateBy3, toPersian } from "../../utils/setting";
+import { FactorPageTablemain } from "../../utils/data";
 import moment from "jalali-moment";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
+import { center } from "../../styles/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { FactorListGet } from "../../Redux/Slices/Accounting/Factor/factorPage";
+import { NoItem } from "../UI/NoItem";
 
 function Row(props) {
     const { row, index } = props;
     const [openCollaps, setOpenCollaps] = useState(false);
 
     const navigate = useNavigate();
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
 
     return (
         <Fragment>
@@ -56,29 +50,29 @@ function Row(props) {
                         fontWeight: 500,
                     }}
                 >
-                    {toPersian(row?.serialNumber)}
+                    {toPersian(row?.id)}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.transactionName}
+                    {row?.cust_fullname}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.factorType}
+                    {row?.order_type_id
+                        ? row?.order_type_id == 1
+                            ? "خریداری"
+                            : "امانی"
+                        : "-"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(
-                        moment(row?.factorDate, "YYYY-MM-DD")
-                            .locale("fa")
-                            .format("YYYY/MM/D")
-                    )}
+                    {row?.order_public_date ? persianDate(row?.order_public_date) : "-"}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -87,9 +81,8 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(row.factorNumer)}
+                    {toPersian(row?.orderpublicid ?? 0)}
                 </TableCell>
-
 
                 <TableCell
                     sx={{
@@ -98,8 +91,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy3(row.amount))}
-
+                    {toPersian(separateBy3(row?.final_price ?? 0))}
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -131,12 +123,12 @@ function Row(props) {
                                         fontSize: "18px",
                                         fontWeight: 500,
                                         color: (theme) =>
-                                            row?.status === "open"
+                                            row?.status !== "open"
                                                 ? theme.palette.warning.main
                                                 : theme.palette.green.main,
                                     }}
                                 >
-                                    {row.status === "open" ? "تسویه نشده" : "تسویه شده"}
+                                    {row.status !== "open" ? "تسویه نشده" : "تسویه شده"}
                                 </Typography>
                             </Box>
                             <Box
@@ -153,6 +145,7 @@ function Row(props) {
                                     واحد عملیات:
                                 </Typography>
                                 <Button
+                                    disabled={true}
                                     onClick={() =>
                                         navigate(reactRouts.safi.main, {
                                             state: { key: row?.factorType },
@@ -177,6 +170,13 @@ function Row(props) {
 }
 
 export default function FactorTable() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(FactorListGet());
+    }, []);
+
+    const { factorList } = useSelector((state) => state.factorPage);
     return (
         <Box
             sx={{
@@ -232,15 +232,16 @@ export default function FactorTable() {
                             >
                                 مبلغ فاکتور
                             </TableCell>
-
-
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {FactorPageTablemain?.map((row, index) => (
-                            <Row key={index} row={row} index={index} />
-                        ))}
+                        {factorList.length > 0 ? (
+                            factorList?.map((row, index) => (
+                                <Row key={index} row={row} index={index} />
+                            ))
+                        ) : (
+                            <NoItem />
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>

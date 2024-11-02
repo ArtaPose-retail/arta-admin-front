@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,6 +14,8 @@ import {
     FactorSellitemstable,
 } from "../../../../utils/data";
 import { toPersian, toastHandler } from "../../../../utils/setting";
+import { useDispatch, useSelector } from "react-redux";
+import { FactorItemslist } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,6 +38,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function FactorItemstable({ height }) {
+    const dispach = useDispatch()
+    const { addDetailRes } = useSelector(
+        (state) => state.factorDetails
+    );
+    useEffect(() => {
+        dispach(FactorItemslist(addDetailRes?.id))
+    }, [addDetailRes?.id])
     const deleteBtn = () => {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
