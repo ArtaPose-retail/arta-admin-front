@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { OldFactor } from "../../utils/data";
 import AddIcon from "@mui/icons-material/Add";
 import SingleLable from "./SingleLable";
 import { Box, Typography } from "@mui/material";
