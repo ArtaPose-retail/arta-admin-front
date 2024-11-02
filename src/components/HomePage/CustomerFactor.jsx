@@ -125,13 +125,13 @@ function CustomerFactor() {
                         چاپ لیبل
                     </Button>
                 </Box>
-                <MoreVertIcon
+                {/* <MoreVertIcon
                     sx={{ cursor: "pointer" }}
                     aria-describedby={id}
                     variant="contained"
                     onClick={handleClick}
-                />
-
+                /> */}
+                {/* 
                 <Popover
                     id={id}
                     open={open}
@@ -189,7 +189,7 @@ function CustomerFactor() {
                             />
                         </Typography>
                     </Box>
-                </Popover>
+                </Popover> */}
             </Box>
         </Box>
     );

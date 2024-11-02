@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addFactorItems, OrderItemList } from "./FactorItemsThunk";
+import {
+    addFactorItems,
+    deleteOrderItemThunk,
+    OrderItemList,
+} from "./FactorItemsThunk";
 import { toastHandler } from "../../../../../utils/setting";
 
 const initialState = {
@@ -24,6 +28,11 @@ export const FactorItemsAdd = createAsyncThunk(
 export const FactorItemslist = createAsyncThunk(
     "factorItems/list",
     OrderItemList
+);
+
+export const DeleteOrderItem = createAsyncThunk(
+    "factorItems/delete",
+    deleteOrderItemThunk
 );
 
 export const factorItems = createSlice({
@@ -60,6 +69,19 @@ export const factorItems = createSlice({
         });
         builder.addCase(FactorItemslist.rejected, (state) => {
             (state.loading = false), toastHandler(" خطا  ", "info");
+        });
+        //?delete
+        builder.addCase(DeleteOrderItem.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(DeleteOrderItem.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+            toastHandler("ایتم مورد  نظر حذف شد", "warning");
+        });
+        builder.addCase(DeleteOrderItem.rejected, (state) => {
+            state.loading = false;
+            toastHandler(" خطا  ", "info");
         });
     },
 });

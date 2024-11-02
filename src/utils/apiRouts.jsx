@@ -23,8 +23,8 @@ const apiRouts = {
         },
         main: {
             list: "admin/products/",
-            add: "admin/products/new"
-        }
+            add: "admin/products/new",
+        },
     },
     promoCode: {
         getList: "admin/promocode/",
@@ -33,43 +33,45 @@ const apiRouts = {
 
     setting: {
         gallery: {
-            list: "admin/gallery/"
-        }
+            list: "admin/gallery/",
+        },
     },
     order: {
         list: "admin/order/",
-        add: "admin/order/new"
+        add: "admin/order/new",
+        listById: (order_id) => `/admin/order/${order_id}/product`,
     },
 
     bank: {
         name: {
             list: "admin/bankaccount/names/",
-            add: "/admin/bankaccount/names/new"
+            add: "/admin/bankaccount/names/new",
         },
         type: {
             list: "admin/bankaccount/types/",
-            add: "admin/bankaccount/types/new"
+            add: "admin/bankaccount/types/new",
         },
         account: {
             add: "/admin/bankaccount/new",
-            list: "/admin/bankaccount/"
-        }
+            list: "/admin/bankaccount/",
+        },
     },
     factor: {
         checkin: {
             details: {
-                add: "/admin/order/checkin/new"
+                add: "/admin/order/checkin/new",
             },
             items: {
                 add: (orderId) => `/admin/order/checkin/${orderId}/product`,
-                list: (order_id) => `/admin/order/${order_id}/product`
-
+                list: (order_id) => `/admin/order/${order_id}/product`,
+                delete: (order_id, op_id) =>
+                    `/admin/order/${order_id}/product/${op_id}`,
             },
             finilize: {
-                main: "/admin/order/checkin/"
-            }
-        }
-    }
+                main: "/admin/order/checkin/",
+            },
+        },
+    },
 };
 
 export default apiRouts;

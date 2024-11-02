@@ -25,3 +25,9 @@ export const addFactorItems = async (OrderID, ThunkAPI) => {
 export const OrderItemList = async (order_id) => {
     return await AXIOS.get(apiRouts.factor.checkin.items.list(order_id));
 };
+
+export const deleteOrderItemThunk = async (order_id, op_id) => {
+    return await AXIOS.delete(
+        apiRouts.factor.checkin.items.delete(order_id, op_id)
+    );
+};

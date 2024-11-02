@@ -13,7 +13,7 @@ import { Box } from "@mui/material";
 
 import { separateBy3, toPersian, toastHandler } from "../../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { FactorItemslist } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
+import { DeleteOrderItem, FactorItemslist } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -50,8 +50,9 @@ export default function FactorItemstable({ height }) {
     }, [addDetailRes?.id])
 
 
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
+    const deleteBtn = (prod_id) => {
+        console.log(prod_id)
+        dispach(DeleteOrderItem(addDetailRes?.id, prod_id))
     };
     return (
         <TableContainer sx={{ maxHeight: height }}>
@@ -99,9 +100,9 @@ export default function FactorItemstable({ height }) {
                                         gap: "10px",
                                     }}
                                 >
-                                    <EditIcon />
+                                    {/* <EditIcon /> */}
                                     <DeleteOutlineIcon
-                                        onClick={() => deleteBtn()}
+                                        onClick={() => deleteBtn(item?.id)}
                                         sx={{
                                             fill: (theme) => theme.palette.warning.main,
                                             cursor: "pointer",

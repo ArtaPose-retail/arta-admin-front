@@ -2,13 +2,17 @@ import { Badge, Box, Typography } from "@mui/material";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 
 import { center } from "../../styles/theme";
+import { useDispatch } from "react-redux";
+import { getCardId, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 
 function SingleLable({ item, index, selectedIndex, onCardSelect }) {
-
+    const dispatch = useDispatch()
     const isSelected = index === selectedIndex;
 
-    const handleCardSelect = () => {
+    const handleCardSelect = (id) => {
         onCardSelect(index);
+        dispatch(getCardId(id))
+        dispatch(SingleOrderProds(id))
     };
 
     return (
@@ -27,7 +31,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                 }}
             >
                 <Box
-                    onClick={handleCardSelect}
+                    onClick={() => handleCardSelect(item.id)}
                     sx={{
                         boxShadow: " 0px 4px 40px 0px rgba(0, 0, 0, 0.08)",
                         borderRadius: "12px",

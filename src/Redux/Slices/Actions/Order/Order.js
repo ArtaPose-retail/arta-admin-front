@@ -1,21 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addnewOrder, GetOrderList } from "./OrderThunk";
+import { addnewOrder, GetOrderList, GetSingleOrderProd } from "./OrderThunk";
 import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
     loading: false,
     update: false,
     orderList: [],
+    cardId: 0,
+    OrderProductList: []
 };
 
 export const OrderList = createAsyncThunk("order/list", GetOrderList);
 export const addOrder = createAsyncThunk("order/add", addnewOrder);
+export const SingleOrderProds = createAsyncThunk("order/prodList", GetSingleOrderProd);
 
 export const Order = createSlice({
     name: "Order",
     initialState,
 
-    reducers: {},
+    reducers: {
+        getCardId: (state, { payload }) => {
+            state.cardId = payload
+        }
+    },
 
     extraReducers: (builder) => {
         //?Create
@@ -43,9 +50,22 @@ export const Order = createSlice({
             (state.loading = false),
                 toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
         });
+        //!single order product list
+        builder.addCase(SingleOrderProds.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(SingleOrderProds.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+            state.OrderProductList = payload.data.data
+        });
+        builder.addCase(SingleOrderProds.rejected, (state) => {
+            (state.loading = false),
+                toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
+        });
     },
 });
 
-export const { } = Order.actions;
+export const { getCardId } = Order.actions;
 
 export default Order.reducer;

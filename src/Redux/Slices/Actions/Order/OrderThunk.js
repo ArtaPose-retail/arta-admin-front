@@ -18,3 +18,7 @@ export const addnewOrder = async (_, ThunkApi) => {
         status_id: 0
     })
 }
+
+export const GetSingleOrderProd = async (order_id) => {
+    return await AXIOS.get(apiRouts.order.listById(order_id))
+}

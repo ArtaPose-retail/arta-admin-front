@@ -9,25 +9,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
-import moment from "jalali-moment";
 import ProductDetails from "./Dialogs/ProductDetails";
 import { customerFactortable } from "../../utils/data";
+import { center } from "../../styles/theme";
+import { useSelector } from "react-redux";
+import { NoItem } from '../UI/NoItem';
 
-function createData(title, amount, fee, weight, finalFee) {
-    return {
-        title,
-        amount,
-        fee,
-        weight,
-        finalFee,
-    };
-}
+
 
 function Row(props) {
     const { row } = props;
@@ -46,11 +39,7 @@ function Row(props) {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     return (
         <React.Fragment>
@@ -70,28 +59,22 @@ function Row(props) {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                    {row.title}
+                    {row?.title}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row.amount)}
+                    {toPersian(row?.quantity ?? 0)}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(separateBy3(row.fee))}
+                    {toPersian(separateBy3(row?.unitprice ?? 0))}
                     ریال
                 </TableCell>
-                <TableCell
-                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
-                    align="center"
-                >
-                    {toPersian(row.weight)}
-                    کیلوگرم
-                </TableCell>
+
                 <TableCell
                     sx={{
                         color: (theme) => theme.palette.darkBlue.main,
@@ -99,7 +82,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy3(row.finalFee))}
+                    {toPersian(separateBy3(row?.finalprice ?? 0))}
                     ریال
                 </TableCell>
             </TableRow>
@@ -144,6 +127,7 @@ function Row(props) {
 }
 
 export default function CustomerFactorTable() {
+    const { OrderProductList } = useSelector(state => state.Order)
     return (
         <Box
             sx={{
@@ -167,7 +151,7 @@ export default function CustomerFactorTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                تعداد
+                                وزن/تعداد
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
@@ -175,12 +159,7 @@ export default function CustomerFactorTable() {
                             >
                                 فی
                             </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                وزن
-                            </TableCell>
+
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
@@ -190,9 +169,9 @@ export default function CustomerFactorTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {customerFactortable?.map((row, index) => (
+                        {OrderProductList.length > 0 ? OrderProductList?.map((row, index) => (
                             <Row key={index} row={row} />
-                        ))}
+                        )) : <NoItem />}
                     </TableBody>
                 </Table>
             </TableContainer>
