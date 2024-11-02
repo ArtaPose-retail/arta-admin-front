@@ -52,7 +52,7 @@ function LableCard() {
                         فاکتور جدید
                     </Typography>
                 </Box>
-                {orderList.map((item, index) => (
+                {orderList.slice().reverse().map((item, index) => (
                     <SingleLable
                         item={item}
                         index={index}

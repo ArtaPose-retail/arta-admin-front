@@ -65,7 +65,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                     color: (theme) => (isSelected ? theme.palette.text.primary : ""),
                                 }}
                             >
-                                {item?.name}
+                                {item?.cust_fullname}
                             </Typography>
                             <Typography
                                 sx={{
@@ -76,7 +76,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                         isSelected ? theme.palette.text.primary : theme.palette.divider,
                                 }}
                             >
-                                شماره فاکتور: {toPersian(item?.factorNumber ?? 0)}
+                                شماره فاکتور: {toPersian(item?.orderpublicid ?? 0)}
                             </Typography>
                         </Box>
                         <Box
@@ -117,7 +117,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                                 : theme.palette.divider,
                                     }}
                                 >
-                                    {toPersian(separateBy3(item?.amount ?? 0))}
+                                    {toPersian(separateBy3(item?.initial_price ?? 0))}
                                 </Typography>
                             </Box>
                             <Typography
@@ -129,7 +129,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                         isSelected ? theme.palette.text.primary : theme.palette.divider,
                                 }}
                             >
-                                {persianDate()}
+                                {persianDate(item?.created_at)}
                             </Typography>
                         </Box>
                     </Box>
