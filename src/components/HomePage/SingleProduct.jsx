@@ -7,12 +7,17 @@ import { center } from "../../styles/theme";
 import apiRouts from "../../utils/apiRouts";
 import { useDispatch } from "react-redux";
 import { singleProd } from "../../Redux/Slices/Accounting/Products/product";
+import { setSingleOrderInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 function SingleProduct({ data }) {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
     const showDialoghandler = () => {
         setOpen(true);
         dispatch(singleProd(data.prod_id))
+        dispatch(setSingleOrderInfo({
+            key: "product_id",
+            value: +data.prod_id
+        }))
     };
     const handlerCloseDialog = () => {
         setOpen(false);

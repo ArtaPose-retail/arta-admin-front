@@ -71,6 +71,10 @@ const apiRouts = {
                 main: "/admin/order/checkin/",
             },
         },
+
+        checkout: {
+            addProd: (order_id) => `/admin/order/checkout/${order_id}/product`,
+        },
     },
 };
 

@@ -10,7 +10,7 @@ import {
     Switch,
     Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../../UI/Title";
 import { toPersian, toastHandler } from "../../../utils/setting";
@@ -24,6 +24,7 @@ import NewProductParentDialog from ".";
 import { center } from "../../../styles/theme";
 import apiRouts from "../../../utils/apiRouts";
 import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
+import { AddProdOrder, setSingleOrderInfo } from "../../../Redux/Slices/Actions/SellPage/sellPage";
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -58,10 +59,27 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
 
     const onChangeHandler = (name, value, type) => {
         console.log(name, value, type);
+        dispatch(setSingleOrderInfo({
+            key: name,
+            value: +value
+        }))
     };
 
     const { signleProd } = useSelector((state) => state.product);
     const { singleOrder } = useSelector((state) => state.sellPage);
+    const { cardId } = useSelector((state) => state.Order);
+
+
+
+
+    const OrderSubmitHandler = () => {
+        if (cardId != 0) {
+
+            dispatch(AddProdOrder(cardId))
+        } else {
+            toastHandler("ابتدا یک طرف معامله مشخص کنید", "info")
+        }
+    }
 
     return (
         <div>
@@ -162,7 +180,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     name={item.name}
                                     id={item.name}
                                     height={"55px"}
-                                // disabled={iteminfo?.is_bulk == true && item.name == "weight" ? true : false}
+                                    disabled={item.name !== "quantity" ? true : false}
                                 />
                             </Grid>
                         ))}
@@ -177,10 +195,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                             }}
                         >
                             <Button
-                                onClick={() => {
-                                    toastHandler("محصول با موفقیت ثبت شد");
-                                    handlerCloseDialog();
-                                }}
+                                onClick={() => OrderSubmitHandler()}
                                 variant="contained"
                                 sx={{
                                     bgcolor: (theme) => theme.palette.green.main,
