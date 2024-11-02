@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Title from "../../UI/Title";
-import { checkAccess, toPersian, toastHandler } from "../../../utils/setting";
+import { toPersian, toastHandler } from "../../../utils/setting";
 import { ProductItemInfoForm } from "../../../utils/data";
 import UndoIcon from "@mui/icons-material/Undo";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -23,6 +23,7 @@ import Input from "../../UI/Input";
 import NewProductParentDialog from ".";
 import { center } from "../../../styles/theme";
 import apiRouts from "../../../utils/apiRouts";
+import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -55,10 +56,12 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
 
-
     const onChangeHandler = (name, value, type) => {
-        console.log(name, value, type)
+        console.log(name, value, type);
     };
+
+    const { signleProd } = useSelector((state) => state.product);
+    const { singleOrder } = useSelector((state) => state.sellPage);
 
     return (
         <div>
@@ -117,8 +120,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     }}
                                 />
                             </Box>
-
-
                         </Box>
                         <Typography
                             sx={{
@@ -130,7 +131,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                         >
                             شماره قفسه:{toPersian(iteminfo?.shelf ?? "")}
                         </Typography>
-
                     </Box>
 
                     <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
@@ -149,14 +149,20 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 </InputLabel>
 
                                 <Input
-                                    value={item.name == "date" ? new Date() : ""}
+                                    value={
+                                        item.name == "FinalPrice"
+                                            ? singleOrder?.quantity * signleProd?.price
+                                            : item.name == "quantity"
+                                                ? singleOrder?.quantity
+                                                : signleProd[item?.name]
+                                    }
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     onChange={onChangeHandler}
                                     name={item.name}
                                     id={item.name}
                                     height={"55px"}
-                                    disabled={iteminfo?.is_bulk == true && item.name == "weight" ? true : false}
+                                // disabled={iteminfo?.is_bulk == true && item.name == "weight" ? true : false}
                                 />
                             </Grid>
                         ))}
@@ -219,7 +225,9 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                         </Box>
                     </Box>
                     <Collapse in={expanded} timeout="auto" unmountOnExit>
-                        <Box sx={{ ...center, justifyContent: "space-between", p: 2, mt: 1 }}>
+                        <Box
+                            sx={{ ...center, justifyContent: "space-between", p: 2, mt: 1 }}
+                        >
                             <NewProductParentDialog type={"edit"} />
                             <Button
                                 variant="outlined"
@@ -251,8 +259,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     ...center,
                                     m: 1,
                                     gap: "5px",
-
-
                                 }}
                                 variant="outlined"
                                 onClick={() => deleteBtn()}
@@ -280,7 +286,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     gap: "5px",
                                 }}
                                 variant="outlined"
-
                                 onClick={() => deleteBtn()}
                             >
                                 <Typography

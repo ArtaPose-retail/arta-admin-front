@@ -1,20 +1,25 @@
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../UI/Title";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import ProductDetails from "./Dialogs/ProductDetails";
 import { center } from "../../styles/theme";
 import apiRouts from "../../utils/apiRouts";
+import { useDispatch } from "react-redux";
+import { singleProd } from "../../Redux/Slices/Accounting/Products/product";
 function SingleProduct({ data }) {
     const [open, setOpen] = useState(false);
-
+    const dispatch = useDispatch()
     const showDialoghandler = () => {
         setOpen(true);
+        dispatch(singleProd(data.prod_id))
     };
     const handlerCloseDialog = () => {
         setOpen(false);
 
     };
+
+
     return (
         <>
             <Box

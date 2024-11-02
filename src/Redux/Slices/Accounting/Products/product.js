@@ -1,5 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addNewPodThunk, AllProductsThunk, deleteProdThunk, editPodThunk, getSingleProd } from "./productThunk";
+import {
+    addNewPodThunk,
+    AllProductsThunk,
+    deleteProdThunk,
+    editPodThunk,
+    getSingleProd,
+    SearchProdByCode,
+} from "./productThunk";
 import { toastHandler } from "../../../../utils/setting";
 const initialState = {
     loading: false,
@@ -31,10 +38,11 @@ const initialState = {
         tsv: "",
         unit_id: null,
         meta: {},
-        shelf: ""
+        shelf: "",
     },
     productList: [],
-    signleProd: null
+    signleProd: null,
+    singleProdByCode: null
 };
 
 export const getProList = createAsyncThunk("product/list", AllProductsThunk);
@@ -42,6 +50,11 @@ export const singleProd = createAsyncThunk("product/single", getSingleProd);
 export const deleteProd = createAsyncThunk("product/delete", deleteProdThunk);
 export const addProd = createAsyncThunk("product/add", addNewPodThunk);
 export const editProd = createAsyncThunk("product/edit", editPodThunk);
+
+export const SearchProdCode = createAsyncThunk(
+    "product/searchCode",
+    SearchProdByCode
+);
 
 export const product = createSlice({
     name: "product",
@@ -51,11 +64,11 @@ export const product = createSlice({
             state.newProduct[payload.key] = payload.value;
         },
         setMetaData: (state, { payload }) => {
-            state.newProduct.meta[payload.key] = payload.value
+            state.newProduct.meta[payload.key] = payload.value;
         },
         resetPRInfo: (state) => {
-            state.newProduct = initialState.newProduct
-        }
+            state.newProduct = initialState.newProduct;
+        },
     },
     extraReducers: (builder) => {
         //?get product list
@@ -65,25 +78,25 @@ export const product = createSlice({
         builder.addCase(getProList.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = false;
-            state.productList = payload.data
+            state.productList = payload.data;
         });
         builder.addCase(getProList.rejected, (state) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
+            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info");
         });
 
-        //?get single  product 
+        //?get single  product
         builder.addCase(singleProd.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(singleProd.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = false;
-            state.signleProd = payload.data
+            state.signleProd = payload.data;
         });
         builder.addCase(singleProd.rejected, (state) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
+            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info");
         });
 
         //? delete product
@@ -93,11 +106,10 @@ export const product = createSlice({
         builder.addCase(deleteProd.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = true;
-
         });
         builder.addCase(deleteProd.rejected, (state) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info")
+            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info");
         });
         //? add product
         builder.addCase(addProd.pending, (state) => {
@@ -106,11 +118,10 @@ export const product = createSlice({
         builder.addCase(addProd.fulfilled, (state) => {
             state.loading = false;
             state.update = true;
-
         });
         builder.addCase(addProd.rejected, (state) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info")
+            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info");
         });
         //? add product
         builder.addCase(editProd.pending, (state) => {
@@ -119,13 +130,25 @@ export const product = createSlice({
         builder.addCase(editProd.fulfilled, (state) => {
             state.loading = false;
             state.update = true;
-
         });
         builder.addCase(editProd.rejected, (state) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info")
+            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info");
         });
-
+        //! search product by code
+        builder.addCase(SearchProdCode.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(SearchProdCode.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = false;
+            state.singleProdByCode = payload.data;
+            console.log(payload.data)
+        });
+        builder.addCase(SearchProdCode.rejected, (state) => {
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info");
+        });
     },
 });
 

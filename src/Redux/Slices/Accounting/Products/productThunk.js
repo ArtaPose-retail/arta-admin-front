@@ -81,3 +81,7 @@ export const editPodThunk = async (id, ThunkApi) => {
         unit_id,
     });
 };
+
+export const SearchProdByCode = async (code) => {
+    return await AXIOS.get(`${apiRouts.product.main.list}?code=${code}`)
+}

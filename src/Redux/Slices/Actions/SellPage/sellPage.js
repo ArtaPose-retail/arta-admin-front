@@ -4,6 +4,11 @@ const initialState = {
     loading: false,
     update: false,
     transactionInfo: null,
+    singleOrder: {
+        product_id: 0,
+        quantity: 1,
+        unitprice: 0
+    }
 };
 
 export const sellPage = createSlice({

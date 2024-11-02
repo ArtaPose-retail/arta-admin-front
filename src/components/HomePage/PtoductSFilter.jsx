@@ -7,9 +7,10 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { center } from "../../styles/theme";
-import apiRouts from "../../utils/apiRouts";
 import { useEffect } from "react";
 import { getallType } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
+import Input from "../UI/Input";
+import { SearchProdCode } from "../../Redux/Slices/Accounting/Products/product";
 
 function PtoductSFilter() {
     const dispatch = useDispatch()
@@ -19,6 +20,10 @@ function PtoductSFilter() {
     useEffect(() => {
         dispatch(getallType())
     }, [])
+
+    const BarcodeSearchHandler = (name, value, type) => {
+        dispatch(SearchProdCode(value))
+    }
 
     return (
         <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
@@ -73,7 +78,8 @@ function PtoductSFilter() {
             </TextField>
 
             <Divider orientation="vertical" flexItem />
-            <Autocomplete
+            <Input type={"text"} placeholder={"بار کد محصول را وارد کنید"} onChange={BarcodeSearchHandler} />
+            {/* <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 options={productList}
@@ -119,7 +125,7 @@ function PtoductSFilter() {
                         }}
                     />
                 )}
-            />
+            /> */}
         </Box>
     );
 }

@@ -1431,24 +1431,17 @@ export const defineFactorForm = [
 ];
 
 export const ProductItemInfoForm = [
+
     {
-        name: "weight",
+        name: "quantity",
         select: false,
-        placeholder: "وزن",
+        placeholder: "وزن/تعداد",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number",
+        type: "text",
     },
     {
-        name: "number",
-        select: false,
-        placeholder: "تعداد",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "number",
-    },
-    {
-        name: "fee",
+        name: "price",
         select: false,
         placeholder: "فی",
         hasIcon: false,
@@ -1457,7 +1450,7 @@ export const ProductItemInfoForm = [
     },
 
     {
-        name: "price",
+        name: "FinalPrice",
         select: false,
         placeholder: "قیمت ",
         hasIcon: false,
@@ -1465,23 +1458,15 @@ export const ProductItemInfoForm = [
         color: "#6D6D6D",
         type: "number",
     },
-    {
-        name: "description",
-        select: false,
-        placeholder: "توضیحات...",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "text",
-    },
 
-    {
-        name: "date",
-        select: false,
-        placeholder: "تاریخ را وارد کنید",
-        hasIcon: false,
-        color: "#6D6D6D",
-        type: "date",
-    },
+    // {
+    //     name: "date",
+    //     select: false,
+    //     placeholder: "تاریخ را وارد کنید",
+    //     hasIcon: false,
+    //     color: "#6D6D6D",
+    //     type: "date",
+    // },
 ];
 
 export const transactionpartyField = [
