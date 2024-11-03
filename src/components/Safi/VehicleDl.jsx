@@ -15,14 +15,13 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { RegistrationCostData, accountstable, vehicleType } from "../../utils/data";
-import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
+import { vehicleType } from "../../utils/data";
+import { toPersian, toastHandler } from "../../utils/setting";
 import { useNavigate } from "react-router-dom";
-import moment from "jalali-moment";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CloseIcon from '@mui/icons-material/Close';
+import { center } from "../../styles/theme";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {},
@@ -53,11 +52,7 @@ export default function VehicleDl() {
         setOpen(false);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
 
     const deleteBtn = () => {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");

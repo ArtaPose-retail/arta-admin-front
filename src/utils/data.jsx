@@ -66,7 +66,7 @@ export const menuData = [
         title: "داشبورد",
         path: "/dashbord",
         hasSubItem: false,
-        RoleAccess: ['admin'],
+        RoleAccess: ["admin"],
         id: "dashbord",
         icon: (
             <svg
@@ -119,7 +119,7 @@ export const menuData = [
         id: "actions",
         title: "عملیات",
         hasSubItem: true,
-        RoleAccess: ['admin', 'actions'],
+        RoleAccess: ["admin", "actions"],
         icon: (
             <svg
                 width="32"
@@ -172,7 +172,7 @@ export const menuData = [
     {
         id: "accounting",
         title: "حسابداری",
-        RoleAccess: ['admin', 'accounting'],
+        RoleAccess: ["admin", "accounting"],
         hasSubItem: true,
         icon: (
             <svg
@@ -215,7 +215,7 @@ export const menuData = [
     {
         id: "management",
         title: "مدیریت",
-        RoleAccess: ['admin', 'management'],
+        RoleAccess: ["admin", "management"],
         hasSubItem: true,
         icon: (
             <svg
@@ -263,7 +263,7 @@ export const menuData = [
     {
         id: "settings",
         title: "تنظیمات",
-        RoleAccess: ['admin', 'settings'],
+        RoleAccess: ["admin", "settings"],
         hasSubItem: false,
         icon: (
             <svg
@@ -289,7 +289,6 @@ export const menuData = [
         subItems: [
             { title: "دیجیتال لیبل", path: reactRouts.digitalLable.main },
             { title: "مشخصات فروشگاه", path: reactRouts.setting.store.info },
-
         ],
     },
 ];
@@ -373,7 +372,6 @@ export const months = [
 ];
 
 export const roundPage = [
-
     {
         title: "رند کردن به پایین ",
         box: [
@@ -394,9 +392,8 @@ export const roundPage = [
                 hasIcon: false,
                 color: "#6D6D6D",
                 type: "number",
-            }
-        ]
-
+            },
+        ],
     },
     {
         title: "رند کردن به بالا ",
@@ -418,11 +415,10 @@ export const roundPage = [
                 hasIcon: false,
                 color: "#6D6D6D",
                 type: "number",
-            }
-        ]
-
-    }
-]
+            },
+        ],
+    },
+];
 
 export const addCartForm = [
     {
@@ -433,7 +429,7 @@ export const addCartForm = [
         hasIcon: true,
         color: "#6D6D6D",
         type: "number",
-        meta: false
+        meta: false,
     },
     {
         name: "account_num",
@@ -443,7 +439,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
-        meta: false
+        meta: false,
     },
     {
         name: "iban",
@@ -453,7 +449,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
-        meta: false
+        meta: false,
     },
     {
         name: "card_num",
@@ -462,7 +458,8 @@ export const addCartForm = [
         lable: "شماره کارت",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "number", meta: false
+        type: "number",
+        meta: false,
     },
     {
         name: "cvv2",
@@ -472,7 +469,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
-        meta: false
+        meta: false,
     },
     {
         name: "expier_date",
@@ -482,7 +479,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         meta: false,
-        type: "date"
+        type: "date",
     },
     {
         name: "type_id",
@@ -492,7 +489,7 @@ export const addCartForm = [
         hasIcon: true,
         color: "#6D6D6D",
         meta: false,
-        type: "number"
+        type: "number",
     },
     {
         name: "branch_name",
@@ -502,7 +499,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
-        meta: false
+        meta: false,
     },
     {
         name: "branch_code",
@@ -512,7 +509,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "number",
-        meta: false
+        meta: false,
     },
     {
         name: "owner_name",
@@ -522,7 +519,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
-        meta: false
+        meta: false,
     },
     {
         name: "owner_phone",
@@ -541,7 +538,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#FF8A00",
         type: "number",
-        meta: false
+        meta: false,
     },
     {
         name: "api_terminal",
@@ -551,7 +548,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#FF8A00",
         type: "text",
-        meta: false
+        meta: false,
     },
     {
         name: "representer_pos_name",
@@ -561,8 +558,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#FF8A00",
         type: "text",
-        meta: false
-
+        meta: false,
     },
     {
         name: "bankUrl",
@@ -572,8 +568,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
-        meta: true
-
+        meta: true,
     },
     {
         name: "userName",
@@ -583,8 +578,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
-        meta: true
-
+        meta: true,
     },
     {
         name: "password",
@@ -594,7 +588,7 @@ export const addCartForm = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "text",
-        meta: true
+        meta: true,
     },
 ];
 
@@ -719,7 +713,6 @@ export const bankList = [
     { title: "بانک صنعت و معدن", value: "San'atVaMadan", logo: Meli },
     { title: "سایر", value: "other", logo: otherbank },
 ];
-
 
 export const products = [
     {
@@ -986,223 +979,6 @@ export const products = [
     },
 ];
 
-export const customerFactortable = [
-    {
-        title: "سیب قرمز سبزوار",
-        amount: "12",
-        fee: "450000",
-        weight: "50",
-        finalFee: "500000",
-        details: {
-            logo: apple,
-            color: "#FFDBDF",
-            genericName: "سیب",
-            title: "سیب قرمز سبزوار",
-            transportInfo: {
-                driver: "احمد رحمتی",
-                vehicle: "نیسان آبی",
-            },
-            amount: "720000",
-            date: new Date(),
-            transactionParty: "محمد مرادی",
-            pureWeight: "45",
-            weight: "50",
-            number: "12",
-            fee: "450000",
-            description: "توضیحات",
-        },
-    },
-    {
-        title: "سیب قرمز سبزوار",
-        amount: "12",
-        fee: "450000",
-        weight: "50",
-        finalFee: "500000",
-        details: {
-            logo: apple,
-            color: "#FFDBDF",
-            genericName: "سیب",
-            title: "سیب قرمز سبزوار",
-            transportInfo: {
-                driver: "احمد رحمتی",
-                vehicle: "نیسان آبی",
-            },
-            amount: "720000",
-            date: new Date(),
-            transactionParty: "محمد مرادی",
-            pureWeight: "45",
-            weight: "50",
-            number: "12",
-            fee: "450000",
-            description: "توضیحات",
-        },
-    },
-    {
-        title: "سیب قرمز سبزوار",
-        amount: "12",
-        fee: "450000",
-        weight: "50",
-        finalFee: "500000",
-        details: {
-            logo: apple,
-            color: "#FFDBDF",
-            genericName: "سیب",
-            title: "سیب قرمز سبزوار",
-            transportInfo: {
-                driver: "احمد رحمتی",
-                vehicle: "نیسان آبی",
-            },
-            amount: "720000",
-            date: new Date(),
-            transactionParty: "محمد مرادی",
-            pureWeight: "45",
-            weight: "50",
-            number: "12",
-            fee: "450000",
-            description: "توضیحات",
-        },
-    },
-    {
-        title: "سیب قرمز سبزوار",
-        amount: "12",
-        fee: "450000",
-        weight: "50",
-        finalFee: "500000",
-        details: {
-            logo: apple,
-            color: "#FFDBDF",
-            genericName: "سیب",
-            title: "سیب قرمز سبزوار",
-            transportInfo: {
-                driver: "احمد رحمتی",
-                vehicle: "نیسان آبی",
-            },
-            amount: "720000",
-            date: new Date(),
-            transactionParty: "محمد مرادی",
-            pureWeight: "45",
-            weight: "50",
-            number: "12",
-            fee: "450000",
-            description: "توضیحات",
-        },
-    },
-    {
-        title: "سیب قرمز سبزوار",
-        amount: "12",
-        fee: "450000",
-        weight: "50",
-        finalFee: "500000",
-        details: {
-            logo: apple,
-            color: "#FFDBDF",
-            genericName: "سیب",
-            title: "سیب قرمز سبزوار",
-            transportInfo: {
-                driver: "احمد رحمتی",
-                vehicle: "نیسان آبی",
-            },
-            amount: "720000",
-            date: new Date(),
-            transactionParty: "محمد مرادی",
-            pureWeight: "45",
-            weight: "50",
-            number: "12",
-            fee: "450000",
-            description: "توضیحات",
-        },
-    },
-    {
-        title: "سیب قرمز سبزوار",
-        amount: "12",
-        fee: "450000",
-        weight: "50",
-        finalFee: "500000",
-        details: {
-            logo: apple,
-            color: "#FFDBDF",
-            genericName: "سیب",
-            title: "سیب قرمز سبزوار",
-            transportInfo: {
-                driver: "احمد رحمتی",
-                vehicle: "نیسان آبی",
-            },
-            amount: "720000",
-            date: new Date(),
-            transactionParty: "محمد مرادی",
-            pureWeight: "45",
-            weight: "50",
-            number: "12",
-            fee: "450000",
-            description: "توضیحات",
-        },
-    },
-];
-
-
-
-export const customersFactorList = [
-    {
-        name: "امیرحسین  فرد",
-        factorType: "رسمی",
-        factorNumber: "153456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی فرد",
-        factorType: "رسمی",
-        factorNumber: "134536",
-        date: new Date(),
-    },
-    {
-        name: "امیرحسین سلیمانی فرد",
-        factorType: "رسمی",
-        factorNumber: "1345634",
-    },
-    {
-        name: "امیرحسن سلیمانی فرد",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-    {
-        name: " سلیمانی",
-        factorType: "رسمی",
-        factorNumber: "13456",
-        date: new Date(),
-    },
-];
-
 export const factorItemForm = [
     {
         name: "product_id",
@@ -1273,9 +1049,6 @@ export const factorItemForm = [
         type: "number",
         hastext: true,
     },
-
-
-
 ];
 export const defineFactorForm = [
     {
@@ -1292,7 +1065,6 @@ export const defineFactorForm = [
         name: "order_type_id",
         select: true,
         options: [
-
             {
                 title: "امانی",
                 value: 1,
@@ -1394,17 +1166,17 @@ export const defineFactorForm = [
         options: [
             {
                 title: "پراید وانت",
-                value: 1
+                value: 1,
             },
             {
                 title: "زامیاد",
-                value: 2
+                value: 2,
             },
             {
                 title: "نیسان ابی",
-                value: 3
+                value: 3,
             },
-        ]
+        ],
     },
     {
         name: "license_plate",
@@ -1431,7 +1203,6 @@ export const defineFactorForm = [
 ];
 
 export const ProductItemInfoForm = [
-
     {
         name: "quantity",
         select: false,
@@ -1611,7 +1382,6 @@ export const productsFeilds = [
         hasIcon: true,
         color: "#6D6D6D",
         type: "select",
-
     },
     {
         name: "subcategory_id",
@@ -1621,8 +1391,6 @@ export const productsFeilds = [
         hasIcon: false,
         color: "#6D6D6D",
         type: "select",
-
-
     },
     {
         name: "title",
@@ -1652,7 +1420,6 @@ export const productsFeilds = [
         hasIcon: true,
         color: "#6D6D6D",
         type: "number",
-
     },
     {
         name: "min_stock",
@@ -1703,7 +1470,6 @@ export const productsFeilds = [
     },
 ];
 export const digitalLable = [
-
     {
         name: "sugar",
         select: false,
@@ -1902,45 +1668,6 @@ export const report = {
     ],
 };
 
-export const keypadletter = [
-    {
-        0: "ض",
-        1: "ص",
-        2: "ث",
-        3: "ق",
-        4: "ف",
-        5: "غ",
-        6: "ع",
-        7: "ه",
-        8: "خ",
-        9: "ح",
-        10: "ج",
-        11: "چ",
-        12: "پ",
-    },
-    {
-        0: "ش",
-        1: "س",
-        2: "ی",
-        3: "ب",
-        4: "ل",
-        5: "ا",
-        6: "ت",
-        7: "ن",
-        8: "م",
-        9: "ک",
-        10: "گ",
-    },
-    {
-        0: "ظ",
-        1: "ط",
-        2: "ز",
-        3: "ر",
-        4: "ذ",
-        5: "د",
-        6: "و",
-    },
-];
 export const keypadnumber = [
     {
         0: "۱",
@@ -2089,7 +1816,6 @@ export const FactorPageTablemain = [
         factorDate: new Date(),
         factorNumer: "462462",
 
-
         amount: "3400000",
         status: "open",
     },
@@ -2099,7 +1825,6 @@ export const FactorPageTablemain = [
         factorType: "خریداری",
         factorDate: new Date(),
         factorNumer: "462462",
-
 
         amount: "3400000",
         status: "close",
@@ -2477,8 +2202,7 @@ export const createUserCheckbox = [
     { title: "تنظیمات", id: "settings" },
     { title: "حسابداری", id: "accounting" },
     { title: "مدیریت", id: "management" },
-
-]
+];
 
 export const checkTable = [
     {
@@ -2606,10 +2330,8 @@ export const keyboardnumber = [
     ". 0 /",
 ];
 
-
 export const lableDiscountForm = [
     {
-
         name: "type",
         select: true,
         placeholder: "نوع کد تخفیف:",
@@ -2621,20 +2343,19 @@ export const lableDiscountForm = [
         options: [
             {
                 value: "",
-                title: "نوع  تخفیف"
+                title: "نوع  تخفیف",
             },
             {
                 value: 0,
-                title: "درصدی"
+                title: "درصدی",
             },
             {
                 value: 1,
-                title: "مبلغی"
+                title: "مبلغی",
             },
-        ]
+        ],
     },
     {
-
         name: "amount",
         select: false,
         placeholder: "مقدار کد تخفیف:",
@@ -2696,19 +2417,19 @@ export const lableDiscountForm = [
         options: [
             {
                 value: "",
-                title: "نوع متن  لیبل"
+                title: "نوع متن  لیبل",
             },
             {
                 value: "manual",
-                title: "دستی"
+                title: "دستی",
             },
             {
                 value: "system",
-                title: 'سیستمی'
-            }
-        ]
-    }
-    , {
+                title: "سیستمی",
+            },
+        ],
+    },
+    {
         name: "orderlimit",
         select: false,
         placeholder: "تعداد استفاده:",
@@ -2717,8 +2438,8 @@ export const lableDiscountForm = [
         color: "#6D6D6D",
         type: "number",
         hastext: false,
-    }
-    , {
+    },
+    {
         name: "how_many",
         select: false,
         placeholder: "تعداد :",
@@ -2727,8 +2448,8 @@ export const lableDiscountForm = [
         color: "#6D6D6D",
         type: "number",
         hastext: false,
-    }
-    , {
+    },
+    {
         name: "code",
         select: false,
         placeholder: "متن دستی :",
@@ -2737,7 +2458,5 @@ export const lableDiscountForm = [
         color: "#6D6D6D",
         type: "text",
         hastext: false,
-    }
-
-
-]
+    },
+];

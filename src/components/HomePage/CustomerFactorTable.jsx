@@ -15,7 +15,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import ProductDetails from "./Dialogs/ProductDetails";
-import { customerFactortable } from "../../utils/data";
 import { center } from "../../styles/theme";
 import { useSelector } from "react-redux";
 import { NoItem } from '../UI/NoItem';

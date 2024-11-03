@@ -2,8 +2,8 @@ import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 
-import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, Typography } from "@mui/material";
+
+import { Box, Button } from "@mui/material";
 import Title from "../UI/Title";
 import Input from "../UI/Input";
 import { styled } from "@mui/material/styles";
@@ -13,13 +13,13 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { RegistrationCostData, accountstable } from "../../utils/data";
+import { RegistrationCostData } from "../../utils/data";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import { useNavigate } from "react-router-dom";
 import moment from "jalali-moment";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { center } from "../../styles/theme";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {},
@@ -53,11 +53,6 @@ export default function RegistrationCostDL() {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
 
     return (
         <div>

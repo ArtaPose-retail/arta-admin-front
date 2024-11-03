@@ -6,13 +6,9 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
-import moment from "jalali-moment";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box, Button, Checkbox } from "@mui/material";
-import { accountstable, customersFactorList } from "../../utils/data";
+import { accountstable } from "../../utils/data";
 import { separateBy3, toPersian } from "../../utils/setting";
 import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
