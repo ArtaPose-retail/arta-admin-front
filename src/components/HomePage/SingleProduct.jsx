@@ -137,11 +137,11 @@ function SingleProduct({ data }) {
                     </Box>
                 </Box>
             </Box>
-            <ProductDetails
+            {open && <ProductDetails
                 iteminfo={data}
                 status={open}
                 handlerCloseDialog={handlerCloseDialog}
-            />
+            />}
         </>
     );
 }

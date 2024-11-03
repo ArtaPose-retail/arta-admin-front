@@ -6,7 +6,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { toPersian, toastHandler } from "../../../utils/setting";
+import { persianDate, toPersian, toastHandler } from "../../../utils/setting";
 
 import { useSelector } from "react-redux";
 import { NoItem } from "../../UI/NoItem";

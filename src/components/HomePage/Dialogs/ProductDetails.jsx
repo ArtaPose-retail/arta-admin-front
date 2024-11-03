@@ -24,7 +24,10 @@ import NewProductParentDialog from ".";
 import { center } from "../../../styles/theme";
 import apiRouts from "../../../utils/apiRouts";
 import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
-import { AddProdOrder, setSingleOrderInfo } from "../../../Redux/Slices/Actions/SellPage/sellPage";
+import {
+    AddProdOrder,
+    setSingleOrderInfo,
+} from "../../../Redux/Slices/Actions/SellPage/sellPage";
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -37,6 +40,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
+    console.log(iteminfo);
     const [expanded, setExpanded] = useState(false);
     const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
@@ -59,27 +63,25 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
 
     const onChangeHandler = (name, value, type) => {
         console.log(name, value, type);
-        dispatch(setSingleOrderInfo({
-            key: name,
-            value: +value
-        }))
+        dispatch(
+            setSingleOrderInfo({
+                key: name,
+                value: +value,
+            })
+        );
     };
 
     const { signleProd } = useSelector((state) => state.product);
     const { singleOrder } = useSelector((state) => state.sellPage);
     const { cardId } = useSelector((state) => state.Order);
 
-
-
-
     const OrderSubmitHandler = () => {
         if (cardId != 0) {
-
-            dispatch(AddProdOrder(cardId))
+            dispatch(AddProdOrder(cardId));
         } else {
-            toastHandler("ابتدا یک طرف معامله مشخص کنید", "info")
+            toastHandler("ابتدا یک طرف معامله مشخص کنید", "info");
         }
-    }
+    };
 
     return (
         <div>
@@ -169,10 +171,10 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 <Input
                                     value={
                                         item.name == "FinalPrice"
-                                            ? singleOrder?.quantity * signleProd?.price
+                                            ? singleOrder?.quantity * iteminfo?.price
                                             : item.name == "quantity"
                                                 ? singleOrder?.quantity
-                                                : signleProd[item?.name]
+                                                : signleProd != null ? signleProd[item?.name] : ""
                                     }
                                     type={item.type}
                                     placeholder={item.placeholder}
