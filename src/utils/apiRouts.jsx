@@ -38,7 +38,7 @@ const apiRouts = {
     },
     order: {
         list: "admin/order/",
-        add: "admin/order/new",
+        add: "admin/order/checkout/new",
         listById: (order_id) => `/admin/order/${order_id}/product`,
     },
 

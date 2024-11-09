@@ -14,7 +14,6 @@ export const addnewOrder = async (_, ThunkApi) => {
     const { transactionInfo } = state.sellPage
     return await AXIOS.post(apiRouts.order.add, {
         cust_id: transactionInfo?.user_id,
-        order_type: 0,
         status_id: 0
     })
 }

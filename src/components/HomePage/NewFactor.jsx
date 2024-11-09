@@ -25,7 +25,7 @@ import { addOrder } from "../../Redux/Slices/Actions/Order/Order";
 
 function NewFactor() {
     const dispatch = useDispatch();
-    const { TransActionList } = useSelector((state) => state.transactionsSlice);
+    const { TransActionList, update } = useSelector((state) => state.transactionsSlice);
     const { transactionInfo } = useSelector((state) => state.sellPage);
     const [open, setOpen] = useState(false);
     const [openTransaction, setOpenTransaction] = useState(false);
@@ -48,13 +48,12 @@ function NewFactor() {
     };
 
     const onSearchHandler = (e) => {
-        console.log(e)
         dispatch(setTransactionInfo(e))
         dispatch(addOrder())
     }
     useEffect(() => {
         dispatch(getTransactions("Customer"));
-    }, []);
+    }, [update]);
     return (
         <Box
             sx={{
