@@ -10,7 +10,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import Title from "../../UI/Title";
 import { bankList } from "../../../utils/data";
 import { toPersian } from "../../../utils/setting";
-
 import { center } from "../../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -105,7 +104,6 @@ function BankName({ handleClose }) {
                         sx={{ width: 300, color: "#000000" }}
                         renderOption={(props, option) => (
                             <Box
-                                // component="li"
                                 sx={{ ...center, gap: "5px" }}
                                 {...props}
                             >
@@ -135,7 +133,7 @@ function BankName({ handleClose }) {
                                 placeholder={"جستوجو عکس بانک"}
                                 inputProps={{
                                     ...params.inputProps,
-                                    autoComplete: "none", // disable autocomplete and autofill
+                                    autoComplete: "none",
                                 }}
                                 InputProps={{
                                     ...params.InputProps,

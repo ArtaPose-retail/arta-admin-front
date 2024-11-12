@@ -58,7 +58,7 @@ export default function BnDialog({ name }) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogContent sx={{ bgcolor: "white", height: "55dvh" }}>
-                    {name === "bankName" ? (
+                    {name === "bank_id" ? (
                         <BankName handleClose={handleClose} />
                     ) : (
                         <AccountType handleClose={handleClose} />
