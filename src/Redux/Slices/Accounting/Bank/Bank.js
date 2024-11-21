@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addNewAccount, BankList } from "./BankThunk";
+import { addNewAccount, BankDelete, BankList } from "./BankThunk";
 import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
@@ -38,6 +38,7 @@ const initialState = {
 
 export const AddAccount = createAsyncThunk("bank/add", addNewAccount);
 export const AccountList = createAsyncThunk("bank/list", BankList);
+export const DeleteAccount = createAsyncThunk("bank/delete", BankDelete);
 
 export const bank = createSlice({
     name: "bank",
@@ -76,10 +77,25 @@ export const bank = createSlice({
         });
         builder.addCase(AccountList.fulfilled, (state, { payload }) => {
             state.loading = false;
+            state.update = false;
             state.bankList = payload.data.data;
         });
         builder.addCase(AccountList.rejected, (state) => {
             state.loading = false;
+        });
+        //?delete
+        builder.addCase(DeleteAccount.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(DeleteAccount.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+            toastHandler("عملیات با موفقیت انجام شد", "info");
+        });
+        builder.addCase(DeleteAccount.rejected, (state) => {
+            state.loading = false;
+            toastHandler("عملیات با موفقیت انجام نشد", "info");
+
         });
     },
 });

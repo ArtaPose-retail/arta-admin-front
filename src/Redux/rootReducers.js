@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import addCard from "./Slices/Banking/addcard";
+// import addCard from "./Slices/Banking/addcard";
 import general from "./Slices/general";
 import factor from "./Slices/HomePage/factor";
 import wallet from "./Slices/Wallet/wallet";
@@ -26,7 +26,6 @@ import factorRegister from "./Slices/Accounting/Factor/FactorRegister/factorRegi
 const appReducer = combineReducers({
     auth,
     user,
-    addCard,
     general,
     factor,
     wallet,

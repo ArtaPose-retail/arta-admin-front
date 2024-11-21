@@ -31,3 +31,7 @@ export const addNewAccount = async (_, ThunkApi) => {
 export const BankList = async () => {
     return await AXIOS.get(apiRouts.bank.account.list);
 };
+
+export const BankDelete = async (id) => {
+    return await AXIOS.delete(`${apiRouts.bank.account.list}${id}`)
+}
