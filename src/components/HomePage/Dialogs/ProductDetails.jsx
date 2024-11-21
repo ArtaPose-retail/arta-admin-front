@@ -23,7 +23,6 @@ import Input from "../../UI/Input";
 import NewProductParentDialog from ".";
 import { center } from "../../../styles/theme";
 import apiRouts from "../../../utils/apiRouts";
-import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
 import {
     AddProdOrder,
     setSingleOrderInfo,
@@ -40,7 +39,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
-    console.log(iteminfo);
+
     const [expanded, setExpanded] = useState(false);
     const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);

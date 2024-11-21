@@ -42,7 +42,8 @@ const initialState = {
     },
     productList: [],
     signleProd: null,
-    singleProdByCode: null
+    singleProdByCode: "",
+    ProdCode: ""
 };
 
 export const getProList = createAsyncThunk("product/list", AllProductsThunk);
@@ -69,6 +70,10 @@ export const product = createSlice({
         resetPRInfo: (state) => {
             state.newProduct = initialState.newProduct;
         },
+        resetSingleProdByCode: (state) => {
+            state.singleProdByCode = initialState.singleProdByCode
+            state.ProdCode = initialState.ProdCode
+        }
     },
     extraReducers: (builder) => {
         //?get product list
@@ -142,7 +147,7 @@ export const product = createSlice({
         builder.addCase(SearchProdCode.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = false;
-            state.singleProdByCode = payload.data;
+            state.singleProdByCode = payload.data[0];
             console.log(payload.data)
         });
         builder.addCase(SearchProdCode.rejected, (state) => {
@@ -152,5 +157,5 @@ export const product = createSlice({
     },
 });
 
-export const { setNewProduct, setMetaData, resetPRInfo } = product.actions;
+export const { setNewProduct, setMetaData, resetPRInfo, resetSingleProdByCode } = product.actions;
 export default product.reducer;
