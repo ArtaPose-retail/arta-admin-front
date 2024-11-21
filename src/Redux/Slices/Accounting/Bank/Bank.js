@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addNewAccount, BankDelete, BankList } from "./BankThunk";
+import { addNewAccount, BankDelete, BankList, BankSingle, EditBank } from "./BankThunk";
 import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
@@ -39,6 +39,8 @@ const initialState = {
 export const AddAccount = createAsyncThunk("bank/add", addNewAccount);
 export const AccountList = createAsyncThunk("bank/list", BankList);
 export const DeleteAccount = createAsyncThunk("bank/delete", BankDelete);
+export const SingleAccount = createAsyncThunk("bannk/single", BankSingle)
+export const EditAccount = createAsyncThunk("bannk/edit", EditBank)
 
 export const bank = createSlice({
     name: "bank",
@@ -93,6 +95,33 @@ export const bank = createSlice({
             toastHandler("عملیات با موفقیت انجام شد", "info");
         });
         builder.addCase(DeleteAccount.rejected, (state) => {
+            state.loading = false;
+            toastHandler("عملیات با موفقیت انجام نشد", "info");
+
+        });
+        //?get single account
+        builder.addCase(SingleAccount.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(SingleAccount.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            console.log(payload.data.data)
+            state.newBackAccount = payload.data.data
+        });
+        builder.addCase(SingleAccount.rejected, (state) => {
+            state.loading = false;
+            toastHandler("عملیات با موفقیت انجام نشد", "info");
+
+        });
+        //?edit single account
+        builder.addCase(EditAccount.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(EditAccount.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            toastHandler("حساب با موفقیت اضافه شد", "info");
+        });
+        builder.addCase(EditAccount.rejected, (state) => {
             state.loading = false;
             toastHandler("عملیات با موفقیت انجام نشد", "info");
 

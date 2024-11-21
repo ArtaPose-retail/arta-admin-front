@@ -12,7 +12,7 @@ import { addCartForm } from "../../utils/data";
 import Switch from "@mui/material/Switch";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import BnDialog from "../../components/Banking/Dialog";
 import { toastHandler } from "../../utils/setting";
@@ -24,6 +24,7 @@ import { BankNameList } from "../../Redux/Slices/Accounting/Bank/BankName/bankNa
 import {
     AddAccount,
     checkBoxhandler,
+    EditAccount,
     resetForm,
     setFormInfo,
 } from "../../Redux/Slices/Accounting/Bank/Bank";
@@ -47,6 +48,9 @@ function AddCard() {
         dispatch(BTlist());
         dispatch(BankNameList());
     }, []);
+
+    const location = useLocation();
+    const { type, id } = location.state || {};
 
     return (
         <Box
@@ -315,7 +319,7 @@ function AddCard() {
 
             <Box sx={{ ...center, justifyContent: "space-between" }}>
                 <Box sx={{ display: "flex", gap: "15px" }}>
-                    <Button
+                    {type != "edit" ? <Button
                         onClick={() => dispatch(AddAccount())}
                         variant="contained"
                         sx={{
@@ -326,7 +330,19 @@ function AddCard() {
                         }}
                     >
                         ثبت حساب
-                    </Button>
+                    </Button> :
+                        <Button
+                            onClick={() => dispatch(EditAccount(id))}
+                            variant="contained"
+                            sx={{
+                                bgcolor: (theme) => theme.palette.green.main,
+                                color: (theme) => theme.palette.text.primary,
+                                p: 1,
+                                px: 4,
+                            }}
+                        >
+                            ویرایش حساب
+                        </Button>}
                     <Button
                         onClick={() => dispatch(resetForm())}
                         variant="contained"
@@ -359,4 +375,3 @@ function AddCard() {
 
 export default AddCard;
 
-//todo=>check redux and functions

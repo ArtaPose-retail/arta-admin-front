@@ -1,7 +1,5 @@
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import { account } from "../../utils/data";
-
 import { separateBy4, toPersian } from "../../utils/setting";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +7,7 @@ import reactRouts from "../../utils/reactRouts";
 import EditIcon from "@mui/icons-material/Edit";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { AccountList, DeleteAccount } from "../../Redux/Slices/Accounting/Bank/Bank";
+import { AccountList, DeleteAccount, SingleAccount } from "../../Redux/Slices/Accounting/Bank/Bank";
 import bankBlue from "../../Assets/images/Bank/bankBlue.png";
 import bankRed from "../../Assets/images/Bank/bankRed.png";
 import bankYellow from "../../Assets/images/Bank/bankYellow.png";
@@ -32,6 +30,13 @@ function Card() {
 
     const DeleteHandler = (id) => {
         dispatch(DeleteAccount(id))
+    }
+
+    const EditHandler = (id) => {
+        dispatch(SingleAccount(id))
+        navigate(reactRouts.banking.addcart, {
+            state: { type: "edit", id: id }
+        });
     }
     return (
         <Box
@@ -77,7 +82,7 @@ function Card() {
                             </Box>
                             <Box
                                 sx={{
-                                    bgcolor: item.color,
+                                    bgcolor: "#FF8A00",
                                     ...center,
                                     p: 1,
                                     borderRadius: "18px 0px 18px 0px",
@@ -162,6 +167,7 @@ function Card() {
                                     {toPersian(item?.iban ?? 0)}
                                 </Typography>
                                 <EditIcon
+                                    onClick={() => EditHandler(item?.id)}
                                     fontSize="small"
                                     sx={{
                                         bgcolor: (theme) => theme.palette.darkBlue.main,
