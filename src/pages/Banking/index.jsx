@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { center } from "../../styles/theme"
 import Input from "../../components/UI/Input";
 import CheckList from "../../components/Banking/CheckList";
+import { NoItem } from "../../components/UI/NoItem";
 function Banking() {
     const navigate = useNavigate();
 
@@ -57,6 +58,7 @@ function Banking() {
                     Typoprops={{
                         fontSize: "24px!important",
                         fontWeight: 700,
+
                         mb: 2,
                     }}
                 />
@@ -395,7 +397,8 @@ function Banking() {
                             allowFullScreen
                         ></iframe>
                     ) : (
-                        <CheckList />
+
+                        false ? <CheckList /> : <NoItem />
                     )}
                 </Box>
             </FullScreen>
