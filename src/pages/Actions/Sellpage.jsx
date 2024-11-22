@@ -18,8 +18,6 @@ function Sellpage() {
                     <PurchaseInformation />
                 </Grid>
             </Grid>
-
-
         </Box>
     );
 }

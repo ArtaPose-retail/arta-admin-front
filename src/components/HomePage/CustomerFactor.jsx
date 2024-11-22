@@ -1,32 +1,16 @@
 import { Box, Button, Divider, FormControlLabel, Popover, Radio, Typography } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import CustomerFactorTable from "./CustomerFactorTable";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { center } from "../../styles/theme";
+
+import ReactToPrint from "react-to-print";
+import { Print } from "@mui/icons-material";
+import ReceiptTemplate from "../PrintTemplate/Recipt";
+
 function CustomerFactor() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const ReciptRef = useRef();
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const PopoverHandler = () => {
-        toastHandler("درخواست ارسال شد", "info");
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popover" : undefined;
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
     return (
         <Box sx={{ width: "100%", height: "100%" }}>
             <Box sx={{ ...center, width: "100%", gap: "10px", my: 1 }}>
@@ -114,6 +98,20 @@ function CustomerFactor() {
                     >
                         چاپ فاکتور
                     </Button>
+                    <Button sx={{ cursor: "auto" }} variant="outlined">
+                        <ReactToPrint
+                            onAfterPrint={() => console.log("after")}
+                            trigger={() => (
+                                <Print
+                                    sx={{
+                                        fill: (theme) => theme.palette.primary.light,
+                                        cursor: "pointer",
+                                    }}
+                                />
+                            )}
+                            content={() => ReciptRef.current}
+                        />
+                    </Button>
                     <Button
                         variant="contained"
                         sx={{
@@ -124,72 +122,12 @@ function CustomerFactor() {
                     >
                         چاپ لیبل
                     </Button>
-                </Box>
-                {/* <MoreVertIcon
-                    sx={{ cursor: "pointer" }}
-                    aria-describedby={id}
-                    variant="contained"
-                    onClick={handleClick}
-                /> */}
-                {/* 
-                <Popover
-                    id={id}
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                    }}
-                    transformOrigin={{
-                        vertical: "bottom",
-                        horizontal: "center",
-                    }}
-                >
-                    <Box sx={{ bgcolor: (theme) => theme.background.box }}>
-                        <Typography
-                            // onClick={() => PopoverHandler()}
-                            sx={{ p: 2, cursor: "pointer", ...center, justifyContent: "space-between", gap: "5px" }}
-                        >
-                            چاپ خودکار فاکتور{" "}
-                            <FormControlLabel
-                                sx={{ m: 0, p: 0 }}
-                                //   onClick={() => setRadioCheck(!RadioCheck)}
-                                control={
-                                    <Radio
-                                        // checked={RadioCheck}
-                                        sx={{
-                                            color: (theme) => theme.palette.primary.main,
-                                            p: 0,
-                                            m: 0,
-                                        }}
-                                    />
-                                }
-                            />
-                        </Typography>
-                        <Divider flexItem variant="middle" />
-                        <Typography
-                            // onClick={() => PopoverHandler()}
-                            sx={{ p: 2, cursor: "pointer", ...center, justifyContent: "space-between", gap: "5px" }}
-                        >
-                            چاپ خودکار لیبل{" "}
-                            <FormControlLabel
-                                sx={{ m: 0, p: 0 }}
-                                //   onClick={() => setRadioCheck(!RadioCheck)}
-                                control={
-                                    <Radio
-                                        // checked={RadioCheck}
-                                        sx={{
-                                            color: (theme) => theme.palette.primary.main,
-                                            p: 0,
-                                            m: 0,
-                                        }}
-                                    />
-                                }
-                            />
-                        </Typography>
+
+                    <Box sx={{ display: "none" }}>
+                        <ReceiptTemplate ref={ReciptRef} />
                     </Box>
-                </Popover> */}
+                </Box>
+
             </Box>
         </Box>
     );
