@@ -88,16 +88,7 @@ function CustomerFactor() {
                 }}
             >
                 <Box sx={{ ...center, width: "100%", gap: "10px" }}>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            bgcolor: (theme) => theme.palette.divider,
-                            borderRadius: "7px",
-                            color: (theme) => theme.palette.text.primary,
-                        }}
-                    >
-                        چاپ فاکتور
-                    </Button>
+
                     <Button sx={{ cursor: "auto" }} variant="outlined">
                         <ReactToPrint
                             onAfterPrint={() => console.log("after")}
@@ -112,16 +103,7 @@ function CustomerFactor() {
                             content={() => ReciptRef.current}
                         />
                     </Button>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            bgcolor: (theme) => theme.palette.divider,
-                            borderRadius: "7px",
-                            color: (theme) => theme.palette.text.primary,
-                        }}
-                    >
-                        چاپ لیبل
-                    </Button>
+
 
                     <Box sx={{ display: "none" }}>
                         <ReceiptTemplate ref={ReciptRef} />
