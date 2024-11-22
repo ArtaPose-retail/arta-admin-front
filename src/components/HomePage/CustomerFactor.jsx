@@ -7,9 +7,12 @@ import { center } from "../../styles/theme";
 import ReactToPrint from "react-to-print";
 import { Print } from "@mui/icons-material";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
+import { useSelector } from "react-redux";
 
 function CustomerFactor() {
     const ReciptRef = useRef();
+
+    const { OrderPrice } = useSelector((state) => state.Order)
 
     return (
         <Box sx={{ width: "100%", height: "100%" }}>
@@ -69,7 +72,7 @@ function CustomerFactor() {
                             fontWeight: 500,
                         }}
                     >
-                        {toPersian(separateBy3("87678"))}
+                        {toPersian(separateBy3(OrderPrice.order_price))}
                         &nbsp; ریال
                     </Typography>
                 </Box>

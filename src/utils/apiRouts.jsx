@@ -74,6 +74,7 @@ const apiRouts = {
 
         checkout: {
             addProd: (order_id) => `/admin/order/checkout/${order_id}/product`,
+            ClcPrice: (order_id) => `/admin/order/checkout/${order_id}/calc`
         },
     },
 };

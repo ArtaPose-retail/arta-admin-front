@@ -3,7 +3,7 @@ import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 
 import { center } from "../../styles/theme";
 import { useDispatch } from "react-redux";
-import { getCardId, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
+import { CalcOrders, getCardId, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 
 function SingleLable({ item, index, selectedIndex, onCardSelect }) {
     const dispatch = useDispatch()
@@ -13,6 +13,11 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
         onCardSelect(index);
         dispatch(getCardId(id))
         dispatch(SingleOrderProds(id))
+
+
+        dispatch(CalcOrders(id));
+
+
     };
 
     return (

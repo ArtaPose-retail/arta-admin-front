@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Typography } from "@mui/material";
 import CustomerFactor from "./CustomerFactor";
 import PayStatus from "./PayStatus";
@@ -7,9 +7,11 @@ import { toastHandler } from "../../utils/setting";
 import CancelBtn from "../UI/CancelBtn";
 import { Close } from "@mui/icons-material";
 import { center } from "../../styles/theme";
+import { useDispatch, useSelector } from "react-redux";
+import { CalcOrders } from "../../Redux/Slices/Actions/Order/Order";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
-
+    const dispatch = useDispatch();
     const [openCancelBTn, setOpenCancelBTn] = useState(false);
     const handleOpenCancleModal = () => setOpenCancelBTn(true);
     const handleCloseCancleModal = () => setOpenCancelBTn(false);
@@ -17,7 +19,6 @@ function PurchaseInformation() {
     const handleChange = (id) => {
         setTabs(+id);
     };
-
 
 
     return (
@@ -115,19 +116,21 @@ function PurchaseInformation() {
                 </Button>
                 <CancelBtn
                     BtnTitle={
-                        <Typography sx={{
-                            bgcolor: (theme) => theme.palette.warning.main,
-                            color: (theme) => theme.palette.text.primary,
-                            width: "100%",
-                            fontSize: "14px",
-                            py: 2,
-                            fontWeight: 700,
-                            borderRadius: "12px",
-                            "&:hover": {
+                        <Typography
+                            sx={{
                                 bgcolor: (theme) => theme.palette.warning.main,
                                 color: (theme) => theme.palette.text.primary,
-                            },
-                        }}>
+                                width: "100%",
+                                fontSize: "14px",
+                                py: 2,
+                                fontWeight: 700,
+                                borderRadius: "12px",
+                                "&:hover": {
+                                    bgcolor: (theme) => theme.palette.warning.main,
+                                    color: (theme) => theme.palette.text.primary,
+                                },
+                            }}
+                        >
                             انصراف
                         </Typography>
                     }
@@ -140,19 +143,21 @@ function PurchaseInformation() {
                 />
                 <CancelBtn
                     BtnTitle={
-                        <Typography sx={{
-                            bgcolor: (theme) => theme.palette.warning.main,
-                            color: (theme) => theme.palette.text.primary,
-                            width: "100%",
-                            fontSize: "14px",
-                            py: 2,
-                            fontWeight: 700,
-                            borderRadius: "12px",
-                            "&:hover": {
+                        <Typography
+                            sx={{
                                 bgcolor: (theme) => theme.palette.warning.main,
                                 color: (theme) => theme.palette.text.primary,
-                            },
-                        }}>
+                                width: "100%",
+                                fontSize: "14px",
+                                py: 2,
+                                fontWeight: 700,
+                                borderRadius: "12px",
+                                "&:hover": {
+                                    bgcolor: (theme) => theme.palette.warning.main,
+                                    color: (theme) => theme.palette.text.primary,
+                                },
+                            }}
+                        >
                             حذف
                         </Typography>
                     }
