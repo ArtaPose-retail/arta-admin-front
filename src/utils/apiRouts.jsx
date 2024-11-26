@@ -5,40 +5,40 @@ const apiRouts = {
         transactiomn: base + "/transaction",
     },
     auth: {
-        login: "user/login",
+        login: "/user/login",
     },
     user: {
-        list: "admin/users/",
-        add: "admin/users/new",
+        list: "/admin/users/",
+        add: "/admin/users/new",
     },
     product: {
         type: {
-            getList: "admin/categories/",
-            delete: "admin/categories/",
-            add: "admin/categories/new",
-            child: "admin/categories/child",
+            getList: "/admin/categories/",
+            delete: "/admin/categories/",
+            add: "/admin/categories/new",
+            child: "/admin/categories/child",
         },
         unit: {
-            getList: "admin/units/",
+            getList: "/admin/units/",
         },
         main: {
-            list: "admin/products/",
-            add: "admin/products/new",
+            list: "/admin/products/",
+            add: "/admin/products/new",
         },
     },
     promoCode: {
-        getList: "admin/promocode/",
-        add: "admin/promocode/new",
+        getList: "/admin/promocode/",
+        add: "/admin/promocode/new",
     },
 
     setting: {
         gallery: {
-            list: "admin/gallery/",
+            list: "/admin/gallery/",
         },
     },
     order: {
-        list: "admin/order/",
-        add: "admin/order/checkout/new",
+        list: "/admin/order/",
+        add: "/admin/order/checkout/new",
         listById: (order_id) => `/admin/order/${order_id}/product`,
     },
 
@@ -48,8 +48,8 @@ const apiRouts = {
             add: "/admin/bankaccount/names/new",
         },
         type: {
-            list: "admin/bankaccount/types/",
-            add: "admin/bankaccount/types/new",
+            list: "/admin/bankaccount/types/",
+            add: "/admin/bankaccount/types/new",
         },
         account: {
             add: "/admin/bankaccount/new",

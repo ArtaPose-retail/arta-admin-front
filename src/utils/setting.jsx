@@ -4,7 +4,8 @@ import moment from "jalali-moment";
 import { useSelector } from "react-redux";
 
 const instance = axios.create({
-    baseURL: "https://api.artps.ir/v1/",
+    baseURL: "/v1",
+    // baseURL: "https://api.artps.ir/v1/",
     timeout: 60000,
 });
 
