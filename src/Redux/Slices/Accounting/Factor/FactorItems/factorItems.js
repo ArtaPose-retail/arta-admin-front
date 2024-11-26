@@ -16,6 +16,7 @@ const initialState = {
         tax: null,
         original_price_fee: null,
         sell_price_fee: null,
+        discount: null
     },
     factorItemsRes: null,
     singleOrderList: [],

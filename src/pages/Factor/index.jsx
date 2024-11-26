@@ -1,18 +1,14 @@
 import {
     Box,
-    Button,
-    InputAdornment,
     TextField,
     Typography,
 } from "@mui/material";
 import { useState } from "react";
 import Title from "../../components/UI/Title";
-
-import SearchIcon from "@mui/icons-material/Search";
 import { months } from "../../utils/data";
 import FactorTable from "../../components/FactorPage/FactorTable";
 import Input from "../../components/UI/Input";
-import AddIcon from "@mui/icons-material/Add";
+
 import NewProductParentDialog from "../../components/HomePage/Dialogs";
 import { center } from "../../styles/theme";
 

@@ -1020,6 +1020,16 @@ export const factorItemForm = [
         hastext: true,
     },
     {
+        name: "discount",
+        select: false,
+        placeholder: "تخفیف خرید ",
+        lable: "تخفیف خرید ",
+        hasIcon: true,
+        color: "#6D6D6D",
+        type: "number",
+        hastext: true,
+    },
+    {
         name: "tax",
         select: false,
         placeholder: "مالیات ",

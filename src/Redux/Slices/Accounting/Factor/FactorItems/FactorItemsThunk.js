@@ -11,6 +11,7 @@ export const addFactorItems = async (OrderID, ThunkAPI) => {
         tax,
         original_price_fee,
         sell_price_fee,
+        discount
     } = state.factorItems.newFacrtorItems;
     return await AXIOS.post(apiRouts.factor.checkin.items.add(OrderID), {
         product_id,
@@ -19,6 +20,7 @@ export const addFactorItems = async (OrderID, ThunkAPI) => {
         tax,
         original_price_fee,
         sell_price_fee,
+        discount
     });
 };
 

@@ -216,10 +216,7 @@ function FactorItems({ handleClose }) {
                                 newFacrtorItems.quantity,
                                 newFacrtorItems.tax
                             ) -
-                            Discount(
-                                newFacrtorItems.original_price_fee,
-                                newFacrtorItems.sell_price_fee
-                            )
+                            newFacrtorItems.discount
                         )
                     )}
                 </Typography>
@@ -296,10 +293,10 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
-                    درصد تخفیف فروش: %{toPersian(DiscountPercentage(Discount(
+                    درصد تخفیف فروش: %{toPersian(parseFloat(DiscountPercentage(Discount(
                         newFacrtorItems.original_price_fee,
                         newFacrtorItems.sell_price_fee
-                    ), newFacrtorItems.original_price_fee))}
+                    ), newFacrtorItems.original_price_fee)).toFixed(2))}
                 </Typography>
                 <Typography
                     sx={{
@@ -311,7 +308,7 @@ function FactorItems({ handleClose }) {
                 >
                     درصد سود: %
                     {toPersian(
-                        Math.floor(
+                        parseFloat(
                             profitPercentage(
                                 FinalBuyFee(
                                     TotalBuy(
@@ -327,7 +324,7 @@ function FactorItems({ handleClose }) {
                                 ),
                                 newFacrtorItems.sell_price_fee
                             )
-                        )
+                        ).toFixed(2)
                     )}
                 </Typography>
             </Box>
