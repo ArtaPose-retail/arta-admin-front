@@ -14,6 +14,8 @@ import Title from "../UI/Title";
 import PayStatusTable from "./PayStatusTable";
 import { ExpandMore } from "@mui/icons-material";
 import Input from "../UI/Input";
+import { center } from "../../styles/theme";
+import { useSelector } from "react-redux";
 
 function PayStatus() {
     const [open, setOpen] = React.useState(false);
@@ -27,11 +29,8 @@ function PayStatus() {
 
     const canBeOpen = open && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+
+    const { OrderPrice } = useSelector((state) => state.Order)
     return (
         <Box
             sx={{
@@ -66,7 +65,7 @@ function PayStatus() {
                 >
                     قابل پرداخت
                 </Typography>
-                <Box sx={{ ...center }}>
+                <Box sx={{ ...center, gap: '2px' }}>
                     <Typography
                         sx={{
                             color: (theme) => theme.palette.text.primary,
@@ -74,7 +73,7 @@ function PayStatus() {
                             fontWeight: 700,
                         }}
                     >
-                        {toPersian(separateBy3("720000"))}
+                        {toPersian(separateBy3(OrderPrice.order_price ?? 0))}
                     </Typography>
                     <Typography
                         sx={{

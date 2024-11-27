@@ -72,7 +72,7 @@ function CustomerFactor() {
                             fontWeight: 500,
                         }}
                     >
-                        {toPersian(separateBy3(OrderPrice.order_price))}
+                        {toPersian(separateBy3(OrderPrice.order_price ?? 0))}
                         &nbsp; ریال
                     </Typography>
                 </Box>
