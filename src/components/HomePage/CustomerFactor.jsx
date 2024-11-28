@@ -1,4 +1,12 @@
-import { Box, Button, Divider, FormControlLabel, Popover, Radio, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    Divider,
+    FormControlLabel,
+    Popover,
+    Radio,
+    Typography,
+} from "@mui/material";
 import React, { useRef } from "react";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import CustomerFactorTable from "./CustomerFactorTable";
@@ -12,7 +20,9 @@ import { useSelector } from "react-redux";
 function CustomerFactor() {
     const ReciptRef = useRef();
 
-    const { OrderPrice, cardInfo } = useSelector((state) => state.Order)
+    const { OrderPrice, cardInfo, OrderProductList } = useSelector(
+        (state) => state.Order
+    );
 
     return (
         <Box sx={{ width: "100%", height: "100%" }}>
@@ -90,7 +100,6 @@ function CustomerFactor() {
                 }}
             >
                 <Box sx={{ ...center, width: "100%", gap: "10px" }}>
-
                     <Button sx={{ cursor: "auto" }} variant="outlined">
                         <ReactToPrint
                             onAfterPrint={() => console.log("after")}
@@ -106,12 +115,15 @@ function CustomerFactor() {
                         />
                     </Button>
 
-
                     <Box sx={{ display: "none" }}>
-                        <ReceiptTemplate ref={ReciptRef} />
+                        <ReceiptTemplate
+                            userInfo={cardInfo}
+                            OrderProductList={OrderProductList}
+                            OrderPrice={OrderPrice}
+                            ref={ReciptRef}
+                        />
                     </Box>
                 </Box>
-
             </Box>
         </Box>
     );

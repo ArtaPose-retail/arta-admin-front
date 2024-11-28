@@ -8,10 +8,12 @@ import {
 import StoreLogo from "../../Assets/images/StoreLogo.png"
 import { Instagram, Phone, Web } from "@mui/icons-material";
 import { center } from "../../styles/theme";
-import { separateBy3, toPersian } from "../../utils/setting";
+import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 
 
 const ReceiptTemplate = forwardRef((props, ref) => {
+
+    const { OrderProductList, userInfo, OrderPrice } = props
 
     return (
         <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", }}>
@@ -46,26 +48,26 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1 }}>
 
                         <Typography sx={{ fontSize: "10px" }} >
-                            شماره فاکتور: 23456
+                            شماره فاکتور: {userInfo?.orderpublicid}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
                         <Typography sx={{ fontSize: "10px" }} >
-                            زمان: 23:50:19 | 1402/07/05
+                            زمان: {persianDate(userInfo?.updated_at)}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
 
                         <Typography sx={{ fontSize: "10px" }} >
-                            کاربر: مصطفی نژاد
+                            کاربر:  {userInfo?.cust_fullname}
                         </Typography>
                     </Box>
                     <Divider />
                     <Box sx={{ ...center, gap: "2px", py: 1, justifyContent: "space-evenly" }}>
 
                         <Typography sx={{ fontSize: "12px" }}>
-                            مشتری: <strong>مهرداد مقدسی امیری</strong>
+                            مشتری: <strong>{userInfo?.cust_fullname}</strong>
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            شناسه مشتری: <strong>123456</strong>
+                            شناسه مشتری: <strong>{userInfo?.cust_id}</strong>
                         </Typography>
                     </Box>
                 </Box>
@@ -93,7 +95,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                 </Typography>
             </Box>
             {/* body */}
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) =>
+            {OrderProductList?.map((item, index) =>
 
                 <Box Box sx={{ p: 1, border: "1px solid black", borderRadius: '12px' }}>
                     <Box sx={{ ...center }}>
@@ -102,25 +104,25 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                             {toPersian(index + 1)}.
                         </Typography>
                         <Typography sx={{ fontSize: "12px", fontWeight: "900" }}>
-                            سیب سبزوار دماوند
+                            {item?.Title}
                         </Typography>
                     </Box>
                     <Box sx={{ ...center, justifyContent: "space-between" }}>
 
                         <Typography sx={{ fontSize: "12px" }}>
-                            {toPersian(separateBy3(10 ?? 0))}
+                            {toPersian(separateBy3(item?.quantity ?? 0))}
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            {toPersian(separateBy3(10000 ?? 0))}
+                            {toPersian(separateBy3(item?.unitprice ?? 0))}
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            {toPersian(separateBy3(10000 ?? 0))}
+                            {toPersian(separateBy3(item?.totalprice ?? 0))}
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            {toPersian(separateBy3(10 ?? 0))}
+                            {toPersian(separateBy3(item?.discount ?? 0))}
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            {toPersian(separateBy3(100000 ?? 0))}
+                            {toPersian(separateBy3(item?.finalprice ?? 0))}
                         </Typography>
                     </Box>
                 </Box>
@@ -130,13 +132,13 @@ const ReceiptTemplate = forwardRef((props, ref) => {
             {/* Footer */}
             <Box sx={{ mt: 2 }}>
                 <Typography variant="body2">
-                    مجموع قیمت مصرف کننده: <strong>2,700,000</strong> ریال
+                    مجموع قیمت مصرف کننده: <strong>{toPersian(separateBy3(OrderPrice?.order_price ?? 0))}</strong> ریال
                 </Typography>
                 <Typography variant="body2">
-                    تخفیف: <strong>120,000</strong> ریال
+                    تخفیف: <strong>{toPersian(separateBy3(OrderPrice?.calculated_discount ?? 0))}</strong> ریال
                 </Typography>
                 <Typography variant="h6" sx={{ mt: 1, fontWeight: "bold" }}>
-                    قابل پرداخت: <strong>2,580,000</strong> ریال
+                    قابل پرداخت: <strong>{toPersian(separateBy3((OrderPrice?.order_price - OrderPrice?.calculated_discount) ?? 0))}</strong> ریال
                 </Typography>
                 <Divider sx={{ my: 1 }} />
                 <Typography variant="body2" textAlign="center">

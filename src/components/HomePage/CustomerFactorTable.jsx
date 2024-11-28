@@ -17,9 +17,7 @@ import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import ProductDetails from "./Dialogs/ProductDetails";
 import { center } from "../../styles/theme";
 import { useSelector } from "react-redux";
-import { NoItem } from '../UI/NoItem';
-
-
+import { NoItem } from "../UI/NoItem";
 
 function Row(props) {
     const { row } = props;
@@ -37,8 +35,6 @@ function Row(props) {
     const deleteBtn = () => {
         toastHandler("ایتم مورد  نظر حذف شد", "warning");
     };
-
-
 
     return (
         <React.Fragment>
@@ -64,7 +60,8 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row?.quantity ?? 0)}{row?.IsBulk == false ? "عدد" : "کیلوگرم"}
+                    {toPersian(row?.quantity ?? 0)}
+                    {row?.IsBulk == false ? "عدد" : "کیلوگرم"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -126,7 +123,7 @@ function Row(props) {
 }
 
 export default function CustomerFactorTable() {
-    const { OrderProductList } = useSelector(state => state.Order)
+    const { OrderProductList } = useSelector((state) => state.Order);
     return (
         <Box
             sx={{
@@ -168,9 +165,13 @@ export default function CustomerFactorTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {OrderProductList.length > 0 ? OrderProductList?.map((row, index) => (
-                            <Row key={index} row={row} />
-                        )) : <NoItem />}
+                        {OrderProductList.length > 0 ? (
+                            OrderProductList?.map((row, index) => (
+                                <Row key={index} row={row} />
+                            ))
+                        ) : (
+                            <NoItem />
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
