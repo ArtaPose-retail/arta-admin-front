@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 function CustomerFactor() {
     const ReciptRef = useRef();
 
-    const { OrderPrice } = useSelector((state) => state.Order)
+    const { OrderPrice, cardInfo } = useSelector((state) => state.Order)
 
     return (
         <Box sx={{ width: "100%", height: "100%" }}>
@@ -43,7 +43,7 @@ function CustomerFactor() {
                             fontWeight: 500,
                         }}
                     >
-                        {toPersian("۲۳۹۰۴۸۵۹۰")}
+                        {toPersian(cardInfo?.orderpublicid ?? 0)}
                     </Typography>
                 </Box>
                 <Box
@@ -86,7 +86,6 @@ function CustomerFactor() {
                     ...center,
                     p: 1,
                     mt: 0.5,
-                    // boxShadow: "0px 0px 9px 2px rgba(0, 0, 0, 0.25)",
                     borderTop: "1px solid lightgray",
                 }}
             >

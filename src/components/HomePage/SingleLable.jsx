@@ -2,23 +2,24 @@ import { Badge, Box, Typography } from "@mui/material";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 
 import { center } from "../../styles/theme";
-import { useDispatch } from "react-redux";
-import { CalcOrders, getCardId, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
+import { useDispatch, useSelector } from "react-redux";
+import { CalcOrders, getCardId, getCardInfo, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 
 function SingleLable({ item, index, selectedIndex, onCardSelect }) {
     const dispatch = useDispatch()
     const isSelected = index === selectedIndex;
-
     const handleCardSelect = (id) => {
         onCardSelect(index);
         dispatch(getCardId(id))
         dispatch(SingleOrderProds(id))
 
-
+        dispatch(getCardInfo(item))
         dispatch(CalcOrders(id));
 
 
     };
+    const { OrderPrice } = useSelector((state) => state.Order)
+
 
     return (
         <Box>
@@ -126,7 +127,7 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
                                                 : theme.palette.divider,
                                     }}
                                 >
-                                    {toPersian(separateBy3(item?.initial_price ?? 0))}
+                                    {toPersian(separateBy3(OrderPrice?.order_price ?? 0))}
                                 </Typography>
                             </Box>
                             <Typography

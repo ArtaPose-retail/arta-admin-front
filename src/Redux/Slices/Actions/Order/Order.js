@@ -12,6 +12,7 @@ const initialState = {
     update: false,
     orderList: [],
     cardId: 0,
+    cardInfo: null,
     OrderProductList: [],
     OrderPrice: {
         order_price: 0,
@@ -35,6 +36,9 @@ export const Order = createSlice({
         getCardId: (state, { payload }) => {
             state.cardId = payload;
         },
+        getCardInfo: (state, { payload }) => {
+            state.cardInfo = payload
+        }
     },
 
     extraReducers: (builder) => {
@@ -92,6 +96,6 @@ export const Order = createSlice({
     },
 });
 
-export const { getCardId } = Order.actions;
+export const { getCardId, getCardInfo } = Order.actions;
 
 export default Order.reducer;
