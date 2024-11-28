@@ -1,12 +1,16 @@
 import { Box, Grid } from "@mui/material";
-import React from "react";
-import NewFactor from '../../components/HomePage/NewFactor';
-import ProductsSection from '../../components/HomePage/ProductsSection';
-import PurchaseInformation from '../../components/HomePage/PurchaseInformation';
-
-
+import React, { useEffect } from "react";
+import NewFactor from "../../components/HomePage/NewFactor";
+import ProductsSection from "../../components/HomePage/ProductsSection";
+import PurchaseInformation from "../../components/HomePage/PurchaseInformation";
+import { useDispatch } from "react-redux";
+import { PaymentBAList } from "../../Redux/Slices/Actions/Payment/payment";
 
 function Sellpage() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(PaymentBAList());
+    }, []);
     return (
         <Box>
             <NewFactor />

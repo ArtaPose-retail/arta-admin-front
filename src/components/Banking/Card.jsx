@@ -77,7 +77,7 @@ function Card() {
                             <Box sx={{ ...center, gap: "5px" }}>
                                 <img src={item?.logo} />
                                 <Typography sx={{ fontSize: "12px", fontWeight: "regular" }}>
-                                    {item?.bankName}
+                                    {item?.bank_name?.name}-{item?.bank_type?.title}
                                 </Typography>
                             </Box>
                             <Box

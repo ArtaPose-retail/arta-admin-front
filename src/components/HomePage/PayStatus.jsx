@@ -30,7 +30,8 @@ function PayStatus() {
     const canBeOpen = open && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
 
-    const { OrderPrice } = useSelector((state) => state.Order)
+    const { OrderPrice } = useSelector((state) => state.Order);
+    const { paymentBA } = useSelector((state) => state.payment);
     return (
         <Box
             sx={{
@@ -65,7 +66,7 @@ function PayStatus() {
                 >
                     قابل پرداخت
                 </Typography>
-                <Box sx={{ ...center, gap: '2px' }}>
+                <Box sx={{ ...center, gap: "2px" }}>
                     <Typography
                         sx={{
                             color: (theme) => theme.palette.text.primary,
@@ -87,11 +88,7 @@ function PayStatus() {
                 </Box>
             </Box>
             <Box sx={{ ...center, m: 0.5, gap: "10px", width: "65%" }}>
-
-                <Input
-                    hasText={true}
-                    type={"number"}
-                />
+                <Input hasText={true} type={"number"} />
             </Box>
             <Box sx={{ ...center, gap: "15px", my: 1 }}>
                 <Box
@@ -106,7 +103,13 @@ function PayStatus() {
                         gap: "5px",
                     }}
                 >
-                    <Typography onClick={() => toastHandler("درخواست ارسال شد", "info")} sx={{ color: (theme) => theme.palette.text.primary, cursor: "pointer" }}>
+                    <Typography
+                        onClick={() => toastHandler("درخواست ارسال شد", "info")}
+                        sx={{
+                            color: (theme) => theme.palette.text.primary,
+                            cursor: "pointer",
+                        }}
+                    >
                         {PosItem}
                     </Typography>
                     <Box
@@ -128,41 +131,23 @@ function PayStatus() {
                                         bgcolor: "background.paper",
                                     }}
                                 >
-                                    <Typography
-                                        sx={{
-                                            borderBottom: "1px solid gray",
-                                            p: 1,
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={() => {
-                                            setPositem("دستگاه پز 1");
-                                            setOpen(false);
-                                        }}
-                                    >
-                                        دستگاه پز 1
-                                    </Typography>
-                                    <Typography
-                                        sx={{
-                                            borderBottom: "1px solid gray",
-                                            p: 1,
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={() => {
-                                            setPositem("دستگاه پز ملت");
-                                            setOpen(false);
-                                        }}
-                                    >
-                                        دستگاه پز ملت
-                                    </Typography>
-                                    <Typography
-                                        sx={{ p: 1, cursor: "pointer" }}
-                                        onClick={() => {
-                                            setPositem("دستگاه پز 1");
-                                            setOpen(false);
-                                        }}
-                                    >
-                                        دستگاه پز ملت
-                                    </Typography>
+                                    {paymentBA &&
+                                        paymentBA.map((item, index) => (
+                                            <Typography
+                                                key={index}
+                                                sx={{
+                                                    borderBottom: "1px solid gray",
+                                                    p: 1,
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() => {
+                                                    setPositem("دستگاه پز 1");
+                                                    setOpen(false);
+                                                }}
+                                            >
+                                                {item?.bank_name?.name}
+                                            </Typography>
+                                        ))}
                                 </Box>
                             </Fade>
                         )}
@@ -231,8 +216,6 @@ function PayStatus() {
                 </Grid>
                 <Grid item xs={7}>
                     <Box sx={{ ...center, justifyContent: "space-between", gap: "5px" }}>
-
-
                         <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
                             کد تخفیف:
                         </Typography>
@@ -245,7 +228,6 @@ function PayStatus() {
                             type="text"
                             id="input-with-icon-textfield"
                             InputProps={{
-
                                 style: {
                                     background: "#F2F2F2",
                                     color: "#000",
@@ -255,7 +237,6 @@ function PayStatus() {
                             }}
                             variant="outlined"
                         />
-
                     </Box>
                 </Grid>
             </Grid>
@@ -264,7 +245,6 @@ function PayStatus() {
                 spacing={2}
                 sx={{ alignItems: "center", justifyContent: "center" }}
             >
-
                 <Grid item xs={12} sx={{ my: 1 }}>
                     <Box sx={{ ...center, gap: "5px", justifyContent: "flex-start" }}>
                         <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
@@ -301,8 +281,7 @@ function PayStatus() {
             />
 
             <PayStatusTable />
-
-        </Box >
+        </Box>
     );
 }
 

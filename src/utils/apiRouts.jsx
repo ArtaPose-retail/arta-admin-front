@@ -77,6 +77,9 @@ const apiRouts = {
             ClcPrice: (order_id) => `/admin/order/checkout/${order_id}/calc`
         },
     },
+    payment: {
+        bankaccount: "/admin/transaction/bankaccount"
+    }
 };
 
 export default apiRouts;
