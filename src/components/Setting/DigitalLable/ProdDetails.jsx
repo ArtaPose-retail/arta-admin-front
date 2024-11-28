@@ -27,7 +27,7 @@ export const ProdDetails = () => {
                 height: "100%",
                 ...center,
                 // border: "1px solid red",
-                pt: 5
+                pt: 5,
             }}
         >
             <FullScreen
@@ -44,10 +44,10 @@ export const ProdDetails = () => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         position: "relative",
-                        pt: 5
+                        pt: 5,
                     }}
                 >
-                    <Box sx={{ position: 'absolute' }}>
+                    <Box sx={{ position: "absolute" }}>
                         {!fullScrenn ? (
                             <FullscreenIcon
                                 onClick={() => screenHandler(true)}
@@ -81,7 +81,6 @@ export const ProdDetails = () => {
                             height: "50%",
                             width: "100%",
                             ...center,
-
                         }}
                     >
                         <Box
@@ -89,8 +88,33 @@ export const ProdDetails = () => {
                                 height: "100%",
                                 width: "40%",
                                 ...center,
+                                position: "relative",
                             }}
                         >
+                            <Box
+                                sx={{
+                                    bgcolor: "#BFF102",
+                                    height: "15%",
+                                    width: "15%",
+                                    position: "absolute",
+                                    top: 40,
+                                    right: 40,
+                                    borderRadius: "50%",
+                                    p: 3,
+                                    ...center
+
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontSize: "24px",
+                                        textAlign: "center",
+                                        fontWeight: '900'
+                                    }}
+                                >
+                                    {toPersian(25 ?? 0)}%
+                                </Typography>
+                            </Box>
                             <img
                                 src={`${apiRouts.baseUrl}${signleProd?.productpic_path}`}
                                 alt="fruitBasket"
@@ -108,7 +132,6 @@ export const ProdDetails = () => {
                                 }}
                             />
                             <Box sx={{ ...center, justifyContent: "start" }}>
-
                                 <Typography
                                     sx={{
                                         fontSize: "70px",
@@ -119,7 +142,6 @@ export const ProdDetails = () => {
                                     }}
                                 >
                                     {toPersian(separateBy3(signleProd?.price ?? 0))}
-
                                 </Typography>
                                 <Typography
                                     sx={{
@@ -147,7 +169,9 @@ export const ProdDetails = () => {
                                 >
                                     هرکیوگرم
                                 </Typography>
-                                <ObliqueLine title={separateBy3(signleProd?.originalprice ?? 0)} />
+                                <ObliqueLine
+                                    title={separateBy3(signleProd?.originalprice ?? 0)}
+                                />
                             </Box>
                         </Box>
                     </Box>
