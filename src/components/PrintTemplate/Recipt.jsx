@@ -9,11 +9,14 @@ import StoreLogo from "../../Assets/images/StoreLogo.png"
 import { Instagram, Phone, Web } from "@mui/icons-material";
 import { center } from "../../styles/theme";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
+import { useSelector } from "react-redux";
 
 
 const ReceiptTemplate = forwardRef((props, ref) => {
 
     const { OrderProductList, userInfo, OrderPrice } = props
+
+    const { loginInfo } = useSelector(state => state.auth)
 
     return (
         <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", }}>
@@ -38,7 +41,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                         </Box>
                         <Box sx={{ ...center, gap: "3px" }}>
 
-                            <Typography variant="body2">Almfresh.ir</Typography>
+                            <Typography variant="body2">almfresh.ir</Typography>
                             <Web />
                         </Box>
                     </Grid>
@@ -48,7 +51,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1 }}>
 
                         <Typography sx={{ fontSize: "10px" }} >
-                            شماره فاکتور: {userInfo?.orderpublicid}
+                            شماره فاکتور: {toPersian(userInfo?.orderpublicid ?? 0)}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
                         <Typography sx={{ fontSize: "10px" }} >
@@ -57,7 +60,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                         <Divider orientation="vertical" flexItem />
 
                         <Typography sx={{ fontSize: "10px" }} >
-                            کاربر:  {userInfo?.cust_fullname}
+                            کاربر:  {loginInfo?.fname} {loginInfo?.lname}
                         </Typography>
                     </Box>
                     <Divider />
