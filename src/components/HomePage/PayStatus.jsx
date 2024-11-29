@@ -32,6 +32,8 @@ function PayStatus() {
 
     const { OrderPrice } = useSelector((state) => state.Order);
     const { paymentBA } = useSelector((state) => state.payment);
+
+
     return (
         <Box
             sx={{

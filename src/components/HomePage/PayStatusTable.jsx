@@ -16,6 +16,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import moment from "jalali-moment";
+import { useSelector } from "react-redux";
+import { NoItem } from "../UI/NoItem";
+import { center } from "../../styles/theme";
 
 function createData(title, TransactionNum, amount, time, date) {
     return {
@@ -119,6 +122,9 @@ const rows = [
 ];
 
 export default function CollapsibleTable() {
+
+    const { paymentOrderList } = useSelector(state => state.payment)
+
     return (
         <Box
             sx={{
@@ -128,7 +134,7 @@ export default function CollapsibleTable() {
                 overflowX: "hidden",
             }}
         >
-            <TableContainer>
+            {paymentOrderList.length > 0 ? <TableContainer>
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>
@@ -168,12 +174,15 @@ export default function CollapsibleTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, index) => (
+                        {paymentOrderList.map((row, index) => (
                             <Row key={index} row={row} />
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+                :
+                <NoItem />
+            }
         </Box>
     );
 }

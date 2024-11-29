@@ -78,7 +78,8 @@ const apiRouts = {
         },
     },
     payment: {
-        bankaccount: "/admin/transaction/bankaccount"
+        bankaccount: "/admin/transaction/bankaccount",
+        orderpayList: "/admin/transaction/list"
     }
 };
 

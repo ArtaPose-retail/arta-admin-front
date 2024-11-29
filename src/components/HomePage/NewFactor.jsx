@@ -136,22 +136,7 @@ function NewFactor() {
                     )}
                 />
                 <Divider orientation="vertical" flexItem />
-                {/* <Input
-                    width={"20%"}
-                    hasIcon={false}
-                    type={"text"}
-                    placeholder={"تلفن همراه"}
-                    value={transactionInfo?.phone1}
-                    name={"phone1"}
-                    onChange={(name, value) => {
-                        dispatch(
-                            setNewTransaction({
-                                key: name,
-                                value: value,
-                            })
-                        );
-                    }}
-                /> */}
+
                 <Input
                     width={"15%"}
                     hasIcon={false}
@@ -185,20 +170,7 @@ function NewFactor() {
                     }}
                 />
                 <Box sx={{ ...center, gap: "10px" }}>
-                    {/* <Button
-                        onClick={() => showDialoghandler()}
-                        variant="contained"
-                        sx={{
-                            bgcolor: theme.palette.darkBlue.main,
-                            color: (theme) => theme.palette.text.primary,
-                            p: 1,
-                            px: 3,
-                            fontSize: "12px",
-                            fontWeight: 500,
-                        }}
-                    >
-                        توضیحات
-                    </Button> */}
+
                     <Button
                         onClick={() => showTransactionDialoghandler()}
                         variant="contained"
