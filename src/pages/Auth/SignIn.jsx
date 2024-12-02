@@ -7,7 +7,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import logo from "../../Assets/images/logo.png";
 import name from "../../Assets/images/logoname.png";
@@ -17,6 +17,8 @@ import { LoginAction, setLogininfo } from "../../Redux/Slices/Auth/auth";
 import { center } from "../../styles/theme";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { useNavigate } from "react-router-dom";
+import reactRouts from "../../utils/reactRouts";
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: "#3A5DF0",
     ...theme.typography.body2,
@@ -26,8 +28,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function SignIn() {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [showPass, setShowPass] = useState(false);
-    const { loginInfo } = useSelector((state) => state.auth);
+    const { loginInfo, token } = useSelector((state) => state.auth);
     const loginhandler = () => {
         dispatch(LoginAction());
     };
@@ -35,6 +38,12 @@ function SignIn() {
     const passWordHandler = () => {
         setShowPass(!showPass);
     };
+
+    useEffect(() => {
+        if (token != null) {
+            navigate(reactRouts.home)
+        }
+    }, [])
 
     return (
         <Box sx={{ flexGrow: 1, p: 1 }}>
