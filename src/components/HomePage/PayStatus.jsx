@@ -12,16 +12,21 @@ import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import { Box } from "@mui/system";
 import Title from "../UI/Title";
 import PayStatusTable from "./PayStatusTable";
-import { ExpandMore } from "@mui/icons-material";
+import { Check, Close, ExpandMore } from "@mui/icons-material";
 import Input from "../UI/Input";
 import { center } from "../../styles/theme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    CalcOrders,
+    resetPromoCode,
+    setPromoCode,
+} from "../../Redux/Slices/Actions/Order/Order";
 
 function PayStatus() {
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [PosItem, setPositem] = React.useState(null);
-
+    const dispatch = useDispatch();
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         setOpen((previousOpen) => !previousOpen);
@@ -30,9 +35,8 @@ function PayStatus() {
     const canBeOpen = open && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
 
-    const { OrderPrice } = useSelector((state) => state.Order);
+    const { OrderPrice, promoCode } = useSelector((state) => state.Order);
     const { paymentBA } = useSelector((state) => state.payment);
-
 
     return (
         <Box
@@ -212,16 +216,18 @@ function PayStatus() {
                                 color: (theme) => theme.palette.warning.main,
                             }}
                         >
-                            {toPersian(separateBy3("720000"))} ریال
+                            {toPersian(separateBy3(OrderPrice?.order_price ?? 0))} ریال
                         </Typography>
                     </Box>
                 </Grid>
                 <Grid item xs={7}>
                     <Box sx={{ ...center, justifyContent: "space-between", gap: "5px" }}>
                         <Typography sx={{ fontSize: "12px", fontWeight: 500 }}>
-                            کد تخفیف:
+                            کدتخفیف:
                         </Typography>
                         <TextField
+                            value={promoCode}
+                            onChange={(e) => dispatch(setPromoCode(e.target.value))}
                             sx={{
                                 "& .MuiOutlinedInput-notchedOutline": {
                                     borderColor: "white",
@@ -239,6 +245,17 @@ function PayStatus() {
                             }}
                             variant="outlined"
                         />
+                        {promoCode && <Box sx={{ ...center }}>
+                            <Close
+                                onClick={() => dispatch(resetPromoCode())}
+                                sx={{ fontSize: "20px", cursor: "pointer" }}
+                            />
+
+                            <Check
+                                onClick={() => dispatch(CalcOrders())}
+                                sx={{ fontSize: "20px" }}
+                            />
+                        </Box>}
                     </Box>
                 </Grid>
             </Grid>
@@ -259,7 +276,8 @@ function PayStatus() {
                                 color: (theme) => theme.palette.warning.main,
                             }}
                         >
-                            {toPersian(separateBy3("720000"))} ریال
+                            {toPersian(separateBy3(OrderPrice?.calculated_discount ?? 0))}{" "}
+                            ریال
                         </Typography>
                     </Box>
                 </Grid>

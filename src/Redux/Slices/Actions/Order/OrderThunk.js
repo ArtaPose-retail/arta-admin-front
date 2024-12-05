@@ -22,6 +22,10 @@ export const GetSingleOrderProd = async (order_id) => {
     return await AXIOS.get(apiRouts.order.listById(order_id))
 }
 
-export const CalculateOrder = async (order_id) => {
-    return await AXIOS.post(apiRouts.factor.checkout.ClcPrice(order_id))
+export const CalculateOrder = async (order_id, ThunkApi) => {
+    const state = ThunkApi.getState()
+    const { promoCode } = state.Order
+    return await AXIOS.post(apiRouts.factor.checkout.ClcPrice(order_id), {
+        promocode: promoCode
+    })
 }

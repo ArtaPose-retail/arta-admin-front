@@ -5,14 +5,17 @@ import { useEffect } from "react";
 import { getallType } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
 import Input from "../UI/Input";
 import {
+    resetProdCode,
     resetSingleProdByCode,
     SearchProdCode,
+    setProdCode,
 } from "../../Redux/Slices/Accounting/Products/product";
 import {
     AddProdOrder,
     setSingleOrderInfo,
 } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { toastHandler } from "../../utils/setting";
+import { Close } from "@mui/icons-material";
 
 function PtoductSFilter() {
     const dispatch = useDispatch();
@@ -43,7 +46,9 @@ function PtoductSFilter() {
     };
 
     const BarcodeSearchHandler = (name, value, type) => {
+        dispatch(setProdCode(value))
         dispatch(SearchProdCode(value));
+
     };
 
     useEffect(() => {
@@ -53,6 +58,10 @@ function PtoductSFilter() {
         }
         dispatch(resetSingleProdByCode());
     }, [loading]);
+
+    const IconHandler = () => {
+        dispatch(resetProdCode())
+    }
     return (
         <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
             <TextField
@@ -109,6 +118,10 @@ function PtoductSFilter() {
                 type={"text"}
                 placeholder={"بار کد محصول را وارد کنید"}
                 onChange={BarcodeSearchHandler}
+                hasIcon={true}
+                icon={"close"}
+                children={<Close />}
+                onIconClick={IconHandler}
             />
         </Box>
     );

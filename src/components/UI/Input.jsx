@@ -27,6 +27,7 @@ function Input({
     onChange,
     children,
     options,
+    onIconClick
 }) {
 
 
@@ -77,7 +78,10 @@ function Input({
                     />
                     {hasIcon &&
                         (icon !== "search" ? (
-                            children
+                            <Box sx={{ cursor: "pointer" }} onClick={onIconClick} >
+
+                                {children}
+                            </Box>
                         ) : (
                             <SearchIcon
                                 sx={{

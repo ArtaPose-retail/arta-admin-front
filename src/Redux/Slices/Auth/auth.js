@@ -27,6 +27,11 @@ export const auth = createSlice({
         resetLoginInfo: (state) => {
             state.loginInfo = initialState.loginInfo;
         },
+        logOut: (state) => {
+            state.admission = initialState.admission;
+            state.token = initialState.token;
+            state.loginInfo = initialState.loginInfo
+        }
     },
     extraReducers: (builder) => {
         //? login
@@ -50,5 +55,5 @@ export const auth = createSlice({
     },
 });
 
-export const { setLogininfo, resetLoginInfo } = auth.actions;
+export const { setLogininfo, resetLoginInfo, logOut } = auth.actions;
 export default auth.reducer;

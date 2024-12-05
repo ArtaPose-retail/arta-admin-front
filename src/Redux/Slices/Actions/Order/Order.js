@@ -16,8 +16,9 @@ const initialState = {
     OrderProductList: [],
     OrderPrice: {
         order_price: 0,
-        calculated_discount: 0
-    }
+        calculated_discount: 0,
+    },
+    promoCode: "",
 };
 
 export const OrderList = createAsyncThunk("order/list", GetOrderList);
@@ -37,8 +38,14 @@ export const Order = createSlice({
             state.cardId = payload;
         },
         getCardInfo: (state, { payload }) => {
-            state.cardInfo = payload
-        }
+            state.cardInfo = payload;
+        },
+        setPromoCode: (state, { payload }) => {
+            state.promoCode = payload;
+        },
+        resetPromoCode: (state) => {
+            state.promoCode = initialState.promoCode;
+        },
     },
 
     extraReducers: (builder) => {
@@ -89,13 +96,25 @@ export const Order = createSlice({
             state.update = false;
             state.OrderPrice = payload.data.data;
         });
-        builder.addCase(CalcOrders.rejected, (state) => {
+        builder.addCase(CalcOrders.rejected, (state, action) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
+
+            const message = action.error.message;
+            const statusMatch = message.match(/\d+/); // استخراج اولین عدد
+            if (statusMatch) {
+                const statusCode = parseInt(statusMatch[0]);
+                console.log(`Extracted status code: ${statusCode}`);
+                if (statusCode === 409) {
+                    toastHandler("کد تخفیف اشتباه است", "error")
+                }
+            } else {
+                console.error('No status code found in message');
+            }
         });
     },
 });
 
-export const { getCardId, getCardInfo } = Order.actions;
+export const { getCardId, getCardInfo, setPromoCode, resetPromoCode } =
+    Order.actions;
 
 export default Order.reducer;

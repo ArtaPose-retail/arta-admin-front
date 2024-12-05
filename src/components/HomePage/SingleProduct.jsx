@@ -12,11 +12,13 @@ function SingleProduct({ data }) {
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
     const showDialoghandler = () => {
+
+        console.log(data.prod_id)
         setOpen(true);
         dispatch(singleProd(data.prod_id))
         dispatch(setSingleOrderInfo({
             key: "product_id",
-            value: +data.prod_id
+            value: data.prod_id
         }))
     };
     const handlerCloseDialog = () => {
@@ -118,7 +120,7 @@ function SingleProduct({ data }) {
                                     textAlign: "start",
                                 }}
                             >
-                                موجودی: {toPersian(separateBy3(4000))}
+                                موجودی: {toPersian(separateBy3(data?.instock ?? 0))}
                             </Typography>
                         </Box>
 

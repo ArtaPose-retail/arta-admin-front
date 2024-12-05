@@ -69,7 +69,7 @@ function NewFactor() {
                     my: 1.5,
                     ...center,
                     justifyContent: "flex-start",
-                    gap: "5px",
+                    gap: "15px",
                     "& hr": {
                         mx: 0.5,
                     },

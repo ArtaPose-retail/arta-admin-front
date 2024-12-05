@@ -22,7 +22,7 @@ import profile from "../../Assets/images/profileImage.png";
 import { center } from "../../styles/theme";
 import { checkAccess } from "../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { resetLoginInfo } from "../../Redux/Slices/Auth/auth";
+import { logOut, resetLoginInfo } from "../../Redux/Slices/Auth/auth";
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -113,7 +113,9 @@ export default function SideBar() {
         localStorage.removeItem("TOKEN");
         localStorage.removeItem("persist:root");
         dispatch(resetLoginInfo());
+        dispatch(logOut())
         navigate(reactRouts.auth.signIn);
+
     };
 
     return (
