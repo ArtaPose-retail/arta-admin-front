@@ -9,7 +9,8 @@ const initialState = {
         product_id: 0,
         quantity: 1,
         unitprice: 0
-    }
+    },
+    scaleData: null
 };
 
 export const AddProdOrder = createAsyncThunk("sellpage/addProd", addProdOrderThunk)
@@ -23,6 +24,9 @@ export const sellPage = createSlice({
         },
         setSingleOrderInfo: (state, { payload }) => {
             state.singleOrder[payload.key] = payload.value;
+        },
+        setScaleData: (state, { payload }) => {
+            state.scaleData = payload
         }
     },
     extraReducers: (builder) => {
@@ -38,5 +42,5 @@ export const sellPage = createSlice({
     },
 });
 
-export const { setTransactionInfo, setSingleOrderInfo } = sellPage.actions;
+export const { setTransactionInfo, setSingleOrderInfo, setScaleData } = sellPage.actions;
 export default sellPage.reducer;

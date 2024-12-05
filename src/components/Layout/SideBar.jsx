@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -23,6 +23,7 @@ import { center } from "../../styles/theme";
 import { checkAccess } from "../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut, resetLoginInfo } from "../../Redux/Slices/Auth/auth";
+import { setScaleData } from "../../Redux/Slices/Actions/SellPage/sellPage";
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -117,6 +118,48 @@ export default function SideBar() {
         navigate(reactRouts.auth.signIn);
 
     };
+
+
+    const messageSet = useRef(new Set()); // استفاده از Set برای جلوگیری از تکرار
+
+    useEffect(() => {
+        // ایجاد اتصال وب‌سوکت
+        const socket = new WebSocket("ws://localhost:8080");
+
+        // وقتی اتصال برقرار شد
+        socket.onopen = () => {
+            console.log("WebSocket connected to server!");
+
+        };
+
+        // دریافت پیام‌ها
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const uniqueKey = JSON.stringify(data); // تعریف یک کلید یکتا برای هر پیام
+
+            if (!messageSet.current.has(uniqueKey)) {
+                messageSet.current.add(uniqueKey); // افزودن پیام جدید به Set
+                dispatch(setScaleData(data)); // ارسال فقط پیام‌های یکتا
+            }
+        };
+
+        // مدیریت خطاها
+        socket.onerror = (error) => {
+            console.error("WebSocket error:", error);
+
+        };
+
+        // وقتی اتصال بسته شد
+        socket.onclose = () => {
+            console.log("WebSocket disconnected from server");
+
+        };
+
+        // پاکسازی هنگام خروج از کامپوننت
+        return () => {
+            socket.close();
+        };
+    }, [dispatch]);
 
     return (
         <Box sx={{ display: "flex" }}>
