@@ -27,6 +27,7 @@ import {
     AddProdOrder,
     setSingleOrderInfo,
 } from "../../../Redux/Slices/Actions/SellPage/sellPage";
+import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -39,7 +40,6 @@ const ExpandMore = styled((props) => {
 }));
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
-
     const [expanded, setExpanded] = useState(false);
     const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
@@ -73,6 +73,8 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const { signleProd } = useSelector((state) => state.product);
     const { singleOrder } = useSelector((state) => state.sellPage);
     const { cardId } = useSelector((state) => state.Order);
+
+    console.log(signleProd);
 
     const OrderSubmitHandler = () => {
         if (cardId != 0) {
@@ -173,7 +175,9 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                             ? singleOrder?.quantity * iteminfo?.price
                                             : item.name == "quantity"
                                                 ? singleOrder?.quantity
-                                                : signleProd != null ? signleProd[item?.name] : ""
+                                                : signleProd != null
+                                                    ? signleProd[item?.name]
+                                                    : ""
                                     }
                                     type={item.type}
                                     placeholder={item.placeholder}
@@ -181,7 +185,13 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     name={item.name}
                                     id={item.name}
                                     height={"55px"}
-                                    disabled={item.name !== "quantity" ? true : false}
+                                    //   disabled={item.name !== "quantity" ? true : false}
+                                    disabled={
+                                        (item.name == "quantity" && signleProd?.is_bulk == true) ||
+                                            (item.name !== "quantity") == true
+                                            ? true
+                                            : false
+                                    }
                                 />
                             </Grid>
                         ))}
