@@ -48,6 +48,8 @@ function MainHeader() {
         justifyContent: "center",
         alignItems: "center",
     };
+
+    const { scaleData } = useSelector(state => state.sellPage)
     return (
         <Box
             sx={{
@@ -238,7 +240,7 @@ function MainHeader() {
                         }}
                     >
 
-                        {toPersian(separateBy3("4000"))}
+                        {toPersian(separateBy3(scaleData?.weight ?? 0))}
                         Kg
                     </Typography>
                     <ScaleOutlinedIcon sx={{ fill: theme => theme.palette.text.primary }} />

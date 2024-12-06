@@ -71,7 +71,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     };
 
     const { signleProd } = useSelector((state) => state.product);
-    const { singleOrder } = useSelector((state) => state.sellPage);
+    const { singleOrder, scaleData } = useSelector((state) => state.sellPage);
     const { cardId } = useSelector((state) => state.Order);
 
     console.log(signleProd);
@@ -174,10 +174,13 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                         item.name == "FinalPrice"
                                             ? singleOrder?.quantity * iteminfo?.price
                                             : item.name == "quantity"
-                                                ? singleOrder?.quantity
+                                                ? !signleProd?.is_bulk
+                                                    ? scaleData?.weight
+                                                    : singleOrder?.quantity
                                                 : signleProd != null
                                                     ? signleProd[item?.name]
                                                     : ""
+
                                     }
                                     type={item.type}
                                     placeholder={item.placeholder}
@@ -185,9 +188,8 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     name={item.name}
                                     id={item.name}
                                     height={"55px"}
-                                    //   disabled={item.name !== "quantity" ? true : false}
                                     disabled={
-                                        (item.name == "quantity" && signleProd?.is_bulk == true) ||
+                                        (item.name == "quantity" && signleProd?.is_bulk !== true) ||
                                             (item.name !== "quantity") == true
                                             ? true
                                             : false
