@@ -49,7 +49,7 @@ function NewFactor() {
 
     const onSearchHandler = (e) => {
         dispatch(setTransactionInfo(e))
-        dispatch(addOrder())
+        // dispatch(addOrder())
     }
     useEffect(() => {
         dispatch(getTransactions("Customer"));

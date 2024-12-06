@@ -4,7 +4,7 @@ import SingleLable from "./SingleLable";
 import { Box, Typography } from "@mui/material";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { OrderList } from "../../Redux/Slices/Actions/Order/Order";
+import { addOrder, OrderList } from "../../Redux/Slices/Actions/Order/Order";
 
 function LableCard() {
     const dispatch = useDispatch();
@@ -28,6 +28,7 @@ function LableCard() {
                 }}
             >
                 <Box
+                    onClick={() => dispatch(addOrder())}
                     sx={{
                         bgcolor: (theme) => theme.palette.text.secondary,
                         borderRadius: "18px",
