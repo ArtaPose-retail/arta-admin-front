@@ -13,11 +13,15 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
         onCardSelect(index);
         dispatch(getCardId(id))
         dispatch(SingleOrderProds(id))
-
         dispatch(getCardInfo(item))
         dispatch(CalcOrders(id));
-
         dispatch(OrderPayList(id))
+        dispatch(
+            setPaymentInfo({
+                key: "order_id",
+                value: id,
+            })
+        )
 
 
     };

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toastHandler } from "../../../../utils/setting";
-import { GetOrderPayemnt, GetPaymentBA } from "./paymentThunk";
+import { addNewPayment, GetOrderPayemnt, GetPaymentBA } from "./paymentThunk";
 
 const initialState = {
     loadingPay: false,
@@ -30,10 +30,17 @@ export const OrderPayList = createAsyncThunk(
     GetOrderPayemnt
 );
 
+export const AddPayment = createAsyncThunk("payment/add", addNewPayment)
+
 export const payment = createSlice({
     name: "payment",
     initialState,
-    reducers: {},
+    reducers: {
+
+        setPaymentInfo: (state, { payload }) => {
+            state.newPayment[payload.key] = payload.value
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(PaymentBAList.pending, (state) => {
             state.loadingPay = true;
@@ -62,9 +69,24 @@ export const payment = createSlice({
             toastHandler("خطا در payemntBAList", "list");
         });
 
+        //?order payment add 
+
+        builder.addCase(AddPayment.pending, (state) => {
+            state.loadingPay = true;
+        });
+        builder.addCase(AddPayment.fulfilled, (state, { payload }) => {
+            state.loadingPay = false;
+            //   state.paymentBA = payload.data.data;
+            console.log(payload.data)
+        });
+        builder.addCase(AddPayment.rejected, (state) => {
+            state.loadingPay = false;
+            toastHandler("خطا در Add Payment", "list");
+        });
+
 
     },
 });
 
-export const { } = payment.actions;
+export const { setPaymentInfo } = payment.actions;
 export default payment.reducer;

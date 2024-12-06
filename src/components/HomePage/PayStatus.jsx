@@ -21,6 +21,10 @@ import {
     resetPromoCode,
     setPromoCode,
 } from "../../Redux/Slices/Actions/Order/Order";
+import {
+    AddPayment,
+    setPaymentInfo,
+} from "../../Redux/Slices/Actions/Payment/payment";
 
 function PayStatus() {
     const [open, setOpen] = React.useState(false);
@@ -35,8 +39,17 @@ function PayStatus() {
     const canBeOpen = open && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
 
-    const { OrderPrice, promoCode } = useSelector((state) => state.Order);
-    const { paymentBA } = useSelector((state) => state.payment);
+    const { OrderPrice, promoCode, cardId } = useSelector((state) => state.Order);
+    const { paymentBA, newPayment } = useSelector((state) => state.payment);
+
+    const EnterAmount = (name, value, type) => {
+        dispatch(
+            setPaymentInfo({
+                key: "amount",
+                value: value,
+            })
+        );
+    };
 
     return (
         <Box
@@ -94,7 +107,13 @@ function PayStatus() {
                 </Box>
             </Box>
             <Box sx={{ ...center, m: 0.5, gap: "10px", width: "65%" }}>
-                <Input hasText={true} type={"number"} />
+                <Input
+                    name={"amount"}
+                    hasText={true}
+                    type={"number"}
+                    onChange={EnterAmount}
+                    value={newPayment.amount}
+                />
             </Box>
             <Box sx={{ ...center, gap: "15px", my: 1 }}>
                 <Box
@@ -147,11 +166,29 @@ function PayStatus() {
                                                     cursor: "pointer",
                                                 }}
                                                 onClick={() => {
-                                                    setPositem("دستگاه پز 1");
+                                                    // dispatch(
+                                                    //     setPaymentInfo({
+                                                    //         key: "bank_account_id",
+                                                    //         value: item?.bank_id,
+                                                    //     })
+                                                    // );
+                                                    // dispatch(
+                                                    //     setPaymentInfo({
+                                                    //         key: "method_id",
+                                                    //         value: 2,
+                                                    //     })
+                                                    // )
+                                                    dispatch(
+                                                        AddPayment({
+                                                            method: 2,
+                                                            orderId: cardId,
+                                                            BAId: item?.bank_id,
+                                                        })
+                                                    );
                                                     setOpen(false);
                                                 }}
                                             >
-                                                {item?.bank_name?.name}
+                                                {item?.bank_name?.name}-{item?.representer_pos_name}
                                             </Typography>
                                         ))}
                                 </Box>
@@ -160,6 +197,22 @@ function PayStatus() {
                     </Popper>
                 </Box>
                 <Button
+                    onClick={
+                        () =>
+                            dispatch(
+                                AddPayment({
+                                    method: 1,
+                                    orderId: cardId,
+                                    BAId: null,
+                                })
+                            )
+                        // dispatch(
+                        //   setPaymentInfo({
+                        //     key: "method_id",
+                        //     value: 1,
+                        //   })
+                        // )
+                    }
                     variant="contained"
                     sx={{
                         bgcolor: (theme) => theme.palette.darkBlue.main,
@@ -172,6 +225,22 @@ function PayStatus() {
                     نقدی
                 </Button>
                 <Button
+                    onClick={
+                        () =>
+                            dispatch(
+                                AddPayment({
+                                    method: 3,
+                                    orderId: cardId,
+                                    BAId: null,
+                                })
+                            )
+                        // dispatch(
+                        //   setPaymentInfo({
+                        //     key: "method_id",
+                        //     value: 3,
+                        //   })
+                        // )
+                    }
                     variant="contained"
                     sx={{
                         bgcolor: (theme) => theme.palette.darkBlue.main,
@@ -245,17 +314,19 @@ function PayStatus() {
                             }}
                             variant="outlined"
                         />
-                        {promoCode && <Box sx={{ ...center }}>
-                            <Close
-                                onClick={() => dispatch(resetPromoCode())}
-                                sx={{ fontSize: "20px", cursor: "pointer" }}
-                            />
+                        {promoCode && (
+                            <Box sx={{ ...center }}>
+                                <Close
+                                    onClick={() => dispatch(resetPromoCode())}
+                                    sx={{ fontSize: "20px", cursor: "pointer" }}
+                                />
 
-                            <Check
-                                onClick={() => dispatch(CalcOrders())}
-                                sx={{ fontSize: "20px" }}
-                            />
-                        </Box>}
+                                <Check
+                                    onClick={() => dispatch(CalcOrders())}
+                                    sx={{ fontSize: "20px" }}
+                                />
+                            </Box>
+                        )}
                     </Box>
                 </Grid>
             </Grid>

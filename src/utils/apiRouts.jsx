@@ -79,7 +79,8 @@ const apiRouts = {
     },
     payment: {
         bankaccount: "/admin/transaction/bankaccount",
-        orderpayList: "/admin/subtransaction/list"
+        orderpayList: "/admin/subtransaction/list",
+        new: "/admin/transaction/new"
     }
 };
 
