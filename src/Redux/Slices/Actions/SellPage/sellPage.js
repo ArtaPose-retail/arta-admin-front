@@ -22,6 +22,9 @@ export const sellPage = createSlice({
         setTransactionInfo: (state, { payload }) => {
             state.transactionInfo = payload;
         },
+        resetTransactionInfo: (state) => {
+            state.transactionInfo = initialState.transactionInfo
+        },
         setSingleOrderInfo: (state, { payload }) => {
             state.singleOrder[payload.key] = payload.value;
         },
@@ -42,5 +45,5 @@ export const sellPage = createSlice({
     },
 });
 
-export const { setTransactionInfo, setSingleOrderInfo, setScaleData } = sellPage.actions;
+export const { setTransactionInfo, setSingleOrderInfo, setScaleData, resetTransactionInfo } = sellPage.actions;
 export default sellPage.reducer;

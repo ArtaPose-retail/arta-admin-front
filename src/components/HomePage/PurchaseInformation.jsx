@@ -9,6 +9,7 @@ import { Close } from "@mui/icons-material";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { CalcOrders, DeleteOrder, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
+import { resetTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
     const dispatch = useDispatch();
@@ -23,9 +24,21 @@ function PurchaseInformation() {
 
 
     const { cardId, cardInfo } = useSelector(state => state.Order)
+    const { transactionInfo } = useSelector(state => state.sellPage)
     const AcceptBtn = () => {
         dispatch(DeleteOrder(cardId))
         setOpenCancelBTn(false)
+    }
+
+    const HandleSaveOrder = () => {
+
+        if (transactionInfo !== null) {
+
+            dispatch(SaveOrder(cardId))
+            dispatch(resetTransactionInfo())
+        } else {
+            toastHandler("یک طرف معامله مشخص کنید", "info")
+        }
     }
 
     return (
@@ -107,7 +120,7 @@ function PurchaseInformation() {
 
             <Box sx={{ ...center, width: "100%", gap: "5px", mt: 1, height: "10%" }}>
                 <Button
-                    onClick={() => dispatch(SaveOrder(cardId))}
+                    onClick={() => HandleSaveOrder()}
                     variant="contained"
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
