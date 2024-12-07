@@ -8,7 +8,7 @@ import CancelBtn from "../UI/CancelBtn";
 import { Close } from "@mui/icons-material";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { CalcOrders } from "../../Redux/Slices/Actions/Order/Order";
+import { CalcOrders, DeleteOrder, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
     const dispatch = useDispatch();
@@ -16,10 +16,17 @@ function PurchaseInformation() {
     const handleOpenCancleModal = () => setOpenCancelBTn(true);
     const handleCloseCancleModal = () => setOpenCancelBTn(false);
 
+
     const handleChange = (id) => {
         setTabs(+id);
     };
 
+
+    const { cardId, cardInfo } = useSelector(state => state.Order)
+    const AcceptBtn = () => {
+        dispatch(DeleteOrder(cardId))
+        setOpenCancelBTn(false)
+    }
 
     return (
         <Box
@@ -100,7 +107,7 @@ function PurchaseInformation() {
 
             <Box sx={{ ...center, width: "100%", gap: "5px", mt: 1, height: "10%" }}>
                 <Button
-                    onClick={() => toastHandler("فاکتور با موفقیت ثبت شد", "success")}
+                    onClick={() => dispatch(SaveOrder(cardId))}
                     variant="contained"
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
@@ -114,7 +121,7 @@ function PurchaseInformation() {
                 >
                     ثبت نهایی
                 </Button>
-                <CancelBtn
+                {/* <CancelBtn
                     BtnTitle={
                         <Typography
                             sx={{
@@ -140,7 +147,7 @@ function PurchaseInformation() {
                     handleOpen={handleOpenCancleModal}
                     title={"انصراف  از درخواست"}
                     question={"آیا از انصراف اطمینان دارید؟"}
-                />
+                /> */}
                 <CancelBtn
                     BtnTitle={
                         <Typography
@@ -166,7 +173,8 @@ function PurchaseInformation() {
                     handleClose={handleCloseCancleModal}
                     handleOpen={handleOpenCancleModal}
                     title={"حذف درخواست"}
-                    question={"آیا از حذف فاکتور شماره 12345 اطمینان دارید؟"}
+                    question={`آیا از حذف فاکتور شماره ${cardInfo?.orderpublicid} اطمینان دارید؟`}
+                    AcceptBtn={AcceptBtn}
                 />
             </Box>
         </Box>

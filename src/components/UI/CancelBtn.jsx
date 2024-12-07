@@ -25,7 +25,8 @@ export default function CancelBtn({
     handleOpen,
     handleClose,
     BtnTitle,
-    width
+    width,
+    AcceptBtn
 }) {
 
 
@@ -92,10 +93,7 @@ export default function CancelBtn({
                                 خیر
                             </Button>
                             <Button
-                                onClick={() => {
-                                    handleClose();
-                                    toastHandler("درخواست شما لغو شد", "info");
-                                }}
+                                onClick={() => AcceptBtn()}
                                 variant="contained"
                                 sx={{
                                     bgcolor: (theme) => theme.palette.green.main,

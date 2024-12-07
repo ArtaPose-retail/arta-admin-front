@@ -21,15 +21,11 @@ export const addNewPayment = async ({ method, orderId, BAId }, ThunkApi) => {
 
         amount: amount,
         bank_account_id: BAId,
-        extra: {},
         is_order_specific: true,
         method_id: method,
         order_id: orderId,
-        public_id: "",
         sub_transaction_type: "ADVANCE_SETTLEMENT",
         submitter_user_id: user_id,
-        transaction_id: 0,
-        transaction_reason_id: 0,
         transaction_type: "INCOMING"
     })
 }

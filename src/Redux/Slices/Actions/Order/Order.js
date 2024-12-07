@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
     addnewOrder,
     CalculateOrder,
+    FinilizeOrder,
     GetOrderList,
     GetSingleOrderProd,
+    RemoveOrder,
 } from "./OrderThunk";
 import { toastHandler } from "../../../../utils/setting";
 
@@ -29,6 +31,9 @@ export const SingleOrderProds = createAsyncThunk(
 );
 export const CalcOrders = createAsyncThunk("order/clc", CalculateOrder);
 
+export const DeleteOrder = createAsyncThunk("order/delete", RemoveOrder)
+export const SaveOrder = createAsyncThunk("order/finial", FinilizeOrder)
+
 export const Order = createSlice({
     name: "Order",
     initialState,
@@ -49,7 +54,7 @@ export const Order = createSlice({
     },
 
     extraReducers: (builder) => {
-        //?Create
+        //?list
         builder.addCase(OrderList.pending, (state) => {
             state.loading = true;
         });
@@ -61,7 +66,7 @@ export const Order = createSlice({
             (state.loading = false),
                 toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
         });
-        //?add
+        //!add
         builder.addCase(addOrder.pending, (state) => {
             state.loading = true;
         });
@@ -84,6 +89,21 @@ export const Order = createSlice({
             state.OrderProductList = payload.data.data;
         });
         builder.addCase(SingleOrderProds.rejected, (state) => {
+            (state.loading = false),
+                toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
+        });
+        //!delete
+        builder.addCase(DeleteOrder.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(DeleteOrder.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+            // state.OrderProductList = payload.data.data;
+            toastHandler("حذف شد", "info");
+
+        });
+        builder.addCase(DeleteOrder.rejected, (state) => {
             (state.loading = false),
                 toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
         });
@@ -110,6 +130,22 @@ export const Order = createSlice({
             } else {
                 console.error('No status code found in message');
             }
+        });
+        //!finilize order
+        builder.addCase(SaveOrder.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(SaveOrder.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = false;
+            console.log(payload.data.data)
+            toastHandler("فاکتور با موفقیت ثبت شد", "success")
+        });
+        builder.addCase(SaveOrder.rejected, (state, action) => {
+            state.loading = false;
+            console.log(action)
+
+
         });
     },
 });

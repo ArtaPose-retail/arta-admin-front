@@ -14,7 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
+import { persianDate, persianTime, separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import moment from "jalali-moment";
 import { useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
@@ -55,36 +55,33 @@ function Row(props) {
                     >
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
-                    {row.title}
+                    {row?.method_id == 1 ? "نقدی" : row?.method_id == 2 ? "پوز" : "تخفیف"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row.TransactionNum)}
+                    {toPersian(row?.public_id ?? 0)}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(separateBy3(row.amount))}
+                    {toPersian(separateBy3(row?.amount ?? 0))}ریال
                 </TableCell>
 
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row.time)}
+                    {toPersian(persianTime(row?.updated_at ?? 0))}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(moment(row.date, "YYYY-MM-DD")
-                        .locale("fa")
-                        .format("YYYY/MM/D"))}
+                    {toPersian(persianDate(row?.updated_at ?? 0))}
                 </TableCell>
-                {/* <TableCell sx={{ color: theme => theme.typography.color }} align="right">{row.protein}</TableCell> */}
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -99,7 +96,7 @@ function Row(props) {
                                 <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
                                     عملیات:
                                 </Typography>
-                                <EditIcon fontSize="small" />
+                                {/* <EditIcon fontSize="small" /> */}
                                 <DeleteOutlineIcon
                                     fontSize="small"
                                     onClick={() => deleteBtn()}
@@ -114,12 +111,6 @@ function Row(props) {
     );
 }
 
-const rows = [
-    createData("تقدی", "34235325", 400000, "13:13", new Date()),
-    createData("پوز", "34235325", 400000, "13:13", new Date()),
-    createData("تخفیف", "34235325", 2000, "13:13", new Date()),
-
-];
 
 export default function CollapsibleTable() {
 

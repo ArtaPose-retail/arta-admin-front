@@ -29,3 +29,18 @@ export const CalculateOrder = async (order_id, ThunkApi) => {
         promocode: promoCode
     })
 }
+
+
+
+export const RemoveOrder = async (order_id) => {
+    return await AXIOS.delete(`${apiRouts.order.list}${order_id}`)
+}
+
+export const FinilizeOrder = async (order_id, ThunkApi) => {
+    const state = ThunkApi.getState()
+    const { promoCode } = state.Order
+    return await AXIOS.post(apiRouts.factor.checkout.finilize(order_id), {
+        allow_debt: true,
+        promo_code: promoCode
+    })
+}

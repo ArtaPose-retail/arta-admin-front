@@ -13,7 +13,7 @@ function SingleProduct({ data }) {
     const dispatch = useDispatch()
     const showDialoghandler = () => {
 
-        console.log(data.prod_id)
+
         setOpen(true);
         dispatch(singleProd(data.prod_id))
         dispatch(setSingleOrderInfo({
