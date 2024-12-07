@@ -8,9 +8,9 @@ import { OrderPayList } from "../../Redux/Slices/Actions/Payment/payment";
 
 function SingleLable({ item, index, selectedIndex, onCardSelect }) {
     const dispatch = useDispatch()
-    const isSelected = index === selectedIndex;
+    const isSelected = item.id === selectedIndex;
     const handleCardSelect = (id) => {
-        onCardSelect(index);
+        onCardSelect(id);
         dispatch(getCardId(id))
         dispatch(SingleOrderProds(id))
         dispatch(getCardInfo(item))
