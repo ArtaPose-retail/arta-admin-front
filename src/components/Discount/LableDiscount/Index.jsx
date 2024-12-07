@@ -3,6 +3,7 @@ import React from "react";
 import FormSection from "./FormSection";
 import TableSection from "./TableSection";
 
+
 export const LableDiscount = () => {
     return (
         <Box sx={{ height: "100%", width: "100%", overflow: "scroll" }}>
@@ -29,6 +30,7 @@ export const LableDiscount = () => {
                     }}
                 >
                     <TableSection />
+
                 </Grid>
             </Grid>
         </Box>

@@ -1,9 +1,9 @@
+
 import React, { forwardRef } from "react";
-import { Box, Typography, Grid, Paper, Divider } from "@mui/material";
+import { Box, Typography, Grid, Divider } from "@mui/material";
 import { center } from "../../styles/theme";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import { BakeryDatamatrix } from "@barcode-bakery/barcode-react/datamatrix";
-
 
 const PromoCodePrint = forwardRef((props, ref) => {
     const { data } = props;
@@ -13,15 +13,32 @@ const PromoCodePrint = forwardRef((props, ref) => {
     return (
         <Box
             ref={ref}
-            sx={{ padding: 2, width: "50%", borderRadius: "10px" }}
+            sx={{
+                padding: 1, // کاهش فاصله داخلی
+                width: "45mm", // عرض ثابت
+                height: "15mm", // ارتفاع ثابت
+                borderRadius: "5px", // کاهش شعاع گوشه‌ها
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+            }}
         >
             {temp.map((item, index) => (
-                <>
-                    <Grid container spacing={2} alignItems="center">
+                <Box key={index} sx={{ height: "100%" }}>
+                    <Grid container spacing={1} alignItems="center">
                         {/* QR Code */}
                         <Grid item xs={5}>
-                            <Box sx={{ width: "100%", height: "auto", ...center }}>
-                                <BakeryDatamatrix text={`${item?.code}`} scale={10} />,
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: "100%",
+                                    ...center,
+                                }}
+                            >
+                                <BakeryDatamatrix
+                                    text={`${item?.code}`}
+                                    scale={5} // کوچک‌تر کردن QR Code
+                                />
                             </Box>
                         </Grid>
 
@@ -41,11 +58,10 @@ const PromoCodePrint = forwardRef((props, ref) => {
                                     sx={{
                                         width: "100%",
                                         border: "1px solid black",
-                                        padding: "5px",
-                                        borderRadius: "5px",
-                                        marginTop: "10px",
+                                        padding: "2px", // کاهش فاصله داخلی
+                                        borderRadius: "3px", // کاهش شعاع گوشه‌ها
                                         textAlign: "center",
-                                        fontSize: "bold",
+                                        fontSize: "8px", // کاهش اندازه فونت
                                     }}
                                 >
                                     {toPersian(item?.code ?? 0)}
@@ -54,23 +70,24 @@ const PromoCodePrint = forwardRef((props, ref) => {
                                 <Box
                                     sx={{
                                         ...center,
-                                        height: "100%",
+                                        flexDirection: "column",
                                         width: "100%",
-                                        my: 1,
-                                        gap: "5px",
+                                        my: 0.5,
+                                        gap: "2px", // کاهش فاصله بین آیتم‌ها
                                     }}
                                 >
                                     <Typography
                                         textAlign="center"
                                         sx={{
                                             border: "1px solid black",
-                                            padding: "5px",
-                                            borderRadius: "5px",
-                                            width: "50%",
-                                            height: "100%",
+                                            padding: "2px", // کاهش فاصله داخلی
+                                            borderRadius: "3px",
+                                            width: "100%",
+                                            fontSize: "7px", // کاهش اندازه فونت
                                         }}
                                     >
-                                        مدت استفاده تا {persianDate(item?.end_time ?? new Date())}
+                                        مدت استفاده تا{" "}
+                                        {persianDate(item?.end_time ?? new Date())}
                                     </Typography>
 
                                     <Typography
@@ -78,35 +95,38 @@ const PromoCodePrint = forwardRef((props, ref) => {
                                         sx={{
                                             backgroundColor: "black",
                                             color: "white",
-                                            padding: "5px",
-                                            borderRadius: "5px",
-                                            width: "50%",
-                                            height: "100%",
+                                            padding: "2px",
+                                            borderRadius: "3px",
+                                            width: "100%",
+                                            fontSize: "7px", // کاهش اندازه فونت
                                         }}
                                     >
                                         {toPersian(item?.amount ?? 0)}{" "}
-                                        {item?.type != 0 ? "هزار تومان" : "درصد"}
+                                        {item?.type !== 0 ? "هزار تومان" : "درصد"}
                                     </Typography>
                                 </Box>
 
                                 {/* Purchase Condition */}
                                 <Typography
-                                    variant="body1"
+                                    variant="body2"
                                     textAlign="center"
                                     sx={{
                                         border: "1px solid black",
-                                        padding: "5px",
-                                        borderRadius: "5px",
+                                        padding: "2px",
+                                        borderRadius: "3px",
+                                        fontSize: "7px", // کاهش اندازه فونت
+                                        width: '100%'
                                     }}
                                 >
-                                    از خرید بالای {toPersian(separateBy3(item?.from_amount ?? 0))}{" "}
+                                    از خرید بالای{" "}
+                                    {toPersian(separateBy3(item?.from_amount ?? 0))}{" "}
                                     هزار تومان
                                 </Typography>
                             </Box>
                         </Grid>
                     </Grid>
-                    <Divider sx={{ my: 2 }} />
-                </>
+                    {index !== temp.length - 1 && <Divider sx={{ my: 0.5 }} />}
+                </Box>
             ))}
         </Box>
     );
