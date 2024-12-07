@@ -5,12 +5,14 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../../components/UI/Title";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountTable from "../../components/Accounts/AccountTable";
-
+import { center } from "../../styles/theme"
+import { useDispatch, useSelector } from "react-redux";
+import { ProfileList } from "../../Redux/Slices/Accounting/Accounts/accounts";
 function Accounts() {
     const [currentItem, setCurrentItem] = useState(0);
 
@@ -18,12 +20,15 @@ function Accounts() {
         setCurrentItem(+curentItem);
     };
 
+    const dispatch = useDispatch()
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    useEffect(() => {
+        dispatch(ProfileList())
+    }, [])
+
+    const { accountList } = useSelector(state => state.accounts)
+
+
     return (
         <Box
             sx={{
@@ -228,7 +233,7 @@ function Accounts() {
                 </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
-                <AccountTable />
+                <AccountTable data={accountList} />
             </Box>
         </Box>
     );

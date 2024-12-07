@@ -30,7 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export default function AccountTable() {
+export default function AccountTable({ data }) {
     const navigate = useNavigate();
     return (
         <TableContainer sx={{ maxHeight: 530 }}>
@@ -94,7 +94,7 @@ export default function AccountTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {accountstable.map((item, index) => (
+                    {data?.map((item, index) => (
                         <StyledTableRow key={index}>
                             <StyledTableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
@@ -122,19 +122,19 @@ export default function AccountTable() {
                                 }}
                                 align="center"
                             >
-                                {toPersian(item.customerNumber)}
+                                {toPersian(item?.ID ?? 0)}
                             </StyledTableCell>
                             <StyledTableCell
                                 sx={{ color: (theme) => theme.typography.color }}
                                 align="center"
                             >
-                                {item.customerName}
+                                {item?.Fname}-{item?.Lname}
                             </StyledTableCell>
                             <StyledTableCell
                                 sx={{ color: (theme) => theme.palette.darkBlue.main }}
                                 align="center"
                             >
-                                {toPersian(item.mobile)}
+                                {toPersian(item?.phone1 ?? 0)}
                             </StyledTableCell>
                             <StyledTableCell
                                 sx={{
@@ -143,13 +143,13 @@ export default function AccountTable() {
                                 }}
                                 align="center"
                             >
-                                {toPersian(separateBy3(item.remaining))}ریال
+                                {toPersian(separateBy3(item?.Total ?? 0))}ریال
                             </StyledTableCell>
                             <StyledTableCell
                                 sx={{ color: (theme) => theme.typography.color }}
                                 align="center"
                             >
-                                {item.remainingTitle}
+                                {item?.Status}
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <Box

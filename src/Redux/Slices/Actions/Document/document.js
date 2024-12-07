@@ -35,6 +35,6 @@ export const document = createSlice({
     },
 });
 
-export const { setNewLableinfo, resetForm } = document.actions;
+export const { } = document.actions;
 
 export default document.reducer;
