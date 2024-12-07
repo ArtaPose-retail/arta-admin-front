@@ -55,6 +55,10 @@ const apiRouts = {
             add: "/admin/bankaccount/new",
             list: "/admin/bankaccount/",
         },
+        otp: {
+            req: "/user/bankotprequest",
+            verify: "/user/bankotpverify"
+        }
     },
     factor: {
         checkin: {

@@ -66,3 +66,15 @@ export const EditBank = async (id, ThunkApi) => {
         has_otp: checkBox.has_otp,
     });
 };
+
+export const OTPreq = async () => {
+
+    return await AXIOS.post(apiRouts.bank.otp.req)
+}
+export const OTPVerify = async (_, ThunkApi) => {
+    const state = ThunkApi.getState();
+    const { otpCode } = state.bank
+    return await AXIOS.post(apiRouts.bank.otp.verify, {
+        otp: otpCode
+    })
+}

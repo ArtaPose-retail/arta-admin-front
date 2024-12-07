@@ -2,6 +2,8 @@ import React from "react";
 import { useTimer } from "react-timer-hook";
 import { Box, Typography } from "@mui/material";
 import { Button } from "@mui/material";
+import { OTPRequest } from "../../Redux/Slices/Accounting/Bank/Bank";
+import { useDispatch } from "react-redux";
 
 
 
@@ -16,6 +18,8 @@ function Timer({ expiryTimestamp }) {
         onExpire: () => console.warn("onExpire called"),
     });
 
+
+    const dispatch = useDispatch()
 
 
     return (
@@ -38,7 +42,7 @@ function Timer({ expiryTimestamp }) {
                         const time = new Date();
                         time.setSeconds(time.getSeconds() + 120);
                         restart(time);
-
+                        dispatch(OTPRequest())
                     }}
                     fullWidth
                     sx={{

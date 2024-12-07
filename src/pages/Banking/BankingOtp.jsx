@@ -1,5 +1,5 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import logoNm from "../../Assets/images/logoname.png";
 import logo from "../../Assets/images/logo.png";
 import Timer from "../../components/UI/Timer";
@@ -8,21 +8,25 @@ import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import Input from "../../components/UI/Input";
 import Input2 from "../../components/UI/Input2";
+import { center } from "../../styles/theme";
+import { useDispatch } from "react-redux";
+import { OTPRequest, VerifyOTP } from "../../Redux/Slices/Accounting/Bank/Bank";
 
-const center = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-};
+
 function BankingOtp() {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch()
     const time = new Date();
     time.setSeconds(time.getSeconds() + 120);
 
     const bankingOtpHandler = () => {
-        navigate(reactRouts.banking.main);
+        dispatch(VerifyOTP())
+
     };
+
+    useEffect(() => {
+        dispatch(OTPRequest())
+    }, [])
     return (
         <Box sx={{ ...center, height: "80vh", gap: "15px" }}>
             <Paper
@@ -50,12 +54,9 @@ function BankingOtp() {
                     <Input
                         type={"number"}
                         placeholder={"پیامک ارسال شده به شماره همراه خود را وارد کنید"}
-                    // newstyle={{
-                    //     width: "65% ",
-                    //     border: "1px solid gray ",
-                    // }}
+
                     />
-                    {/* <Input2 /> */}
+
                     <Timer expiryTimestamp={time} />
                     <Button
                         variant="contained"

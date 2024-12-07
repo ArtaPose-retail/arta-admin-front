@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addNewAccount, BankDelete, BankList, BankSingle, EditBank } from "./BankThunk";
+import { addNewAccount, BankDelete, BankList, BankSingle, EditBank, OTPreq, OTPVerify } from "./BankThunk";
 import { toastHandler } from "../../../../utils/setting";
+import reactRouts from "../../../../utils/reactRouts";
 
 const initialState = {
     loading: false,
@@ -34,13 +35,16 @@ const initialState = {
         has_internet_bank: false,
         has_otp: false,
     },
+    otpCode: 0
 };
 
 export const AddAccount = createAsyncThunk("bank/add", addNewAccount);
 export const AccountList = createAsyncThunk("bank/list", BankList);
 export const DeleteAccount = createAsyncThunk("bank/delete", BankDelete);
-export const SingleAccount = createAsyncThunk("bannk/single", BankSingle)
-export const EditAccount = createAsyncThunk("bannk/edit", EditBank)
+export const SingleAccount = createAsyncThunk("bank/single", BankSingle)
+export const EditAccount = createAsyncThunk("bank/edit", EditBank)
+export const OTPRequest = createAsyncThunk("bank/otp", OTPreq)
+export const VerifyOTP = createAsyncThunk("bank/otpVerify", OTPVerify)
 
 export const bank = createSlice({
     name: "bank",
@@ -60,6 +64,10 @@ export const bank = createSlice({
             (state.newBackAccount = initialState.newBackAccount),
                 (state.checkBox = initialState.checkBox);
         },
+
+        setOtpCode: (state, { payload }) => {
+            state.otpCode = payload
+        }
     },
     extraReducers: (builder) => {
         //?create
@@ -126,8 +134,34 @@ export const bank = createSlice({
             toastHandler("عملیات با موفقیت انجام نشد", "info");
 
         });
+        //? otp request
+        builder.addCase(OTPRequest.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(OTPRequest.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            toastHandler("otp با موفقیت ارسال شد", "info");
+        });
+        builder.addCase(OTPRequest.rejected, (state) => {
+            state.loading = false;
+            toastHandler("عملیات با موفقیت انجام نشد", "error");
+
+        });
+        //? otp verify
+        builder.addCase(VerifyOTP.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(VerifyOTP.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            window.location.pathname = reactRouts.banking.main
+        });
+        builder.addCase(VerifyOTP.rejected, (state) => {
+            state.loading = false;
+            toastHandler("عملیات با موفقیت انجام نشد", "error");
+
+        });
     },
 });
 
-export const { setFormInfo, checkBoxhandler, resetForm } = bank.actions;
+export const { setFormInfo, checkBoxhandler, resetForm, setOtpCode } = bank.actions;
 export default bank.reducer;
