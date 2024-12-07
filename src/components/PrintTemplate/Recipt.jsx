@@ -8,7 +8,7 @@ import {
 import StoreLogo from "../../Assets/images/StoreLogo.png"
 import { Instagram, Phone, Web } from "@mui/icons-material";
 import { center } from "../../styles/theme";
-import { persianDate, separateBy3, toPersian } from "../../utils/setting";
+import { persianDate, persianTime, separateBy3, toPersian } from "../../utils/setting";
 import { useSelector } from "react-redux";
 
 
@@ -55,7 +55,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                         </Typography>
                         <Divider orientation="vertical" flexItem />
                         <Typography sx={{ fontSize: "10px" }} >
-                            زمان: {persianDate(userInfo?.updated_at)}
+                            زمان: {persianDate(userInfo?.updated_at)}- {persianTime(userInfo?.create_at)}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
 
@@ -145,7 +145,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                 </Typography>
                 <Divider sx={{ my: 1 }} />
                 <Typography variant="body2" textAlign="center">
-                    آدرس: مازندران - بابل - روبروی پمپ بنزین نوشیروانی - بسیج 18
+                    آدرس: مازندران - بابل - روبروی پمپ بنزین پارک نوشیروانی - بسیج 18
                 </Typography>
                 <Typography variant="caption" textAlign="center" display="block">
                     Artapos | Powered by arta-tech.ir
