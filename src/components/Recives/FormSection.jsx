@@ -12,7 +12,6 @@ import {
 import { useState } from "react";
 import Title from "../UI/Title";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import TransactionDialog from "../HomePage/Dialogs/defineFactorSteps/TransactionDialog";
 import { separateBy3, toPersian } from "../../utils/setting";
 import ReciveForDl from "../Payment/ReciveForDl";
 import CheckRegister from "./CheckRegister";
