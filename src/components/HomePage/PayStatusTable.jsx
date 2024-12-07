@@ -125,7 +125,7 @@ export default function CollapsibleTable() {
                 overflowX: "hidden",
             }}
         >
-            {paymentOrderList.length > 0 ? <TableContainer>
+            {paymentOrderList?.length > 0 ? <TableContainer>
                 <Table aria-label="collapsible table">
                     <TableHead>
                         <TableRow>

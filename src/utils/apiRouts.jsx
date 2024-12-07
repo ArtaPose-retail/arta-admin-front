@@ -86,6 +86,9 @@ const apiRouts = {
         bankaccount: "/admin/transaction/bankaccount",
         orderpayList: "/admin/subtransaction/list",
         new: "/admin/transaction/new"
+    },
+    document: {
+        list: "/admin/transaction/list?limit=1&offset=0"
     }
 };
 

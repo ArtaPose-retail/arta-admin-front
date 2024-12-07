@@ -16,6 +16,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
     persianDate,
     persianTime,
+    separateBy3,
     toPersian,
     toastHandler,
 } from "../../utils/setting";
@@ -97,32 +98,32 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row?.DocCode)}
+                    {toPersian(row?.trasaction_id ?? 0)}
                 </TableCell>
 
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.title}
+                    {row?.tramsaction_reason}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.transactionName}
+                    {row?.first_name}-{row?.last_name}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row?.phone)}
+                    {toPersian(row?.phone ?? 0)}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {persianDate()} | {persianTime()}
+                    {persianDate(row?.created_at)} | {persianTime(row?.created_at)}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -131,7 +132,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(row?.fee)}
+                    {toPersian(separateBy3(row?.amount ?? 0))}
                     ریال
                 </TableCell>
                 <TableCell
@@ -159,7 +160,7 @@ function Row(props) {
                         >
                             ارسال پیامک
                         </Button>
-                        <Box
+                        {/* <Box
                             sx={{
                                 ...center,
                                 bgcolor: "#3A5DF0",
@@ -229,7 +230,7 @@ function Row(props) {
                                     </Fade>
                                 )}
                             </Popper>
-                        </Box>
+                        </Box> */}
 
                         <Box sx={{ ...center, flexDirection: "column" }}>
                             <Link to={reactRouts.sellpage}>
@@ -245,13 +246,13 @@ function Row(props) {
                             />
                         </Box>
 
-                        <IconButton
+                        {/* <IconButton
                             aria-label="expand row"
                             size="small"
                             onClick={() => setOpenCollaps(!openCollaps)}
                         >
                             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                        </IconButton>
+                        </IconButton> */}
                     </Box>
                 </TableCell>
             </TableRow>
@@ -297,7 +298,7 @@ function Row(props) {
                                         fontWeight: 400,
                                     }}
                                 >
-                                    {toPersian(row?.Details?.checks)}
+                                    {/* {toPersian(row?.Details?.checks)} */}
                                 </Typography>
                             </Box>
                             <Divider flexItem orientation="vertical" />
@@ -330,46 +331,8 @@ function Row(props) {
     );
 }
 
-const rows = [
-    createData(
-        "98326498",
-        "فروش",
-        "امیرحسین فهمیده",
-        "09138090933",
-        new Date(),
-        "300000",
-        "بدهکار"
-    ),
-    createData(
-        "98326498",
-        "پرداخت",
-        "امیرحسین فهمیده",
-        "09138090933",
-        new Date(),
-        "300000",
-        "بدهکار"
-    ),
-    createData(
-        "98326498",
-        "خرید",
-        "امیرحسین فهمیده",
-        "09138090933",
-        new Date(),
-        "300000",
-        "تسویه شده"
-    ),
-    createData(
-        "98326498",
-        "خرید",
-        "امیرحسین فهمیده",
-        "09138090933",
-        new Date(),
-        "300000",
-        "بدهکار"
-    ),
-];
 
-export default function DocumentsTable() {
+export default function DocumentsTable({ data }) {
     return (
         <Box
             sx={{
@@ -447,7 +410,7 @@ export default function DocumentsTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows?.map((row, index) => (
+                        {data && data?.map((row, index) => (
                             <Row key={index} row={row} index={index} />
                         ))}
                     </TableBody>
