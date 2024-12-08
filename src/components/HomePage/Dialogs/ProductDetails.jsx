@@ -84,6 +84,31 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         }
     };
 
+    const calculateValue = (
+        item,
+        singleOrder,
+        iteminfo,
+        singleProd,
+        scaleData
+    ) => {
+        if (item.name === "FinalPrice") {
+            return singleOrder?.quantity * iteminfo?.price;
+        } else if (item.name === "quantity") {
+            !singleProd?.is_bulk
+                ? dispatch(
+                    setSingleOrderInfo({
+                        key: "quantity",
+                        value: +scaleData?.weight,
+                    })
+                )
+                : singleOrder?.quantity;
+            return !singleProd?.is_bulk ? scaleData?.weight : singleOrder?.quantity;
+        } else if (singleProd != null) {
+            return singleProd[item?.name];
+        } else {
+            return "";
+        }
+    };
     return (
         <div>
             <Dialog
@@ -170,18 +195,25 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 </InputLabel>
 
                                 <Input
-                                    value={
-                                        item.name == "FinalPrice"
-                                            ? singleOrder?.quantity * iteminfo?.price
-                                            : item.name == "quantity"
-                                                ? !signleProd?.is_bulk
-                                                    ? scaleData?.weight
-                                                    : singleOrder?.quantity
-                                                : signleProd != null
-                                                    ? signleProd[item?.name]
-                                                    : ""
+                                    // value={
+                                    //     item.name == "FinalPrice"
+                                    //         ? singleOrder?.quantity * iteminfo?.price
+                                    //         : item.name == "quantity"
+                                    //             ? !signleProd?.is_bulk
+                                    //                 ? scaleData?.weight
+                                    //                 : singleOrder?.quantity
+                                    //             : signleProd != null
+                                    //                 ? signleProd[item?.name]
+                                    //                 : ""
 
-                                    }
+                                    // }
+                                    value={calculateValue(
+                                        item,
+                                        singleOrder,
+                                        iteminfo,
+                                        singleProd,
+                                        scaleData
+                                    )}
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     onChange={onChangeHandler}
