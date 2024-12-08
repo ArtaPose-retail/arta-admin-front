@@ -19,7 +19,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
     const { loginInfo } = useSelector(state => state.auth)
 
     return (
-        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", }}>
+        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 1 }}>
             {/* Header */}
             <Box sx={{ border: "1px solid black ", borderRadius: "15px" }}>
 
