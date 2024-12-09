@@ -4,6 +4,7 @@ import { addProdOrderThunk } from "./SellpageThunk";
 const initialState = {
     loading: false,
     update: false,
+    sellUpdate: false,
     transactionInfo: null,
     singleOrder: {
         product_id: 0,
@@ -35,12 +36,15 @@ export const sellPage = createSlice({
     extraReducers: (builder) => {
         builder.addCase(AddProdOrder.pending, (state) => {
             state.loading = true
+            state.sellUpdate = true
         })
         builder.addCase(AddProdOrder.fulfilled, (state) => {
             state.loading = false
+            state.sellUpdate = false
         })
         builder.addCase(AddProdOrder.rejected, (state) => {
             state.loading = false
+            state.sellUpdate = false
         })
     },
 });

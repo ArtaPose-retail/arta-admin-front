@@ -40,7 +40,6 @@ const ExpandMore = styled((props) => {
 }));
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
-    console.log(status, handlerCloseDialog, iteminfo)
     const [expanded, setExpanded] = useState(false);
     const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
@@ -82,6 +81,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const OrderSubmitHandler = () => {
         if (cardId != 0) {
             dispatch(AddProdOrder(cardId));
+            handlerCloseDialog()
         } else {
             toastHandler("ابتدا یک طرف معامله مشخص کنید", "info");
         }

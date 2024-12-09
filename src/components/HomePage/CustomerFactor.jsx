@@ -7,7 +7,7 @@ import {
     Radio,
     Typography,
 } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import CustomerFactorTable from "./CustomerFactorTable";
 import { center } from "../../styles/theme";
@@ -15,14 +15,24 @@ import { center } from "../../styles/theme";
 import ReactToPrint from "react-to-print";
 import { Print } from "@mui/icons-material";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 
 function CustomerFactor() {
     const ReciptRef = useRef();
-
-    const { OrderPrice, cardInfo, OrderProductList } = useSelector(
+    const dispatch = useDispatch()
+    const { OrderPrice, cardInfo, OrderProductList, cardId } = useSelector(
         (state) => state.Order
     );
+
+    const { sellUpdate } = useSelector(state => state.sellPage)
+
+    useEffect(() => {
+        if (cardId != 0) {
+
+            dispatch(SingleOrderProds(cardId))
+        }
+    }, [sellUpdate])
 
     return (
         <Box sx={{ width: "100%", height: "100%" }}>
