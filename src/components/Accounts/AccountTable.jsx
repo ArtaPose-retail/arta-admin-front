@@ -134,7 +134,7 @@ export default function AccountTable({ data }) {
                                 sx={{ color: (theme) => theme.palette.darkBlue.main }}
                                 align="center"
                             >
-                                {toPersian(item?.phone1 ?? 0)}
+                                {toPersian(item?.Phone1 ?? 0)}
                             </StyledTableCell>
                             <StyledTableCell
                                 sx={{

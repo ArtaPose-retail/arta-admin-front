@@ -165,7 +165,7 @@ export default function CustomerFactorTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {OrderProductList.length > 0 ? (
+                        {OrderProductList?.length > 0 ? (
                             OrderProductList?.map((row, index) => (
                                 <Row key={index} row={row} />
                             ))
