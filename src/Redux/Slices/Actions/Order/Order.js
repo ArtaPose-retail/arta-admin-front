@@ -138,7 +138,10 @@ export const Order = createSlice({
         builder.addCase(SaveOrder.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = false;
-            console.log(payload.data.data)
+            state.OrderPrice = initialState.OrderPrice;
+            state.cardId = initialState.cardId;
+            state.cardInfo = initialState.cardInfo;
+            state.OrderProductList = initialState.OrderProductList;
             toastHandler("فاکتور با موفقیت ثبت شد", "success")
         });
         builder.addCase(SaveOrder.rejected, (state, action) => {
