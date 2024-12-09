@@ -91,7 +91,7 @@ export const Order = createSlice({
         });
         builder.addCase(SingleOrderProds.fulfilled, (state, { payload }) => {
             state.loading = false;
-            state.update = true;
+            state.update = false;
             state.OrderProductList = payload.data.data;
         });
         builder.addCase(SingleOrderProds.rejected, (state) => {

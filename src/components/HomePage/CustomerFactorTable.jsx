@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -18,13 +18,13 @@ import ProductDetails from "./Dialogs/ProductDetails";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
-import { DeleteOrderItem } from "../../Redux/Slices/Actions/Order/Order";
+import { DeleteOrderItem, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 
 function Row(props) {
     const { row, deleteProd } = props;
-    const [openCollaps, setOpenCollaps] = React.useState(false);
+    const [openCollaps, setOpenCollaps] = useState(false);
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const showDialoghandler = () => {
         setOpen(true);
@@ -36,7 +36,7 @@ function Row(props) {
 
 
     return (
-        <React.Fragment>
+        <Fragment>
             <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
                 <TableCell
                     align="center"
@@ -117,16 +117,20 @@ function Row(props) {
                 status={open}
                 handlerCloseDialog={handlerCloseDialog}
             />
-        </React.Fragment>
+        </Fragment>
     );
 }
 
 export default function CustomerFactorTable() {
-    const { OrderProductList, cardId } = useSelector((state) => state.Order);
+    const { OrderProductList, cardId, update } = useSelector((state) => state.Order);
     const dispatch = useDispatch();
     const deleteProd = (prodId) => {
         dispatch(DeleteOrderItem({ order_id: cardId, op_id: prodId }))
     }
+
+    useEffect(() => {
+        dispatch(SingleOrderProds(cardId))
+    }, [update])
     return (
         <Box
             sx={{
