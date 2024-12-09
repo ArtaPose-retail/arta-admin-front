@@ -113,7 +113,7 @@ function PayStatus() {
                     hasText={true}
                     type={"number"}
                     onChange={EnterAmount}
-                    value={newPayment.amount}
+                    value={newPayment?.amount}
                 />
             </Box>
             <Box sx={{ ...center, gap: "15px", my: 1 }}>
