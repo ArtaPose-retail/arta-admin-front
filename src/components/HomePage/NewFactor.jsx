@@ -138,7 +138,7 @@ function NewFactor() {
                 <Divider orientation="vertical" flexItem />
 
                 <Input
-                    width={"15%"}
+                    // width={"15%"}
                     hasIcon={false}
                     type={"text"}
                     placeholder={"نام"}
@@ -154,7 +154,7 @@ function NewFactor() {
                     }}
                 />
                 <Input
-                    width={"15%"}
+                    // width={"15%"}
                     hasIcon={false}
                     type={"text"}
                     name={"lname"}
