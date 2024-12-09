@@ -7,7 +7,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import { Box } from "@mui/system";
 import Title from "../UI/Title";
@@ -23,6 +23,7 @@ import {
 } from "../../Redux/Slices/Actions/Order/Order";
 import {
     AddPayment,
+    OrderPayList,
     setPaymentInfo,
 } from "../../Redux/Slices/Actions/Payment/payment";
 
@@ -40,7 +41,7 @@ function PayStatus() {
     const id = canBeOpen ? "transition-popper" : undefined;
 
     const { OrderPrice, promoCode, cardId } = useSelector((state) => state.Order);
-    const { paymentBA, newPayment } = useSelector((state) => state.payment);
+    const { paymentBA, newPayment, updatePay } = useSelector((state) => state.payment);
 
     const EnterAmount = (name, value, type) => {
         dispatch(
@@ -50,6 +51,10 @@ function PayStatus() {
             })
         );
     };
+
+    useEffect(() => {
+        dispatch(OrderPayList(cardId))
+    }, [updatePay])
 
     return (
         <Box

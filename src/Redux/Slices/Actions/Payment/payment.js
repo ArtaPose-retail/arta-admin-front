@@ -65,6 +65,7 @@ export const payment = createSlice({
         });
         builder.addCase(OrderPayList.fulfilled, (state, { payload }) => {
             state.loadingPay = false;
+            state.updatePay = false
             state.paymentOrderList = payload.data.data;
 
         });
@@ -80,6 +81,7 @@ export const payment = createSlice({
         });
         builder.addCase(AddPayment.fulfilled, (state, { payload }) => {
             state.loadingPay = false;
+            state.updatePay = true
             //   state.paymentBA = payload.data.data;
             console.log(payload.data)
             state.newPayment.amount = 0
