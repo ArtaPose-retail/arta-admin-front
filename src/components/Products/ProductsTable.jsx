@@ -78,7 +78,7 @@ export default function ProductsTable() {
                             <StyledTableCell align="center"> نام ژنریک</StyledTableCell>
                             <StyledTableCell align="center">نام محصول</StyledTableCell>
                             <StyledTableCell align="center">دسته</StyledTableCell>
-                            <StyledTableCell align="center">واحد</StyledTableCell>
+                            <StyledTableCell align="center">موجودی</StyledTableCell>
                             <StyledTableCell align="center">عملیات </StyledTableCell>
                         </TableRow>
                     </TableHead>
@@ -89,7 +89,7 @@ export default function ProductsTable() {
                                     {toPersian(index + 1)}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {item?.prod_public_id}
+                                    {item?.code}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {item?.subcategory_title}
@@ -98,7 +98,7 @@ export default function ProductsTable() {
                                 <StyledTableCell align="center">
                                     {item?.category_title}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">{item?.unit_id}</StyledTableCell>
+                                <StyledTableCell align="center">{item?.instock}</StyledTableCell>
 
                                 <StyledTableCell align="center">
                                     <Box

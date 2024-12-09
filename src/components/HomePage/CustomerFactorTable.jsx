@@ -16,11 +16,12 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import ProductDetails from "./Dialogs/ProductDetails";
 import { center } from "../../styles/theme";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
+import { DeleteOrderItem } from "../../Redux/Slices/Actions/Order/Order";
 
 function Row(props) {
-    const { row } = props;
+    const { row, deleteProd } = props;
     const [openCollaps, setOpenCollaps] = React.useState(false);
 
     const [open, setOpen] = React.useState(false);
@@ -32,9 +33,7 @@ function Row(props) {
         setOpen(false);
     };
 
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
-    };
+
 
     return (
         <React.Fragment>
@@ -99,9 +98,9 @@ function Row(props) {
                                 <Typography sx={{ fontSize: "18px", fontWeight: 500 }}>
                                     عملیات:
                                 </Typography>
-                                <EditIcon fontSize="small" onClick={showDialoghandler} />
+                                {/* <EditIcon fontSize="small" onClick={showDialoghandler} /> */}
                                 <DeleteOutlineIcon
-                                    onClick={() => deleteBtn()}
+                                    onClick={() => deleteProd(row?.id)}
                                     fontSize="small"
                                     sx={{
                                         fill: (theme) => theme.palette.warning.main,
@@ -123,7 +122,11 @@ function Row(props) {
 }
 
 export default function CustomerFactorTable() {
-    const { OrderProductList } = useSelector((state) => state.Order);
+    const { OrderProductList, cardId } = useSelector((state) => state.Order);
+    const dispatch = useDispatch();
+    const deleteProd = (prodId) => {
+        dispatch(DeleteOrderItem({ order_id: cardId, op_id: prodId }))
+    }
     return (
         <Box
             sx={{
@@ -167,7 +170,7 @@ export default function CustomerFactorTable() {
                     <TableBody>
                         {OrderProductList?.length > 0 ? (
                             OrderProductList?.map((row, index) => (
-                                <Row key={index} row={row} />
+                                <Row key={index} row={row} deleteProd={deleteProd} />
                             ))
                         ) : (
                             <NoItem />
