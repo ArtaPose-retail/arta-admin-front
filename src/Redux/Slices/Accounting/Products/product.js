@@ -104,6 +104,7 @@ export const product = createSlice({
             state.loading = false;
             state.update = false;
             state.signleProd = payload.data;
+            console.log(payload.data)
         });
         builder.addCase(singleProd.rejected, (state) => {
             state.loading = false;

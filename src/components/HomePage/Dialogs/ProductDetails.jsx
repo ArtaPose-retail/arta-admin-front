@@ -40,6 +40,7 @@ const ExpandMore = styled((props) => {
 }));
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
+    console.log(status, handlerCloseDialog, iteminfo)
     const [expanded, setExpanded] = useState(false);
     const [date, seDate] = useState(false);
     const [Price, setPrice] = useState(false);
@@ -74,7 +75,9 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const { singleOrder, scaleData } = useSelector((state) => state.sellPage);
     const { cardId } = useSelector((state) => state.Order);
 
-    console.log(signleProd);
+    console.log(singleOrder)
+
+
 
     const OrderSubmitHandler = () => {
         if (cardId != 0) {
@@ -84,31 +87,17 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         }
     };
 
-    const calculateValue = (
-        item,
-        singleOrder,
-        iteminfo,
-        singleProd,
-        scaleData
-    ) => {
-        if (item.name === "FinalPrice") {
-            return singleOrder?.quantity * iteminfo?.price;
-        } else if (item.name === "quantity") {
-            !singleProd?.is_bulk
-                ? dispatch(
-                    setSingleOrderInfo({
-                        key: "quantity",
-                        value: +scaleData?.weight,
-                    })
-                )
-                : singleOrder?.quantity;
-            return !singleProd?.is_bulk ? scaleData?.weight : singleOrder?.quantity;
-        } else if (singleProd != null) {
-            return singleProd[item?.name];
-        } else {
-            return "";
+    useEffect(() => {
+        if (signleProd?.is_bulk == false) {
+            console.log("here")
+            dispatch(
+                setSingleOrderInfo({
+                    key: "quantity",
+                    value: +scaleData?.weight,
+                })
+            );
         }
-    };
+    }, [])
     return (
         <div>
             <Dialog
@@ -195,25 +184,19 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 </InputLabel>
 
                                 <Input
-                                    // value={
-                                    //     item.name == "FinalPrice"
-                                    //         ? singleOrder?.quantity * iteminfo?.price
-                                    //         : item.name == "quantity"
-                                    //             ? !signleProd?.is_bulk
-                                    //                 ? scaleData?.weight
-                                    //                 : singleOrder?.quantity
-                                    //             : signleProd != null
-                                    //                 ? signleProd[item?.name]
-                                    //                 : ""
+                                    value={
+                                        item.name == "FinalPrice"
+                                            ? singleOrder?.quantity * iteminfo?.price
+                                            : item.name == "quantity"
+                                                ? signleProd?.is_bulk
+                                                    ? singleOrder?.quantity
+                                                    : scaleData?.weight
+                                                : signleProd != null
+                                                    ? signleProd[item?.name]
+                                                    : ""
 
-                                    // }
-                                    value={calculateValue(
-                                        item,
-                                        singleOrder,
-                                        iteminfo,
-                                        singleProd,
-                                        scaleData
-                                    )}
+                                    }
+
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     onChange={onChangeHandler}

@@ -64,8 +64,7 @@ export const productType = createSlice({
         });
         builder.addCase(getChild.fulfilled, (state, { payload }) => {
             (state.loading = false),
-                console.log(payload.data)
-            state.childList = payload.data
+                state.childList = payload.data.data
 
         });
         builder.addCase(getChild.rejected, (state) => {

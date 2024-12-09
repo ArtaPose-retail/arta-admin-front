@@ -167,18 +167,7 @@ function PayStatus() {
                                                     cursor: "pointer",
                                                 }}
                                                 onClick={() => {
-                                                    // dispatch(
-                                                    //     setPaymentInfo({
-                                                    //         key: "bank_account_id",
-                                                    //         value: item?.bank_id,
-                                                    //     })
-                                                    // );
-                                                    // dispatch(
-                                                    //     setPaymentInfo({
-                                                    //         key: "method_id",
-                                                    //         value: 2,
-                                                    //     })
-                                                    // )
+
                                                     dispatch(
                                                         AddPayment({
                                                             method: 2,
@@ -207,12 +196,7 @@ function PayStatus() {
                                     BAId: null,
                                 })
                             )
-                        // dispatch(
-                        //   setPaymentInfo({
-                        //     key: "method_id",
-                        //     value: 1,
-                        //   })
-                        // )
+
                     }
                     variant="contained"
                     sx={{
@@ -235,12 +219,7 @@ function PayStatus() {
                                     BAId: null,
                                 })
                             )
-                        // dispatch(
-                        //   setPaymentInfo({
-                        //     key: "method_id",
-                        //     value: 3,
-                        //   })
-                        // )
+
                     }
                     variant="contained"
                     sx={{

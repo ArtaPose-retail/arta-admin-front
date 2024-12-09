@@ -150,7 +150,7 @@ function ProductDetails({ handlerCloseDialog, next }) {
                                                 انتخاب کنید
                                             </Typography>
                                         </option>
-                                        {childList.map((option, index) => (
+                                        {childList?.map((option, index) => (
                                             <option key={index} value={option.id}>
                                                 <Typography sx={{ fontSize: "12px", color: "black" }}>
                                                     {option.title}

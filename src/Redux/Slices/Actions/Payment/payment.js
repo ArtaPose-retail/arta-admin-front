@@ -39,7 +39,11 @@ export const payment = createSlice({
 
         setPaymentInfo: (state, { payload }) => {
             state.newPayment[payload.key] = payload.value
+        },
+        resetPaymentInfo: (state, { payload }) => {
+            state.newPayment[payload.key] = initialState.newPayment[payload.value]
         }
+
     },
     extraReducers: (builder) => {
         builder.addCase(PaymentBAList.pending, (state) => {
@@ -62,7 +66,7 @@ export const payment = createSlice({
         builder.addCase(OrderPayList.fulfilled, (state, { payload }) => {
             state.loadingPay = false;
             state.paymentOrderList = payload.data.data;
-            console.log(payload.data)
+
         });
         builder.addCase(OrderPayList.rejected, (state) => {
             state.loadingPay = false;
@@ -78,6 +82,7 @@ export const payment = createSlice({
             state.loadingPay = false;
             //   state.paymentBA = payload.data.data;
             console.log(payload.data)
+            state.newPayment.amount = 0
         });
         builder.addCase(AddPayment.rejected, (state) => {
             state.loadingPay = false;
@@ -88,5 +93,5 @@ export const payment = createSlice({
     },
 });
 
-export const { setPaymentInfo } = payment.actions;
+export const { setPaymentInfo, resetPaymentInfo } = payment.actions;
 export default payment.reducer;
