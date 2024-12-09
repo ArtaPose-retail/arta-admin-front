@@ -8,7 +8,7 @@ const initialState = {
     paymentBA: [],
     paymentOrderList: [],
     newPayment: {
-        amount: 0,
+        amount: "",
         bank_account_id: 0,
         extra: {},
         is_order_specific: true,
@@ -84,7 +84,7 @@ export const payment = createSlice({
             state.updatePay = true
             //   state.paymentBA = payload.data.data;
             console.log(payload.data)
-            state.newPayment.amount = 0
+            state.newPayment.amount = initialState.newPayment.amount
         });
         builder.addCase(AddPayment.rejected, (state) => {
             state.loadingPay = false;
