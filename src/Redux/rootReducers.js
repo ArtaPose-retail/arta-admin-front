@@ -25,6 +25,7 @@ import factorRegister from "./Slices/Accounting/Factor/FactorRegister/factorRegi
 import payment from "./Slices/Actions/Payment/payment";
 import document from "./Slices/Actions/Document/document";
 import accounts from "./Slices/Accounting/Accounts/accounts";
+import cashier from "./Slices/Accounting/Cashier/cashier";
 
 const appReducer = combineReducers({
     auth,
@@ -50,7 +51,8 @@ const appReducer = combineReducers({
     factorRegister,
     payment,
     document,
-    accounts
+    accounts,
+    cashier
 });
 
 export const rootReducers = (state, action) => {

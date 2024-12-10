@@ -1622,58 +1622,82 @@ export const transactionTypeItem = [
 export const report = {
     sectionTop: [
         {
+            name: "CashTotal",
             title: "نقد",
-            value: 20000,
+            value: 0,
+            hasText: true,
         },
         {
+            name: "PosTotal",
             title: "پوز ها",
-            value: 20000,
+            value: 0,
+            hasText: true,
         },
         {
             title: "تنخواه",
-            value: 20000,
+            value: 0,
+            hasText: true,
+            name: "PettyCashTotal",
         },
         {
             title: "جمع کل تخفیفات",
             value: 20000,
+            hasText: true,
+            name: "DiscountTotal",
         },
         {
             title: "جمع کل دریافتی ها",
             value: 20000,
+            hasText: true,
+            name: "TotalIncoming",
         },
         {
             title: "جمع کل پرداختی ها",
             value: 20000,
+            hasText: true,
+            name: "TotalOutgoing",
         },
         {
             title: "جمع کل مستردی",
             value: 20000,
+            hasText: true,
+            name: "TotalReturned",
         },
         {
             title: "جمع کل چک ها",
             value: 20000,
+            hasText: true,
+            name: "TotalChecks",
         },
         {
             title: "تعداد مشتریان",
             value: 20000,
+            hasText: false,
+            name: "CustomerCount",
         },
         {
             title: "موجودی صندوق",
             value: 20000,
+            hasText: true,
+            name: "CashInventoryBalance",
         },
     ],
     sectionBotton: [
         {
             title: "فروش نقدی",
             value: 20000,
+            hasText: true,
         },
         {
             title: "فروش نسیه",
             value: 20000,
+            hasText: true,
         },
         {
             title: "جمع کل فروش",
             value: 20000,
+            hasText: true,
+
         },
     ],
 };

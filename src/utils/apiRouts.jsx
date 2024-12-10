@@ -44,7 +44,7 @@ const apiRouts = {
 
     bank: {
         name: {
-            list: "admin/bankaccount/names/",
+            list: "/admin/bankaccount/names/",
             add: "/admin/bankaccount/names/new",
         },
         type: {
@@ -90,6 +90,9 @@ const apiRouts = {
     },
     document: {
         list: "/admin/transaction/list?limit=50&offset=0"
+    },
+    cashier: {
+        list: "/admin/transaction/cashier"
     }
 };
 

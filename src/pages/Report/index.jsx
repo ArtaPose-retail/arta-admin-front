@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Title from "../../components/UI/Title";
 import { DatePicker } from "@kasraghoreyshi/datepicker";
 import "@kasraghoreyshi/calendar/styles.css";
@@ -9,9 +9,17 @@ import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import { report } from "../../utils/data";
 import PayDialog from "../../components/Report/PayDialog";
 import { center } from '../../styles/theme'
+import { useDispatch, useSelector } from "react-redux";
+import { Cashierinfo } from "../../Redux/Slices/Accounting/Cashier/cashier";
 //! this page is for AMALIAt page
 
 function Report() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(Cashierinfo())
+    }, [])
+
+    const { cashierData } = useSelector(state => state.cashier)
 
     return (
         <Box
@@ -40,7 +48,7 @@ function Report() {
                         color: (theme) => theme.palette.text.card,
                     }}
                 >
-                    {persianDate()}
+                    {persianDate(new Date)}
                 </Typography>
             </Box>
             <Box sx={{ px: 2, mt: 4 }}>
@@ -75,7 +83,7 @@ function Report() {
                                     >
                                         {item.title}
                                     </Typography>
-                                    {item?.hasIcon && <PayDialog />}
+                                    {/* {item?.hasText && <PayDialog />} */}
                                 </Box>
                                 <Typography
                                     sx={{
@@ -85,7 +93,7 @@ function Report() {
                                         p: 1,
                                     }}
                                 >
-                                    {toPersian(separateBy3(item.value))}ریال
+                                    {toPersian(separateBy3(cashierData[item.name] ?? 0))} {item.hasText ? "ریال" : ""}
                                 </Typography>
                             </Box>
                         </Grid>
