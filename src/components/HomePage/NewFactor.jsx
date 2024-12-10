@@ -76,6 +76,8 @@ function NewFactor() {
                 }}
             >
                 <Autocomplete
+                    freeSolo
+                    // value={transactionInfo?.phone1 }
                     disablePortal
                     id="combo-box-demo"
                     options={TransActionList}
@@ -106,6 +108,7 @@ function NewFactor() {
                     )}
                     renderInput={(params) => (
                         <TextField
+                            // value={transactionInfo?.phone1}
                             onChange={(e) => dispatch(
                                 setNewTransaction({
                                     key: "phone1",
@@ -142,7 +145,7 @@ function NewFactor() {
                     type={"text"}
                     placeholder={"نام"}
                     name={"fname"}
-                    value={transactionInfo?.fname}
+                    value={transactionInfo !== null ? transactionInfo?.fname : ""}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({
@@ -157,7 +160,7 @@ function NewFactor() {
                     type={"text"}
                     name={"lname"}
                     placeholder={" نام خانوادگی"}
-                    value={transactionInfo?.lname}
+                    value={transactionInfo !== null ? transactionInfo?.lname : ""}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({
