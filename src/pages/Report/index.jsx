@@ -93,7 +93,7 @@ function Report() {
                                         p: 1,
                                     }}
                                 >
-                                    {toPersian(separateBy3(cashierData[item.name] ?? 0))} {item.hasText ? "ریال" : ""}
+                                    {cashierData ? toPersian(separateBy3(cashierData[item?.name] ?? 0)) : ""} {item.hasText ? "ریال" : ""}
                                 </Typography>
                             </Box>
                         </Grid>
