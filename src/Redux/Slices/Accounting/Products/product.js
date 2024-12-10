@@ -91,9 +91,10 @@ export const product = createSlice({
             state.update = false;
             state.productList = payload.data;
         });
-        builder.addCase(getProList.rejected, (state) => {
+        builder.addCase(getProList.rejected, (state, { payload }) => {
             state.loading = false;
-            toastHandler("مشکلی پیش امده مجدد وارد شوید", "info");
+            console.log(payload)
+            toastHandler("مشکلی پیش امده", "info");
         });
 
         //?get single  product

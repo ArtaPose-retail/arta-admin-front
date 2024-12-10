@@ -10,13 +10,13 @@ const initialState = {
     loading: false,
     update: false,
     newFacrtorItems: {
-        product_id: null,
-        quantity: null,
-        buy_price_fee: null,
-        tax: null,
-        original_price_fee: null,
-        sell_price_fee: null,
-        discount: null
+        product_id: "",
+        quantity: "",
+        buy_price_fee: "",
+        tax: "",
+        original_price_fee: "",
+        sell_price_fee: "",
+        discount: ""
     },
     factorItemsRes: null,
     singleOrderList: [],
@@ -53,6 +53,7 @@ export const factorItems = createSlice({
             state.loading = false;
             state.factorItemsRes = payload.data.data;
             state.update = true;
+            state.newFacrtorItems = initialState.newFacrtorItems
             toastHandler("با موفقیت ثبت شد", "info");
         });
         builder.addCase(FactorItemsAdd.rejected, (state) => {

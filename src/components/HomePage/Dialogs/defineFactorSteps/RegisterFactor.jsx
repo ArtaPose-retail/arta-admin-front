@@ -6,6 +6,8 @@ import { handlefactorStep } from "../../../../Redux/Slices/HomePage/factor";
 import { useDispatch, useSelector } from "react-redux";
 import { center } from "../../../../styles/theme";
 import { finalizeFactorAction } from "../../../../Redux/Slices/Accounting/Factor/FactorRegister/factorRegister";
+import { FactorListGet } from "../../../../Redux/Slices/Accounting/Factor/factorPage";
+import { resetfactorDetailForm } from "../../../../Redux/Slices/Accounting/Factor/FactorDetails/details";
 
 function RegisterFactor({ handleClose }) {
     const dispatch = useDispatch();
@@ -16,8 +18,13 @@ function RegisterFactor({ handleClose }) {
 
     const registerBn = () => {
         // toastHandler("فاکتور با موفقیت ثبت شد", "info");
-        // handleClose();
+        handleClose();
         dispatch(finalizeFactorAction(addDetailRes?.id))
+        dispatch(handlefactorStep(1));
+        dispatch(resetfactorDetailForm());
+        setTimeout(() => {
+            dispatch(FactorListGet())
+        }, 2000)
     };
     const [img, setImg] = useState(null)
     const handlerUploadImg = (e) => {

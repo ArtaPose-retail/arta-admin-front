@@ -40,13 +40,13 @@ export default function FactorItemstable({ height }) {
     const { addDetailRes } = useSelector(
         (state) => state.factorDetails
     );
-    const { singleOrderList } = useSelector(
+    const { singleOrderList, update } = useSelector(
         (state) => state.factorItems
     );
 
     useEffect(() => {
         dispach(FactorItemslist(addDetailRes?.id))
-    }, [addDetailRes?.id])
+    }, [addDetailRes?.id, update])
 
 
     const deleteBtn = (prod_id) => {
