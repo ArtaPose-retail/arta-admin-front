@@ -61,7 +61,7 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.fname}{row?.lname}
+                    {row?.fname}-{row?.lname}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -95,7 +95,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(row?.phone)}
+                    {toPersian(row?.phone ?? 0)}
                 </TableCell>
                 <TableCell
                     sx={{

@@ -8,7 +8,8 @@ import { addOrder, OrderList } from "../../Redux/Slices/Actions/Order/Order";
 
 function LableCard() {
     const dispatch = useDispatch();
-    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const { cardId } = useSelector(state => state.Order)
+    const [selectedIndex, setSelectedIndex] = useState(cardId ?? -1);
     const { orderList, update } = useSelector(state => state.Order)
     const handleCardSelect = (index) => {
         setSelectedIndex(index);
