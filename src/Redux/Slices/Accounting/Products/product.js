@@ -19,6 +19,7 @@ const initialState = {
         description: "",
         detail: "",
         instock: null,
+        stock_alert: null,
         is_bulk: false,
         is_fav: false,
         max_stock: null,

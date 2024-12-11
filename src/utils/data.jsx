@@ -1441,7 +1441,7 @@ export const productsFeilds = [
         type: "number",
     },
     {
-        name: "instock",
+        name: "stock_alert",
         select: false,
         placeholder: "نقطه سفارش",
         lable: "نقطه سفارش",

@@ -18,7 +18,7 @@ export const addNewPodThunk = async (_, ThunkApi) => {
     const {
         code,
         category_id,
-        instock,
+        stock_alert,
         is_bulk,
         is_fav,
         max_stock,
@@ -34,7 +34,7 @@ export const addNewPodThunk = async (_, ThunkApi) => {
     return await AXIOS.post(apiRouts.product.main.add, {
         code,
         category_id,
-        instock,
+        stock_alert,
         is_bulk,
         is_fav,
         max_stock,
@@ -52,7 +52,7 @@ export const editPodThunk = async (id, ThunkApi) => {
     const {
         code,
         category_id,
-        instock,
+        stock_alert,
         is_bulk,
         is_fav,
         max_stock,
@@ -68,7 +68,7 @@ export const editPodThunk = async (id, ThunkApi) => {
     return await AXIOS.put(`${apiRouts.product.main.list}${id}`, {
         code,
         category_id,
-        instock,
+        stock_alert,
         is_bulk,
         is_fav,
         max_stock,
