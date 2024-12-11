@@ -27,7 +27,7 @@ import PackageType from "./PackageType";
 import Input from "../../../UI/Input";
 import { center } from "../../../../styles/theme";
 import { getProList } from "../../../../Redux/Slices/Accounting/Products/product";
-import { FactorItemsAdd, setFactorItems } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
+import { EditOrderItem, FactorItemsAdd, setFactorItems } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 
 function FactorItems({ handleClose }) {
     const dispatch = useDispatch();
@@ -62,6 +62,10 @@ function FactorItems({ handleClose }) {
 
     const AddItemHandler = () => {
         dispatch(FactorItemsAdd(addDetailRes?.id))
+    }
+
+    const EditItemHandler = (prodID) => {
+        dispatch(EditOrderItem(prodID))
     }
 
     return (
@@ -212,7 +216,7 @@ function FactorItems({ handleClose }) {
                     {toPersian(
                         separateBy3(
                             TotalBuy(
-                                newFacrtorItems.buy_price_fee,
+                                newFacrtorItems.initial_buy_price,
                                 newFacrtorItems.quantity,
                                 newFacrtorItems.tax
                             ) -
@@ -234,13 +238,13 @@ function FactorItems({ handleClose }) {
                             Math.ceil(
                                 FinalBuyFee(
                                     TotalBuy(
-                                        newFacrtorItems.buy_price_fee,
+                                        newFacrtorItems.initial_buy_price,
                                         newFacrtorItems.quantity,
                                         newFacrtorItems.tax
                                     ),
                                     Discount(
-                                        newFacrtorItems.original_price_fee,
-                                        newFacrtorItems.sell_price_fee
+                                        newFacrtorItems.original_price,
+                                        newFacrtorItems.unitprice
                                     ),
                                     newFacrtorItems.quantity
                                 )
@@ -261,7 +265,7 @@ function FactorItems({ handleClose }) {
                     {toPersian(
                         separateBy3(
                             sumSell(
-                                newFacrtorItems.original_price_fee,
+                                newFacrtorItems.original_price,
                                 newFacrtorItems.quantity
                             )
                         )
@@ -279,8 +283,8 @@ function FactorItems({ handleClose }) {
                     {toPersian(
                         separateBy3(
                             Discount(
-                                newFacrtorItems.original_price_fee,
-                                newFacrtorItems.sell_price_fee
+                                newFacrtorItems.original_price,
+                                newFacrtorItems.unitprice
                             )
                         )
                     )}
@@ -294,9 +298,9 @@ function FactorItems({ handleClose }) {
                     }}
                 >
                     درصد تخفیف فروش: %{toPersian(parseFloat(DiscountPercentage(Discount(
-                        newFacrtorItems.original_price_fee,
-                        newFacrtorItems.sell_price_fee
-                    ), newFacrtorItems.original_price_fee)).toFixed(2))}
+                        newFacrtorItems.original_price,
+                        newFacrtorItems.unitprice
+                    ), newFacrtorItems.original_price)).toFixed(2))}
                 </Typography>
                 <Typography
                     sx={{
@@ -312,36 +316,47 @@ function FactorItems({ handleClose }) {
                             profitPercentage(
                                 FinalBuyFee(
                                     TotalBuy(
-                                        newFacrtorItems.buy_price_fee,
+                                        newFacrtorItems.initial_buy_price,
                                         newFacrtorItems.quantity,
                                         newFacrtorItems.tax
                                     ),
                                     Discount(
-                                        newFacrtorItems.original_price_fee,
-                                        newFacrtorItems.sell_price_fee
+                                        newFacrtorItems.original_price,
+                                        newFacrtorItems.unitprice
                                     ),
                                     newFacrtorItems.quantity
                                 ),
-                                newFacrtorItems.sell_price_fee
+                                newFacrtorItems.unitprice
                             )
                         ).toFixed(2)
                     )}
                 </Typography>
             </Box>
             <Box sx={{ ...center, justifyContent: "space-between" }}>
-                <Box>
-                    <Button
-                        onClick={() => AddItemHandler()}
-                        variant="contained"
-                        sx={{
-                            bgcolor: (theme) => theme.palette.primary.main,
-                            color: (theme) => theme.palette.text.primary,
-                            px: 3,
-                        }}
-                    >
-                        افزودن
-                    </Button>
-                </Box>
+
+                <Button
+                    onClick={() => AddItemHandler()}
+                    variant="contained"
+                    sx={{
+                        bgcolor: (theme) => theme.palette.primary.main,
+                        color: (theme) => theme.palette.text.primary,
+                        px: 3,
+                    }}
+                >
+                    افزودن
+                </Button>
+                {newFacrtorItems?.id && <Button
+                    onClick={() => EditItemHandler()}
+                    variant="contained"
+                    sx={{
+                        bgcolor: (theme) => theme.palette.primary.main,
+                        color: (theme) => theme.palette.text.primary,
+                        px: 3,
+                    }}
+                >
+                    ویرایش
+                </Button>}
+
             </Box>
 
             <FactorItemstable height={200} />

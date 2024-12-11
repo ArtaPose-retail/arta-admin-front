@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
     addFactorItems,
     deleteOrderItemThunk,
+    editFactorItems,
     OrderItemList,
 } from "./FactorItemsThunk";
 import { toastHandler } from "../../../../../utils/setting";
@@ -12,11 +13,11 @@ const initialState = {
     newFacrtorItems: {
         product_id: "",
         quantity: "",
-        buy_price_fee: "",
+        initial_buy_price: "",
         tax: "",
-        original_price_fee: "",
-        sell_price_fee: "",
-        discount: ""
+        original_price: "",
+        unitprice: "",
+        discount: "",
     },
     factorItemsRes: null,
     singleOrderList: [],
@@ -34,6 +35,10 @@ export const FactorItemslist = createAsyncThunk(
 export const DeleteOrderItem = createAsyncThunk(
     "factorItems/delete",
     deleteOrderItemThunk
+);
+export const EditOrderItem = createAsyncThunk(
+    "factorItems/edit",
+    editFactorItems
 );
 
 export const factorItems = createSlice({
@@ -57,6 +62,20 @@ export const factorItems = createSlice({
             toastHandler("با موفقیت ثبت شد", "info");
         });
         builder.addCase(FactorItemsAdd.rejected, (state) => {
+            (state.loading = false), toastHandler(" خطا  ", "info");
+        });
+        //? edit
+        builder.addCase(EditOrderItem.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(EditOrderItem.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.factorItemsRes = payload.data.data;
+            state.update = true;
+            state.newFacrtorItems = initialState.newFacrtorItems
+            toastHandler("با موفقیت ثبت شد", "info");
+        });
+        builder.addCase(EditOrderItem.rejected, (state) => {
             (state.loading = false), toastHandler(" خطا  ", "info");
         });
 

@@ -1010,7 +1010,7 @@ export const factorItemForm = [
     },
 
     {
-        name: "buy_price_fee",
+        name: "initial_buy_price",
         select: false,
         placeholder: "فی خرید ",
         lable: "فی خرید ",
@@ -1040,7 +1040,7 @@ export const factorItemForm = [
     },
 
     {
-        name: "original_price_fee",
+        name: "original_price",
         select: false,
         placeholder: "فی فروش ",
         lable: "فی فروش ",
@@ -1050,7 +1050,7 @@ export const factorItemForm = [
         hastext: true,
     },
     {
-        name: "sell_price_fee",
+        name: "unitprice",
         select: false,
         placeholder: " فی فروش فروشگاه",
         lable: "فی فروش فروشگاه",

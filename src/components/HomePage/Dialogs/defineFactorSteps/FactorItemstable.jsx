@@ -12,7 +12,8 @@ import { Box } from "@mui/material";
 
 import { separateBy3, toPersian } from "../../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOrderItem, FactorItemslist } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
+import { DeleteOrderItem, FactorItemslist, setFactorItems } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
+import EditIcon from '@mui/icons-material/Edit';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -52,6 +53,19 @@ export default function FactorItemstable({ height }) {
     const deleteBtn = (prod_id) => {
         dispach(DeleteOrderItem({ order_id: addDetailRes?.id, op_id: prod_id }))
     };
+
+    const EditHandler = (item) => {
+        console.log(item)
+
+        for (const key in item) {
+            if (Object.prototype.hasOwnProperty.call(item, key)) {
+                dispach(setFactorItems({
+                    key: key,
+                    value: item[key]
+                }))
+            }
+        }
+    }
     return (
         <TableContainer sx={{ maxHeight: height }}>
             <Table stickyHeader aria-label="sticky table">
@@ -98,7 +112,9 @@ export default function FactorItemstable({ height }) {
                                         gap: "10px",
                                     }}
                                 >
-                                    {/* <EditIcon /> */}
+                                    <EditIcon sx={{
+                                        cursor: "pointer",
+                                    }} onClick={() => EditHandler(item)} />
                                     <DeleteOutlineIcon
                                         onClick={() => deleteBtn(item?.id)}
                                         sx={{

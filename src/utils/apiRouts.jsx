@@ -57,8 +57,8 @@ const apiRouts = {
         },
         otp: {
             req: "/user/bankotprequest",
-            verify: "/user/bankotpverify"
-        }
+            verify: "/user/bankotpverify",
+        },
     },
     factor: {
         checkin: {
@@ -70,6 +70,7 @@ const apiRouts = {
                 list: (order_id) => `/admin/order/${order_id}/product`,
                 delete: (order_id, op_id) =>
                     `/admin/order/${order_id}/product/${op_id}`,
+                edit: (op_id) => `/admin/order/checkin/${op_id}/product`,
             },
             finilize: {
                 main: "/admin/order/checkin/",
@@ -79,21 +80,21 @@ const apiRouts = {
         checkout: {
             addProd: (order_id) => `/admin/order/checkout/${order_id}/product`,
             ClcPrice: (order_id) => `/admin/order/checkout/${order_id}/calc`,
-            finilize: (order_id) => `/admin/order/checkout/${order_id}`
+            finilize: (order_id) => `/admin/order/checkout/${order_id}`,
         },
     },
     payment: {
         bankaccount: "/admin/transaction/bankaccount",
         orderpayList: "/admin/subtransaction/list",
         new: "/admin/transaction/new",
-        profile: "/admin/transaction/profiles"
+        profile: "/admin/transaction/profiles",
     },
     document: {
-        list: "/admin/transaction/list?limit=50&offset=0"
+        list: "/admin/transaction/list?limit=50&offset=0",
     },
     cashier: {
-        list: "/admin/transaction/cashier"
-    }
+        list: "/admin/transaction/cashier",
+    },
 };
 
 export default apiRouts;

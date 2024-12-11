@@ -121,9 +121,9 @@ export const Discount = (original_fee_sell, fee_sell) => {
     }
 };
 
-export const TotalBuy = (buy_price_fee, quantity, tax) => {
-    if (buy_price_fee != null && quantity != null && tax != null) {
-        return buy_price_fee * quantity + tax;
+export const TotalBuy = (initial_buy_price, quantity, tax) => {
+    if (initial_buy_price != null && quantity != null && tax != null) {
+        return initial_buy_price * quantity + tax;
     } else {
         return 0;
     }
@@ -134,15 +134,15 @@ export const FinalBuyFee = (total_buy, discount, quantity) => {
     return (total_buy - discount) / quantity
 }
 
-export const profitPercentage = (FinalBuyFee, sell_price_fee) => {
+export const profitPercentage = (FinalBuyFee, unitprice) => {
 
-    return ((sell_price_fee - FinalBuyFee) / FinalBuyFee) * 100
+    return ((unitprice - FinalBuyFee) / FinalBuyFee) * 100
 
 }
 
-export const DiscountPercentage = (discount, original_price_fee) => {
-    if (original_price_fee != null) {
-        return (discount * 100) / original_price_fee
+export const DiscountPercentage = (discount, original_price) => {
+    if (original_price != null) {
+        return (discount * 100) / original_price
     } else {
         return 0
     }
