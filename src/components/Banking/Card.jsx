@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { separateBy4, toPersian } from "../../utils/setting";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useNavigate } from "react-router-dom";
@@ -12,10 +12,19 @@ import bankBlue from "../../Assets/images/Bank/bankBlue.png";
 import bankRed from "../../Assets/images/Bank/bankRed.png";
 import bankYellow from "../../Assets/images/Bank/bankYellow.png";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import CancelBtn from "../UI/CancelBtn";
 
 function Card() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [openCancelBTn, setOpenCancelBTn] = useState(false);
+    const handleOpenCancleModal = () => setOpenCancelBTn(true);
+    const handleCloseCancleModal = () => setOpenCancelBTn(false);
+
+    const AcceptBtn = (id) => {
+        dispatch(DeleteAccount(id))
+    }
 
     const addAcount = () => {
         navigate(reactRouts.banking.addcart);
@@ -176,7 +185,7 @@ function Card() {
                                         p: 0.2,
                                     }}
                                 />
-                                <DeleteOutlineIcon
+                                {/* <DeleteOutlineIcon
                                     onClick={() => DeleteHandler(item?.id)}
                                     fontSize="small"
                                     sx={{
@@ -184,7 +193,28 @@ function Card() {
                                         fill: (theme) => theme.palette.text.primary,
                                         borderRadius: "8px",
                                         p: 0.2,
-                                    }} />
+                                    }} /> */}
+                                <CancelBtn
+                                    BtnTitle={
+                                        <DeleteOutlineIcon
+                                            // onClick={() => DeleteHandler(item?.id)}
+                                            fontSize="small"
+                                            sx={{
+                                                bgcolor: (theme) => theme.palette.error.main,
+                                                fill: (theme) => theme.palette.text.primary,
+                                                borderRadius: "8px",
+                                                p: 0.2,
+                                            }} />
+                                    }
+                                    width="30%"
+                                    open={openCancelBTn}
+                                    handleClose={handleCloseCancleModal}
+                                    handleOpen={handleOpenCancleModal}
+                                    title={"حذف درخواست"}
+                                    question={`آیا از حذف اطمینان دارید؟`}
+                                    AcceptBtn={AcceptBtn}
+                                    id={item.id}
+                                />
                             </Box>
                         </Box>
                     </Box>

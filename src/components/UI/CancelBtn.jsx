@@ -26,7 +26,8 @@ export default function CancelBtn({
     handleClose,
     BtnTitle,
     width,
-    AcceptBtn
+    AcceptBtn,
+    id
 }) {
 
 
@@ -93,7 +94,7 @@ export default function CancelBtn({
                                 خیر
                             </Button>
                             <Button
-                                onClick={() => AcceptBtn()}
+                                onClick={() => AcceptBtn(id)}
                                 variant="contained"
                                 sx={{
                                     bgcolor: (theme) => theme.palette.green.main,

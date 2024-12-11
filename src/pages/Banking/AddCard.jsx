@@ -244,7 +244,7 @@ function AddCard() {
                     <Switch
                         name="has_pos"
                         color="warning"
-                        checked={checkBox.has_pos}
+                        checked={newBackAccount.has_pos ?? checkBox.has_pos}
                         onClick={(e) =>
                             dispatch(
                                 checkBoxhandler({
@@ -259,7 +259,7 @@ function AddCard() {
                     <Typography>فعال</Typography>
                     <Switch
                         name="enabled"
-                        checked={checkBox.enabled}
+                        checked={newBackAccount.enabled ?? checkBox.enabled}
                         onClick={(e) =>
                             dispatch(
                                 checkBoxhandler({
@@ -274,7 +274,7 @@ function AddCard() {
                     <Typography>دسته چک</Typography>
                     <Switch
                         name="has_check"
-                        checked={checkBox.has_check}
+                        checked={newBackAccount.has_check ?? checkBox.has_check}
                         onClick={(e) =>
                             dispatch(
                                 checkBoxhandler({
@@ -289,7 +289,7 @@ function AddCard() {
                     <Typography>اینترنت بانک</Typography>
                     <Switch
                         name="has_internet_bank"
-                        checked={checkBox.has_internet_bank}
+                        checked={newBackAccount.has_internet_bank ?? checkBox.has_internet_bank}
                         onClick={(e) =>
                             dispatch(
                                 checkBoxhandler({
@@ -303,7 +303,7 @@ function AddCard() {
                 <Box sx={{ ...center }}>
                     <Typography>OTP</Typography>
                     <Switch
-                        checked={checkBox.has_otp}
+                        checked={newBackAccount.has_otp ?? checkBox.has_otp}
                         name="has_otp"
                         onClick={(e) =>
                             dispatch(
@@ -320,7 +320,11 @@ function AddCard() {
             <Box sx={{ ...center, justifyContent: "space-between" }}>
                 <Box sx={{ display: "flex", gap: "15px" }}>
                     {type != "edit" ? <Button
-                        onClick={() => dispatch(AddAccount())}
+                        onClick={() => {
+                            dispatch(AddAccount())
+                            dispatch(resetForm())
+                            navigate(reactRouts.banking.main)
+                        }}
                         variant="contained"
                         sx={{
                             bgcolor: (theme) => theme.palette.green.main,
@@ -332,7 +336,11 @@ function AddCard() {
                         ثبت حساب
                     </Button> :
                         <Button
-                            onClick={() => dispatch(EditAccount(id))}
+                            onClick={() => {
+                                dispatch(EditAccount(id))
+                                dispatch(resetForm())
+                                navigate(reactRouts.banking.main)
+                            }}
                             variant="contained"
                             sx={{
                                 bgcolor: (theme) => theme.palette.green.main,
