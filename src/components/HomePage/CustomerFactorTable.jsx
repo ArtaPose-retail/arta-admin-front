@@ -60,7 +60,7 @@ function Row(props) {
                     align="center"
                 >
                     {toPersian(row?.quantity ?? 0)}
-                    {row?.IsBulk == false ? "عدد" : "کیلوگرم"}
+                    {row?.IsBulk == true ? "عدد" : "کیلوگرم"}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}

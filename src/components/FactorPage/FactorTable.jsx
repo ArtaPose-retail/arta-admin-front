@@ -179,7 +179,7 @@ export default function FactorTable() {
         <Box
             sx={{
                 width: "100%",
-                height: "78%",
+                height: "90%",
                 overflowY: "scroll",
                 overflowX: "hidden",
             }}

@@ -537,7 +537,7 @@ export const addCartForm = [
         lable: "API-IP",
         hasIcon: false,
         color: "#FF8A00",
-        type: "number",
+        type: "text",
         meta: false,
     },
     {
