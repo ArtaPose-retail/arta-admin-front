@@ -1470,7 +1470,7 @@ export const productsFeilds = [
     },
 
     {
-        name: "barcode",
+        name: "code",
         select: false,
         placeholder: "بارکد",
         lable: "بارکد",

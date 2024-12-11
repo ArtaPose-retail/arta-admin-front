@@ -12,7 +12,7 @@ const initialState = {
     loading: false,
     update: false,
     newProduct: {
-        barcode: "",
+        code: "",
         brandname: "",
         category_id: null,
         category_title: "",

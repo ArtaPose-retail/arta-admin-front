@@ -16,7 +16,7 @@ export const deleteProdThunk = async (id) => {
 export const addNewPodThunk = async (_, ThunkApi) => {
     const state = ThunkApi.getState();
     const {
-        barcode,
+        code,
         category_id,
         instock,
         is_bulk,
@@ -32,7 +32,7 @@ export const addNewPodThunk = async (_, ThunkApi) => {
     } = state.product.newProduct;
 
     return await AXIOS.post(apiRouts.product.main.add, {
-        barcode,
+        code,
         category_id,
         instock,
         is_bulk,
@@ -50,7 +50,7 @@ export const addNewPodThunk = async (_, ThunkApi) => {
 export const editPodThunk = async (id, ThunkApi) => {
     const state = ThunkApi.getState();
     const {
-        barcode,
+        code,
         category_id,
         instock,
         is_bulk,
@@ -66,7 +66,7 @@ export const editPodThunk = async (id, ThunkApi) => {
     } = state.product.newProduct;
 
     return await AXIOS.put(`${apiRouts.product.main.list}${id}`, {
-        barcode,
+        code,
         category_id,
         instock,
         is_bulk,
