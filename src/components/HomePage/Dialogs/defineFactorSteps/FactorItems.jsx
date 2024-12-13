@@ -242,10 +242,7 @@ function FactorItems({ handleClose }) {
                                         newFacrtorItems.quantity,
                                         newFacrtorItems.tax
                                     ),
-                                    Discount(
-                                        newFacrtorItems.original_price,
-                                        newFacrtorItems.unitprice
-                                    ),
+                                    newFacrtorItems.discount,
                                     newFacrtorItems.quantity
                                 )
                             )

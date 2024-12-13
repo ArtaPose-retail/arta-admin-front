@@ -76,6 +76,7 @@ export const bank = createSlice({
         });
         builder.addCase(AddAccount.fulfilled, (state) => {
             state.loading = false;
+            state.update = true
             toastHandler("حساب با موفقیت اضافه شد", "info");
         });
         builder.addCase(AddAccount.rejected, (state) => {
