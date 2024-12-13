@@ -47,8 +47,15 @@ function PtoductSFilter() {
 
     const BarcodeSearchHandler = (name, value, type) => {
         dispatch(setProdCode(value))
-        dispatch(SearchProdCode(value));
+        // dispatch(SearchProdCode(value));
 
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            dispatch(SearchProdCode(ProdCode));
+
+        }
     };
 
     useEffect(() => {
@@ -122,6 +129,7 @@ function PtoductSFilter() {
                 icon={"close"}
                 children={<Close />}
                 onIconClick={IconHandler}
+                onKeyDown={handleKeyDown}
             />
         </Box>
     );

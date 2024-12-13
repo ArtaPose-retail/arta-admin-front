@@ -27,7 +27,8 @@ function Input({
     onChange,
     children,
     options,
-    onIconClick
+    onIconClick,
+    onKeyDown
 }) {
 
 
@@ -65,6 +66,7 @@ function Input({
                     }}
                 >
                     <input
+                        onKeyDown={onKeyDown}
                         value={value}
                         onChange={(e) => onChange(name, e.target.value, type)}
                         onClick={onClickHandler}
