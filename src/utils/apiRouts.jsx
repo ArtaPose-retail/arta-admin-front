@@ -94,6 +94,7 @@ const apiRouts = {
     },
     cashier: {
         list: "/admin/transaction/cashier",
+        seles: "/admin/transaction/sales"
     },
 };
 
