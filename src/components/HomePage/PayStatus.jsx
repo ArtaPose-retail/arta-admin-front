@@ -99,7 +99,7 @@ function PayStatus() {
                         }}
                     >
                         {/* {toPersian(separateBy3(OrderPrice.order_price ?? 0))} */}
-                        {toPersian(separateBy3(OrderPrice.remaining_amount ? OrderPrice.remaining_amount : OrderPrice.order_price))}
+                        {toPersian(separateBy3(OrderPrice?.remaining_amount))}
                     </Typography>
                     <Typography
                         sx={{

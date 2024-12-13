@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -16,20 +16,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { persianDate, persianTime, separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import moment from "jalali-moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
 import { center } from "../../styles/theme";
+import { OrderPayList } from "../../Redux/Slices/Actions/Payment/payment";
+import { CalcOrders } from "../../Redux/Slices/Actions/Order/Order";
 
-function createData(title, TransactionNum, amount, time, date) {
-    return {
-        title, TransactionNum, amount, time, date
-
-    };
-}
 
 function Row(props) {
     const { row } = props;
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const center = {
         display: "flex",
@@ -41,7 +37,7 @@ function Row(props) {
     };
 
     return (
-        <React.Fragment>
+        <Fragment>
             <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
 
                 <TableCell
@@ -107,15 +103,24 @@ function Row(props) {
                     </Collapse>
                 </TableCell>
             </TableRow>
-        </React.Fragment>
+        </Fragment>
     );
 }
 
 
 export default function CollapsibleTable() {
 
-    const { paymentOrderList } = useSelector(state => state.payment)
+    const { paymentOrderList, updatePay } = useSelector(state => state.payment)
+    const { cardId } = useSelector(state => state.Order)
+    const dispath = useDispatch()
 
+    useEffect(() => {
+        if (cardId != 0) {
+
+            dispath(OrderPayList(cardId))
+            dispath(CalcOrders(cardId))
+        }
+    }, [updatePay])
     return (
         <Box
             sx={{

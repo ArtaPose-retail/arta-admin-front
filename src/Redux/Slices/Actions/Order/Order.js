@@ -20,6 +20,8 @@ const initialState = {
     OrderPrice: {
         order_price: 0,
         calculated_discount: 0,
+        remaining_amount: 0,
+        settled_amount: 0
     },
     promoCode: "",
 };

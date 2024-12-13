@@ -16,7 +16,7 @@ import ReactToPrint from "react-to-print";
 import { Print } from "@mui/icons-material";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
 import { useDispatch, useSelector } from "react-redux";
-import { SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
+import { CalcOrders, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 
 function CustomerFactor() {
     const ReciptRef = useRef();
@@ -31,8 +31,12 @@ function CustomerFactor() {
         if (cardId != 0) {
 
             dispatch(SingleOrderProds(cardId))
+            dispatch(CalcOrders(cardId))
+
         }
     }, [sellUpdate])
+
+
 
     return (
         <Box sx={{ width: "100%", height: "100%" }}>
@@ -92,7 +96,7 @@ function CustomerFactor() {
                             fontWeight: 500,
                         }}
                     >
-                        {toPersian(separateBy3(OrderPrice.order_price ?? 0))}
+                        {toPersian(separateBy3(OrderPrice?.order_price ?? 0))}
                         &nbsp; ریال
                     </Typography>
                 </Box>
