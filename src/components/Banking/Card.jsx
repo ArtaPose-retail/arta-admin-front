@@ -23,7 +23,8 @@ function Card() {
     const handleCloseCancleModal = () => setOpenCancelBTn(false);
 
     const AcceptBtn = (id) => {
-        dispatch(DeleteAccount(id))
+        // dispatch(DeleteAccount(id))
+        console.log(id)
     }
 
     const addAcount = () => {
@@ -185,20 +186,9 @@ function Card() {
                                         p: 0.2,
                                     }}
                                 />
-                                {/* <DeleteOutlineIcon
-                                    onClick={() => DeleteHandler(item?.id)}
-                                    fontSize="small"
-                                    sx={{
-                                        bgcolor: (theme) => theme.palette.error.main,
-                                        fill: (theme) => theme.palette.text.primary,
-                                        borderRadius: "8px",
-                                        p: 0.2,
-                                    }} /> */}
                                 <CancelBtn
                                     BtnTitle={
-                                        <DeleteOutlineIcon
-                                            // onClick={() => DeleteHandler(item?.id)}
-                                            fontSize="small"
+                                        <DeleteOutlineIcon fontSize="small"
                                             sx={{
                                                 bgcolor: (theme) => theme.palette.error.main,
                                                 fill: (theme) => theme.palette.text.primary,
