@@ -5,6 +5,7 @@ import {
     deleteProdThunk,
     editPodThunk,
     getSingleProd,
+    ProdSearch,
     SearchProdByCode,
 } from "./productThunk";
 import { toastHandler } from "../../../../utils/setting";
@@ -53,6 +54,8 @@ export const deleteProd = createAsyncThunk("product/delete", deleteProdThunk);
 export const addProd = createAsyncThunk("product/add", addNewPodThunk);
 export const editProd = createAsyncThunk("product/edit", editPodThunk);
 
+export const SearchByCategory = createAsyncThunk("product/search", ProdSearch)
+
 export const SearchProdCode = createAsyncThunk(
     "product/searchCode",
     SearchProdByCode
@@ -93,6 +96,20 @@ export const product = createSlice({
             state.productList = payload.data;
         });
         builder.addCase(getProList.rejected, (state, { payload }) => {
+            state.loading = false;
+            console.log(payload)
+            toastHandler("مشکلی پیش امده", "info");
+        });
+        //?get product list by category
+        builder.addCase(SearchByCategory.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(SearchByCategory.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = true;
+            state.productList = payload.data;
+        });
+        builder.addCase(SearchByCategory.rejected, (state, { payload }) => {
             state.loading = false;
             console.log(payload)
             toastHandler("مشکلی پیش امده", "info");

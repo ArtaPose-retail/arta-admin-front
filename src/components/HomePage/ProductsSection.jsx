@@ -10,7 +10,7 @@ import { NoItem } from '../UI/NoItem';
 
 function ProductsSection() {
     const dispatch = useDispatch();
-    const { productList } = useSelector((state) => state.product);
+    const { productList, update } = useSelector((state) => state.product);
 
 
     useEffect(() => {

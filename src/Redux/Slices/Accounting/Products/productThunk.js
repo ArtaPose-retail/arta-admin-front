@@ -13,6 +13,10 @@ export const deleteProdThunk = async (id) => {
     return await AXIOS.delete(`${apiRouts.product.main.list}${id}`);
 };
 
+export const ProdSearch = async (title) => {
+    return await AXIOS.get(`${apiRouts.product.main.list}?category=${title}`)
+}
+
 export const addNewPodThunk = async (_, ThunkApi) => {
     const state = ThunkApi.getState();
     const {

@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import { getallType } from "../../Redux/Slices/Accounting/Products/ProductType/Type";
 import Input from "../UI/Input";
 import {
+    getProList,
     resetProdCode,
     resetSingleProdByCode,
+    SearchByCategory,
     SearchProdCode,
     setProdCode,
 } from "../../Redux/Slices/Accounting/Products/product";
@@ -15,7 +17,7 @@ import {
     setSingleOrderInfo,
 } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { toastHandler } from "../../utils/setting";
-import { Close } from "@mui/icons-material";
+import { Close, RestartAlt } from "@mui/icons-material";
 
 function PtoductSFilter() {
     const dispatch = useDispatch();
@@ -29,7 +31,6 @@ function PtoductSFilter() {
     }, []);
 
     const AddProdByCode = () => {
-        console.log("here");
         if (singleProdByCode != null) {
             dispatch(
                 setSingleOrderInfo({
@@ -60,7 +61,6 @@ function PtoductSFilter() {
 
     useEffect(() => {
         if (singleProdByCode != null) {
-            console.log("here");
             AddProdByCode();
         }
         dispatch(resetSingleProdByCode());
@@ -73,6 +73,7 @@ function PtoductSFilter() {
         <Box sx={{ ...center, justifyContent: "end", gap: "10px" }}>
             <TextField
                 select
+                onChange={(e) => dispatch(SearchByCategory(e.target.value))}
                 sx={{
                     "& .MuiOutlinedInput-notchedOutline": {
                         borderColor: "white",
@@ -92,6 +93,7 @@ function PtoductSFilter() {
                 SelectProps={{
                     native: true,
                 }}
+
             >
                 <option value="">
                     <Typography
@@ -104,8 +106,19 @@ function PtoductSFilter() {
                         وضیعت محصول
                     </Typography>
                 </option>
+                <option value="" onClick={() => dispatch(getProList())}>
+                    <Typography
+                        sx={{
+                            fontSize: "12px",
+                            color: (theme) => theme.typography.color,
+                            fontWeight: 400,
+                        }}
+                    >
+                        همه
+                    </Typography>
+                </option>
                 {typeList?.map((item, index) => (
-                    <option value={item.id} key={item.id}>
+                    <option value={item.title} key={item.id}>
                         <Typography
                             sx={{
                                 fontSize: "12px",
@@ -118,6 +131,7 @@ function PtoductSFilter() {
                     </option>
                 ))}
             </TextField>
+            <RestartAlt sx={{ cursor: "pointer" }} onClick={() => dispatch(getProList())} />
 
             <Divider orientation="vertical" flexItem />
             <Input
