@@ -97,7 +97,6 @@ export const product = createSlice({
         });
         builder.addCase(getProList.rejected, (state, { payload }) => {
             state.loading = false;
-            console.log(payload)
             toastHandler("مشکلی پیش امده", "info");
         });
         //?get product list by category

@@ -56,6 +56,16 @@ function PayStatus() {
         dispatch(OrderPayList(cardId))
     }, [updatePay])
 
+    useEffect(() => {
+
+        dispatch(
+            setPaymentInfo({
+                key: "amount",
+                value: +OrderPrice?.remaining_amount,
+            })
+        );
+    }, [updatePay])
+
     return (
         <Box
             sx={{

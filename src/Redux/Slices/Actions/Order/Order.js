@@ -21,7 +21,7 @@ const initialState = {
         order_price: 0,
         calculated_discount: 0,
         remaining_amount: 0,
-        settled_amount: 0
+        settled_amount: 0,
     },
     promoCode: "",
 };
@@ -34,8 +34,8 @@ export const SingleOrderProds = createAsyncThunk(
 );
 export const CalcOrders = createAsyncThunk("order/clc", CalculateOrder);
 
-export const DeleteOrder = createAsyncThunk("order/delete", RemoveOrder)
-export const SaveOrder = createAsyncThunk("order/finial", FinilizeOrder)
+export const DeleteOrder = createAsyncThunk("order/delete", RemoveOrder);
+export const SaveOrder = createAsyncThunk("order/finial", FinilizeOrder);
 
 export const DeleteOrderItem = createAsyncThunk(
     "order/deleteProd",
@@ -59,6 +59,13 @@ export const Order = createSlice({
         resetPromoCode: (state) => {
             state.promoCode = initialState.promoCode;
         },
+        resetOrderPrice: (state) => {
+            state.OrderPrice = initialState.OrderPrice;
+        },
+
+        resetOrderStates: () => {
+            initialState;
+        },
     },
 
     extraReducers: (builder) => {
@@ -67,12 +74,13 @@ export const Order = createSlice({
             state.loading = true;
         });
         builder.addCase(OrderList.fulfilled, (state, { payload }) => {
-            (state.loading = false), (state.orderList = payload.data.data);
+            state.loading = false;
+            state.orderList = payload.data.data;
             state.update = false;
         });
         builder.addCase(OrderList.rejected, (state) => {
-            (state.loading = false),
-                toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجددا وارد شوید", "info");
         });
         //!add
         builder.addCase(addOrder.pending, (state) => {
@@ -109,7 +117,6 @@ export const Order = createSlice({
             state.update = true;
             // state.OrderProductList = payload.data.data;
             toastHandler("حذف شد", "info");
-
         });
         builder.addCase(DeleteOrder.rejected, (state) => {
             (state.loading = false),
@@ -124,7 +131,6 @@ export const Order = createSlice({
             state.update = true;
             // state.OrderProductList = payload.data.data;
             toastHandler("حذف شد", "info");
-
         });
         builder.addCase(DeleteOrderItem.rejected, (state) => {
             (state.loading = false),
@@ -148,10 +154,10 @@ export const Order = createSlice({
                 const statusCode = parseInt(statusMatch[0]);
                 console.log(`Extracted status code: ${statusCode}`);
                 if (statusCode === 409) {
-                    toastHandler("کد تخفیف اشتباه است", "error")
+                    toastHandler("کد تخفیف اشتباه است", "error");
                 }
             } else {
-                console.error('No status code found in message');
+                console.error("No status code found in message");
             }
         });
         //!finilize order
@@ -160,23 +166,27 @@ export const Order = createSlice({
         });
         builder.addCase(SaveOrder.fulfilled, (state, { payload }) => {
             state.loading = false;
-            state.update = false;
+            state.update = true;
             state.OrderPrice = initialState.OrderPrice;
             state.cardId = initialState.cardId;
             state.cardInfo = initialState.cardInfo;
             state.OrderProductList = initialState.OrderProductList;
-            toastHandler("فاکتور با موفقیت ثبت شد", "success")
+            toastHandler("فاکتور با موفقیت ثبت شد", "success");
         });
         builder.addCase(SaveOrder.rejected, (state, action) => {
             state.loading = false;
-            console.log(action)
-
-
+            console.log(action);
         });
     },
 });
 
-export const { getCardId, getCardInfo, setPromoCode, resetPromoCode } =
-    Order.actions;
+export const {
+    getCardId,
+    getCardInfo,
+    setPromoCode,
+    resetPromoCode,
+    resetOrderPrice,
+    resetOrderStates,
+} = Order.actions;
 
 export default Order.reducer;

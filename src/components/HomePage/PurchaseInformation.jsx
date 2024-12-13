@@ -5,11 +5,11 @@ import CustomerFactor from "./CustomerFactor";
 import PayStatus from "./PayStatus";
 import { toastHandler } from "../../utils/setting";
 import CancelBtn from "../UI/CancelBtn";
-import { Close } from "@mui/icons-material";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { CalcOrders, DeleteOrder, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
+import { DeleteOrder, OrderList, resetOrderStates, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
 import { resetTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
+import { resetPayment } from "../../Redux/Slices/Actions/Payment/payment";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
     const dispatch = useDispatch();
@@ -36,6 +36,9 @@ function PurchaseInformation() {
 
             dispatch(SaveOrder(cardId))
             dispatch(resetTransactionInfo())
+            dispatch(resetOrderStates())
+            dispatch(resetPayment())
+            dispatch(OrderList())
         } else {
             toastHandler("یک طرف معامله مشخص کنید", "info")
         }

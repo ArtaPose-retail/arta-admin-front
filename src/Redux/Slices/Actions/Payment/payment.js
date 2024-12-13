@@ -42,7 +42,8 @@ export const payment = createSlice({
         },
         resetPaymentInfo: (state, { payload }) => {
             state.newPayment[payload.key] = initialState.newPayment[payload.value]
-        }
+        },
+        resetPayment: () => initialState
 
     },
     extraReducers: (builder) => {
@@ -95,5 +96,5 @@ export const payment = createSlice({
     },
 });
 
-export const { setPaymentInfo, resetPaymentInfo } = payment.actions;
+export const { setPaymentInfo, resetPaymentInfo, resetPayment } = payment.actions;
 export default payment.reducer;
