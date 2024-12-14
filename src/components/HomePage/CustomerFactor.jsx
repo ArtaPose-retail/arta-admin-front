@@ -118,12 +118,16 @@ function CustomerFactor() {
                         <ReactToPrint
                             onAfterPrint={() => console.log("after")}
                             trigger={() => (
+
                                 <Print
                                     sx={{
                                         fill: (theme) => theme.palette.primary.light,
                                         cursor: "pointer",
                                     }}
                                 />
+
+
+
                             )}
                             content={() => ReciptRef.current}
                         />
