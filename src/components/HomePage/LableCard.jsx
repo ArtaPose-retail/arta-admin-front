@@ -4,7 +4,7 @@ import SingleLable from "./SingleLable";
 import { Box, Typography } from "@mui/material";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { addOrder, OrderList } from "../../Redux/Slices/Actions/Order/Order";
+import { addOrder, getCardId, getCardInfo, OrderList } from "../../Redux/Slices/Actions/Order/Order";
 
 function LableCard() {
     const dispatch = useDispatch();
@@ -18,6 +18,22 @@ function LableCard() {
     useEffect(() => {
         dispatch(OrderList());
     }, [update]);
+
+    useEffect(() => {
+        if ( orderList&& orderList.length > 0) {
+          
+          const reversedArray = [...orderList].reverse();
+    
+          const lastItemId = reversedArray[0].id;
+
+          dispatch(getCardId(lastItemId))
+          
+    
+          console.log("Last Item ID:", lastItemId);
+        }
+      }, [orderList]); 
+
+   
 
     return (
         <Box sx={{ width: "100wh", display: "flex", overflowX: "scroll" }}>

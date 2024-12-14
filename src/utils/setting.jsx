@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const instance = axios.create({
     // baseURL: "/v1",
-    baseURL: "https://api.artps.ir/v1",
+    baseURL: "http://192.168.100.3/v1",
     timeout: 60000,
 });
 

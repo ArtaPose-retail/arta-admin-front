@@ -5,10 +5,11 @@ import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
 import { CalcOrders, getCardId, getCardInfo, SingleOrderProds } from "../../Redux/Slices/Actions/Order/Order";
 import { OrderPayList } from "../../Redux/Slices/Actions/Payment/payment";
+import { useEffect } from "react";
 
 function SingleLable({ item, index, selectedIndex, onCardSelect }) {
     const dispatch = useDispatch()
-    const isSelected = item.id === selectedIndex;
+ 
     const handleCardSelect = (id) => {
         onCardSelect(id);
         dispatch(getCardId(id))
@@ -25,9 +26,19 @@ function SingleLable({ item, index, selectedIndex, onCardSelect }) {
 
 
     };
-    const { OrderPrice } = useSelector((state) => state.Order)
+    const { OrderPrice,cardId } = useSelector((state) => state.Order)
+
+    //const isSelected = item.id === selectedIndex;
+    const isSelected =cardId===item.id;
 
 
+   useEffect(()=>{
+    if(cardId==item.id){
+        console.log("here")
+        dispatch(getCardInfo(item))
+    }
+
+      },[cardId])
     return (
         <Box>
             <Badge

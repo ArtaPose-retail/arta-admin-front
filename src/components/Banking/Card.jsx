@@ -19,12 +19,18 @@ function Card() {
     const dispatch = useDispatch();
 
     const [openCancelBTn, setOpenCancelBTn] = useState(false);
+    const[bankId,setBankid]=useState(0)
     const handleOpenCancleModal = () => setOpenCancelBTn(true);
     const handleCloseCancleModal = () => setOpenCancelBTn(false);
 
-    const AcceptBtn = (id) => {
-        // dispatch(DeleteAccount(id))
-        console.log(id)
+    const AcceptBtn = () => {
+         dispatch(DeleteAccount(bankId))
+ 
+setOpenCancelBTn(false)
+    }
+    const OpenModal=(id)=>{
+        setBankid(id);
+        setOpenCancelBTn(true)
     }
 
     const addAcount = () => {
@@ -163,7 +169,7 @@ function Card() {
                             </Typography>
 
                             {/* })} */}
-                            <Box sx={{ ...center, justifyContent: "space-between" }}>
+                            <Box sx={{ ...center, justifyContent: "space-between",gap:"5px" }}>
                                 <Typography
                                     sx={{
                                         ...center,
@@ -186,6 +192,16 @@ function Card() {
                                         p: 0.2,
                                     }}
                                 />
+                                 <DeleteOutlineIcon
+                                    onClick={() => OpenModal(item?.id)}
+                                    fontSize="small"
+                                    sx={{
+                                        bgcolor: (theme) => theme.palette.error.main,
+                                        fill: (theme) => theme.palette.text.primary,
+                                        borderRadius: "8px",
+                                        p: 0.2,
+                                    }} />
+                                
                                 <CancelBtn
                                     BtnTitle={
                                         <DeleteOutlineIcon fontSize="small"
@@ -194,6 +210,7 @@ function Card() {
                                                 fill: (theme) => theme.palette.text.primary,
                                                 borderRadius: "8px",
                                                 p: 0.2,
+                                                display:'none'
                                             }} />
                                     }
                                     width="30%"
