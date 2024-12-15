@@ -25,7 +25,7 @@ import { addOrder } from "../../Redux/Slices/Actions/Order/Order";
 
 function NewFactor() {
     const dispatch = useDispatch();
-    const { TransActionList, update } = useSelector((state) => state.transactionsSlice);
+    const { TransActionList, update, newTransaction } = useSelector((state) => state.transactionsSlice);
     const { transactionInfo } = useSelector((state) => state.sellPage);
     const [open, setOpen] = useState(false);
     const [openTransaction, setOpenTransaction] = useState(false);
@@ -145,7 +145,7 @@ function NewFactor() {
                     type={"text"}
                     placeholder={"نام"}
                     name={"fname"}
-                    value={transactionInfo !== null ? transactionInfo?.fname : ""}
+                    value={transactionInfo !== null ? transactionInfo?.fname : newTransaction.fname}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({
@@ -160,7 +160,7 @@ function NewFactor() {
                     type={"text"}
                     name={"lname"}
                     placeholder={" نام خانوادگی"}
-                    value={transactionInfo !== null ? transactionInfo?.lname : ""}
+                    value={transactionInfo !== null ? transactionInfo?.lname : newTransaction.lname}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({

@@ -58,6 +58,17 @@ function PayStatus() {
 
     useEffect(() => {
 
+        dispatch(CalcOrders(cardId))
+        // dispatch(
+        //     setPaymentInfo({
+        //         key: "amount",
+        //         value: +OrderPrice?.remaining_amount,
+        //     })
+        // );
+    }, [updatePay])
+    useEffect(() => {
+
+        // dispatch(CalcOrders(cardId))
         dispatch(
             setPaymentInfo({
                 key: "amount",
@@ -65,6 +76,8 @@ function PayStatus() {
             })
         );
     }, [updatePay])
+
+
 
     return (
         <Box
