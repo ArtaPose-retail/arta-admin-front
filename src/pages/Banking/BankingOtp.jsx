@@ -10,7 +10,7 @@ import Input from "../../components/UI/Input";
 import Input2 from "../../components/UI/Input2";
 import { center } from "../../styles/theme";
 import { useDispatch } from "react-redux";
-import { OTPRequest, VerifyOTP } from "../../Redux/Slices/Accounting/Bank/Bank";
+import { OTPRequest, setOtpCode, VerifyOTP } from "../../Redux/Slices/Accounting/Bank/Bank";
 
 
 function BankingOtp() {
@@ -27,6 +27,10 @@ function BankingOtp() {
     useEffect(() => {
         dispatch(OTPRequest())
     }, [])
+
+    const HandleSetOtp = (name, value, type) => {
+        dispatch(setOtpCode(value))
+    }
     return (
         <Box sx={{ ...center, height: "80vh", gap: "15px" }}>
             <Paper
@@ -52,6 +56,7 @@ function BankingOtp() {
 
 
                     <Input
+                        onChange={HandleSetOtp}
                         type={"number"}
                         placeholder={"پیامک ارسال شده به شماره همراه خود را وارد کنید"}
 
