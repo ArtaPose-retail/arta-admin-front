@@ -187,7 +187,7 @@ function PayStatus() {
                                                         AddPayment({
                                                             method: 2,
                                                             orderId: cardId,
-                                                            BAId: item?.bank_id,
+                                                            BAId: item?.id,
                                                         })
                                                     );
                                                     setOpen(false);
