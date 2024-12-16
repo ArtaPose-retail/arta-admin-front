@@ -36,7 +36,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Grid item xs={4}>
                         <Box sx={{ ...center, gap: "3px" }}>
 
-                            <Typography variant="body2">Almfresh.ir</Typography>
+                            <Typography variant="body2">Almafresh.ir</Typography>
                             <Instagram />
                         </Box>
                         <Box sx={{ ...center, gap: "3px" }}>
@@ -46,7 +46,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                         </Box>
                         <Box sx={{ ...center, gap: "3px" }}>
 
-                            <Typography variant="body2">almfresh.ir</Typography>
+                            <Typography variant="body2">almafresh.ir</Typography>
                             <Web />
                         </Box>
                     </Grid>

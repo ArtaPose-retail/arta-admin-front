@@ -68,6 +68,17 @@ export const persianTime = (data) => {
     );
 };
 
+export const persianTimeTehran = (date) => {
+    if (date) {
+        const tehranMoment = moment(date).locale('fa');
+        return digitsEnToFa(tehranMoment.format('HH:mm'));
+    } else {
+        return '_';
+    }
+};
+
+
+
 import { toast } from "react-toastify";
 export const toastHandler = (msg, variant) => {
     toast[variant](msg, {

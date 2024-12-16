@@ -14,7 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { persianDate, persianTime, separateBy3, toPersian, toastHandler } from "../../utils/setting";
+import { persianDate, persianTime, persianTimeTehran, separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import moment from "jalali-moment";
 import { useDispatch, useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
@@ -70,13 +70,13 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(persianTime(row?.updated_at ?? 0))}
+                    {toPersian(persianTimeTehran(row?.created_at ?? 0))}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(persianDate(row?.updated_at ?? 0))}
+                    {toPersian(persianDate(row?.created_at ?? 0))}
                 </TableCell>
             </TableRow>
             <TableRow>
