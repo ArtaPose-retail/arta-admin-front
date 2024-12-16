@@ -7,10 +7,10 @@ import { toastHandler } from "../../utils/setting";
 import CancelBtn from "../UI/CancelBtn";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOrder, OrderList, resetOrderStates, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
+import { DeleteOrder, OrderList, resetOrderStates, restAllowPrint, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
 import { resetTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { resetPayment } from "../../Redux/Slices/Actions/Payment/payment";
-import ReactToPrint from "react-to-print";
+import ReactToPrint, { useReactToPrint } from "react-to-print";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
 import { Print } from "@mui/icons-material";
 function PurchaseInformation() {
@@ -27,7 +27,7 @@ function PurchaseInformation() {
     };
 
 
-    const { OrderPrice, cardInfo, OrderProductList, cardId } = useSelector(state => state.Order)
+    const { OrderPrice, cardInfo, OrderProductList, cardId, AllowPrint } = useSelector(state => state.Order)
     const { transactionInfo } = useSelector(state => state.sellPage)
     const AcceptBtn = () => {
         dispatch(DeleteOrder(cardId))
@@ -43,10 +43,34 @@ function PurchaseInformation() {
             dispatch(resetOrderStates())
             dispatch(resetPayment())
             dispatch(OrderList())
+
         } else {
             toastHandler("یک طرف معامله مشخص کنید", "info")
         }
     }
+
+
+    useEffect(() => {
+
+        if (AllowPrint) {
+            handlePrint();
+        }
+
+    }, [AllowPrint])
+
+
+    const handlePrint = () => {
+        if (ReciptReParent.current) {
+            window.setTimeout(() => {
+                printTrigger();
+            }, 500); // تأخیر برای اطمینان از آماده‌بودن محتوای چاپ
+        }
+    };
+
+    const printTrigger = useReactToPrint({
+        content: () => ReciptReParent.current,
+        onAfterPrint: () => dispatch(restAllowPrint())
+    });
 
 
 
@@ -128,7 +152,7 @@ function PurchaseInformation() {
             </Box>
 
             <Box sx={{ ...center, width: "100%", gap: "5px", mt: 1, height: "10%" }}>
-                {/* <Button
+                <Button
                     onClick={() => HandleSaveOrder()}
                     variant="contained"
                     sx={{
@@ -142,73 +166,17 @@ function PurchaseInformation() {
                     }}
                 >
                     ثبت نهایی
-                </Button>  */}
+                </Button>
 
-                <Box sx={{ ...center, width: "100%", gap: "10px" }}>
-                    {/* <span sx={{ cursor: "auto", width: "100%" }} variant="outlined"> */}
-                    <ReactToPrint
-                        onBeforePrint={() => HandleSaveOrder()}
-                        onAfterPrint={() => dispatch(OrderList())}
-                        trigger={() => (
-
-
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    bgcolor: (theme) => theme.palette.green.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                    width: "70%",
-                                    fontSize: "14px",
-                                    fontWeight: 700,
-                                    py: 2,
-                                    borderRadius: "12px",
-                                }}
-                            >
-                                ثبت نهایی
-                            </Button>
-
-
-                        )}
-                        content={() => ReciptReParent.current}
+                <Box sx={{ display: "none" }}>
+                    <ReceiptTemplate
+                        userInfo={cardInfo}
+                        OrderProductList={OrderProductList}
+                        OrderPrice={OrderPrice}
+                        ref={ReciptReParent}
                     />
-                    {/* </span> */}
-
-                    <Box sx={{ display: "none" }}>
-                        <ReceiptTemplate
-                            userInfo={cardInfo}
-                            OrderProductList={OrderProductList}
-                            OrderPrice={OrderPrice}
-                            ref={ReciptReParent}
-                        />
-                    </Box>
                 </Box>
-                {/* <CancelBtn
-                    BtnTitle={
-                        <Typography
-                            sx={{
-                                bgcolor: (theme) => theme.palette.warning.main,
-                                color: (theme) => theme.palette.text.primary,
-                                width: "100%",
-                                fontSize: "14px",
-                                py: 2,
-                                fontWeight: 700,
-                                borderRadius: "12px",
-                                "&:hover": {
-                                    bgcolor: (theme) => theme.palette.warning.main,
-                                    color: (theme) => theme.palette.text.primary,
-                                },
-                            }}
-                        >
-                            انصراف
-                        </Typography>
-                    }
-                    width="30%"
-                    open={openCancelBTn}
-                    handleClose={handleCloseCancleModal}
-                    handleOpen={handleOpenCancleModal}
-                    title={"انصراف  از درخواست"}
-                    question={"آیا از انصراف اطمینان دارید؟"}
-                /> */}
+
                 <CancelBtn
                     BtnTitle={
                         <Typography

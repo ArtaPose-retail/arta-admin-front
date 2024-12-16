@@ -24,6 +24,7 @@ const initialState = {
         settled_amount: 0,
     },
     promoCode: "",
+    AllowPrint: false
 };
 
 export const OrderList = createAsyncThunk("order/list", GetOrderList);
@@ -66,6 +67,9 @@ export const Order = createSlice({
         resetOrderStates: () => {
             initialState;
         },
+        restAllowPrint: (state) => {
+            state.AllowPrint = initialState.AllowPrint
+        }
     },
 
     extraReducers: (builder) => {
@@ -171,6 +175,7 @@ export const Order = createSlice({
             state.cardId = initialState.cardId;
             state.cardInfo = initialState.cardInfo;
             state.OrderProductList = initialState.OrderProductList;
+            state.AllowPrint = true
             toastHandler("فاکتور با موفقیت ثبت شد", "success");
         });
         builder.addCase(SaveOrder.rejected, (state, action) => {
@@ -187,6 +192,7 @@ export const {
     resetPromoCode,
     resetOrderPrice,
     resetOrderStates,
+    restAllowPrint
 } = Order.actions;
 
 export default Order.reducer;
