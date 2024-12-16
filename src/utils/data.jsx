@@ -1006,7 +1006,7 @@ export const factorItemForm = [
         lable: "وزن  ",
         hasIcon: false,
         color: "#6D6D6D",
-        type: "text",
+        type: "number",
     },
 
     {

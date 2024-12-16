@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,8 +12,16 @@ import { Box } from "@mui/material";
 
 import { separateBy3, toPersian } from "../../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOrderItem, FactorItemslist, setFactorItems } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
-import EditIcon from '@mui/icons-material/Edit';
+import {
+    DeleteOrderItem,
+    FactorItemslist,
+    setFactorItems,
+} from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
+import EditIcon from "@mui/icons-material/Edit";
+import { PrintRounded } from "@mui/icons-material";
+import ReactToPrint from "react-to-print";
+import ProdCode from "../../../PrintTemplate/ProdCode";
+import { singleProd } from "../../../../Redux/Slices/Accounting/Products/product";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,36 +44,33 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function FactorItemstable({ height }) {
-    const dispach = useDispatch()
-
-    const { addDetailRes } = useSelector(
-        (state) => state.factorDetails
-    );
-    const { singleOrderList, update } = useSelector(
-        (state) => state.factorItems
-    );
+    const dispach = useDispatch();
+    const prodRef = useRef();
+    const { addDetailRes } = useSelector((state) => state.factorDetails);
+    const { singleOrderList, update } = useSelector((state) => state.factorItems);
 
     useEffect(() => {
-        dispach(FactorItemslist(addDetailRes?.id))
-    }, [addDetailRes?.id, update])
-
+        dispach(FactorItemslist(addDetailRes?.id));
+    }, [addDetailRes?.id, update]);
 
     const deleteBtn = (prod_id) => {
-        dispach(DeleteOrderItem({ order_id: addDetailRes?.id, op_id: prod_id }))
+        dispach(DeleteOrderItem({ order_id: addDetailRes?.id, op_id: prod_id }));
     };
 
     const EditHandler = (item) => {
-        console.log(item)
+        console.log(item);
 
         for (const key in item) {
             if (Object.prototype.hasOwnProperty.call(item, key)) {
-                dispach(setFactorItems({
-                    key: key,
-                    value: item[key]
-                }))
+                dispach(
+                    setFactorItems({
+                        key: key,
+                        value: item[key],
+                    })
+                );
             }
         }
-    }
+    };
     return (
         <TableContainer sx={{ maxHeight: height }}>
             <Table stickyHeader aria-label="sticky table">
@@ -84,47 +89,69 @@ export default function FactorItemstable({ height }) {
                 </TableHead>
                 <TableBody>
                     {singleOrderList?.map((item, index) => (
-                        <StyledTableRow key={index}>
-                            <StyledTableCell width={"10%"} align="center">
-                                {toPersian(index + 1)}
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {item?.Title}
-                            </StyledTableCell>
+                        <>
+                            <StyledTableRow key={index}>
+                                <StyledTableCell width={"10%"} align="center">
+                                    {toPersian(index + 1)}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">{item?.Title}</StyledTableCell>
 
-                            <StyledTableCell align="center">
-                                {toPersian(separateBy3(item?.initial_buy_price ?? 0))}ریال
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {toPersian(separateBy3(item?.original_price ?? 0))}ریال
-                            </StyledTableCell>
-                            <StyledTableCell align="center">
-                                {toPersian(separateBy3(item?.unitprice ?? 0))}ریال
-                            </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {toPersian(separateBy3(item?.initial_buy_price ?? 0))}ریال
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {toPersian(separateBy3(item?.original_price ?? 0))}ریال
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    {toPersian(separateBy3(item?.unitprice ?? 0))}ریال
+                                </StyledTableCell>
 
-                            <StyledTableCell align="center">{item?.quantity}{item?.IsBulk == true ? "عدد" : "کیلوگرم"}</StyledTableCell>
-                            <StyledTableCell align="center">
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        gap: "10px",
-                                    }}
-                                >
-                                    <EditIcon sx={{
-                                        cursor: "pointer",
-                                    }} onClick={() => EditHandler(item)} />
-                                    <DeleteOutlineIcon
-                                        onClick={() => deleteBtn(item?.id)}
+                                <StyledTableCell align="center">
+                                    {item?.quantity}
+                                    {item?.IsBulk == true ? "عدد" : "کیلوگرم"}
+                                </StyledTableCell>
+                                <StyledTableCell align="center">
+                                    <Box
                                         sx={{
-                                            fill: (theme) => theme.palette.warning.main,
-                                            cursor: "pointer",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "10px",
                                         }}
-                                    />
-                                </Box>
-                            </StyledTableCell>
-                        </StyledTableRow>
+                                    >
+                                        <EditIcon
+                                            sx={{
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() => EditHandler(item)}
+                                        />
+                                        <DeleteOutlineIcon
+                                            onClick={() => deleteBtn(item?.id)}
+                                            sx={{
+                                                fill: (theme) => theme.palette.warning.main,
+                                                cursor: "pointer",
+                                            }}
+                                        />
+
+                                        <ReactToPrint
+                                            onBeforePrint={() => dispach(singleProd(item?.product_id))}
+                                            trigger={() => (
+                                                <PrintRounded
+                                                    sx={{
+                                                        fill: (theme) => theme.palette.primary.light,
+                                                        cursor: "pointer",
+                                                    }}
+                                                />
+                                            )}
+                                            content={() => prodRef.current}
+                                        />
+                                    </Box>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                            <Box sx={{ display: "none" }}>
+                                <ProdCode ref={prodRef} data={item} />
+                            </Box>
+                        </>
                     ))}
                 </TableBody>
             </Table>

@@ -129,7 +129,7 @@ function FactorItems({ handleClose }) {
                                         singleProd?.is_bulk && item.lable.trim() === "وزن"
                                             ? true
                                             : !singleProd?.is_bulk && item.lable.trim() === "تعداد"
-                                                ? false
+                                                ? true
                                                 : false
                                     }
                                 />
