@@ -10,12 +10,17 @@ const initialState = {
     singleOrder: {
         product_id: 0,
         quantity: 1,
-        unitprice: 0
+        unitprice: 0,
     },
-    scaleData: null
+    scaleData: {
+        weight: 0
+    },
 };
 
-export const AddProdOrder = createAsyncThunk("sellpage/addProd", addProdOrderThunk)
+export const AddProdOrder = createAsyncThunk(
+    "sellpage/addProd",
+    addProdOrderThunk
+);
 
 export const sellPage = createSlice({
     name: "sellPage",
@@ -25,31 +30,41 @@ export const sellPage = createSlice({
             state.transactionInfo = payload;
         },
         resetTransactionInfo: (state) => {
-            state.transactionInfo = initialState.transactionInfo
+            state.transactionInfo = initialState.transactionInfo;
         },
         setSingleOrderInfo: (state, { payload }) => {
             state.singleOrder[payload.key] = payload.value;
         },
         setScaleData: (state, { payload }) => {
-            state.scaleData = payload
-        }
+            state.scaleData.weight = payload;
+        },
+        resetSingleOrder: (state) => {
+            state.singleOrder = initialState.singleOrder;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(AddProdOrder.pending, (state) => {
-            state.loading = true
-            state.sellUpdate = true
-        })
+            state.loading = true;
+            state.sellUpdate = true;
+        });
         builder.addCase(AddProdOrder.fulfilled, (state) => {
-            state.loading = false
-            state.sellUpdate = false
-        })
+            state.loading = false;
+            state.sellUpdate = false;
+            state.singleOrder = initialState.singleOrder
+        });
         builder.addCase(AddProdOrder.rejected, (state) => {
-            state.loading = false
-            state.sellUpdate = false,
-                toastHandler("خطا در  افزودن محصول. موجودی را بررسی کنید", "error")
-        })
+            state.loading = false;
+            (state.sellUpdate = false),
+                toastHandler("خطا در  افزودن محصول. موجودی را بررسی کنید", "error");
+        });
     },
 });
 
-export const { setTransactionInfo, setSingleOrderInfo, setScaleData, resetTransactionInfo } = sellPage.actions;
+export const {
+    setTransactionInfo,
+    setSingleOrderInfo,
+    setScaleData,
+    resetTransactionInfo,
+    resetSingleOrder
+} = sellPage.actions;
 export default sellPage.reducer;

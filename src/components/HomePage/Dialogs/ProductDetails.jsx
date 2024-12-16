@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    CircularProgress,
     Collapse,
     Dialog,
     DialogContent,
@@ -25,6 +26,7 @@ import { center } from "../../../styles/theme";
 import apiRouts from "../../../utils/apiRouts";
 import {
     AddProdOrder,
+    resetSingleOrder,
     setSingleOrderInfo,
 } from "../../../Redux/Slices/Actions/SellPage/sellPage";
 import { singleProd } from "../../../Redux/Slices/Accounting/Products/product";
@@ -70,34 +72,45 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
         );
     };
 
-    const { signleProd } = useSelector((state) => state.product);
+    const { signleProd, update, loading } = useSelector((state) => state.product);
     const { singleOrder, scaleData } = useSelector((state) => state.sellPage);
     const { cardId } = useSelector((state) => state.Order);
-
-    console.log(singleOrder)
-
 
 
     const OrderSubmitHandler = () => {
         if (cardId != 0) {
             dispatch(AddProdOrder(cardId));
-            handlerCloseDialog()
+            dispatch(resetSingleOrder());
+            handlerCloseDialog();
         } else {
-            toastHandler("ابتدا یک طرف معامله مشخص کنید", "info");
+            toastHandler("ابتدا یک طرف فاکتور بسازید", "info");
         }
     };
 
     useEffect(() => {
+
+
         if (signleProd?.is_bulk == false) {
-            console.log("here")
             dispatch(
                 setSingleOrderInfo({
                     key: "quantity",
                     value: +scaleData?.weight,
                 })
             );
+        } else if (signleProd?.is_bulk == true) {
+            dispatch(
+                setSingleOrderInfo({
+                    key: "quantity",
+                    value: 1,
+                })
+            );
         }
-    }, [])
+
+
+
+
+    }, [iteminfo, loading]);
+
     return (
         <div>
             <Dialog
@@ -168,7 +181,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                         </Typography>
                     </Box>
 
-                    <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
+                    {loading ? <CircularProgress sx={{ m: 3 }} /> : <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
                         {ProductItemInfoForm?.map((item, index) => (
                             <Grid item xs={4} key={index}>
                                 <InputLabel>
@@ -184,19 +197,25 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 </InputLabel>
 
                                 <Input
+                                    // value={
+                                    //     item.name == "FinalPrice"
+                                    //         ? singleOrder?.quantity * iteminfo?.price
+                                    //         : item.name == "quantity"
+                                    //             ? signleProd?.is_bulk
+                                    //                 ? singleOrder?.quantity
+                                    //                 : scaleData?.weight
+                                    //             : signleProd != null
+                                    //                 ? signleProd[item?.name]
+                                    //                 : ""
+                                    // }
+
                                     value={
-                                        item.name == "FinalPrice"
-                                            ? singleOrder?.quantity * iteminfo?.price
-                                            : item.name == "quantity"
-                                                ? signleProd?.is_bulk
-                                                    ? singleOrder?.quantity
-                                                    : scaleData?.weight
-                                                : signleProd != null
-                                                    ? signleProd[item?.name]
-                                                    : ""
-
+                                        item.name == "quantity"
+                                            ? singleOrder?.quantity
+                                            : item.name == "FinalPrice"
+                                                ? singleOrder?.quantity * signleProd?.price
+                                                : signleProd[item?.name]
                                     }
-
                                     type={item.type}
                                     placeholder={item.placeholder}
                                     onChange={onChangeHandler}
@@ -212,7 +231,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 />
                             </Grid>
                         ))}
-                    </Grid>
+                    </Grid>}
                     <Box sx={{ ...center, justifyContent: "space-between" }}>
                         <Box
                             sx={{
