@@ -64,9 +64,10 @@ export const Order = createSlice({
             state.OrderPrice = initialState.OrderPrice;
         },
 
-        resetOrderStates: () => {
-            initialState;
+        resetOrderStates: (state) => {
+            return { ...initialState };
         },
+
         restAllowPrint: (state) => {
             state.AllowPrint = initialState.AllowPrint
         }
@@ -171,10 +172,6 @@ export const Order = createSlice({
         builder.addCase(SaveOrder.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = true;
-            state.OrderPrice = initialState.OrderPrice;
-            state.cardId = initialState.cardId;
-            state.cardInfo = initialState.cardInfo;
-            state.OrderProductList = initialState.OrderProductList;
             state.AllowPrint = true
             toastHandler("فاکتور با موفقیت ثبت شد", "success");
         });

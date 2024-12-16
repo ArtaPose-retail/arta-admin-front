@@ -14,9 +14,14 @@ import { useSelector } from "react-redux";
 
 const ReceiptTemplate = forwardRef((props, ref) => {
 
-    const { OrderProductList, userInfo, OrderPrice } = props
+    // const { OrderProductList, OrderPrice } = props
 
+    const { OrderPrice, OrderProductList } = useSelector(state => state.Order)
+
+    const { transactionInfo } = useSelector(state => state.sellPage)
     const { loginInfo } = useSelector(state => state.auth)
+
+    console.log(OrderProductList)
 
     return (
         <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 2 }}>
@@ -51,11 +56,11 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1 }}>
 
                         <Typography sx={{ fontSize: "10px" }} >
-                            شماره فاکتور: {toPersian(userInfo?.orderpublicid ?? 0)}
+                            شماره فاکتور: {toPersian(transactionInfo?.orderpublicid ?? 0)}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
                         <Typography sx={{ fontSize: "10px" }} >
-                            زمان: {persianDate(userInfo?.updated_at)}- {persianTime(userInfo?.create_at)}
+                            زمان: {persianDate(transactionInfo?.updated_at)}- {persianTime(transactionInfo?.create_at)}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
 
@@ -67,10 +72,10 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1, justifyContent: "space-evenly" }}>
 
                         <Typography sx={{ fontSize: "12px" }}>
-                            مشتری: <strong>{userInfo?.cust_fullname}</strong>
+                            مشتری: <strong>{transactionInfo?.fname}</strong>
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            شناسه مشتری: <strong>{userInfo?.cust_id}</strong>
+                            شناسه مشتری: <strong>{transactionInfo?.cust_id}</strong>
                         </Typography>
                     </Box>
                 </Box>

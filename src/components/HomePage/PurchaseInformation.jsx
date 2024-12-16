@@ -39,9 +39,9 @@ function PurchaseInformation() {
         if (transactionInfo !== null) {
 
             dispatch(SaveOrder(cardId))
-            dispatch(resetTransactionInfo())
-            dispatch(resetOrderStates())
-            dispatch(resetPayment())
+            // dispatch(resetTransactionInfo())
+            // dispatch(resetOrderStates())
+            // dispatch(resetPayment())
             dispatch(OrderList())
 
         } else {
@@ -69,7 +69,13 @@ function PurchaseInformation() {
 
     const printTrigger = useReactToPrint({
         content: () => ReciptReParent.current,
-        onAfterPrint: () => dispatch(restAllowPrint())
+        onAfterPrint: () => {
+            dispatch(restAllowPrint())
+            dispatch(resetTransactionInfo())
+            dispatch(resetOrderStates())
+            dispatch(resetPayment())
+
+        }
     });
 
 
@@ -170,7 +176,7 @@ function PurchaseInformation() {
 
                 <Box sx={{ display: "none" }}>
                     <ReceiptTemplate
-                        userInfo={cardInfo}
+                        userInfo={transactionInfo}
                         OrderProductList={OrderProductList}
                         OrderPrice={OrderPrice}
                         ref={ReciptReParent}
