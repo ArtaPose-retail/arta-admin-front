@@ -26,6 +26,7 @@ import {
     OrderPayList,
     setPaymentInfo,
 } from "../../Redux/Slices/Actions/Payment/payment";
+import { numberToWords } from "@persian-tools/persian-tools";
 
 function PayStatus() {
     const [open, setOpen] = React.useState(false);
@@ -57,24 +58,22 @@ function PayStatus() {
     }, [updatePay])
 
     useEffect(() => {
-
+        console.log("")
         dispatch(CalcOrders(cardId))
-        // dispatch(
-        //     setPaymentInfo({
-        //         key: "amount",
-        //         value: +OrderPrice?.remaining_amount,
-        //     })
-        // );
+
     }, [updatePay])
     useEffect(() => {
 
-        // dispatch(CalcOrders(cardId))
-        dispatch(
-            setPaymentInfo({
-                key: "amount",
-                value: +OrderPrice?.remaining_amount,
-            })
-        );
+        setTimeout(() => {
+            console.log("")
+            dispatch(
+                setPaymentInfo({
+                    key: "amount",
+                    value: OrderPrice?.remaining_amount == 0 ? "" : OrderPrice?.remaining_amount,
+                })
+            );
+        }, 1000);
+
     }, [updatePay])
 
 
@@ -164,7 +163,7 @@ function PayStatus() {
                     </Typography>
                 </Box>
             </Box>
-            <Box sx={{ ...center, m: 0.5, gap: "10px", width: "65%" }}>
+            <Box sx={{ ...center, flexDirection: "column", m: 0.5, gap: "10px", width: "65%" }}>
                 <Input
                     name={"amount"}
                     hasText={true}
@@ -172,6 +171,15 @@ function PayStatus() {
                     onChange={EnterAmount}
                     value={newPayment?.amount}
                 />
+                <Typography
+                    sx={{
+                        color: (theme) => theme.palette.text.secondary,
+                        fontSize: "10px",
+                        fontWeight: 700,
+                    }}
+                >
+                    {numberToWords(newPayment?.amount ?? 0, { ordinal: false })} ریال
+                </Typography>
             </Box>
             <Box sx={{ ...center, gap: "15px", my: 1 }}>
                 <Box
