@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { addProdOrderThunk } from "./SellpageThunk";
+import { toastHandler } from "../../../../utils/setting";
 
 const initialState = {
     loading: false,
@@ -44,7 +45,8 @@ export const sellPage = createSlice({
         })
         builder.addCase(AddProdOrder.rejected, (state) => {
             state.loading = false
-            state.sellUpdate = false
+            state.sellUpdate = false,
+                toastHandler("خطا در  افزودن محصول. موجودی را بررسی کنید", "error")
         })
     },
 });

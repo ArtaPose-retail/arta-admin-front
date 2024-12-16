@@ -62,6 +62,7 @@ function PtoductSFilter() {
     useEffect(() => {
         if (singleProdByCode != null) {
             AddProdByCode();
+            dispatch(resetProdCode())
         }
         dispatch(resetSingleProdByCode());
     }, [loading]);
