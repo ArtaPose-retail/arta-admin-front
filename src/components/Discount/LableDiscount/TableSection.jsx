@@ -178,7 +178,7 @@ export default function TableSection() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {promoList.map((row, index) => (
+                        {promoList.slice().reverse().map((row, index) => (
                             <Row key={index} row={row} />
                         ))}
                     </TableBody>
