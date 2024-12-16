@@ -19,7 +19,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
     const { loginInfo } = useSelector(state => state.auth)
 
     return (
-        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 1.5 }}>
+        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 2 }}>
             {/* Header */}
             <Box sx={{ border: "1px solid black ", borderRadius: "15px" }}>
 
@@ -140,7 +140,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                 <Typography variant="body2">
                     تخفیف: <strong>{toPersian(separateBy3(OrderPrice?.calculated_discount ?? 0))}</strong> ریال
                 </Typography>
-                <Typography variant="h6" sx={{ mt: 1, fontWeight: "bold" }}>
+                <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
                     قابل پرداخت: <strong>{toPersian(separateBy3((OrderPrice?.order_price - OrderPrice?.calculated_discount) ?? 0))}</strong> ریال
                 </Typography>
                 <Divider sx={{ my: 1 }} />
