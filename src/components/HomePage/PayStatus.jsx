@@ -7,7 +7,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
 import { Box } from "@mui/system";
 import Title from "../UI/Title";
@@ -77,6 +77,35 @@ function PayStatus() {
         );
     }, [updatePay])
 
+
+    // فرض کنید از useState برای مدیریت وضعیت استفاده می‌کنید.
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const handleItemClick = (item) => {
+        dispatch(
+            AddPayment({
+                method: 2,
+                orderId: cardId,
+                BAId: item?.id,
+            })
+        );
+        setPositem(item?.representer_pos_name);
+        setSelectedItem(item); // آیتم انتخاب شده را ذخیره می‌کنیم
+        setOpen(false);
+    };
+
+    const handleTypographyClick = () => {
+        if (selectedItem) {
+            dispatch(
+                AddPayment({
+                    method: 2,
+                    orderId: cardId,
+                    BAId: selectedItem?.id, // استفاده از آیتم ذخیره شده
+                })
+            );
+            toastHandler("درخواست ارسال شد", "info");
+        }
+    };
 
 
     return (
@@ -157,7 +186,7 @@ function PayStatus() {
                         gap: "5px",
                     }}
                 >
-                    <Typography
+                    {/* <Typography
                         onClick={() => toastHandler("درخواست ارسال شد", "info")}
                         sx={{
                             color: (theme) => theme.palette.text.primary,
@@ -203,6 +232,7 @@ function PayStatus() {
                                                             BAId: item?.id,
                                                         })
                                                     );
+                                                    setPositem(item?.representer_pos_name)
                                                     setOpen(false);
                                                 }}
                                             >
@@ -212,7 +242,55 @@ function PayStatus() {
                                 </Box>
                             </Fade>
                         )}
+                    </Popper> */}
+
+                    <Typography
+                        onClick={handleTypographyClick} // فراخوانی تابع ذخیره شده
+                        sx={{
+                            color: (theme) => theme.palette.text.primary,
+                            cursor: "pointer",
+                        }}
+                    >
+                        {PosItem}
+                    </Typography>
+                    <Box
+                        sx={{ borderLeft: "1px solid white", ...center, cursor: "pointer" }}
+                        aria-describedby={id}
+                        type="button"
+                        onClick={handleClick}
+                    >
+                        <ExpandMore sx={{ fill: "white" }} />
+                    </Box>
+                    <Popper id={id} open={open} anchorEl={anchorEl} transition>
+                        {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={350}>
+                                <Box
+                                    sx={{
+                                        borderRadius: "12px",
+                                        border: "1px solid gray",
+                                        p: 1,
+                                        bgcolor: "background.paper",
+                                    }}
+                                >
+                                    {paymentBA &&
+                                        paymentBA.map((item, index) => (
+                                            <Typography
+                                                key={index}
+                                                sx={{
+                                                    borderBottom: "1px solid gray",
+                                                    p: 1,
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() => handleItemClick(item)} // استفاده از تابع مشترک
+                                            >
+                                                {item?.bank_name?.name}-{item?.representer_pos_name}
+                                            </Typography>
+                                        ))}
+                                </Box>
+                            </Fade>
+                        )}
                     </Popper>
+
                 </Box>
                 <Button
                     onClick={
