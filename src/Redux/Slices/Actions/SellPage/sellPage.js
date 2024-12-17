@@ -36,7 +36,7 @@ export const sellPage = createSlice({
             state.singleOrder[payload.key] = payload.value;
         },
         setScaleData: (state, { payload }) => {
-            state.scaleData.weight = payload;
+            state.scaleData.weight = payload.weight;
         },
         resetSingleOrder: (state) => {
             state.singleOrder = initialState.singleOrder;
