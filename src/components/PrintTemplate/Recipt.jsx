@@ -16,7 +16,9 @@ const ReceiptTemplate = forwardRef((props, ref) => {
 
     // const { OrderProductList, OrderPrice } = props
 
-    const { OrderPrice, OrderProductList } = useSelector(state => state.Order)
+    const { OrderPrice, OrderProductList, cardInfo } = useSelector(state => state.Order)
+
+
 
     const { transactionInfo } = useSelector(state => state.sellPage)
     const { loginInfo } = useSelector(state => state.auth)
@@ -56,7 +58,7 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1 }}>
 
                         <Typography sx={{ fontSize: "10px" }} >
-                            شماره فاکتور: {toPersian(transactionInfo?.orderpublicid ?? 0)}
+                            شماره فاکتور: {toPersian(cardInfo?.orderpublicid ?? 0)}
                         </Typography>
                         <Divider orientation="vertical" flexItem />
                         <Typography sx={{ fontSize: "10px" }} >
@@ -72,10 +74,10 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1, justifyContent: "space-evenly" }}>
 
                         <Typography sx={{ fontSize: "12px" }}>
-                            مشتری: <strong>{transactionInfo?.fname}</strong>
+                            مشتری: <span>{transactionInfo?.fname} {transactionInfo?.lname}</span>
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            شناسه مشتری: <strong>{transactionInfo?.cust_id}</strong>
+                            شناسه مشتری: <span>{transactionInfo?.user_id}</span>
                         </Typography>
                     </Box>
                 </Box>
