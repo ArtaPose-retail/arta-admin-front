@@ -24,7 +24,7 @@ const ProdCode = forwardRef((props, ref) => {
             sx={{
                 padding: 0, // کاهش فاصله داخلی
                 width: "45mm", // عرض ثابت
-                height: "13mm", // ارتفاع ثابت
+                height: "12mm", // ارتفاع ثابت
 
                 display: "flex",
                 flexDirection: "column",
@@ -99,8 +99,8 @@ const ProdCode = forwardRef((props, ref) => {
                                         padding: "2px",
                                         borderRadius: "3px",
                                         width: "100%",
-                                        fontSize: "7px", // کاهش اندازه فونت
-                                        fontWeight: "bold",
+                                        fontSize: "8px", // کاهش اندازه فونت
+                                        fontWeight: "900",
                                     }}
                                 >
                                     {toPersian(signleProd?.code ?? 0)}
@@ -109,9 +109,9 @@ const ProdCode = forwardRef((props, ref) => {
                                     variant="body2"
                                     textAlign="center"
                                     sx={{
-                                        // border: "1px solid black",
+
                                         padding: "2px",
-                                        borderRadius: "3px",
+
                                         fontSize: "10px", // کاهش اندازه فونت
                                         width: "100%",
                                         fontWeight: "bold",
