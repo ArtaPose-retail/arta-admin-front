@@ -182,7 +182,7 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                     </Box>
 
                     {loading ? <CircularProgress sx={{ m: 3 }} /> : <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
-                        {ProductItemInfoForm?.map((item, index) => (
+                        {signleProd && ProductItemInfoForm?.map((item, index) => (
                             <Grid item xs={4} key={index}>
                                 <InputLabel>
                                     <Typography
@@ -197,17 +197,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 </InputLabel>
 
                                 <Input
-                                    // value={
-                                    //     item.name == "FinalPrice"
-                                    //         ? singleOrder?.quantity * iteminfo?.price
-                                    //         : item.name == "quantity"
-                                    //             ? signleProd?.is_bulk
-                                    //                 ? singleOrder?.quantity
-                                    //                 : scaleData?.weight
-                                    //             : signleProd != null
-                                    //                 ? signleProd[item?.name]
-                                    //                 : ""
-                                    // }
 
                                     value={
                                         item.name == "quantity"

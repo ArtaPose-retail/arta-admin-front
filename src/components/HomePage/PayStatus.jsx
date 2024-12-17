@@ -69,10 +69,10 @@ function PayStatus() {
             dispatch(
                 setPaymentInfo({
                     key: "amount",
-                    value: OrderPrice?.remaining_amount == 0 ? "" : OrderPrice?.remaining_amount,
+                    value: OrderPrice?.remaining_amount == 0 ? 0 : OrderPrice?.remaining_amount,
                 })
             );
-        }, 1000);
+        }, 1500);
 
     }, [updatePay])
 

@@ -8,7 +8,7 @@ const initialState = {
     paymentBA: [],
     paymentOrderList: [],
     newPayment: {
-        amount: "",
+        amount: 0,
         bank_account_id: 0,
         extra: {},
         is_order_specific: true,
