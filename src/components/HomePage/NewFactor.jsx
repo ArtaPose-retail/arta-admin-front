@@ -53,7 +53,17 @@ function NewFactor() {
     }
     useEffect(() => {
         dispatch(getTransactions("Customer"));
+
     }, [update]);
+
+    useEffect(() => {
+        dispatch(
+            setNewTransaction({
+                key: "user_type",
+                value: "Customer",
+            })
+        );
+    }, [])
     return (
         <Box
             sx={{

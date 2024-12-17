@@ -13,6 +13,7 @@ import { resetPayment } from "../../Redux/Slices/Actions/Payment/payment";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
 import { Print } from "@mui/icons-material";
+import { addTransactions, resetNewTransaction } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
     const dispatch = useDispatch();
@@ -34,7 +35,14 @@ function PurchaseInformation() {
         setOpenCancelBTn(false)
     }
 
+    const CreateTransaction = () => {
+        dispatch(addTransactions());
+        dispatch(resetNewTransaction());
+    }
+
     const HandleSaveOrder = () => {
+
+        // CreateTransaction()
 
         if (transactionInfo !== null) {
 
