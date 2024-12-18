@@ -8,18 +8,22 @@ import moment from "jalali-moment";
 import { persianDate, separateBy3, toPersian } from "../../utils/setting";
 import { report } from "../../utils/data";
 import PayDialog from "../../components/Report/PayDialog";
-import { center } from '../../styles/theme'
+import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { Cashierinfo } from "../../Redux/Slices/Accounting/Cashier/cashier";
+import {
+    Cashierinfo,
+    SelesInfo,
+} from "../../Redux/Slices/Accounting/Cashier/cashier";
 //! this page is for AMALIAt page
 
 function Report() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(Cashierinfo())
-    }, [])
+        dispatch(Cashierinfo());
+        dispatch(SelesInfo());
+    }, []);
 
-    const { cashierData } = useSelector(state => state.cashier)
+    const { cashierData, selesData } = useSelector((state) => state.cashier);
 
     return (
         <Box
@@ -48,7 +52,7 @@ function Report() {
                         color: (theme) => theme.palette.text.card,
                     }}
                 >
-                    {persianDate(new Date)}
+                    {persianDate(new Date())}
                 </Typography>
             </Box>
             <Box sx={{ px: 2, mt: 4 }}>
@@ -93,7 +97,10 @@ function Report() {
                                         p: 1,
                                     }}
                                 >
-                                    {cashierData ? toPersian(separateBy3(cashierData[item?.name] ?? 0)) : ""} {item.hasText ? "ریال" : ""}
+                                    {cashierData
+                                        ? toPersian(separateBy3(cashierData[item?.name] ?? 0))
+                                        : ""}{" "}
+                                    {item.hasText ? "ریال" : ""}
                                 </Typography>
                             </Box>
                         </Grid>
@@ -138,7 +145,10 @@ function Report() {
                                             p: 1,
                                         }}
                                     >
-                                        {toPersian(separateBy3(item.value))}ریال
+                                        {selesData
+                                            ? toPersian(separateBy3(selesData[item?.name] ?? 0))
+                                            : ""}{" "}
+                                        {item.hasText ? "ریال" : ""}
                                     </Typography>
                                 </Box>
                                 <Box />

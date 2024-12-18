@@ -1687,16 +1687,19 @@ export const report = {
             title: "فروش نقدی",
             value: 20000,
             hasText: true,
+            name: "CashTotal"
         },
         {
             title: "فروش نسیه",
             value: 20000,
             hasText: true,
+            name: "CreditTotal"
         },
         {
             title: "جمع کل فروش",
             value: 20000,
             hasText: true,
+            name: "SalesTotal"
 
         },
     ],
