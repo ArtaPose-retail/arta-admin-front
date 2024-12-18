@@ -160,3 +160,20 @@ export const DiscountPercentage = (discount, original_price) => {
         return 0
     }
 }
+
+
+export function translateStatusDoc(status) {
+    const translations = {
+        IN_DEBT: "بدهکار",
+        PARTIAL_ADVANCE_SETTLEMENT: "تسویه جزئی پیش‌پرداخت",
+        PARTIALLY_SETTLED: "تسویه جزئی",
+        COMPLETED: "کامل شده",
+        PARTIALLY_REFUNDED: "بازپرداخت جزئی",
+        REFUNDED: "بازپرداخت شده",
+        CANCELLED: "لغو شده",
+        OVER_PAID: "پرداخت بیش از حد",
+        OVER_REFUNDED: "بازپرداخت بیش از حد",
+    };
+
+    return translations[status] || "وضعیت نامشخص";
+}

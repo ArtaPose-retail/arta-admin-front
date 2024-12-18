@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -16,9 +16,11 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
     persianDate,
     persianTime,
+    persianTimeTehran,
     separateBy3,
     toPersian,
     toastHandler,
+    translateStatusDoc,
 } from "../../utils/setting";
 
 import { Button, Checkbox, Divider, Fade, Popper } from "@mui/material";
@@ -26,23 +28,11 @@ import { Link } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import { center } from "../../styles/theme";
 import { ExpandMore } from "@mui/icons-material";
+import { DocumentList } from "../../Redux/Slices/Actions/Document/document";
+import { useDispatch, useSelector } from "react-redux";
 
-function createData(DocCode, title, transactionName, phone, date, fee, status) {
-    return {
-        DocCode,
-        title,
-        transactionName,
-        phone,
-        date,
-        fee,
-        status,
-        Details: {
-            productName: "سیب قرمز البرز",
-            checks: "12",
-            destinationAccount: "امیرحسین سلیمانی فرد",
-        },
-    };
-}
+import { ArrowBack, ArrowForward, } from "@mui/icons-material";
+
 
 function Row(props) {
     const [openPopper, setOpenPopper] = useState(false);
@@ -98,14 +88,14 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {toPersian(row?.trasaction_id ?? 0)}
+                    {toPersian(row?.transaction_id ?? 0)}
                 </TableCell>
 
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.tramsaction_reason}
+                    {row?.transaction_reason}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -123,7 +113,7 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {persianDate(row?.created_at)} | {persianTime(row?.created_at)}
+                    {persianDate(row?.created_at)} | {persianTimeTehran(row?.created_at)}
                 </TableCell>
                 <TableCell
                     sx={{
@@ -142,7 +132,8 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {row?.status}
+                    {/* {row?.status} */}
+                    {translateStatusDoc(row?.status)}
                 </TableCell>
                 <TableCell>
                     <Box
@@ -160,77 +151,6 @@ function Row(props) {
                         >
                             ارسال پیامک
                         </Button>
-                        {/* <Box
-                            sx={{
-                                ...center,
-                                bgcolor: "#3A5DF0",
-                                color: "white",
-                                direction: "ltr",
-                                height: "40px",
-                                borderRadius: "12px",
-                                p: 0.5,
-                                gap: "5px",
-                            }}
-                        >
-                            <Typography
-                                onClick={() => toastHandler("درخواست چاپ ارسال شد")}
-                                sx={{
-                                    color: (theme) => theme.palette.text.primary,
-                                    cursor: "pointer",
-                                }}
-                            >
-                                {PosItem}
-                            </Typography>
-                            <Box
-                                sx={{
-                                    borderLeft: "1px solid white",
-                                    ...center,
-                                    cursor: "pointer",
-                                }}
-                                aria-describedby={id}
-                                type="button"
-                                onClick={handleClick}
-                            >
-                                <ExpandMore sx={{ fill: "white" }} />
-                            </Box>
-                            <Popper id={id} open={openPopper} anchorEl={anchorEl} transition>
-                                {({ TransitionProps }) => (
-                                    <Fade {...TransitionProps} timeout={350}>
-                                        <Box
-                                            sx={{
-                                                borderRadius: "12px",
-                                                border: "1px solid gray",
-                                                p: 1,
-                                                bgcolor: "background.paper",
-                                            }}
-                                        >
-                                            <Typography
-                                                sx={{
-                                                    borderBottom: "1px solid gray",
-                                                    p: 1,
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() => {
-                                                    setPositem("  چاپ لیبلی");
-                                                    setOpenPopper(false);
-                                                }}
-                                            >
-                                                چاپ لیبلی
-                                            </Typography>
-                                            <Typography
-                                                sx={{ p: 1, cursor: "pointer" }}
-                                                onClick={() => {
-                                                    setPositem("  چاپ حرارتی");
-                                                    setOpenPopper(false);
-                                                }}
-                                            >
-                                                چاپ حرارتی
-                                            </Typography>
-                                        </Box>
-                                    </Fade>
-                                )}
-                            </Popper>
-                        </Box> */}
 
                         <Box sx={{ ...center, flexDirection: "column" }}>
                             <Link to={reactRouts.sellpage}>
@@ -246,13 +166,7 @@ function Row(props) {
                             />
                         </Box>
 
-                        {/* <IconButton
-                            aria-label="expand row"
-                            size="small"
-                            onClick={() => setOpenCollaps(!openCollaps)}
-                        >
-                            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                        </IconButton> */}
+
                     </Box>
                 </TableCell>
             </TableRow>
@@ -332,12 +246,25 @@ function Row(props) {
 }
 
 
-export default function DocumentsTable({ data }) {
+export default function DocumentsTable() {
+
+    const { docList } = useSelector(state => state.document)
+    const [page, setPage] = useState(0);
+    const dispatch = useDispatch()
+
+    const PageHandler = (pageNumber) => {
+        setPage(pageNumber);
+    };
+
+    useEffect(() => {
+        dispatch(DocumentList(page ?? 0))
+    }, [page])
+
     return (
         <Box
             sx={{
                 width: "100%",
-                height: "78%",
+                height: "100%",
                 overflowY: "scroll",
                 overflowX: "hidden",
             }}
@@ -410,12 +337,33 @@ export default function DocumentsTable({ data }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data && data?.map((row, index) => (
+                        {docList && docList?.map((row, index) => (
                             <Row key={index} row={row} index={index} />
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Box sx={{ p: 2, ...center, gap: "25px" }}>
+                <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={() => PageHandler(page + 1)}
+                >
+                    <ArrowForward />
+                    بعدی
+                </Button>
+                <Typography>
+                    {toPersian(page + 1)}
+                </Typography>
+                <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={() => PageHandler(page - 1)}
+                >
+                    قبلی
+                    <ArrowBack />
+                </Button>
+            </Box>
         </Box>
     );
 }

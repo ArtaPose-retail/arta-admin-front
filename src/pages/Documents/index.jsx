@@ -22,11 +22,8 @@ function Documents() {
         setCurrentItem(+curentItem);
     };
 
-    useEffect(() => {
-        dispatch(DocumentList())
-    }, [])
 
-    const { docList } = useSelector(state => state.document)
+
 
 
     return (
@@ -243,7 +240,7 @@ function Documents() {
                 </Box>
             </Box>
             <Box sx={{ mt: 2 }}>
-                <DocumentsTable data={docList} />
+                <DocumentsTable />
             </Box>
         </Box>
     );

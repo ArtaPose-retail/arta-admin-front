@@ -90,7 +90,7 @@ const apiRouts = {
         profile: "/admin/transaction/profiles",
     },
     document: {
-        list: "/admin/transaction/list?limit=50&offset=0",
+        list: (page) => `/admin/transaction/list?limit=50&offset=${page}`,
     },
     cashier: {
         list: "/admin/transaction/cashier",
