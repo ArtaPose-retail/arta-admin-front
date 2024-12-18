@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 import { separateBy3, toPersian } from "../../../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,10 +18,7 @@ import {
     setFactorItems,
 } from "../../../../Redux/Slices/Accounting/Factor/FactorItems/factorItems";
 import EditIcon from "@mui/icons-material/Edit";
-import { PrintRounded } from "@mui/icons-material";
-import ReactToPrint from "react-to-print";
-import ProdCode from "../../../PrintTemplate/ProdCode";
-import { singleProd } from "../../../../Redux/Slices/Accounting/Products/product";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -45,13 +42,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function FactorItemstable({ height }) {
     const dispach = useDispatch();
-    const prodRef = useRef();
     const { addDetailRes } = useSelector((state) => state.factorDetails);
     const { singleOrderList, update } = useSelector((state) => state.factorItems);
+    const { signleProd } = useSelector((state) => state.product);
 
     useEffect(() => {
         dispach(FactorItemslist(addDetailRes?.id));
-    }, [addDetailRes?.id, update]);
+    }, [addDetailRes?.id, update, signleProd]);
 
     const deleteBtn = (prod_id) => {
         dispach(DeleteOrderItem({ order_id: addDetailRes?.id, op_id: prod_id }));
@@ -133,24 +130,10 @@ export default function FactorItemstable({ height }) {
                                             }}
                                         />
 
-                                        <ReactToPrint
-                                            onBeforePrint={() => dispach(singleProd(item?.product_id))}
-                                            trigger={() => (
-                                                <PrintRounded
-                                                    sx={{
-                                                        fill: (theme) => theme.palette.primary.light,
-                                                        cursor: "pointer",
-                                                    }}
-                                                />
-                                            )}
-                                            content={() => prodRef.current}
-                                        />
                                     </Box>
                                 </StyledTableCell>
                             </StyledTableRow>
-                            <Box sx={{ display: "none" }}>
-                                <ProdCode ref={prodRef} data={item} />
-                            </Box>
+
                         </>
                     ))}
                 </TableBody>

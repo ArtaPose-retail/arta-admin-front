@@ -83,6 +83,9 @@ export const product = createSlice({
         },
         resetProdCode: (state) => {
             state.ProdCode = initialState.ProdCode;
+        },
+        resetSingleProd: (state) => {
+            state.signleProd = initialState.signleProd
         }
     },
     extraReducers: (builder) => {
@@ -188,6 +191,7 @@ export const {
     resetPRInfo,
     resetSingleProdByCode,
     setProdCode,
-    resetProdCode
+    resetProdCode,
+    resetSingleProd
 } = product.actions;
 export default product.reducer;

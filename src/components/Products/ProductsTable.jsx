@@ -14,6 +14,9 @@ import { toPersian } from "../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProd, getProList, setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
 import AddNewProduct from "./AddNewProduct";
+import ProdCode from "../PrintTemplate/ProdCode";
+import { PrintRounded } from "@mui/icons-material";
+import ReactToPrint from "react-to-print";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -84,42 +87,72 @@ export default function ProductsTable() {
                     </TableHead>
                     <TableBody>
                         {productList.map((item, index) => (
-                            <StyledTableRow key={index}>
-                                <StyledTableCell width={"10%"} align="center">
-                                    {toPersian(index + 1)}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {item?.code}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {item?.subcategory_title}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">{item?.title}</StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {item?.category_title}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">{item?.instock}</StyledTableCell>
+                            <>
+                                <StyledTableRow key={index}>
+                                    <StyledTableCell width={"10%"} align="center">
+                                        {toPersian(index + 1)}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {item?.code}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {item?.subcategory_title}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">{item?.title}</StyledTableCell>
+                                    <StyledTableCell align="center">
+                                        {item?.category_title}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="center">{item?.instock}</StyledTableCell>
 
-                                <StyledTableCell align="center">
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            gap: "10px",
-                                        }}
-                                    >
-                                        <EditIcon sx={{ cursor: "pointer" }} onClick={() => openProductDg(item)} />
-                                        <DeleteOutlineIcon
-                                            onClick={() => deleteBtn(item?.prod_id)}
+                                    <StyledTableCell align="center">
+                                        <Box
                                             sx={{
-                                                fill: (theme) => theme.palette.warning.main,
-                                                cursor: "pointer",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                gap: "10px",
                                             }}
-                                        />
-                                    </Box>
-                                </StyledTableCell>
-                            </StyledTableRow>
+                                        >
+                                            <EditIcon sx={{ cursor: "pointer" }} onClick={() => openProductDg(item)} />
+                                            <DeleteOutlineIcon
+                                                onClick={() => deleteBtn(item?.prod_id)}
+                                                sx={{
+                                                    fill: (theme) => theme.palette.warning.main,
+                                                    cursor: "pointer",
+                                                }}
+                                            />
+                                            <ReactToPrint
+                                                // onBeforePrint={
+                                                //     // () => dispach(singleProd(item?.product_id)) // منتظر به‌روزرسانی state
+                                                // }
+                                                // onAfterPrint={() => {
+                                                //     // dispach(resetSingleProd());
+                                                // }}
+                                                trigger={() => (
+                                                    <PrintRounded
+                                                        sx={{
+                                                            fill: (theme) => theme.palette.primary.light,
+                                                            cursor: "pointer",
+                                                        }}
+                                                    />
+                                                )}
+                                                content={() =>
+                                                    document.getElementById(`prodCode-${item.prod_id}`)
+                                                }
+
+                                            // content={() => prodRef.current}
+                                            />
+                                        </Box>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                                <Box sx={{ display: "none" }}>
+                                    <ProdCode
+                                        id={`prodCode-${item.prod_id}`}
+                                        data={item}
+
+                                    />
+                                </Box>
+                            </>
                         ))}
                     </TableBody>
                 </Table>

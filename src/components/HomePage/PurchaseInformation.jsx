@@ -33,6 +33,10 @@ function PurchaseInformation() {
     const AcceptBtn = () => {
         dispatch(DeleteOrder(cardId))
         setOpenCancelBTn(false)
+        dispatch(restAllowPrint())
+        dispatch(resetTransactionInfo())
+        dispatch(resetOrderStates())
+        dispatch(resetPayment())
     }
 
     const CreateTransaction = () => {

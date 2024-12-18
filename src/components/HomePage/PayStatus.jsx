@@ -62,19 +62,19 @@ function PayStatus() {
         dispatch(CalcOrders(cardId))
 
     }, [updatePay])
-    useEffect(() => {
+    // useEffect(() => {
 
-        setTimeout(() => {
-            console.log("")
-            dispatch(
-                setPaymentInfo({
-                    key: "amount",
-                    value: OrderPrice?.remaining_amount == 0 ? 0 : OrderPrice?.remaining_amount,
-                })
-            );
-        }, 1500);
+    //     setTimeout(() => {
+    //         console.log("")
+    //         dispatch(
+    //             setPaymentInfo({
+    //                 key: "amount",
+    //                 value: OrderPrice?.remaining_amount == 0 ? 0 : OrderPrice?.remaining_amount,
+    //             })
+    //         );
+    //     }, 1500);
 
-    }, [updatePay])
+    // }, [updatePay])
 
 
     // فرض کنید از useState برای مدیریت وضعیت استفاده می‌کنید.
