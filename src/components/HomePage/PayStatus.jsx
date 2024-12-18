@@ -41,7 +41,7 @@ function PayStatus() {
     const canBeOpen = open && Boolean(anchorEl);
     const id = canBeOpen ? "transition-popper" : undefined;
 
-    const { OrderPrice, promoCode, cardId } = useSelector((state) => state.Order);
+    const { OrderPrice, promoCode, cardId, loading } = useSelector((state) => state.Order);
     const { paymentBA, newPayment, updatePay } = useSelector((state) => state.payment);
 
     const EnterAmount = (name, value, type) => {
@@ -62,19 +62,19 @@ function PayStatus() {
         dispatch(CalcOrders(cardId))
 
     }, [updatePay])
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     setTimeout(() => {
-    //         console.log("")
-    //         dispatch(
-    //             setPaymentInfo({
-    //                 key: "amount",
-    //                 value: OrderPrice?.remaining_amount == 0 ? 0 : OrderPrice?.remaining_amount,
-    //             })
-    //         );
-    //     }, 1500);
+        setTimeout(() => {
+            console.log("")
+            dispatch(
+                setPaymentInfo({
+                    key: "amount",
+                    value: OrderPrice?.remaining_amount == 0 ? 0 : OrderPrice?.remaining_amount,
+                })
+            );
+        }, 1500);
 
-    // }, [updatePay])
+    }, [loading])
 
 
     // فرض کنید از useState برای مدیریت وضعیت استفاده می‌کنید.

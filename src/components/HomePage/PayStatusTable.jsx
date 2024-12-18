@@ -125,7 +125,7 @@ export default function CollapsibleTable() {
         <Box
             sx={{
                 width: "100%",
-                height: "190px",
+                height: "200px",
                 overflowY: "scroll",
                 overflowX: "hidden",
             }}
