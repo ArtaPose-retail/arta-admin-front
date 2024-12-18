@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toastHandler } from "../../../../utils/setting";
-import { addNewPayment, GetOrderPayemnt, GetPaymentBA } from "./paymentThunk";
+import { addNewPayment, deleteSubTransaction, GetOrderPayemnt, GetPaymentBA } from "./paymentThunk";
 
 const initialState = {
     loadingPay: false,
@@ -31,6 +31,8 @@ export const OrderPayList = createAsyncThunk(
 );
 
 export const AddPayment = createAsyncThunk("payment/add", addNewPayment)
+
+export const DeletePayment = createAsyncThunk("payment/delete", deleteSubTransaction)
 
 export const payment = createSlice({
     name: "payment",
@@ -90,6 +92,21 @@ export const payment = createSlice({
         builder.addCase(AddPayment.rejected, (state) => {
             state.loadingPay = false;
             toastHandler("خطا در Add Payment", "list");
+        });
+        //!order payment delete 
+
+        builder.addCase(DeletePayment.pending, (state) => {
+            state.loadingPay = true;
+        });
+        builder.addCase(DeletePayment.fulfilled, (state, { payload }) => {
+            state.loadingPay = false;
+            state.updatePay = true
+            console.log(payload.data)
+
+        });
+        builder.addCase(DeletePayment.rejected, (state) => {
+            state.loadingPay = false;
+            toastHandler("خطا در delete Payment", "info");
         });
 
 

@@ -86,6 +86,7 @@ const apiRouts = {
     payment: {
         bankaccount: "/admin/transaction/bankaccount",
         orderpayList: "/admin/subtransaction/list",
+        deleteTransaction: (id) => `/admin/subtransaction/${id}`,
         new: "/admin/transaction/new",
         profile: "/admin/transaction/profiles",
     },

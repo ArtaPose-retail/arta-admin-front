@@ -30,3 +30,7 @@ export const addNewPayment = async ({ method, orderId, BAId }, ThunkApi) => {
         transaction_reason_id: 1,
     })
 }
+
+export const deleteSubTransaction = async (id) => {
+    return await AXIOS.delete(apiRouts.payment.deleteTransaction(id))
+}
