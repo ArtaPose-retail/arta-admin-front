@@ -13,7 +13,7 @@ const initialState = {
     loading: false,
     update: false,
     newProduct: {
-        code: "",
+        code: null,
         brandname: "",
         category_id: null,
         category_title: "",

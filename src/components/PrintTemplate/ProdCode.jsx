@@ -20,6 +20,8 @@ const ProdCode = (props) => {
 
     const { signleProd } = useSelector((state) => state.product);
 
+
+    console.log(data)
     return (
         <>
             <Box
@@ -88,7 +90,7 @@ const ProdCode = (props) => {
                                         fontWeight: "bold",
                                     }}
                                 >
-                                    {data?.title}
+                                    {signleProd?.title}
                                 </Typography>
 
                                 <Typography
@@ -102,7 +104,7 @@ const ProdCode = (props) => {
                                         fontWeight: "900",
                                     }}
                                 >
-                                    {toPersian(data?.code ?? 0)}
+                                    {toPersian(signleProd?.code ?? 0)}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -115,7 +117,7 @@ const ProdCode = (props) => {
                                         fontWeight: "bold",
                                     }}
                                 >
-                                    {toPersian(separateBy3(data?.price ?? 0))} ریال
+                                    {toPersian(separateBy3(signleProd?.price ?? 0))} ریال
                                 </Typography>
                             </Box>
                         </Grid>

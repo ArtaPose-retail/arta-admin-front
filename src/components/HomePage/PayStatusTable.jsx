@@ -93,11 +93,11 @@ function Row(props) {
                                     عملیات:
                                 </Typography>
                                 {/* <EditIcon fontSize="small" /> */}
-                                <DeleteOutlineIcon
+                                {row?.method_id != 2 && <DeleteOutlineIcon
                                     fontSize="small"
                                     onClick={() => deleteBtn()}
                                     sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
-                                />
+                                />}
                             </Box>
                         </Box>
                     </Collapse>

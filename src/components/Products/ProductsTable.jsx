@@ -12,7 +12,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { Box } from "@mui/material";
 import { toPersian } from "../../utils/setting";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProd, getProList, setNewProduct } from "../../Redux/Slices/Accounting/Products/product";
+import { deleteProd, getProList, setNewProduct, singleProd } from "../../Redux/Slices/Accounting/Products/product";
 import AddNewProduct from "./AddNewProduct";
 import ProdCode from "../PrintTemplate/ProdCode";
 import { PrintRounded } from "@mui/icons-material";
@@ -123,7 +123,7 @@ export default function ProductsTable() {
                                             />
                                             <ReactToPrint
                                                 // onBeforePrint={
-                                                //     // () => dispach(singleProd(item?.product_id)) // منتظر به‌روزرسانی state
+                                                //     () => dispatch(singleProd(item?.prod_id)) // منتظر به‌روزرسانی state
                                                 // }
                                                 // onAfterPrint={() => {
                                                 //     // dispach(resetSingleProd());
