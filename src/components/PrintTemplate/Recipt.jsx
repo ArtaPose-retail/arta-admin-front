@@ -21,12 +21,13 @@ const ReceiptTemplate = forwardRef((props, ref) => {
 
 
     const { transactionInfo } = useSelector(state => state.sellPage)
+    const { singleTransaction } = useSelector(state => state.transactionsSlice)
     const { loginInfo } = useSelector(state => state.auth)
 
     console.log(OrderProductList)
 
     return (
-        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 2 }}>
+        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 1.5 }}>
             {/* Header */}
             <Box sx={{ border: "1px solid black ", borderRadius: "15px" }}>
 
@@ -74,10 +75,10 @@ const ReceiptTemplate = forwardRef((props, ref) => {
                     <Box sx={{ ...center, gap: "2px", py: 1, justifyContent: "space-evenly" }}>
 
                         <Typography sx={{ fontSize: "12px" }}>
-                            مشتری: <span>{transactionInfo?.fname} {transactionInfo?.lname}</span>
+                            مشتری: <span>{singleTransaction != null ? singleTransaction.fname : transactionInfo?.fname} {singleTransaction != null ? singleTransaction.lname : transactionInfo?.lname}</span>
                         </Typography>
                         <Typography sx={{ fontSize: "12px" }}>
-                            شناسه مشتری: <span>{transactionInfo?.user_id}</span>
+                            شناسه مشتری: <span>{singleTransaction != null ? singleTransaction?.user_id : transactionInfo?.user_id}</span>
                         </Typography>
                     </Box>
                 </Box>

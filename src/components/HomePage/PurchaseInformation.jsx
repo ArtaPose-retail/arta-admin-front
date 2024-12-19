@@ -13,7 +13,7 @@ import { resetPayment } from "../../Redux/Slices/Actions/Payment/payment";
 import { useReactToPrint } from "react-to-print";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
 
-import { addTransactions, resetNewTransaction } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
+import { addTransactions, resetNewTransaction, resetSingleTransaction } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
     const dispatch = useDispatch();
@@ -30,6 +30,7 @@ function PurchaseInformation() {
 
     const { OrderPrice, cardInfo, OrderProductList, cardId, AllowPrint } = useSelector(state => state.Order)
     const { transactionInfo } = useSelector(state => state.sellPage)
+    const { singleTransaction } = useSelector(state => state.transactionsSlice)
     const AcceptBtn = () => {
         dispatch(DeleteOrder(cardId))
         setOpenCancelBTn(false)
@@ -48,7 +49,7 @@ function PurchaseInformation() {
 
         // CreateTransaction()
 
-        if (transactionInfo !== null) {
+        if (transactionInfo !== null || singleTransaction != null) {
 
             dispatch(SaveOrder(cardId))
             // dispatch(resetTransactionInfo())
@@ -86,6 +87,8 @@ function PurchaseInformation() {
             dispatch(resetTransactionInfo())
             dispatch(resetOrderStates())
             dispatch(resetPayment())
+            dispatch(resetNewTransaction());
+            dispatch(resetSingleTransaction());
 
         }
     });

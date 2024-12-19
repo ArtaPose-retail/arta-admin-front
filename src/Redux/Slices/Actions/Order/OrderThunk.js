@@ -40,9 +40,10 @@ export const FinilizeOrder = async (order_id, ThunkApi) => {
     const state = ThunkApi.getState()
     const { promoCode } = state.Order
     const { transactionInfo } = state.sellPage
+    const { singleTransaction } = state.transactionsSlice
     return await AXIOS.post(apiRouts.factor.checkout.finilize(order_id), {
         allow_debt: true,
         promo_code: promoCode,
-        customer_id: transactionInfo?.id
+        customer_id: singleTransaction?.user_id ?? transactionInfo?.id
     })
 }

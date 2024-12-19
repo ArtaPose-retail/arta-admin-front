@@ -17,7 +17,8 @@ const initialState = {
         home_address: "",
         referer: "",
         qualification: ""
-    }
+    },
+    singleTransaction: null
 };
 
 export const getTransactions = createAsyncThunk(
@@ -43,6 +44,9 @@ export const transactionsSlice = createSlice({
         },
         resetNewTransaction: (state) => {
             state.newTransaction = initialState.newTransaction
+        },
+        resetSingleTransaction: (state) => {
+            state.singleTransaction = initialState.singleTransaction
         }
     },
     extraReducers: (builder) => {
@@ -81,6 +85,7 @@ export const transactionsSlice = createSlice({
         builder.addCase(addTransactions.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = true;
+            state.singleTransaction = payload.data.data
             toastHandler("ایتم مورد  نظر اضافه شد", "info");
         });
         builder.addCase(addTransactions.rejected, (state) => {
@@ -89,5 +94,5 @@ export const transactionsSlice = createSlice({
     },
 });
 
-export const { setNewTransaction, resetNewTransaction } = transactionsSlice.actions;
+export const { setNewTransaction, resetNewTransaction, resetSingleTransaction } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

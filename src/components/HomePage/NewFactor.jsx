@@ -16,7 +16,9 @@ import { toPersian } from "../../utils/setting";
 import Input from "../UI/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    addTransactions,
     getTransactions,
+    resetNewTransaction,
     setNewTransaction,
 } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 import { setTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
@@ -25,7 +27,7 @@ import { addOrder } from "../../Redux/Slices/Actions/Order/Order";
 
 function NewFactor() {
     const dispatch = useDispatch();
-    const { TransActionList, update, newTransaction } = useSelector((state) => state.transactionsSlice);
+    const { TransActionList, update, newTransaction, singleTransaction } = useSelector((state) => state.transactionsSlice);
     const { transactionInfo } = useSelector((state) => state.sellPage);
     const [open, setOpen] = useState(false);
     const [openTransaction, setOpenTransaction] = useState(false);
@@ -64,6 +66,11 @@ function NewFactor() {
             })
         );
     }, [])
+
+    const addCustomer = () => {
+        dispatch(addTransactions());
+        // dispatch(resetNewTransaction());
+    }
     return (
         <Box
             sx={{
@@ -155,7 +162,7 @@ function NewFactor() {
                     type={"text"}
                     placeholder={"نام"}
                     name={"fname"}
-                    value={transactionInfo !== null ? transactionInfo?.fname : newTransaction.fname}
+                    value={transactionInfo !== null ? transactionInfo?.fname : singleTransaction != null ? singleTransaction?.fname : ""}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({
@@ -170,7 +177,7 @@ function NewFactor() {
                     type={"text"}
                     name={"lname"}
                     placeholder={" نام خانوادگی"}
-                    value={transactionInfo !== null ? transactionInfo?.lname : newTransaction.lname}
+                    value={transactionInfo !== null ? transactionInfo?.lname : singleTransaction != null ? singleTransaction?.lname : ""}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({
@@ -181,7 +188,20 @@ function NewFactor() {
                     }}
                 />
                 <Box sx={{ ...center, gap: "10px" }}>
-
+                    <Button
+                        onClick={() => addCustomer()}
+                        variant="contained"
+                        sx={{
+                            bgcolor: (theme) => theme.palette.darkBlue.main,
+                            color: (theme) => theme.palette.text.primary,
+                        }}
+                    >
+                        <Add
+                            fontSize="medium"
+                            sx={{ fill: (theme) => theme.palette.text.primary }}
+                        />
+                        ثبت مشتری
+                    </Button>
                     <Button
                         onClick={() => showTransactionDialoghandler()}
                         variant="contained"
@@ -194,11 +214,9 @@ function NewFactor() {
                             fontSize="medium"
                             sx={{ fill: (theme) => theme.palette.text.primary }}
                         />
-                        <PersonIcon
-                            fontSize="medium"
-                            sx={{ fill: (theme) => theme.palette.text.primary }}
-                        />
+                        ثبت با جزییات
                     </Button>
+
                 </Box>
             </Box>
             <Description status={open} handlerCloseDialog={handlerCloseDialog} />
