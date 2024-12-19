@@ -126,7 +126,7 @@ export default function ProductsTable() {
                                                 //     () => dispatch(singleProd(item?.prod_id)) // منتظر به‌روزرسانی state
                                                 // }
                                                 // onAfterPrint={() => {
-                                                //     // dispach(resetSingleProd());
+                                                // dispach(resetSingleProd());
                                                 // }}
                                                 trigger={() => (
                                                     <PrintRounded
@@ -137,7 +137,7 @@ export default function ProductsTable() {
                                                     />
                                                 )}
                                                 content={() =>
-                                                    document.getElementById(`prodCode-${item.prod_id}`)
+                                                    document.getElementById(`prodCode-${item?.prod_id}`)
                                                 }
 
                                             // content={() => prodRef.current}
@@ -147,7 +147,7 @@ export default function ProductsTable() {
                                 </StyledTableRow>
                                 <Box sx={{ display: "none" }}>
                                     <ProdCode
-                                        id={`prodCode-${item.prod_id}`}
+                                        id={`prodCode-${item?.prod_id}`}
                                         data={item}
 
                                     />

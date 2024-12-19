@@ -8,20 +8,6 @@ import { singleProd } from "../../Redux/Slices/Accounting/Products/product";
 
 const ProdCode = (props) => {
     const { data, id, code } = props;
-
-    const dispatch = useDispatch();
-    // console.log(data, ref)
-
-    // const temp = Array.isArray(data) ? data : [data];
-
-    // useEffect(() => {
-    //     dispatch(singleProd(data?.product_id));
-    // }, []);
-
-    const { signleProd } = useSelector((state) => state.product);
-
-
-    console.log(data)
     return (
         <>
             <Box
@@ -90,7 +76,7 @@ const ProdCode = (props) => {
                                         fontWeight: "bold",
                                     }}
                                 >
-                                    {signleProd?.title}
+                                    {data?.title}
                                 </Typography>
 
                                 <Typography
@@ -104,7 +90,7 @@ const ProdCode = (props) => {
                                         fontWeight: "900",
                                     }}
                                 >
-                                    {toPersian(signleProd?.code ?? 0)}
+                                    {toPersian(data?.code ?? 0)}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -117,7 +103,7 @@ const ProdCode = (props) => {
                                         fontWeight: "bold",
                                     }}
                                 >
-                                    {toPersian(separateBy3(signleProd?.price ?? 0))} ریال
+                                    {toPersian(separateBy3(data?.price ?? 0))} ریال
                                 </Typography>
                             </Box>
                         </Grid>
