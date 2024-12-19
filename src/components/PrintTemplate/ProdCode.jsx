@@ -71,9 +71,12 @@ const ProdCode = (props) => {
                                         // border: "1px solid black",
                                         padding: "2px", // کاهش فاصله داخلی
                                         borderRadius: "3px",
-                                        width: "100%",
+                                        width: "90%",
                                         fontSize: "8px", // کاهش اندازه فونت
                                         fontWeight: "bold",
+                                        whiteSpace: "nowrap", // جلوگیری از چند خطی شدن متن
+                                        overflow: "hidden", // مخفی کردن متن اضافه
+                                        textOverflow: "ellipsis", // اضافه کردن ۳ نقطه در انتها
                                     }}
                                 >
                                     {data?.title}
@@ -85,7 +88,7 @@ const ProdCode = (props) => {
                                         border: "1px solid black",
                                         padding: "2px",
                                         borderRadius: "3px",
-                                        width: "100%",
+                                        width: "95%",
                                         fontSize: "8px", // کاهش اندازه فونت
                                         fontWeight: "900",
                                     }}
