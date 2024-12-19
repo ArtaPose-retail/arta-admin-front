@@ -20,6 +20,7 @@ import {
     getTransactions,
     resetNewTransaction,
     setNewTransaction,
+    setSingleTransaction,
 } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 import { setTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { Add } from "@mui/icons-material";
@@ -50,7 +51,8 @@ function NewFactor() {
     };
 
     const onSearchHandler = (e) => {
-        dispatch(setTransactionInfo(e))
+        console.log(e)
+        dispatch(setSingleTransaction(e))
         // dispatch(addOrder())
     }
     useEffect(() => {
@@ -98,6 +100,7 @@ function NewFactor() {
                     disablePortal
                     id="combo-box-demo"
                     options={TransActionList}
+                    onClose={() => console.log("man")}
                     onChange={(_, e) => onSearchHandler(e)}
                     getOptionLabel={(option) => `${option?.phone1}`}
                     sx={{ width: 300, color: "#000000" }}
@@ -162,7 +165,8 @@ function NewFactor() {
                     type={"text"}
                     placeholder={"نام"}
                     name={"fname"}
-                    value={transactionInfo !== null ? transactionInfo?.fname : singleTransaction != null ? singleTransaction?.fname : ""}
+                    // value={transactionInfo !== null ? transactionInfo?.fname : singleTransaction != null ? singleTransaction?.fname : ""}
+                    value={newTransaction?.fname}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({
@@ -177,7 +181,7 @@ function NewFactor() {
                     type={"text"}
                     name={"lname"}
                     placeholder={" نام خانوادگی"}
-                    value={transactionInfo !== null ? transactionInfo?.lname : singleTransaction != null ? singleTransaction?.lname : ""}
+                    value={newTransaction?.lname}
                     onChange={(name, value) => {
                         dispatch(
                             setNewTransaction({

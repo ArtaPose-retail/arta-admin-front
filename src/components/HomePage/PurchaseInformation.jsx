@@ -30,7 +30,7 @@ function PurchaseInformation() {
 
     const { OrderPrice, cardInfo, OrderProductList, cardId, AllowPrint } = useSelector(state => state.Order)
     const { transactionInfo } = useSelector(state => state.sellPage)
-    const { singleTransaction } = useSelector(state => state.transactionsSlice)
+    const { singleTransaction, newTransaction } = useSelector(state => state.transactionsSlice)
     const AcceptBtn = () => {
         dispatch(DeleteOrder(cardId))
         setOpenCancelBTn(false)
@@ -40,16 +40,13 @@ function PurchaseInformation() {
         dispatch(resetPayment())
     }
 
-    const CreateTransaction = () => {
-        dispatch(addTransactions());
-        dispatch(resetNewTransaction());
-    }
+
 
     const HandleSaveOrder = () => {
 
         // CreateTransaction()
 
-        if (transactionInfo !== null || singleTransaction != null) {
+        if (newTransaction?.user_id !== null) {
 
             dispatch(SaveOrder(cardId))
             // dispatch(resetTransactionInfo())
@@ -88,7 +85,7 @@ function PurchaseInformation() {
             dispatch(resetOrderStates())
             dispatch(resetPayment())
             dispatch(resetNewTransaction());
-            dispatch(resetSingleTransaction());
+            // dispatch(resetSingleTransaction());
 
         }
     });

@@ -47,6 +47,9 @@ export const transactionsSlice = createSlice({
         },
         resetSingleTransaction: (state) => {
             state.singleTransaction = initialState.singleTransaction
+        },
+        setSingleTransaction: (state, { payload }) => {
+            state.newTransaction = payload
         }
     },
     extraReducers: (builder) => {
@@ -85,7 +88,7 @@ export const transactionsSlice = createSlice({
         builder.addCase(addTransactions.fulfilled, (state, { payload }) => {
             state.loading = false;
             state.update = true;
-            state.singleTransaction = payload.data.data
+            state.newTransaction = payload.data.data
             toastHandler("ایتم مورد  نظر اضافه شد", "info");
         });
         builder.addCase(addTransactions.rejected, (state) => {
@@ -94,5 +97,5 @@ export const transactionsSlice = createSlice({
     },
 });
 
-export const { setNewTransaction, resetNewTransaction, resetSingleTransaction } = transactionsSlice.actions;
+export const { setNewTransaction, resetNewTransaction, resetSingleTransaction, setSingleTransaction } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

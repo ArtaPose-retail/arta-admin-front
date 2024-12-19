@@ -76,8 +76,8 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                             }}
                         />
                     </Box>
-                    <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
-                        {transactionpartyField?.map((item, index) => (
+                    {newTransaction != null && <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
+                        {newTransaction != null && transactionpartyField?.map((item, index) => (
                             <Grid item xs={4} key={index}>
                                 <InputLabel>
                                     <Typography
@@ -152,7 +152,7 @@ function TransactionpartyDg({ status, handlerCloseDialog, iteminfo }) {
                                 </TextField>
                             </Grid>
                         ))}
-                    </Grid>
+                    </Grid>}
 
                     <Box
                         sx={{
