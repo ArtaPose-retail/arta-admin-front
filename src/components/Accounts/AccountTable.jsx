@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function AccountTable({ data }) {
     const navigate = useNavigate();
     return (
-        <TableContainer sx={{ maxHeight: 530 }}>
+        <TableContainer sx={{ height: "75dvh" }}>
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>

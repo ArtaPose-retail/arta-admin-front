@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import LableCard from "./LableCard";
 import { center } from "../../styles/theme";
 import Description from "./Dialogs/Description";
-import PersonIcon from "@mui/icons-material/Person";
 import TransactionpartyDg from "./Dialogs/TransactionpartyDg";
 import { toPersian } from "../../utils/setting";
 import Input from "../UI/Input";
@@ -18,13 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     addTransactions,
     getTransactions,
-    resetNewTransaction,
     setNewTransaction,
     setSingleTransaction,
 } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
-import { setTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { Add } from "@mui/icons-material";
-import { addOrder } from "../../Redux/Slices/Actions/Order/Order";
 
 function NewFactor() {
     const dispatch = useDispatch();
