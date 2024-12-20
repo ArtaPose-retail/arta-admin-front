@@ -15,7 +15,8 @@ export const AddDetails = async (_, ThunkApi) => {
         vehicle_type_id,
         license_plate,
         weight,
-        delivery_company_title
+        delivery_company_title,
+        meta
     } = state.factorDetails.newDetail;
 
     const { user_id } = state.auth.loginInfo;
@@ -32,6 +33,7 @@ export const AddDetails = async (_, ThunkApi) => {
         license_plate,
         weight,
         submitter_user_id: +user_id,
-        delivery_company_title
+        delivery_company_title,
+        meta
     });
 };

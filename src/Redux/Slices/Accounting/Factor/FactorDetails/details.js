@@ -16,7 +16,8 @@ const initialState = {
         vehicle_type_id: null,
         license_plate: "",
         weight: null,
-        delivery_company_title: ""
+        delivery_company_title: "",
+        meta: {}
     },
     addDetailRes: null
 };
@@ -29,7 +30,12 @@ export const factorDetails = createSlice({
 
     reducers: {
         setFactorDetailsInfo: (sate, { payload }) => {
-            sate.newDetail[payload.key] = payload.value
+            if (payload.key != "expire_date") {
+
+                sate.newDetail[payload.key] = payload.value
+            } else {
+                sate.newDetail.meta[payload.key] = payload.value
+            }
         },
         resetfactorDetailForm: (state) => {
             state.newDetail = initialState.newDetail
