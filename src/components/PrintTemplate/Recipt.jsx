@@ -27,16 +27,16 @@ const ReceiptTemplate = forwardRef((props, ref) => {
     console.log(OrderProductList)
 
     return (
-        <Box ref={ref} sx={{ width: "80mm", margin: "0 auto", p: 1.5 }}>
+        <Box ref={ref} sx={{ width: "75mm", margin: "0 auto", p: 2 }}>
             {/* Header */}
             <Box sx={{ border: "1px solid black ", borderRadius: "15px" }}>
 
                 <Grid container spacing={1} sx={{ justifyContent: "space-between", p: 2 }} >
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <img src={StoreLogo} />
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <Box sx={{ ...center, gap: "3px" }}>
 
                             <Typography variant="body2">Almafresh.ir</Typography>
@@ -89,19 +89,19 @@ const ReceiptTemplate = forwardRef((props, ref) => {
             {/* Product Table */}
             {/* {header} */}
             <Box sx={{ ...center, p: 1, borderRadius: "10px", bgcolor: "black", mt: 1, justifyContent: "space-between" }}>
-                <Typography sx={{ fontSize: "12px", color: "white" }}>
+                <Typography sx={{ fontSize: "10px", color: "white" }}>
                     وزن/تعداد
                 </Typography>
-                <Typography sx={{ fontSize: "12px", color: "white" }}>
+                <Typography sx={{ fontSize: "10px", color: "white" }}>
                     فی
                 </Typography>
-                <Typography sx={{ fontSize: "12px", color: "white" }}>
-                    قیمت مصزف کننده
+                <Typography sx={{ fontSize: "10px", color: "white" }}>
+                    قیمت مصرف کننده
                 </Typography>
-                <Typography sx={{ fontSize: "12px", color: "white" }}>
+                <Typography sx={{ fontSize: "10px", color: "white" }}>
                     تخفیف
                 </Typography>
-                <Typography sx={{ fontSize: "12px", color: "white" }}>
+                <Typography sx={{ fontSize: "10px", color: "white" }}>
                     قابل پرداخت
                 </Typography>
             </Box>
@@ -143,19 +143,19 @@ const ReceiptTemplate = forwardRef((props, ref) => {
             {/* Footer */}
             <Box sx={{ mt: 2 }}>
                 <Typography variant="body2">
-                    مجموع قیمت مصرف کننده: <strong>{toPersian(separateBy3(OrderPrice?.order_price ?? 0))}</strong> ریال
+                    مجموع قیمت مصرف کننده: <strong>{toPersian(separateBy3(OrderPrice?.order_original_price ?? 0))}</strong> ریال
                 </Typography>
                 <Typography variant="body2">
-                    تخفیف: <strong>{toPersian(separateBy3(OrderPrice?.calculated_discount ?? 0))}</strong> ریال
+                    تخفیف: <strong>{toPersian(separateBy3(OrderPrice?.order_original_price - OrderPrice?.order_price ?? 0))}</strong> ریال
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1, fontWeight: "bold" }}>
-                    قابل پرداخت: <strong>{toPersian(separateBy3((OrderPrice?.order_price - OrderPrice?.calculated_discount) ?? 0))}</strong> ریال
+                <Typography sx={{ mt: 1, fontWeight: "bold" }}>
+                    قابل پرداخت: <strong>{toPersian(separateBy3(OrderPrice?.order_price ?? 0))}</strong> ریال
                 </Typography>
                 <Divider sx={{ my: 1 }} />
-                <Typography variant="body2" textAlign="center">
+                <Typography textAlign="center" sx={{ fontSize: "7px" }}>
                     آدرس: مازندران - بابل - روبروی پمپ بنزین پارک نوشیروانی - بسیج 18
                 </Typography>
-                <Typography variant="caption" textAlign="center" display="block">
+                <Typography textAlign="center" sx={{ fontSize: "7px" }} display="block">
                     Artapos | Powered by arta-tech.ir
                 </Typography>
             </Box>
