@@ -1,4 +1,5 @@
 import {
+    Autocomplete,
     Box,
     Button,
     Divider,
@@ -68,6 +69,15 @@ function FactorItems({ handleClose }) {
         dispatch(EditOrderItem(prodID))
     }
 
+    const onSearchHandler = (e) => {
+        dispatch(
+            setFactorItems({
+                key: "product_id",
+                value: +e.prod_id,
+            })
+        );
+    }
+
     return (
         <Box>
             <Box>
@@ -135,70 +145,130 @@ function FactorItems({ handleClose }) {
                                 />
                             </>
                         ) : (
-                            <TextField
-                                value={newFacrtorItems[item.name]}
-                                name={item.name}
-                                id={item.name}
-                                onChange={(e) =>
-                                    onChangeHandler(item.name, e.target.value, item.type)
-                                }
-                                fullWidth
-                                sx={{
-                                    "& .MuiNativeSelect-select": {
-                                        color: "black",
-                                    },
-                                    "& .MuiOutlinedInput-notchedOutline": {
-                                        borderColor: "white",
-                                    },
-                                    borderRadius: "18px",
-                                }}
-                                select={item?.select}
-                                InputProps={{
-                                    style: {
-                                        background: "#F2F2F2",
-                                        color: "#000",
-                                        direction: "ltr",
-                                        borderRadius: "18px",
-                                    },
-                                    startAdornment: (
-                                        <>
-                                            {item?.hasIcon && (
-                                                <InputAdornment position="end">
-                                                    <PackageType />
-                                                </InputAdornment>
-                                            )}
-                                        </>
-                                    ),
-                                }}
-                                SelectProps={{
-                                    native: true,
-                                    style: {
-                                        background: "#F2F2F2",
-                                        color: "#000",
-                                        direction: "ltr",
-                                        borderRadius: "18px",
-                                    },
-                                }}
-                            >
-                                {item?.select && item.name == "product_id" ? (
-                                    <>
-                                        <option value={""}>
-                                            <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                انتخاب کنید
-                                            </Typography>
-                                        </option>
-                                        {productList.map((option, index) => (
-                                            <option key={index} value={option?.prod_id}>
-                                                <Typography sx={{ fontSize: "12px", color: "black" }}>
-                                                    {option?.title}
-                                                </Typography>
-                                            </option>
-                                        ))}{" "}
-                                    </>
-                                ) : (
-                                    ""
+                            // <TextField
+                            //     value={newFacrtorItems[item.name]}
+                            //     name={item.name}
+                            //     id={item.name}
+                            //     onChange={(e) =>
+                            //         onChangeHandler(item.name, e.target.value, item.type)
+                            //     }
+                            //     fullWidth
+                            //     sx={{
+                            //         "& .MuiNativeSelect-select": {
+                            //             color: "black",
+                            //         },
+                            //         "& .MuiOutlinedInput-notchedOutline": {
+                            //             borderColor: "white",
+                            //         },
+                            //         borderRadius: "18px",
+                            //     }}
+                            //     select={item?.select}
+                            //     InputProps={{
+                            //         style: {
+                            //             background: "#F2F2F2",
+                            //             color: "#000",
+                            //             direction: "ltr",
+                            //             borderRadius: "18px",
+                            //         },
+                            //         startAdornment: (
+                            //             <>
+                            //                 {item?.hasIcon && (
+                            //                     <InputAdornment position="end">
+                            //                         <PackageType />
+                            //                     </InputAdornment>
+                            //                 )}
+                            //             </>
+                            //         ),
+                            //     }}
+                            //     SelectProps={{
+                            //         native: true,
+                            //         style: {
+                            //             background: "#F2F2F2",
+                            //             color: "#000",
+                            //             direction: "ltr",
+                            //             borderRadius: "18px",
+                            //         },
+                            //     }}
+                            // >
+                            //     {item?.select && item.name == "product_id" ? (
+                            //         <>
+                            //             <option value={""}>
+                            //                 <Typography sx={{ fontSize: "12px", color: "black" }}>
+                            //                     انتخاب کنید
+                            //                 </Typography>
+                            //             </option>
+                            //             {productList.map((option, index) => (
+                            //                 <option key={index} value={option?.prod_id}>
+                            //                     <Typography sx={{ fontSize: "12px", color: "black" }}>
+                            //                         {option?.title}
+                            //                     </Typography>
+                            //                 </option>
+                            //             ))}{" "}
+                            //         </>
+                            //     ) : (
+                            //         ""
+                            //     )}
+                            // </TextField>
+                            <Autocomplete
+                                freeSolo
+                                // value={transactionInfo?.phone1 }
+                                disablePortal
+                                id="combo-box-demo"
+                                options={productList}
+                                onClose={() => console.log("man")}
+                                onChange={(_, e) => onSearchHandler(e)}
+                                getOptionLabel={(option) => `${option?.code}`}
+                                sx={{ width: 300, color: "#000000" }}
+                                renderOption={(props, option) => (
+                                    <Box
+                                        // component="li"
+                                        sx={{ ...center, gap: "5px" }}
+                                        {...props}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                fontSize: "14px",
+                                                fontWeight: 500,
+                                                color: (theme) => theme.palette.text.primary,
+                                            }}
+                                        >{`${option?.title}-${option?.code} `}</Typography>
+
+                                    </Box>
                                 )}
-                            </TextField>
+                                renderInput={(params) => (
+                                    <TextField
+
+                                        // value={transactionInfo?.phone1}
+                                        // onChange={(e) => dispatch(
+                                        //     setNewTransaction({
+                                        //         key: "phone1",
+                                        //         value: e.target.value,
+                                        //     })
+                                        // )}
+                                        sx={{
+                                            color: "#000",
+                                            background: "#F2F2F2",
+                                            borderRadius: "12px",
+                                            width: "17rem"
+                                        }}
+                                        autoComplete={false}
+                                        {...params}
+                                        placeholder={"جستوجو محصول"}
+                                        inputProps={{
+                                            ...params.inputProps,
+                                            autoComplete: "none", // disable autocomplete and autofill
+                                        }}
+                                        InputProps={{
+                                            ...params.InputProps,
+                                            sx: {
+                                                "& .MuiInputBase-input": {
+                                                    color: "#000000",
+                                                },
+                                            },
+                                        }}
+                                    />
+                                )}
+                            />
                         )}
                     </Grid>
                 ))}
