@@ -42,18 +42,8 @@ function RegisterFactor({ handleClose }) {
                             my: 0.5,
                         }}
                     >
-                        شماره سند:
-                        {toPersian("886677")}
-                    </Typography>
-                    <Typography
-                        sx={{
-                            fontSize: "16px",
-                            fontWeight: 400,
-                            color: (theme) => theme.palette.disable.main,
-                            my: 0.5,
-                        }}
-                    >
-                        طرف معامله: محمدامین رحمتی
+                        طرف معامله:{addDetailRes?.customer?.fname} {addDetailRes?.customer?.lname}
+
                     </Typography>
                     <Typography
                         sx={{
@@ -64,8 +54,10 @@ function RegisterFactor({ handleClose }) {
                         }}
                     >
                         شماره بارنامه / فاکتور:
-                        {toPersian("3842")}
+                        {toPersian(addDetailRes?.orderpublicid ?? 0)}
                     </Typography>
+
+
                 </Box>
                 <Divider
                     orientation="horizontal"
