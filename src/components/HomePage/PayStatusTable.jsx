@@ -19,21 +19,17 @@ import moment from "jalali-moment";
 import { useDispatch, useSelector } from "react-redux";
 import { NoItem } from "../UI/NoItem";
 import { center } from "../../styles/theme";
-import { OrderPayList } from "../../Redux/Slices/Actions/Payment/payment";
+import { DeletePayment, OrderPayList } from "../../Redux/Slices/Actions/Payment/payment";
 import { CalcOrders } from "../../Redux/Slices/Actions/Order/Order";
 
 
 function Row(props) {
+    const dispatch = useDispatch()
     const { row } = props;
     const [open, setOpen] = useState(false);
-
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
-    const deleteBtn = () => {
-        toastHandler("ایتم مورد  نظر حذف شد", "warning");
+    const deleteBtn = (id) => {
+        // dispatch(DeletePayment(id))
+        console.log(id)
     };
 
     return (
@@ -95,7 +91,7 @@ function Row(props) {
                                 {/* <EditIcon fontSize="small" /> */}
                                 {row?.method_id != 2 && <DeleteOutlineIcon
                                     fontSize="small"
-                                    onClick={() => deleteBtn()}
+                                    onClick={() => deleteBtn(row.id)}
                                     sx={{ fill: (theme) => theme.palette.warning.main, cursor: "pointer" }}
                                 />}
                             </Box>
@@ -121,13 +117,14 @@ export default function CollapsibleTable() {
             dispath(CalcOrders(cardId))
         }
     }, [updatePay])
+
+    console.log(paymentOrderList)
     return (
         <Box
             sx={{
                 width: "100%",
-                height: "200px",
-                overflowY: "scroll",
-                overflowX: "hidden",
+                height: "150px",
+                overflowY: "auto",
             }}
         >
             {paymentOrderList?.length > 0 ? <TableContainer>

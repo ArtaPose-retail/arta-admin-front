@@ -194,63 +194,6 @@ function PayStatus() {
                         gap: "5px",
                     }}
                 >
-                    {/* <Typography
-                        onClick={() => toastHandler("درخواست ارسال شد", "info")}
-                        sx={{
-                            color: (theme) => theme.palette.text.primary,
-                            cursor: "pointer",
-                        }}
-                    >
-                        {PosItem}
-                    </Typography>
-                    <Box
-                        sx={{ borderLeft: "1px solid white", ...center, cursor: "pointer" }}
-                        aria-describedby={id}
-                        type="button"
-                        onClick={handleClick}
-                    >
-                        <ExpandMore sx={{ fill: "white" }} />
-                    </Box>
-                    <Popper id={id} open={open} anchorEl={anchorEl} transition>
-                        {({ TransitionProps }) => (
-                            <Fade {...TransitionProps} timeout={350}>
-                                <Box
-                                    sx={{
-                                        borderRadius: "12px",
-                                        border: "1px solid gray",
-                                        p: 1,
-                                        bgcolor: "background.paper",
-                                    }}
-                                >
-                                    {paymentBA &&
-                                        paymentBA.map((item, index) => (
-                                            <Typography
-                                                key={index}
-                                                sx={{
-                                                    borderBottom: "1px solid gray",
-                                                    p: 1,
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() => {
-
-                                                    dispatch(
-                                                        AddPayment({
-                                                            method: 2,
-                                                            orderId: cardId,
-                                                            BAId: item?.id,
-                                                        })
-                                                    );
-                                                    setPositem(item?.representer_pos_name)
-                                                    setOpen(false);
-                                                }}
-                                            >
-                                                {item?.bank_name?.name}-{item?.representer_pos_name}
-                                            </Typography>
-                                        ))}
-                                </Box>
-                            </Fade>
-                        )}
-                    </Popper> */}
 
                     <Typography
                         onClick={handleTypographyClick} // فراخوانی تابع ذخیره شده
