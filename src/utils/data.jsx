@@ -1062,8 +1062,8 @@ export const factorItemForm = [
     {
         name: "expire_date",
         select: false,
-        placeholder: "تاریخ انقضا فاکتور /  بارنامه",
-        lable: "تاریخ انقضا فاکتور /  بارنامه",
+        placeholder: "تاریخ انقضا",
+        lable: "تاریخ انقضا",
         hasIcon: false,
         color: "#6D6D6D",
         type: "date",
