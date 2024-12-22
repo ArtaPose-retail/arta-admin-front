@@ -25,6 +25,7 @@ import Title from "../UI/Title";
 import TransportD from "./TransportD";
 import RegistrationCostDL from "./RegistrationCostDL";
 import Input from "../UI/Input";
+import { useSelector } from "react-redux";
 
 function Row(props) {
     const { row, index } = props;
@@ -61,29 +62,24 @@ function Row(props) {
                         fontWeight: 500,
                     }}
                 >
-                    {toPersian(row?.serialNumber)}
+                    {row?.Title}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    {row?.transactionName}
+                    {row?.quantity}
                 </TableCell>
+
+
                 <TableCell
-                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
+                    sx={{
+                        color: (theme) => theme.typography.color,
+                        fontWeight: 500,
+                    }}
                     align="center"
                 >
-                    {row?.factorType}
-                </TableCell>
-                <TableCell
-                    sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
-                    align="center"
-                >
-                    {toPersian(
-                        moment(row?.factorDate, "YYYY-MM-DD")
-                            .locale("fa")
-                            .format("YYYY/MM/D")
-                    )}
+                    {toPersian(separateBy3(row?.initial_buy_price ?? 0))} ریال
                 </TableCell>
                 <TableCell
                     sx={{
@@ -92,16 +88,7 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {toPersian(separateBy3(row.factorNumer))}
-                </TableCell>
-                <TableCell
-                    sx={{
-                        color: (theme) => theme.typography.color,
-                        fontWeight: 500,
-                    }}
-                    align="center"
-                >
-                    {row?.driver}
+                    {toPersian(separateBy3(row?.original_price ?? 0))} ریال
                 </TableCell>
                 <TableCell
                     sx={{
@@ -110,30 +97,10 @@ function Row(props) {
                     }}
                     align="center"
                 >
-                    {row?.vehicle}
+                    {toPersian(separateBy3(row?.unitprice ?? 0))} ریال
                 </TableCell>
-                <TableCell
-                    sx={{
-                        color: (theme) => theme.palette.primary.main,
-                        fontWeight: 500,
-                    }}
-                    align="center"
-                >
-                    {toPersian(row.plate)}
-                </TableCell>
-                <TableCell
-                    sx={{
-                        color: (theme) => theme.palette.primary.main,
-                        fontWeight: 500,
-                    }}
-                    align="center"
-                >
-                    {toPersian(
-                        moment(row?.date, "YYYY-MM-DD ")
-                            .locale("fa")
-                            .format("YYYY/MM/D - HH:mm")
-                    )}
-                </TableCell>
+
+
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
@@ -281,11 +248,13 @@ export default function KharidariTable() {
             border: 0,
         },
     }));
+
+    const { details } = useSelector(state => state.factorPage)
     return (
         <Box
             sx={{
                 width: "100%",
-                height: "30vh",
+                height: "80%",
                 overflowY: "scroll",
                 overflowX: "hidden",
             }}
@@ -310,32 +279,11 @@ export default function KharidariTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                تعداد
+                                تعداد/وزن
                             </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                نوع بسته بندی
-                            </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                وزن ناخالص{" "}
-                            </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                وزن ظرف{" "}
-                            </TableCell>
-                            <TableCell
-                                sx={{ color: (theme) => theme.palette.disable.main }}
-                                align="center"
-                            >
-                                وزن خالص
-                            </TableCell>
+
+
+
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
@@ -352,18 +300,18 @@ export default function KharidariTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                قیمت
+                                فی فروشگاه
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {FactorPageTable?.map((row, index) => (
+                        {details?.map((row, index) => (
                             <Row key={index} row={row} index={index} />
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Box
+            {/* <Box
                 sx={{
                     display: "flex",
                     alignItems: "flex-end",
@@ -396,9 +344,9 @@ export default function KharidariTable() {
                 <StyledTableCell align="center">
                     جمع کل قیمت:{toPersian(separateBy3("7700000"))}ریال
                 </StyledTableCell>
-            </Box>
+            </Box> */}
 
-            <Box sx={{ p: 1 }}>
+            {/* <Box sx={{ p: 1 }}>
                 <Title
                     title={"مخارج"}
                     Typoprops={{
@@ -452,7 +400,7 @@ export default function KharidariTable() {
                         </Typography>
                     </Box>
                 </Box>
-            </Box>
+            </Box> */}
         </Box>
     );
 }

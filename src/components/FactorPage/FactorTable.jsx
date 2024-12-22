@@ -16,14 +16,14 @@ import { useNavigate } from "react-router-dom";
 import reactRouts from "../../utils/reactRouts";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { FactorListGet } from "../../Redux/Slices/Accounting/Factor/factorPage";
+import { FactorDetails, FactorListGet } from "../../Redux/Slices/Accounting/Factor/factorPage";
 import { NoItem } from "../UI/NoItem";
 
 function Row(props) {
     const { row, index } = props;
     const [openCollaps, setOpenCollaps] = useState(false);
 
-    const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     return (
         <Fragment>
@@ -61,7 +61,7 @@ function Row(props) {
                     align="center"
                 >
                     {row?.order_type_id
-                        ? row?.order_type_id == 1
+                        ? row?.order_type_id !== 1
                             ? "خریداری"
                             : "امانی"
                         : "-"}
@@ -126,7 +126,7 @@ function Row(props) {
                                                 : theme.palette.green.main,
                                     }}
                                 >
-                                    {row.status !== "open" ? "تسویه نشده" : "تسویه شده"}
+                                    {row.status_id == 1 ? "تسویه نشده" : "تسویه شده"}
                                 </Typography>
                             </Box>
                             <Box
@@ -144,11 +144,7 @@ function Row(props) {
                                 </Typography>
                                 <Button
                                     disabled={false}
-                                    onClick={() =>
-                                        navigate(reactRouts.safi.main, {
-                                            state: { key: row?.factorType },
-                                        })
-                                    }
+                                    onClick={() => dispatch(FactorDetails(row?.id))}
                                     variant="contained"
                                     sx={{
                                         px: 4,

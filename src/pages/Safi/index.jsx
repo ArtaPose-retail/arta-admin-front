@@ -15,10 +15,12 @@ import Input from "../../components/UI/Input";
 import AddIcon from "@mui/icons-material/Add";
 import TransactionDialog from "../../components/HomePage/Dialogs/defineFactorSteps/TransactionDialog";
 import AmaniTable from "../../components/Safi/AmaniTable";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import KharidariTable from "../../components/Safi/KharidariTable";
 import VehicleDl from "../../components/Safi/VehicleDl";
 import Gallery from "../../components/Documents/Gallery";
+import { ArrowBack } from "@mui/icons-material";
+import { center } from "../../styles/theme";
 
 export default function Safi() {
     const [month, setMonth] = useState("");
@@ -36,12 +38,8 @@ export default function Safi() {
         setImg(URL.createObjectURL(e.target.files[0]))
     }
 
-    const location = useLocation();
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    let navigate = useNavigate();
+
     return (
         <Box
             sx={{
@@ -49,19 +47,23 @@ export default function Safi() {
                 m: 1,
                 p: 1,
                 borderRadius: "18px",
+                height: "85dvh",
+                overflowY: "scroll"
+
             }}
         >
-            <Box sx={{ ...center, justifyContent: "flex-start" }}>
+            <Box sx={{ ...center, justifyContent: "space-between", m: 2 }}>
                 <Title
-                    title={`فاکتور (${location?.state?.key})`}
+                    title={"جزییات فاکتور"}
                     Typoprops={{
                         fontSize: "20px",
                         fontWeight: 500,
                         color: (theme) => theme.typography.color,
                     }}
                 />
+                <ArrowBack sx={{ cursor: "pointer" }} onClick={() => navigate(-1)} />
             </Box>
-            <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
+            {/* <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
                 {safiFrom?.map((item, index) => (
                     <Grid item xs={2} key={index}>
                         {item?.select ? (
@@ -140,11 +142,11 @@ export default function Safi() {
                         )}
                     </Grid>
                 ))}
-            </Grid>
+            </Grid> */}
 
-            <Box>{location?.state?.key === "امانی" ? <AmaniTable /> : <KharidariTable />}</Box>
-            <Divider sx={{ my: 2, borderColor: theme => theme.palette.divider }} />
-            <Box sx={{ ...center, gap: '15px' }}>
+            {/* <Box>{location?.state?.key === "امانی" ? <AmaniTable /> : <KharidariTable />}</Box> */}
+            <KharidariTable />
+            {/* <Box sx={{ ...center, gap: '15px' }}>
                 <Button
                     sx={{
                         bgcolor: (theme) => theme.palette.green.main,
@@ -178,7 +180,6 @@ export default function Safi() {
                 </Button>
                 <Gallery />
             </Box>
-            <Divider sx={{ my: 2, borderColor: theme => theme.palette.divider }} />
             <Box sx={{ ...center, gap: '15px' }}>
                 <Button
                     sx={{
@@ -275,7 +276,7 @@ export default function Safi() {
                     انصراف
                 </Button>
 
-            </Box>
+            </Box> */}
         </Box>
     );
 }
