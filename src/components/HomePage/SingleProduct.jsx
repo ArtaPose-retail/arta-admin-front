@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { singleProd } from "../../Redux/Slices/Accounting/Products/product";
 import { setSingleOrderInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 function SingleProduct({ data }) {
-    console.log(data)
     const [open, setOpen] = useState(false);
     const dispatch = useDispatch()
     const showDialoghandler = () => {

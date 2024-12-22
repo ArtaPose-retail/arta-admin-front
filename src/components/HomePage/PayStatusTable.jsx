@@ -28,7 +28,7 @@ function Row(props) {
     const { row } = props;
     const [open, setOpen] = useState(false);
     const deleteBtn = (id) => {
-        // dispatch(DeletePayment(id))
+        dispatch(DeletePayment(id))
         console.log(id)
     };
 

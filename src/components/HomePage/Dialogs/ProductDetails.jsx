@@ -43,16 +43,13 @@ const ExpandMore = styled((props) => {
 
 function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const [expanded, setExpanded] = useState(false);
-    const [date, seDate] = useState(false);
-    const [Price, setPrice] = useState(false);
+    const [Price, setPrice] = useState(true);
     const handerPrice = () => {
         setPrice(!Price);
     };
     const dispatch = useDispatch();
 
-    const handlerDate = () => {
-        seDate(!date);
-    };
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -76,7 +73,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     const { singleOrder, scaleData } = useSelector((state) => state.sellPage);
     const { cardId } = useSelector((state) => state.Order);
 
-
     const OrderSubmitHandler = () => {
         if (cardId != 0) {
             dispatch(AddProdOrder(cardId));
@@ -88,8 +84,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
     };
 
     useEffect(() => {
-
-
         if (signleProd?.is_bulk == false) {
             dispatch(
                 setSingleOrderInfo({
@@ -105,10 +99,6 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                 })
             );
         }
-
-
-
-
     }, [iteminfo, loading]);
 
     return (
@@ -181,46 +171,51 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                         </Typography>
                     </Box>
 
-                    {loading ? <CircularProgress sx={{ m: 3 }} /> : <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
-                        {signleProd && ProductItemInfoForm?.map((item, index) => (
-                            <Grid item xs={4} key={index}>
-                                <InputLabel>
-                                    <Typography
-                                        sx={{
-                                            fontSize: "18px",
-                                            fontWeight: 400,
-                                            color: item.color,
-                                        }}
-                                    >
-                                        {item?.placeholder}
-                                    </Typography>
-                                </InputLabel>
+                    {loading ? (
+                        <CircularProgress sx={{ m: 3 }} />
+                    ) : (
+                        <Grid container spacing={2} sx={{ p: 1, mt: 1 }}>
+                            {signleProd &&
+                                ProductItemInfoForm?.map((item, index) => (
+                                    <Grid item xs={4} key={index}>
+                                        <InputLabel>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 400,
+                                                    color: item.color,
+                                                }}
+                                            >
+                                                {item?.placeholder}
+                                            </Typography>
+                                        </InputLabel>
 
-                                <Input
-
-                                    value={
-                                        item.name == "quantity"
-                                            ? singleOrder?.quantity
-                                            : item.name == "FinalPrice"
-                                                ? singleOrder?.quantity * signleProd?.price
-                                                : signleProd[item?.name]
-                                    }
-                                    type={item.type}
-                                    placeholder={item.placeholder}
-                                    onChange={onChangeHandler}
-                                    name={item.name}
-                                    id={item.name}
-                                    height={"55px"}
-                                    disabled={
-                                        (item.name == "quantity" && signleProd?.is_bulk !== true) ||
-                                            (item.name !== "quantity") == true
-                                            ? true
-                                            : false
-                                    }
-                                />
-                            </Grid>
-                        ))}
-                    </Grid>}
+                                        <Input
+                                            value={
+                                                item.name == "quantity"
+                                                    ? singleOrder?.quantity
+                                                    : item.name == "FinalPrice"
+                                                        ? singleOrder?.quantity * signleProd?.price
+                                                        : signleProd[item?.name]
+                                            }
+                                            type={item.type}
+                                            placeholder={item.placeholder}
+                                            onChange={onChangeHandler}
+                                            name={item.name}
+                                            id={item.name}
+                                            height={"55px"}
+                                            disabled={
+                                                (item.name == "quantity" && signleProd?.is_bulk !== true) ||
+                                                    (item.name !== "quantity" && item.name !== "price") ||
+                                                    (item.name === "price" && Price === true)
+                                                    ? true
+                                                    : false
+                                            }
+                                        />
+                                    </Grid>
+                                ))}
+                        </Grid>
+                    )}
                     <Box sx={{ ...center, justifyContent: "space-between" }}>
                         <Box
                             sx={{
@@ -356,28 +351,12 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                 />
                             </Button>
                             <Box sx={{ ...center, m: 1 }}>
-                                <Box sx={{ ...center }}>
-                                    <Switch
-                                        name="Date"
-                                        onClick={() => handlerDate()}
-                                        checked={date}
-                                        size="small"
-                                    />
-                                    <Typography
-                                        sx={{
-                                            fontSize: "14px",
-                                            fontWeight: 500,
-                                            color: (theme) => theme.typography.color,
-                                        }}
-                                    >
-                                        تاریخ
-                                    </Typography>
-                                </Box>
+
                                 <Box sx={{ ...center }}>
                                     <Switch
                                         name="Price"
                                         onClick={() => handerPrice()}
-                                        checked={Price}
+                                        checked={!Price}
                                         size="small"
                                     />
                                     <Typography
@@ -391,7 +370,19 @@ function ProductDetails({ status, handlerCloseDialog, iteminfo }) {
                                     </Typography>
                                 </Box>
                             </Box>
+
                         </Box>
+                        {!Price && <Box sx={{ width: "40%" }}>
+                            <Input
+                                value={singleOrder.unitprice}
+                                type={"number"}
+                                placeholder={"قیمت جدید وارد کنید"}
+                                onChange={onChangeHandler}
+                                name={"unitprice"}
+                                height={"55px"}
+                            />
+                        </Box>}
+
                     </Collapse>
                 </DialogContent>
             </Dialog>

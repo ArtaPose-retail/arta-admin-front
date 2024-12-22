@@ -10,7 +10,7 @@ const initialState = {
     singleOrder: {
         product_id: 0,
         quantity: 1,
-        unitprice: 0,
+        unitprice: null,
     },
     scaleData: {
         weight: 0
@@ -33,7 +33,13 @@ export const sellPage = createSlice({
             state.transactionInfo = initialState.transactionInfo;
         },
         setSingleOrderInfo: (state, { payload }) => {
-            state.singleOrder[payload.key] = payload.value;
+            if (payload.key != "price") {
+
+                state.singleOrder[payload.key] = payload.value;
+            } else {
+                state.singleOrder.unitprice = payload.value;
+
+            }
         },
         setScaleData: (state, { payload }) => {
             state.scaleData.weight = payload.weight;
