@@ -18,6 +18,7 @@ const initialState = {
         original_price: "",
         unitprice: "",
         discount: "",
+        meta: {}
     },
     factorItemsRes: null,
     singleOrderList: [],
@@ -46,7 +47,12 @@ export const factorItems = createSlice({
     initialState,
     reducers: {
         setFactorItems: (state, { payload }) => {
-            state.newFacrtorItems[payload.key] = payload.value;
+            if (payload.key != "expire_date") {
+
+                state.newFacrtorItems[payload.key] = payload.value
+            } else {
+                state.newFacrtorItems.meta[payload.key] = payload.value
+            }
         },
     },
     extraReducers: (builder) => {

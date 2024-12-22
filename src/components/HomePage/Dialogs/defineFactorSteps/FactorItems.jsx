@@ -145,70 +145,7 @@ function FactorItems({ handleClose }) {
                                 />
                             </>
                         ) : (
-                            // <TextField
-                            //     value={newFacrtorItems[item.name]}
-                            //     name={item.name}
-                            //     id={item.name}
-                            //     onChange={(e) =>
-                            //         onChangeHandler(item.name, e.target.value, item.type)
-                            //     }
-                            //     fullWidth
-                            //     sx={{
-                            //         "& .MuiNativeSelect-select": {
-                            //             color: "black",
-                            //         },
-                            //         "& .MuiOutlinedInput-notchedOutline": {
-                            //             borderColor: "white",
-                            //         },
-                            //         borderRadius: "18px",
-                            //     }}
-                            //     select={item?.select}
-                            //     InputProps={{
-                            //         style: {
-                            //             background: "#F2F2F2",
-                            //             color: "#000",
-                            //             direction: "ltr",
-                            //             borderRadius: "18px",
-                            //         },
-                            //         startAdornment: (
-                            //             <>
-                            //                 {item?.hasIcon && (
-                            //                     <InputAdornment position="end">
-                            //                         <PackageType />
-                            //                     </InputAdornment>
-                            //                 )}
-                            //             </>
-                            //         ),
-                            //     }}
-                            //     SelectProps={{
-                            //         native: true,
-                            //         style: {
-                            //             background: "#F2F2F2",
-                            //             color: "#000",
-                            //             direction: "ltr",
-                            //             borderRadius: "18px",
-                            //         },
-                            //     }}
-                            // >
-                            //     {item?.select && item.name == "product_id" ? (
-                            //         <>
-                            //             <option value={""}>
-                            //                 <Typography sx={{ fontSize: "12px", color: "black" }}>
-                            //                     انتخاب کنید
-                            //                 </Typography>
-                            //             </option>
-                            //             {productList.map((option, index) => (
-                            //                 <option key={index} value={option?.prod_id}>
-                            //                     <Typography sx={{ fontSize: "12px", color: "black" }}>
-                            //                         {option?.title}
-                            //                     </Typography>
-                            //                 </option>
-                            //             ))}{" "}
-                            //         </>
-                            //     ) : (
-                            //         ""
-                            //     )}
-                            // </TextField>
+
                             <Autocomplete
                                 freeSolo
                                 // value={transactionInfo?.phone1 }
