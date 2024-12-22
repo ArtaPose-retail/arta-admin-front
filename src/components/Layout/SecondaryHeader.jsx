@@ -20,6 +20,7 @@ import { Height } from "@mui/icons-material";
 import profile from "../../Assets/images/profileImage.png";
 import SearchDialog from "../Search/SearchDialog";
 import { separateBy3, toPersian } from "../../utils/setting";
+import { center } from "../../styles/theme";
 
 function SecondaryHeader() {
     const { isfullScrenn } = useSelector((state) => state.general);
@@ -35,7 +36,6 @@ function SecondaryHeader() {
                         .locale("fa")
                         .format("HH:mm - YYYY/MM/D")
                 )
-
             );
         }, 1000);
 
@@ -46,11 +46,7 @@ function SecondaryHeader() {
         navigate(`/${name}`);
     };
 
-    const center = {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    };
+    const { loginInfo } = useSelector((state) => state.auth);
     return (
         <Box
             sx={{
@@ -97,7 +93,7 @@ function SecondaryHeader() {
                             color: (theme) => theme.typography.color,
                         }}
                     >
-                        پرهام حسن زاده
+                        {loginInfo?.fname} {loginInfo?.lname}
                     </Typography>
                 </Box>
                 <Box sx={{ display: "flex", gap: "10px" }}>
