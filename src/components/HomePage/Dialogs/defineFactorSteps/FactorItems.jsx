@@ -283,6 +283,58 @@ function FactorItems({ handleClose }) {
                         px: 3,
                     }}
                 >
+                    درصد سود فروش: %
+                    {toPersian(
+                        parseFloat(
+                            profitPercentage(
+                                FinalBuyFee(
+                                    TotalBuy(
+                                        newFacrtorItems.initial_buy_price,
+                                        newFacrtorItems.quantity,
+                                        newFacrtorItems.tax
+                                    ),
+                                    newFacrtorItems.discount,
+                                    newFacrtorItems.quantity
+                                ),
+                                newFacrtorItems.unitprice
+                            )
+                        ).toFixed(2)
+                    )}
+                </Typography>
+                <Typography
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
+                    جمع کل فروش فروشگاه: %
+                    {toPersian(
+                        parseFloat(
+                            profitPercentage(
+                                FinalBuyFee(
+                                    TotalBuy(
+                                        newFacrtorItems.initial_buy_price,
+                                        newFacrtorItems.quantity,
+                                        newFacrtorItems.tax
+                                    ),
+                                    newFacrtorItems.discount,
+                                    newFacrtorItems.quantity
+                                ),
+                                newFacrtorItems.unitprice
+                            )
+                        ).toFixed(2)
+                    )}
+                </Typography>
+                <Typography
+                    sx={{
+                        bgcolor: (theme) => theme.palette.green.main,
+                        color: (theme) => theme.palette.text.primary,
+                        borderRadius: "15px",
+                        px: 3,
+                    }}
+                >
                     مبلغ تخفیف فروش:{" "}
                     {toPersian(
                         separateBy3(
@@ -306,35 +358,7 @@ function FactorItems({ handleClose }) {
                         newFacrtorItems.unitprice
                     ), newFacrtorItems.original_price)).toFixed(2))}
                 </Typography>
-                <Typography
-                    sx={{
-                        bgcolor: (theme) => theme.palette.green.main,
-                        color: (theme) => theme.palette.text.primary,
-                        borderRadius: "15px",
-                        px: 3,
-                    }}
-                >
-                    درصد سود: %
-                    {toPersian(
-                        parseFloat(
-                            profitPercentage(
-                                FinalBuyFee(
-                                    TotalBuy(
-                                        newFacrtorItems.initial_buy_price,
-                                        newFacrtorItems.quantity,
-                                        newFacrtorItems.tax
-                                    ),
-                                    Discount(
-                                        newFacrtorItems.original_price,
-                                        newFacrtorItems.unitprice
-                                    ),
-                                    newFacrtorItems.quantity
-                                ),
-                                newFacrtorItems.unitprice
-                            )
-                        ).toFixed(2)
-                    )}
-                </Typography>
+
             </Box>
             <Box sx={{ ...center, justifyContent: "space-between" }}>
 
