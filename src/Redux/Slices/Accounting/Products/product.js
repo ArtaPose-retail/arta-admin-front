@@ -7,6 +7,7 @@ import {
     getSingleProd,
     ProdSearch,
     SearchProdByCode,
+    SearchProdByTitle,
 } from "./productThunk";
 import { toastHandler } from "../../../../utils/setting";
 const initialState = {
@@ -61,6 +62,8 @@ export const SearchProdCode = createAsyncThunk(
     SearchProdByCode
 );
 
+export const SearchByTitle = createAsyncThunk("product/searchTitle", SearchProdByTitle)
+
 export const product = createSlice({
     name: "product",
     initialState,
@@ -86,7 +89,7 @@ export const product = createSlice({
         },
         resetSingleProd: (state) => {
             state.signleProd = initialState.signleProd
-        }
+        },
     },
     extraReducers: (builder) => {
         //?get product list
@@ -182,6 +185,20 @@ export const product = createSlice({
             state.loading = false;
             toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info");
         });
+        //! search product by code
+        builder.addCase(SearchByTitle.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(SearchByTitle.fulfilled, (state, { payload }) => {
+            state.loading = false;
+            state.update = false;
+            state.productList = payload.data;
+            console.log(payload.data);
+        });
+        builder.addCase(SearchByTitle.rejected, (state) => {
+            state.loading = false;
+            toastHandler("مشکلی پیش امده مجدد تلاش کنید", "info");
+        });
     },
 });
 
@@ -192,6 +209,6 @@ export const {
     resetSingleProdByCode,
     setProdCode,
     resetProdCode,
-    resetSingleProd
+    resetSingleProd,
 } = product.actions;
 export default product.reducer;

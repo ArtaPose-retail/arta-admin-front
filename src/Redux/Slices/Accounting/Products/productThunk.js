@@ -2,20 +2,22 @@ import apiRouts from "../../../../utils/apiRouts";
 import AXIOS from "../../../../utils/setting";
 
 export const AllProductsThunk = async () => {
-    return await AXIOS.get(`${apiRouts.product.main.list}?page=1&limit=1200&sort=DESC&orderBy=updated_at`);
+    return await AXIOS.get(
+        `${apiRouts.product.main.list}?page=1&limit=1200&sort=DESC&orderBy=updated_at`
+    );
 };
 
 export const getSingleProd = async (id) => {
-    return await AXIOS.get(`${apiRouts.product.main.list}${id}`)
-}
+    return await AXIOS.get(`${apiRouts.product.main.list}${id}`);
+};
 
 export const deleteProdThunk = async (id) => {
     return await AXIOS.delete(`${apiRouts.product.main.list}${id}`);
 };
 
 export const ProdSearch = async (title) => {
-    return await AXIOS.get(`${apiRouts.product.main.list}?category=${title}`)
-}
+    return await AXIOS.get(`${apiRouts.product.main.list}?category=${title}`);
+};
 
 export const addNewPodThunk = async (_, ThunkApi) => {
     const state = ThunkApi.getState();
@@ -87,5 +89,10 @@ export const editPodThunk = async (id, ThunkApi) => {
 };
 
 export const SearchProdByCode = async (code) => {
-    return await AXIOS.get(`${apiRouts.product.main.list}?code=${code}`)
-}
+    return await AXIOS.get(`${apiRouts.product.main.list}?code=${code}`);
+};
+export const SearchProdByTitle = async (title) => {
+    return await AXIOS.get(
+        `${apiRouts.product.main.list}?page=1&limit=1200&sort=DESC&orderBy=updated_at&search=${title}`
+    );
+};
