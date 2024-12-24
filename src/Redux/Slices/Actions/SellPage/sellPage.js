@@ -56,7 +56,7 @@ export const sellPage = createSlice({
         builder.addCase(AddProdOrder.fulfilled, (state) => {
             state.loading = false;
             state.sellUpdate = false;
-            state.singleOrder = initialState.singleOrder
+            state.singleOrder = JSON.parse(JSON.stringify(initialState.singleOrder));
         });
         builder.addCase(AddProdOrder.rejected, (state) => {
             state.loading = false;

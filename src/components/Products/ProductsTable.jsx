@@ -17,6 +17,7 @@ import AddNewProduct from "./AddNewProduct";
 import ProdCode from "../PrintTemplate/ProdCode";
 import { PrintRounded } from "@mui/icons-material";
 import ReactToPrint from "react-to-print";
+// import ProdA4 from "../PrintTemplate/ProdA4";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -142,6 +143,27 @@ export default function ProductsTable() {
 
                                             // content={() => prodRef.current}
                                             />
+                                            {/* <ReactToPrint
+                                                // onBeforePrint={
+                                                //     () => dispatch(singleProd(item?.prod_id)) // منتظر به‌روزرسانی state
+                                                // }
+                                                // onAfterPrint={() => {
+                                                // dispach(resetSingleProd());
+                                                // }}
+                                                trigger={() => (
+                                                    <PrintRounded
+                                                        sx={{
+                                                            fill: (theme) => theme.palette.error.main,
+                                                            cursor: "pointer",
+                                                        }}
+                                                    />
+                                                )}
+                                                content={() =>
+                                                    document.getElementById(`prodA4-${item?.prod_id}`)
+                                                }
+
+                                            // content={() => prodRef.current}
+                                            /> */}
                                         </Box>
                                     </StyledTableCell>
                                 </StyledTableRow>
@@ -152,6 +174,13 @@ export default function ProductsTable() {
 
                                     />
                                 </Box>
+                                {/* <Box sx={{ display: "none" }}>
+                                    <ProdA4
+                                        id={`prodA4-${item?.prod_id}`}
+                                        data={item}
+
+                                    />
+                                </Box> */}
                             </>
                         ))}
                     </TableBody>

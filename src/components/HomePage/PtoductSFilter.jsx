@@ -14,6 +14,7 @@ import {
 } from "../../Redux/Slices/Accounting/Products/product";
 import {
     AddProdOrder,
+    resetSingleOrder,
     setSingleOrderInfo,
 } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { toastHandler } from "../../utils/setting";
@@ -38,8 +39,15 @@ function PtoductSFilter() {
                     value: singleProdByCode.prod_id,
                 })
             );
+            dispatch(
+                setSingleOrderInfo({
+                    key: "quantity",
+                    value: 1,
+                })
+            );
             if (cardId != 0) {
                 dispatch(AddProdOrder(cardId));
+                // dispatch(resetSingleOrder());
             } else {
                 toastHandler("ابتدا یک طرف معامله مشخص کنید", "info");
             }
@@ -63,6 +71,7 @@ function PtoductSFilter() {
         if (singleProdByCode != null) {
             AddProdByCode();
             dispatch(resetProdCode())
+            dispatch(resetSingleOrder());
         }
         dispatch(resetSingleProdByCode());
     }, [loading]);
