@@ -2,7 +2,7 @@ import apiRouts from "../../../../utils/apiRouts";
 import AXIOS from "../../../../utils/setting";
 
 export const AllProductsThunk = async () => {
-    return await AXIOS.get(`${apiRouts.product.main.list}?page=1&limit=1200`);
+    return await AXIOS.get(`${apiRouts.product.main.list}?page=1&limit=1200&sort=DESC&orderBy=updated_at`);
 };
 
 export const getSingleProd = async (id) => {
