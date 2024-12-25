@@ -1,14 +1,10 @@
 import {
     Box,
     Button,
-    Divider,
-    FormControlLabel,
-    Popover,
-    Radio,
     Typography,
 } from "@mui/material";
 import React, { useEffect, useRef } from "react";
-import { separateBy3, toPersian, toastHandler } from "../../utils/setting";
+import { separateBy3, toPersian } from "../../utils/setting";
 import CustomerFactorTable from "./CustomerFactorTable";
 import { center } from "../../styles/theme";
 

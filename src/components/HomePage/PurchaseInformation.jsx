@@ -7,13 +7,23 @@ import { toastHandler } from "../../utils/setting";
 import CancelBtn from "../UI/CancelBtn";
 import { center } from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOrder, OrderList, resetOrderStates, restAllowPrint, SaveOrder } from "../../Redux/Slices/Actions/Order/Order";
+import {
+    DeleteOrder,
+    OrderList,
+    resetOrderStates,
+    restAllowPrint,
+    SaveOrder,
+} from "../../Redux/Slices/Actions/Order/Order";
 import { resetTransactionInfo } from "../../Redux/Slices/Actions/SellPage/sellPage";
 import { resetPayment } from "../../Redux/Slices/Actions/Payment/payment";
 import { useReactToPrint } from "react-to-print";
 import ReceiptTemplate from "../PrintTemplate/Recipt";
 
-import { addTransactions, resetNewTransaction, resetSingleTransaction } from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
+import {
+    addTransactions,
+    resetNewTransaction,
+    resetSingleTransaction,
+} from "../../Redux/Slices/Accounting/Transactions/transactionsSlice";
 function PurchaseInformation() {
     const [tabs, setTabs] = useState(2);
     const dispatch = useDispatch();
@@ -27,47 +37,46 @@ function PurchaseInformation() {
         setTabs(+id);
     };
 
+    const { OrderPrice, cardInfo, OrderProductList, cardId, AllowPrint } =
+        useSelector((state) => state.Order);
+    const { transactionInfo } = useSelector((state) => state.sellPage);
+    const { singleTransaction, newTransaction } = useSelector(
+        (state) => state.transactionsSlice
+    );
 
-    const { OrderPrice, cardInfo, OrderProductList, cardId, AllowPrint } = useSelector(state => state.Order)
-    const { transactionInfo } = useSelector(state => state.sellPage)
-    const { singleTransaction, newTransaction } = useSelector(state => state.transactionsSlice)
+    const { paymentOrderList } = useSelector((state) => state.payment);
+
     const AcceptBtn = () => {
-        dispatch(DeleteOrder(cardId))
-        setOpenCancelBTn(false)
-        dispatch(restAllowPrint())
-        dispatch(resetTransactionInfo())
-        dispatch(resetOrderStates())
-        dispatch(resetPayment())
-    }
-
-
+        dispatch(DeleteOrder(cardId));
+        setOpenCancelBTn(false);
+        dispatch(restAllowPrint());
+        dispatch(resetTransactionInfo());
+        dispatch(resetOrderStates());
+        dispatch(resetPayment());
+    };
 
     const HandleSaveOrder = () => {
-
         // CreateTransaction()
-
-        if (newTransaction?.user_id !== null) {
-
-            dispatch(SaveOrder(cardId))
-            // dispatch(resetTransactionInfo())
-            // dispatch(resetOrderStates())
-            // dispatch(resetPayment())
-            dispatch(OrderList())
-
+        if (paymentOrderList?.length > 0) {
+            if (newTransaction?.user_id !== null) {
+                dispatch(SaveOrder(cardId));
+                // dispatch(resetTransactionInfo())
+                // dispatch(resetOrderStates())
+                // dispatch(resetPayment())
+                dispatch(OrderList());
+            } else {
+                toastHandler("یک طرف معامله مشخص کنید", "info");
+            }
         } else {
-            toastHandler("یک طرف معامله مشخص کنید", "info")
+            toastHandler("پرداختی برای این سفارش ثبت نشده است", "info");
         }
-    }
-
+    };
 
     useEffect(() => {
-
         if (AllowPrint) {
             handlePrint();
         }
-
-    }, [AllowPrint])
-
+    }, [AllowPrint]);
 
     const handlePrint = () => {
         if (ReciptReParent.current) {
@@ -80,17 +89,14 @@ function PurchaseInformation() {
     const printTrigger = useReactToPrint({
         content: () => ReciptReParent.current,
         onAfterPrint: () => {
-            dispatch(restAllowPrint())
-            dispatch(resetTransactionInfo())
-            dispatch(resetOrderStates())
-            dispatch(resetPayment())
+            dispatch(restAllowPrint());
+            dispatch(resetTransactionInfo());
+            dispatch(resetOrderStates());
+            dispatch(resetPayment());
             dispatch(resetNewTransaction());
             // dispatch(resetSingleTransaction());
-
-        }
+        },
     });
-
-
 
     return (
         <Box

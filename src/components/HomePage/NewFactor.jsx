@@ -11,7 +11,7 @@ import LableCard from "./LableCard";
 import { center } from "../../styles/theme";
 import Description from "./Dialogs/Description";
 import TransactionpartyDg from "./Dialogs/TransactionpartyDg";
-import { toPersian } from "../../utils/setting";
+import { toastHandler, toPersian } from "../../utils/setting";
 import Input from "../UI/Input";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -48,7 +48,9 @@ function NewFactor() {
 
     const onSearchHandler = (e) => {
         console.log(e)
-        dispatch(setSingleTransaction(e))
+        if (e !== null) {
+            dispatch(setSingleTransaction(e))
+        }
         // dispatch(addOrder())
     }
     useEffect(() => {
@@ -96,7 +98,7 @@ function NewFactor() {
                     disablePortal
                     id="combo-box-demo"
                     options={TransActionList}
-                    onClose={() => console.log("man")}
+                    // onClose={() => console.log("man")}
                     onChange={(_, e) => onSearchHandler(e)}
                     getOptionLabel={(option) => `${option?.phone1}`}
                     sx={{ width: 300, color: "#000000" }}

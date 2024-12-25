@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,13 +8,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
     persianDate,
-    persianTime,
+
     persianTimeTehran,
     separateBy3,
     toPersian,
@@ -23,20 +21,17 @@ import {
     translateStatusDoc,
 } from "../../utils/setting";
 
-import { Button, Checkbox, Divider, Fade, Popper } from "@mui/material";
-import { Link } from "react-router-dom";
-import reactRouts from "../../utils/reactRouts";
+import { Button } from "@mui/material";
 import { center } from "../../styles/theme";
-import { ExpandMore } from "@mui/icons-material";
-import { DocumentList } from "../../Redux/Slices/Actions/Document/document";
+import { Docpayment, DocumentList } from "../../Redux/Slices/Actions/Document/document";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ArrowBack, ArrowForward, } from "@mui/icons-material";
+import DocumentDialog from "./DocumentDialog";
 
 
 function Row(props) {
     const [openPopper, setOpenPopper] = useState(false);
-    const [PosItem, setPositem] = useState("چاپ حرارتی");
     const [anchorEl, setAnchorEl] = useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -56,8 +51,10 @@ function Row(props) {
     };
 
     const [open, setOpen] = useState(false);
-
-    const showDialoghandler = () => {
+    const dispatch = useDispatch()
+    const showDialoghandler = (id) => {
+        console.log(id)
+        dispatch(Docpayment(id))
         setOpen(true);
     };
     const handlerCloseDialog = () => {
@@ -76,7 +73,7 @@ function Row(props) {
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
                     align="center"
                 >
-                    <Checkbox color="primary" />
+                    {/* <Checkbox color="primary" /> */}
                 </TableCell>
                 <TableCell
                     sx={{ color: (theme) => theme.typography.color, fontWeight: 500 }}
@@ -145,7 +142,7 @@ function Row(props) {
                         }}
                     >
                         <Button
-                            onClick={() => toastHandler("پیامک با موفقیت ارسال شد ")}
+                            onClick={() => toastHandler("پیامک با موفقیت ارسال شد", "error")}
                             variant="outlined"
                             sx={{ color: (theme) => theme.typography.color }}
                         >
@@ -153,9 +150,9 @@ function Row(props) {
                         </Button>
 
                         <Box sx={{ ...center, flexDirection: "column" }}>
-                            <Link to={reactRouts.sellpage}>
-                                <EditIcon fontSize="small" onClick={showDialoghandler} />
-                            </Link>
+                            {/* <Link to={reactRouts.sellpage}> */}
+                            <EditIcon fontSize="small" sx={{ cursor: "pointer" }} onClick={() => showDialoghandler(row?.transaction_id)} />
+                            {/* </Link> */}
                             <DeleteOutlineIcon
                                 onClick={() => deletehandler()}
                                 fontSize="medium"
@@ -170,77 +167,7 @@ function Row(props) {
                     </Box>
                 </TableCell>
             </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={openCollaps} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1, ...center, gap: "15px" }}>
-                            <Box sx={{ ...center }}>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.palette.divider,
-                                        fontSize: "16px",
-                                        fontWeight: 400,
-                                    }}
-                                >
-                                    نام محصول:
-                                </Typography>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.typography.color,
-                                        fontSize: "16px",
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    {row?.Details?.productName}
-                                </Typography>
-                            </Box>
-                            <Divider flexItem orientation="vertical" />
-                            <Box sx={{ ...center }}>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.palette.divider,
-                                        fontSize: "16px",
-                                        fontWeight: 400,
-                                    }}
-                                >
-                                    تعداد چک:
-                                </Typography>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.typography.color,
-                                        fontSize: "16px",
-                                        fontWeight: 400,
-                                    }}
-                                >
-                                    {/* {toPersian(row?.Details?.checks)} */}
-                                </Typography>
-                            </Box>
-                            <Divider flexItem orientation="vertical" />
-                            <Box sx={{ ...center }}>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.palette.divider,
-                                        fontSize: "16px",
-                                        fontWeight: 400,
-                                    }}
-                                >
-                                    {" "}
-                                    به حساب:
-                                </Typography>
-                                <Typography
-                                    sx={{
-                                        color: (theme) => theme.typography.color,
-                                        fontSize: "16px",
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    {row?.Details?.destinationAccount}
-                                </Typography>
-                            </Box>
-                        </Box>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
+            <DocumentDialog open={open} handleClose={handlerCloseDialog} />
         </Fragment>
     );
 }
@@ -277,7 +204,7 @@ export default function DocumentsTable() {
                                 sx={{ color: (theme) => theme.palette.disable.main }}
                                 align="center"
                             >
-                                <Checkbox color="primary" />
+                                {/* <Checkbox color="primary" /> */}
                             </TableCell>
                             <TableCell
                                 sx={{ color: (theme) => theme.palette.disable.main }}

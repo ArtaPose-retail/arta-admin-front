@@ -5,19 +5,14 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Title from "../../components/UI/Title";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountTable from "../../components/Accounts/AccountTable";
 import DocumentsTable from "../../components/Documents/DocumentsTable";
 import { center } from "../../styles/theme";
-import { useDispatch, useSelector } from "react-redux";
-import { DocumentList } from "../../Redux/Slices/Actions/Document/document";
-
 function Documents() {
     const [currentItem, setCurrentItem] = useState(0);
-    const dispatch = useDispatch()
     const focusehandler = (curentItem) => {
         setCurrentItem(+curentItem);
     };
