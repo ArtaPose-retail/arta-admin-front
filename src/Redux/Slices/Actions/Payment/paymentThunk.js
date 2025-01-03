@@ -27,7 +27,7 @@ export const addNewPayment = async ({ method, orderId, BAId }, ThunkApi) => {
         sub_transaction_type: "ADVANCE_SETTLEMENT",
         submitter_user_id: user_id,
         transaction_type: "INCOMING",
-        transaction_reason_id: 1,
+        transaction_reason_id: 2,
     })
 }
 
